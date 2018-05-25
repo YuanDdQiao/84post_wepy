@@ -46,7 +46,7 @@
           ->
         </button>
       </form>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindEditZipCode">
 
         <button formType="submit">
           <text>邮编：{{ userInfo.zipCode }}</text>
@@ -93,7 +93,14 @@
          @confirm="bindNameModalConfirm">
     <form>
       你的名字
-      <input type="text" value="{{ userInfo.raw.name }}" focus="true" @input="bindNameModalInputChange"/>
+      <input type="text" value="{{ userInfo.raw.name }}" @input="bindNameModalInputChange"/>
+    </form>
+  </modal>
+  <modal title="修改邮编" hidden="{{ zipCodeModalHidden }}" @cancel="bindZipCodeModalCancel"
+         @confirm="bindzipCodeModalConfirm">
+    <form>
+      你的邮编
+      <input type="digit" value="{{ userInfo.raw.zipCode }}" @input="bindZipCodeModalInputChange"/>
     </form>
   </modal>
 </template>
@@ -119,7 +126,8 @@
       userInfo: {},
       staff: false,
       canDebug: false,
-      nameModalHidden: true
+      nameModalHidden: true,
+      zipCodeModalHidden: true
     }
 
     /**
@@ -142,9 +150,11 @@
           url: 'user/tel/',
           method: 'POST',
           data: e.detail
+        }).then(() => {
+          this.onShow()
         })
-        this.onShow()
       },
+      // edit name
       bindEditName(e) {
         this.nameModalHidden = false
       },
@@ -162,9 +172,39 @@
           data: {
             name: this.userInfo.raw.name
           }
-        }).then(
+        }).then(() => {
           this.onShow()
-        )
+        })
+      },
+      // edit zip_code
+      bindZipCodeModalInputChange(e) {
+        this.userInfo.raw.zipCode = e.detail.value
+      },
+      bindZipCodeModalCancel(e) {
+        this.zipCodeModalHidden = true
+      },
+      bindzipCodeModalConfirm(e) {
+        this.zipCodeModalHidden = true
+        api.request({
+          url: 'user/zip_code/',
+          method: 'POST',
+          data: {
+            zipCode: this.userInfo.raw.zipCode
+          }
+        }).then(e => {
+          if (e.data.error) {
+            wepy.showModal({
+              title: '格式错误',
+              content: '您的邮编格式错误，请修正后重试',
+              showCancel: false
+            })
+          } else {
+            this.onShow()
+          }
+        })
+      },
+      bindEditZipCode(e) {
+        this.zipCodeModalHidden = false
       },
       async bindAddressChoose(e) {
         await api.getAuthScope('scope.userLocation')
