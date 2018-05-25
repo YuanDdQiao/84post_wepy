@@ -1,5 +1,5 @@
 <template>
-    <view></view>
+  <view></view>
 </template>
 
 <script>
@@ -29,33 +29,34 @@
     events = {}
 
     /**
-     * 生命周期函数--监听页面加载
+     * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    onLoad() {
+    async onLoad() {
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
     };
 
     /**
      * 生命周期函数--监听页面初次渲染完成
+     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
      */
-    onReady() {
+    async onReady() {
     };
 
     /**
-     * 生命周期函数--监听页面显示
+     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
      */
-    onShow() {
+    async onHide() {
     };
 
     /**
-     * 生命周期函数--监听页面隐藏
+     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
      */
-    onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
+    async onUnload() {
     };
 
     /**
