@@ -18,6 +18,17 @@ const request = async (options, showLoading = true) => {
   // 拼接请求地址
   options.url = host + '/' + options.url
 
+  // Authorization
+  if (!options.header) {
+    options.header = {}
+  }
+
+  let token = wepy.getStorageSync('token')
+
+  if (token) {
+    options.header.Authorization = `Token ${token}`
+  }
+
   // 调用小程序的 request 方法
   let response = await wepy.request(options)
 
@@ -49,7 +60,7 @@ const login = async (params = {}) => {
   // 参数中增加code
   params.code = loginData.code
 
-  // 接口请求 weapp/authorizations
+  // 接口请求
   let authResponse = await request({
     url: 'auth/code/',
     data: params,
@@ -71,8 +82,6 @@ const login = async (params = {}) => {
 
     wepy.setStorageSync('token', token)
     wepy.setStorageSync('user_id', userId)
-    // this.globalData.token = token
-    // this.globalData.user_id = user_id
   }
 
   return authResponse
