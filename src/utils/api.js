@@ -34,7 +34,22 @@ const request = async (options, showLoading = true, auth = true) => {
 
   // 调用小程序的 request 方法
   // console.log(options)
-  let response = await wepy.request(options)
+  let response
+  try {
+    response = await wepy.request(options)
+  } catch (e) {
+    if (showLoading) {
+      // 隐藏加载中
+      wepy.hideLoading()
+    }
+
+    wepy.showModal({
+      title: '提示',
+      content: '无法连接服务器，请检查网络后重试',
+      showCancel: false
+    })
+    return null
+  }
   // console.log(response)
 
   if (showLoading) {
@@ -46,12 +61,13 @@ const request = async (options, showLoading = true, auth = true) => {
   if (response.statusCode === 500) {
     wepy.showModal({
       title: '提示',
-      content: '服务器错误，请联系管理员或重试'
+      content: '服务器错误，请稍后再试',
+      showCancel: false
     })
   } else if (response.statusCode === 401) {
     wepy.showModal({
       title: '提示',
-      content: '未登录权限不足，请联系管理员或重试',
+      content: '未登录或权限不足',
       showCancel: false
     })
   }

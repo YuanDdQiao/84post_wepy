@@ -53,7 +53,11 @@
         }],
         color: '#707070',
         selectedColor: '#00b5ad'
-      }
+      },
+      networkTimeout: {
+        request: 5000
+      },
+      debug: true
     }
 
     globalData = {
