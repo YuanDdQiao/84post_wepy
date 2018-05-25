@@ -9,7 +9,9 @@
     /**
      * 页面配置对象，对应于原生的 page.json 文件
      */
-    config = {}
+    config = {
+      navigationBarTitleText: '我的'
+    }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据

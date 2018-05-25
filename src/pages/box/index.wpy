@@ -10,7 +10,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '写信'
+      navigationBarTitleText: '信箱'
     }
 
     /**
