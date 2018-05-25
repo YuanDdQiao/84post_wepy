@@ -67,11 +67,11 @@
     }
 
     onLaunch() {
-      wepy.login().then(res => {
-        console.log('login:', res)
-      })
+      // wepy.login().then(res => {
+      //   // console.log('login:', res)
+      // })
       api.login()
-      this.testAsync()
+      // this.testAsync()
     }
 
     sleep(s) {
@@ -83,8 +83,8 @@
     }
 
     async testAsync() {
-      const data = await this.sleep(3)
-      console.log(data)
+      // const data = await this.sleep(3)
+      // console.log(data)
     }
 
     getUserInfo(cb) {

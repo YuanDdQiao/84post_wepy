@@ -1,9 +1,100 @@
 <template>
-    <view></view>
+  <view>
+    <view>
+      <text>点券</text>
+      {{ balance }} 点券
+      <form report-submit="True" @submit="bindRecharge">
+        <button formType="submit">充值</button>
+      </form>
+    </view>
+    <view>
+      <text>信件</text>
+      <form report-submit="True" @submit="bindNoSenseForm">
+
+        <button formType="submit">
+          <text>寄出的信</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindNoSenseForm">
+
+        <button formType="submit">
+          <text>收到的信</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindNoSenseForm">
+        <button formType="submit">
+          <text>根据运单号查询</text>
+          ->
+        </button>
+      </form>
+    </view>
+    <view>
+      <text>我的信息</text>
+      <form report-submit="True" @submit="bindNoSenseForm">
+
+        <button formType="submit">
+          <text>称呼：{{ userInfo.name }}</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindAddressChoose">
+
+        <button formType="submit">
+          <text>地址：{{ userInfo.address }}</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindNoSenseForm">
+
+        <button formType="submit">
+          <text>邮编：{{ userInfo.zipCode }}</text>
+          ->
+        </button>
+      </form>
+      <view>
+
+        <button open-type='getPhoneNumber' @getphonenumber='bindGetPhoneNumber'>
+          <text>手机号：{{ userInfo.tel }}</text>
+          ->
+        </button>
+      </view>
+      <form report-submit="True" @submit="bindNoSenseForm">
+
+        <button formType="submit">
+          <text>常用联系人</text>
+          ->
+        </button>
+      </form>
+    </view>
+    <view wx-if="{{ canDebug }}">
+      <text>调试面板</text>
+      <form report-submit="True" @submit="bindStartDebug">
+
+        <button formType="submit">
+          <text>开启调试模式</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindStopDebug">
+
+        <button formType="submit">
+          <text>关闭调试模式</text>
+          ->
+        </button>
+      </form>
+    </view>
+    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+    <!--<button  formType="submit">按钮测试</button>-->
+    <!--</form>-->
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import 'wepy-async-function'
+  import api from '@/utils/api'
 
   export default class extends wepy.page {
     /**
@@ -16,12 +107,57 @@
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      balance: 0,
+      userInfo: {},
+      staff: false,
+      canDebug: false
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
-    methods = {}
+    methods = {
+      bindNoSenseForm(e) {
+        api.formIdSubmit(e.detail.formId)
+      },
+      bindRecharge(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.showModal({
+          title: '提示',
+          content: '充值功能暂未开放',
+          showCancel: false
+        })
+      },
+      bindGetPhoneNumber(e) {
+        api.request({
+          url: 'user/tel/',
+          method: 'POST',
+          data: e.detail
+        })
+        this.onShow()
+      },
+      async bindAddressChoose(e) {
+        await api.getAuthScope('scope.userLocation')
+
+        let res = await wepy.chooseLocation()
+
+        // console.log(res)
+        api.request({
+          url: 'user/address/',
+          method: 'POST',
+          data: res
+        }).then(
+          this.onShow()
+        )
+      },
+      async bindStartDebug(e) {
+        api.startDebug()
+      },
+      async bindStopDebug(e) {
+        api.stopDebug()
+      }
+    }
 
     /**
      * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
@@ -29,51 +165,69 @@
     events = {}
 
     /**
-     * 生命周期函数--监听页面加载
+     * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    onLoad() {
+    async onLoad() {
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
+      api.request('user/balance/').then((e) => {
+        this.balance = e.data.balance
+        this.$apply()
+      })
+      api.request('user/info/').then((e) => {
+        let userInfo = {}
+        let data = e.data
+        userInfo.name = data.name || '未填写'
+        userInfo.zipCode = data.zipCode || '未填写'
+        userInfo.tel = data.phoneNumber || '未填写'
+        userInfo.address = data.addressShort || '未填写'
+
+        this.userInfo = userInfo
+        this.staff = data.staff
+        this.canDebug = data.staff
+        this.$apply()
+      })
     };
 
     /**
      * 生命周期函数--监听页面初次渲染完成
+     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
      */
-    onReady() {
+    async onReady() {
     };
 
     /**
-     * 生命周期函数--监听页面显示
+     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
      */
-    onShow() {
+    async onHide() {
     };
 
     /**
-     * 生命周期函数--监听页面隐藏
+     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
      */
-    onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
+    async onUnload() {
     };
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh() {
+    async onPullDownRefresh() {
     };
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom() {
+    async onReachBottom() {
     };
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage() {
+    async onShareAppMessage() {
     };
   }
 </script>

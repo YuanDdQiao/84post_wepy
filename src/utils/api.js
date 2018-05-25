@@ -1,10 +1,11 @@
 import wepy from 'wepy'
+import 'wepy-async-function'
 
 // 服务器接口地址
 const host = 'http://192.168.123.103:8000/api/v1'
 
 // 普通请求
-const request = async (options, showLoading = true) => {
+const request = async (options, showLoading = true, auth = true) => {
   // 简化开发，如果传入字符串则转换成 对象
   if (typeof options === 'string') {
     options = {
@@ -19,18 +20,22 @@ const request = async (options, showLoading = true) => {
   options.url = host + '/' + options.url
 
   // Authorization
-  if (!options.header) {
-    options.header = {}
-  }
+  if (auth) {
+    if (!options.header) {
+      options.header = {}
+    }
 
-  let token = wepy.getStorageSync('token')
+    let token = wepy.getStorageSync('token')
 
-  if (token) {
-    options.header.Authorization = `Token ${token}`
+    if (token) {
+      options.header.Authorization = `Token ${token}`
+    }
   }
 
   // 调用小程序的 request 方法
+  // console.log(options)
   let response = await wepy.request(options)
+  // console.log(response)
 
   if (showLoading) {
     // 隐藏加载中
@@ -46,7 +51,8 @@ const request = async (options, showLoading = true) => {
   } else if (response.statusCode === 401) {
     wepy.showModal({
       title: '提示',
-      content: '未登录权限不足，请联系管理员或重试'
+      content: '未登录权限不足，请联系管理员或重试',
+      showCancel: false
     })
   }
   return response
@@ -65,20 +71,20 @@ const login = async (params = {}) => {
     url: 'auth/code/',
     data: params,
     method: 'POST'
-  })
+  }, false, false)
 
   // 登录成功，记录 token 信息
-  console.log(authResponse.statusCode)
+  // console.log(authResponse.statusCode)
 
   if (authResponse.statusCode === 200) {
-    console.log('data:', authResponse.dat)
+    // console.log('data:', authResponse.data)
     let token = authResponse.data.token
     let userId = authResponse.data.id
 
     // app.globalData.token = token
 
-    console.log('Token:', token)
-    console.log('User ID:', userId)
+    // console.log('Token:', token)
+    // console.log('User ID:', userId)
 
     wepy.setStorageSync('token', token)
     wepy.setStorageSync('user_id', userId)
@@ -87,7 +93,56 @@ const login = async (params = {}) => {
   return authResponse
 }
 
+// 上报 FormId
+const formIdSubmit = async (formId) => {
+  // console.log(formId)
+  request({
+    url: 'formid/submit/',
+    data: { 'formId': formId },
+    method: 'POST'
+  }, false).then((result) => {
+    // console.log(result.data)
+  })
+}
+
+const getAuthScope = async (scope) => {
+  try {
+    await wepy.authorize({
+      scope: scope
+    })
+  } catch (e) {
+    let modal = await wepy.showModal({
+      title: '授权被拒绝',
+      content: '您拒绝了我们的权限申请，因此您的操作无法完成。',
+      confirmText: '给予权限',
+      cancelText: '拒绝授权'
+    })
+
+    if (modal.confirm) {
+      await wepy.openSetting()
+    }
+
+    console.log(e)
+  }
+}
+
+const startDebug = async () => {
+  wepy.setEnableDebug({
+    enableDebug: true
+  })
+}
+
+const stopDebug = async () => {
+  wepy.setEnableDebug({
+    enableDebug: false
+  })
+}
+
 export default {
   request,
-  login
+  login,
+  formIdSubmit,
+  getAuthScope,
+  startDebug,
+  stopDebug
 }
