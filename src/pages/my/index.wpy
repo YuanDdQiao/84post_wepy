@@ -32,7 +32,7 @@
     </view>
     <view>
       <text>我的信息</text>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindEditName">
 
         <button formType="submit">
           <text>称呼：{{ userInfo.name }}</text>
@@ -89,6 +89,13 @@
     <!--<button  formType="submit">按钮测试</button>-->
     <!--</form>-->
   </view>
+  <modal title="修改称呼" hidden="{{ nameModalHidden }}" @cancel="bindNameModalCancel"
+         @confirm="bindNameModalConfirm">
+    <form>
+      你的名字
+      <input type="text" value="{{ userInfo.raw.name }}" focus="true" @input="bindNameModalInputChange"/>
+    </form>
+  </modal>
 </template>
 
 <script>
@@ -111,7 +118,8 @@
       balance: 0,
       userInfo: {},
       staff: false,
-      canDebug: false
+      canDebug: false,
+      nameModalHidden: true
     }
 
     /**
@@ -136,6 +144,27 @@
           data: e.detail
         })
         this.onShow()
+      },
+      bindEditName(e) {
+        this.nameModalHidden = false
+      },
+      bindNameModalInputChange(e) {
+        this.userInfo.raw.name = e.detail.value
+      },
+      bindNameModalCancel(e) {
+        this.nameModalHidden = true
+      },
+      bindNameModalConfirm(e) {
+        this.nameModalHidden = true
+        api.request({
+          url: 'user/name/',
+          method: 'POST',
+          data: {
+            name: this.userInfo.raw.name
+          }
+        }).then(
+          this.onShow()
+        )
       },
       async bindAddressChoose(e) {
         await api.getAuthScope('scope.userLocation')
@@ -181,6 +210,13 @@
       api.request('user/info/').then((e) => {
         let userInfo = {}
         let data = e.data
+
+        userInfo.raw = {}
+        userInfo.raw.name = data.name
+        userInfo.raw.zipCode = data.zipCode
+        userInfo.raw.tel = data.phoneNumber
+        userInfo.raw.address = data.addressShort
+
         userInfo.name = data.name || '未填写'
         userInfo.zipCode = data.zipCode || '未填写'
         userInfo.tel = data.phoneNumber || '未填写'
