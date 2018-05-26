@@ -115,7 +115,8 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '我的'
+      navigationBarTitleText: '我的',
+      enablePullDownRefresh: true
     }
 
     /**
@@ -292,6 +293,8 @@
      * 页面相关事件处理函数--监听用户下拉动作
      */
     async onPullDownRefresh() {
+      this.onShow()
+      wepy.stopPullDownRefresh()
     };
 
     /**
