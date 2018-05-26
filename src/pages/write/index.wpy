@@ -1,31 +1,24 @@
 <template>
   <view>
-    <swiper @change="bindSwiperCurrentChange">
-      <swiper-item item-id="1001" class="show-border">
-        <view>
-          这里有一些话 - 01
-          <text>{{ todayDate }}</text>
+    <swiper @change="bindSwiperCurrentChange" current="{{ current }}">
 
-        </view>
-      </swiper-item>
+      <block wx:for="{{ papers }}" wx:key="id">
+        <swiper-item item-id="{{ item.id }}" class="show-border">
+          <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+            {{ item.demo_text }}
+            <text>{{ todayDate }}</text>
 
-      <swiper-item item-id="1002" class="show-border">
-        <view>
-          这里有一些话 - 02
-          <text>{{ todayDate }}</text>
-
-        </view>
-      </swiper-item>
-
-      <swiper-item item-id="1003" class="show-border">
-        <view>
-          这里有一些话 - 03
-          <text>{{ todayDate }}</text>
-
-        </view>
-      </swiper-item>
+          </view>
+          <view>{{ item.name }}</view>
+        </swiper-item>
+      </block>
+      <view></view>
 
     </swiper>
+    <view>滑动选择信纸</view>
+    <form report-submit="True" @submit="bindStartWriting">
+      <button formType="submit">开始</button>
+    </form>
   </view>
 </template>
 
@@ -45,18 +38,24 @@
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      todayDate: ''
+      todayDate: '',
+      papers: {},
+      current: 0,
+      currentItem: {}
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      bindStartWriting(e) {
+        api.formIdSubmit(e.detail.formId)
+        console.log(this.current)
+        console.log(this.currentItem.id)
+      },
       bindSwiperCurrentChange(e) {
-        console.log(e.detail.current)
+        this.current = e.detail.current
+        this.currentItem = this.papers[this.current]
       }
     }
 
@@ -77,6 +76,11 @@
     async onShow() {
       let d = new Date()
       this.todayDate = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+      this.$apply()
+
+      let res = await api.request('letter/paper/')
+      this.papers = res.data
+      this.currentItem = this.papers[this.current]
       this.$apply()
     };
 
