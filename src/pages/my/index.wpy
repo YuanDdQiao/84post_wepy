@@ -140,10 +140,13 @@
       },
       bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.showModal({
-          title: '提示',
-          content: '充值功能暂未开放',
-          showCancel: false
+        // wepy.showModal({
+        //   title: '提示',
+        //   content: '充值功能暂未开放',
+        //   showCancel: false
+        // })
+        wepy.navigateTo({
+          url: '/pages/my/recharge'
         })
       },
       bindGetPhoneNumber(e) {

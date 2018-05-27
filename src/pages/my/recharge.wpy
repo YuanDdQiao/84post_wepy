@@ -1,23 +1,27 @@
 <template>
   <view>
-    <swiper @change="bindSwiperCurrentChange" current="{{ current }}">
+    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+    <!--<button  formType="submit">按钮测试</button>-->
+    <!--</form>-->
+    <!--<view>-->
+    <!--充值方式一：保存下面的二维码到相册后使用微信扫一扫打开-->
+    <!--&lt;!&ndash;<image></image>&ndash;&gt;-->
+    <!--</view>-->
+    <view>
+      请点击下面的按钮后发送「充值」（充值二字已经为您复制）
+      <view>
+        <block wx:for="{{ price }}" wx:key="id">
+          <button open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
+                  id="recharge-{{ item.id }}">
+            <view>¥{{ item.price / 100 }}</view>
+            <view>充值 {{ item.point }} 点券</view>
+            <view>（其中充值点券 {{ item.point_paid }}，赠送点券 {{ item.point_gift }} ）</view>
+          </button>
+        </block>
+      </view>
+    </view>
 
-      <block wx:for="{{ papers }}" wx:key="id">
-        <swiper-item item-id="{{ item.id }}" class="show-border">
-          <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
-            <view>{{ item.demo_text }}</view>
-            <view>{{ todayDate }}</view>
-          </view>
-          <view>{{ item.name }}</view>
-        </swiper-item>
-      </block>
-      <view></view>
-
-    </swiper>
-    <view>滑动选择信纸</view>
-    <form report-submit="True" @submit="bindStartWriting">
-      <button formType="submit">开始</button>
-    </form>
+    充值完成后一般即时到账。如果支付成功后超过1h仍旧未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。
   </view>
 </template>
 
@@ -30,34 +34,25 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '84号邮局'
+      navigationBarTitleText: '充值'
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      todayDate: '',
-      papers: {},
-      current: 0,
-      currentItem: {}
+      price: {}
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindStartWriting(e) {
-        api.formIdSubmit(e.detail.formId)
-        // console.log(this.current)
-        // console.log(this.currentItem.id)
-        wepy.navigateTo({
-          url: `write-1?id=${this.currentItem.id}`
-        })
-      },
-      bindSwiperCurrentChange(e) {
-        this.current = e.detail.current
-        this.currentItem = this.papers[this.current]
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
+      async bindContact(e) {
+        console.log(e.target.id)
       }
     }
 
@@ -70,13 +65,12 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-      let d = new Date()
-      this.todayDate = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+      let response = await api.request('pay/price/')
+      this.price = response.data
       this.$apply()
-      let res = await api.request('letter/paper/')
-      this.papers = res.data
-      this.currentItem = this.papers[this.current]
-      this.$apply()
+      wepy.setClipboardData({
+        data: '充值'
+      })
     };
 
     /**
@@ -125,8 +119,5 @@
 </script>
 
 <style lang="less">
-  .show-border {
-    border: red solid 3px;
-  }
 
 </style>
