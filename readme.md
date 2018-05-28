@@ -15,7 +15,7 @@ git clone https://github.com/TeamUsefulUseless/84post_wepy.git
 安装依赖
 
 ```
-npm install wepy-cli -g
+yarn global add wepy-cli
 ```
 
 ```
