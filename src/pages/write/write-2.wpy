@@ -1,9 +1,23 @@
 <template>
+  <view>
     <view>
-        <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-        <!--<button  formType="submit">按钮测试</button>-->
-        <!--</form>-->
+      <view>写</view>
+      <view>选</view>
+      <view>寄</view>
     </view>
+    <block wx:for="{{ letterTypes }}" wx:key="id">
+      <form report-submit="True" @submit="bindSubmit">
+        <button formType="submit" id="{{ index }}">
+          <view>{{ item.name }}</view>
+          <view>
+            <block wx:if="{{ item.price === 0}}">免费</block>
+            <block wx:else>{{ item.price }} 点券</block>
+          </view>
+          <view>{{ item.describe }}</view>
+        </button>
+      </form>
+    </block>
+  </view>
 </template>
 
 <script>
@@ -21,15 +35,22 @@
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      letterTypes: []
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      bindSubmit(e) {
+        api.formIdSubmit(e.detail.formId)
+        this.$parent.globalData.letterInfo.letterType = this.letterTypes[e.detail.target.id]
+        console.log(this.$parent.globalData.letterInfo)
+        wepy.navigateTo({
+          url: 'write-3'
+        })
+      }
     }
 
     /**
@@ -41,6 +62,10 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
+      let ret = await api.request('letter/type/')
+
+      this.letterTypes = ret.data
+      this.$apply()
     };
 
     /**

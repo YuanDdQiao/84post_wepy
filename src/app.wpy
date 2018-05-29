@@ -26,6 +26,8 @@
         // 'pages/index',
         'pages/write/index',
         'pages/write/write-1',
+        'pages/write/write-2',
+        'pages/write/write-3',
         'pages/box/index',
         'pages/my/index',
         'pages/my/recharge'
@@ -64,7 +66,7 @@
 
     globalData = {
       userInfo: null,
-      letterContent: ''
+      letterInfo: {}
     }
 
     constructor() {

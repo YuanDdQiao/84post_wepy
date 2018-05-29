@@ -51,8 +51,9 @@
         api.formIdSubmit(e.detail.formId)
         // console.log(this.current)
         // console.log(this.currentItem.id)
+        this.$parent.globalData.letterInfo.paperType = this.currentItem
         wepy.navigateTo({
-          url: `write-1?id=${this.currentItem.id}`
+          url: 'write-1'
         })
       },
       bindSwiperCurrentChange(e) {

@@ -5,14 +5,17 @@
       <view>选</view>
       <view>寄</view>
     </view>
-    <form report-submit="True" @submit="bindSubmit">
-      <!--<input type="text"   />-->
-      <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
-                maxlength="{{ maxLength }}"></textarea>
-      <view>{{ todayDate }}</view>
-      <view>{{ wordCount }}/{{ maxLength }} 字</view>
-      <button formType="submit">下一步</button>
-    </form>
+    <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
+      <form report-submit="True" @submit="bindSubmit">
+        <!--<input type="text"   />-->
+        <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
+                  maxlength="{{ maxLength }}"></textarea>
+        <view>{{ todayDate }}</view>
+        <view>{{ wordCount }}/{{ maxLength }} 字</view>
+        <button formType="submit">下一步</button>
+      </form>
+
+    </view>
   </view>
 </template>
 
@@ -36,7 +39,8 @@
       wordCount: 0,
       maxLength: 2000,
       inputValue: '',
-      todayDate: ''
+      todayDate: '',
+      paperType: {}
     }
 
     /**
@@ -45,7 +49,10 @@
     methods = {
       bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
-        this.$parent.globalData.letterContent = this.inputValue
+        this.$parent.globalData.letterInfo.content = this.inputValue
+        wepy.navigateTo({
+          url: 'write-2'
+        })
       },
       bindInput(e) {
         this.inputValue = e.detail.value
@@ -67,7 +74,7 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad(options) {
-      console.log(options.id)
+      this.paperType = this.$parent.globalData.letterInfo.paperType
       let d = new Date()
       this.todayDate = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
       this.$apply()
