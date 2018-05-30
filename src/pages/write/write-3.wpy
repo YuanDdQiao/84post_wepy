@@ -12,7 +12,7 @@
 
       <view class="{{ toNameError ? 'error' : '' }}">
         <view>称呼</view>
-        <input type="text" confirm-type="next" @input="bindInput" data-name="toName"/>
+        <input type="text" confirm-type="next" @input="bindInput" data-name="toName" value="{{ toName }}"/>
         <view>{{ toNameErrorInfo }}</view>
       </view>
 
@@ -29,20 +29,20 @@
 
       <view class="{{ toZipError ? 'error' : '' }}">
         <view>邮编</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="toZip"/>
+        <input type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}"/>
         <view>{{ toZipErrorInfo }}</view>
       </view>
 
       <view>
         <view>手机号</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="toTel"/>
+        <input type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}"/>
       </view>
 
       <view>寄信人</view>
 
       <view>
         <view>称呼</view>
-        <input type="text" confirm-type="next" @input="bindInput" data-name="fromName"/>
+        <input type="text" confirm-type="next" @input="bindInput" data-name="fromName" value="{{ fromName }}"/>
       </view>
 
       <view>
@@ -57,12 +57,12 @@
 
       <view>
         <view>邮编</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="fromZip"/>
+        <input type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}"/>
       </view>
 
       <view>
         <view>手机号</view>
-        <input type="text" confirm-type="done" @input="bindInput" data-name="fromTel"/>
+        <input type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}"/>
       </view>
 
       <view>邮票</view>
@@ -105,14 +105,23 @@
      */
     data = {
       letterStamps: [],
-      toAddress: '点击选择地址',
-      fromAddress: '点击选择地址',
+      toName: '',
+      fromName: '',
       toNameError: false,
       toNameErrorInfo: '',
+
+      toAddress: '点击选择地址',
+      fromAddress: '点击选择地址',
       toAddressError: false,
       toAddressErrorInfo: '',
+
+      toZip: '',
+      fromZip: '',
       toZipError: false,
-      toZipErrorInfo: ''
+      toZipErrorInfo: '',
+
+      toTel: '',
+      fromTel: ''
     }
 
     /**
@@ -129,7 +138,7 @@
         this.$apply()
         this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[e.detail.target.id]
       },
-      bindSubmit(e) {
+      async bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         console.log(this.$parent.globalData.letterInfo)
         let submit = true
@@ -159,6 +168,19 @@
         }
         this.$apply()
         if (submit) {
+          let res = await api.request({
+            url: 'letter/submit/',
+            method: 'POST',
+            data: this.$parent.globalData.letterInfo
+          })
+          console.log(res.data)
+          try {
+            submit = res.data.err_level === 0
+          } catch (e) {
+            submit = false
+          }
+        }
+        if (submit) {
           wepy.navigateTo({
             url: 'write-4'
           })
@@ -171,7 +193,14 @@
       bindInput(e) {
         // console.log(e.currentTarget.dataset.name)
         // console.log(e.detail.value)
-        this.$parent.globalData.letterInfo.shiftInfo[e.currentTarget.dataset.name] = e.detail.value
+        let key = e.currentTarget.dataset.name
+        let value = e.detail.value
+        console.log(`${key}: ${value}`)
+        this.$parent.globalData.letterInfo.shiftInfo[key] = value
+        wepy.setStorage({
+          key: `letterInfo-shiftInfo-${key}`,
+          data: value
+        })
       },
       async bindToAddress(e) {
         await api.getAuthScope('scope.userLocation')
@@ -182,14 +211,21 @@
 
         this.$parent.globalData.letterInfo.shiftInfo.toAddress = res
 
-        this.toAddress = res.name
-        if (this.toAddress === '') {
-          this.toAddress = res.address
+        this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.name
+
+        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.address
         }
-        if (this.toAddress === '') {
-          this.toAddress = `${res.address.latitude}, ${res.address.longtitude}`
+        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
         }
 
+        wepy.setStorage({
+          key: 'letterInfo-shiftInfo-toAddress',
+          data: this.$parent.globalData.letterInfo.shiftInfo.toAddress
+        })
+
+        this.toAddress = this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName
         this.$apply()
       },
       async bindFromAddress(e) {
@@ -201,13 +237,21 @@
 
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress = res
 
-        this.fromAddress = res.name
-        if (this.fromAddress === '') {
-          this.fromAddress = res.address
+        this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.name
+
+        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.address
         }
-        if (this.fromAddress === '') {
-          this.fromAddress = `${res.address.latitude}, ${res.address.longtitude}`
+        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
         }
+
+        wepy.setStorage({
+          key: 'letterInfo-shiftInfo-fromAddress',
+          data: this.$parent.globalData.letterInfo.shiftInfo.fromAddress
+        })
+
+        this.fromAddress = this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName
         this.$apply()
       }
     }
@@ -221,32 +265,78 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-      api.request('letter/stamp/').then(e => {
-        this.letterStamps = e.data
-        for (let ls of this.letterStamps) {
-          ls.icon = decodeURIComponent(ls.icon)
-          ls.choose = false
-        }
-        this.letterStamps[0].choose = true
-        this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
-        this.$parent.globalData.letterInfo.shiftInfo = {
-          toName: '',
-          toTel: '',
-          toZip: '',
-          fromName: '',
-          fromTel: '',
-          fromZip: '',
-          toAddress: {},
-          fromAddress: {}
-        }
-        this.$apply()
-      })
+      let e = await api.request('letter/stamp/')
+      this.letterStamps = e.data
+      for (let ls of this.letterStamps) {
+        ls.icon = decodeURIComponent(ls.icon)
+        ls.choose = false
+      }
+      this.letterStamps[0].choose = true
+      this.$apply()
+
+      this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
+      this.$parent.globalData.letterInfo.shiftInfo = {
+        toName: '',
+        toTel: '',
+        toZip: '',
+        fromName: '',
+        fromTel: '',
+        fromZip: '',
+        toAddress: {},
+        fromAddress: {}
+      }
     };
 
     /**
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      // 记住一般信息（'toName', 'toTel', 'toZip', 'fromName', 'fromTel', 'fromZip'）
+      let key = ['toName', 'toTel', 'toZip', 'fromName', 'fromTel', 'fromZip']
+
+      await key.forEach(async k => {
+        try {
+          let v = await wepy.getStorage({
+            key: `letterInfo-shiftInfo-${k}`
+          })
+          this[k] = v.data
+        } catch (e) {
+          this[k] = ''
+        }
+      })
+      // 记住地址
+      try {
+        let v = await wepy.getStorage({
+          key: 'letterInfo-shiftInfo-toAddress'
+        })
+
+        this.$parent.globalData.letterInfo.shiftInfo.toAddress = v.data
+        this.toAddress = v.data.showName
+      } catch (e) {
+        console.log(e)
+      }
+      try {
+        let v = await wepy.getStorage({
+          key: 'letterInfo-shiftInfo-fromAddress'
+        })
+
+        this.$parent.globalData.letterInfo.shiftInfo.fromAddress = v.data
+        this.fromAddress = v.data.showName
+      } catch (e) {
+        console.log(e)
+      }
+      // 记住邮票
+
+      // try {
+      //   wepy.getStorage({
+      //     key: `letterInfo-shiftInfo-${k}`
+      //   }).then(v => {
+      //     this[k] = v.data
+      //   })
+      // } catch (e) {
+      //   this[k] = ''
+      // }
+      this.$apply()
     };
 
     /**

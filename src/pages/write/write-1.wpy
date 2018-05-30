@@ -5,6 +5,7 @@
       <view>选</view>
       <view>寄</view>
     </view>
+    <view wx:if="errorInfo  !== '' ">{{ errorInfo }}</view>
     <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <!--<input type="text"   />-->
@@ -37,10 +38,12 @@
     data = {
       placeHolderText: '写下想要说的……',
       wordCount: 0,
+      minLength: 1,
       maxLength: 2000,
       inputValue: '',
       todayDate: '',
-      paperType: {}
+      paperType: {},
+      errorInfo: ''
     }
 
     /**
@@ -50,9 +53,25 @@
       bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         this.$parent.globalData.letterInfo.content = this.inputValue
-        wepy.navigateTo({
-          url: 'write-2'
-        })
+        if (this.inputValue.length > this.maxLength) {
+          this.errorInfo = `内容长度必须在 ${this.minLength}-${this.maxLength} 字之间`
+          this.$apply()
+          wepy.pageScrollTo({
+            scrollTop: 0
+          })
+        } else if (this.inputValue.length < this.minLength) {
+          this.errorInfo = `内容长度必须在 ${this.minLength}-${this.maxLength} 字之间`
+          this.$apply()
+          wepy.pageScrollTo({
+            scrollTop: 0
+          })
+        } else {
+          this.errorInfo = ''
+          this.$apply()
+          wepy.navigateTo({
+            url: 'write-2'
+          })
+        }
       },
       bindInput(e) {
         this.inputValue = e.detail.value
@@ -94,6 +113,10 @@
       this.$apply()
       api.request('global/letter_max_length/').then(e => {
         this.maxLength = parseInt(e.data.value)
+        this.$apply()
+      })
+      api.request('global/letter_min_length/').then(e => {
+        this.minLength = parseInt(e.data.value)
         this.$apply()
       })
     };
