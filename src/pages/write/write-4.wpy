@@ -1,5 +1,10 @@
 <template>
   <view>
+    <view>
+      <view>写</view>
+      <view>选</view>
+      <view>寄</view>
+    </view>
     <image src="{{ thumbnailUrl }}"></image>
 
     <block wx:if="{{ fee !== 0}}">

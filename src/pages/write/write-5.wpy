@@ -1,9 +1,31 @@
 <template>
+  <view>
     <view>
-        <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-        <!--<button  formType="submit">按钮测试</button>-->
-        <!--</form>-->
+      <view>写</view>
+      <view>选</view>
+      <view>寄</view>
     </view>
+
+
+    <view>
+      <image></image>
+    </view>
+
+
+    <view>
+      <view>您的邮件（平邮）已寄出！</view>
+      <view>目的地：北京xx区</view>
+    </view>
+
+
+    <form report-submit="True" @submit="bindNoSenseForm">
+      <button formType="submit">再寄一封</button>
+    </form>
+    <form report-submit="True" @submit="bindNoSenseForm">
+      <button formType="submit">预览信件</button>
+    </form>
+
+  </view>
 </template>
 
 <script>
@@ -84,10 +106,11 @@
      * 用户点击右上角分享
      */
     onShareAppMessage() {
+      let userId = wepy.getStorageSync('userId')
+      let imageUrl = `${api.host}/media/share/default.png`
       return {
-        title: null,
-        path: null,
-        imageUrl: null
+        path: `/pages/write/index?fromUID=${userId}`,
+        imageUrl: imageUrl
       }
     };
   }
