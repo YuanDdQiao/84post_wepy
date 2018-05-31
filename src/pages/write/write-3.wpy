@@ -192,6 +192,7 @@
             errMsg = '未知错误，请重试'
           }
           if (errLevel === 0) {
+            this.$parent.globalData.currentLetter = res.data
             wepy.navigateTo({
               url: 'write-4'
             })
@@ -346,11 +347,14 @@
         let tls = this.letterStamps.find(ls => ls.id === letterStampId)
         if (tls) {
           tls.choose = true
+          this.$parent.globalData.letterInfo.letterStamp = tls
         } else {
           this.letterStamps[0].choose = true
+          this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
         }
       } catch (e) {
         this.letterStamps[0].choose = true
+        this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
       }
       this.$apply()
     };

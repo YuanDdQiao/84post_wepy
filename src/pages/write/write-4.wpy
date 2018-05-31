@@ -63,6 +63,7 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
+      console.log(this.$parent.globalData.currentLetter)
     };
 
     /**
