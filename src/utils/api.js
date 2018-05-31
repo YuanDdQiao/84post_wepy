@@ -105,7 +105,7 @@ const login = async (params = {}) => {
     // console.log('User ID:', userId)
 
     wepy.setStorageSync('token', token)
-    wepy.setStorageSync('user_id', userId)
+    wepy.setStorageSync('userId', userId)
   }
 
   return authResponse
@@ -157,6 +157,7 @@ const stopDebug = async () => {
 }
 
 export default {
+  host,
   request,
   login,
   formIdSubmit,
