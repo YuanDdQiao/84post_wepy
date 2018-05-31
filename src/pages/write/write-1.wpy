@@ -93,7 +93,6 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad(options) {
-      this.paperType = this.$parent.globalData.letterInfo.paperType
       let d = new Date()
       this.todayDate = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
       this.$apply()
@@ -103,6 +102,7 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.paperType = this.$parent.globalData.letterInfo.paperType
       try {
         let res = await wepy.getStorage({ key: 'letterContent' })
         this.inputValue = res.data
