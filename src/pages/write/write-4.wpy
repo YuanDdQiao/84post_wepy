@@ -1,6 +1,6 @@
 <template>
   <view>
-    <img src="{{ thumbnailUrl }}">
+    <image src="{{ thumbnailUrl }}"></image>
 
     <block wx:if="{{ fee !== 0}}">
       <view>您需支付 {{ fee }} 点券</view>
@@ -67,6 +67,7 @@
         wepy.navigateBack()
       },
       async bindPayFreeForm(e) {
+        api.formIdSubmit(e.detail.formId)
       }
     }
 
@@ -82,6 +83,10 @@
       console.log(this.$parent.globalData.currentLetter)
       this.fee = this.$parent.globalData.currentLetter.fee
       this.balance = this.$parent.globalData.currentLetter.balance
+      let id = this.$parent.globalData.currentLetter.id
+      let res = await api.request(`letter/thumbnail/${id}`)
+      this.thumbnailUrl = res.data.url
+      this.$apply()
     };
 
     /**
