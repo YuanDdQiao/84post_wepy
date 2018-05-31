@@ -4,7 +4,8 @@ import 'wepy-async-function'
 // 服务器接口地址
 // const host = 'http://127.0.0.1:8000/api/v1'
 // const host = 'http://192.168.123.103:8000/api/v1'
-const host = 'https://84.singee.site/api/v1'
+const host = 'https://84.singee.site'
+const apiRoot = `${host}/api/v1`
 
 // 普通请求
 const request = async (options, showLoading = true, auth = true) => {
@@ -19,7 +20,7 @@ const request = async (options, showLoading = true, auth = true) => {
     wepy.showLoading({ title: '加载中' })
   }
   // 拼接请求地址
-  options.url = host + '/' + options.url
+  options.url = apiRoot + '/' + options.url
 
   // Authorization
   if (auth) {
