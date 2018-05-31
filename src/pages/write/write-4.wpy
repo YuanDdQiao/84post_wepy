@@ -6,21 +6,31 @@
       <view>您需支付 {{ fee }} 点券</view>
       <view>余额 {{ balance }} 点券</view>
     </block>
+    <block wx:else>
+      预览您要寄出的信
+    </block>
 
-    <form report-submit="True" @submit="bindNoSenseForm">
-      <block wx:if="{{ fee !== 0}}">
-        <block wx:if="{{ balance >= fee }}">
+    <form report-submit="True" @submit="bindBackForm">
+      <button formType="submit">返回并修改</button>
+    </form>
+
+    <block wx:if="{{ fee !== 0}}">
+      <block wx:if="{{ balance >= fee }}">
+        <form report-submit="True" @submit="bindNoSenseForm">
           <button formType="submit">确认支付并继续</button>
-        </block>
-        <block wx:else>
-          <button formType="submit">充值并继续</button>
-        </block>
+        </form>
       </block>
       <block wx:else>
-        <button formType="submit">确认并继续</button>
+        <form report-submit="True" @submit="bindNoSenseForm">
+          <button formType="submit">充值并继续</button>
+        </form>
       </block>
-
-    </form>
+    </block>
+    <block wx:else>
+      <form report-submit="True" @submit="bindPayFreeForm">
+        <button formType="submit">确认并继续</button>
+      </form>
+    </block>
   </view>
 </template>
 
@@ -51,6 +61,12 @@
     methods = {
       bindNoSenseForm(e) {
         api.formIdSubmit(e.detail.formId)
+      },
+      bindBackForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateBack()
+      },
+      async bindPayFreeForm(e) {
       }
     }
 
@@ -64,6 +80,8 @@
      */
     async onLoad() {
       console.log(this.$parent.globalData.currentLetter)
+      this.fee = this.$parent.globalData.currentLetter.fee
+      this.balance = this.$parent.globalData.currentLetter.balance
     };
 
     /**
