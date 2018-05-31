@@ -137,6 +137,10 @@
         this.letterStamps[e.detail.target.id].choose = true
         this.$apply()
         this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[e.detail.target.id]
+        wepy.setStorage({
+          key: 'letterInfo-letterStamp',
+          data: this.letterStamps[e.detail.target.id]
+        })
       },
       async bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
@@ -271,7 +275,6 @@
         ls.icon = decodeURIComponent(ls.icon)
         ls.choose = false
       }
-      this.letterStamps[0].choose = true
       this.$apply()
 
       this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
@@ -285,12 +288,6 @@
         toAddress: {},
         fromAddress: {}
       }
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
       // 记住一般信息（'toName', 'toTel', 'toZip', 'fromName', 'fromTel', 'fromZip'）
       let key = ['toName', 'toTel', 'toZip', 'fromName', 'fromTel', 'fromZip']
 
@@ -313,7 +310,6 @@
         this.$parent.globalData.letterInfo.shiftInfo.toAddress = v.data
         this.toAddress = v.data.showName
       } catch (e) {
-        console.log(e)
       }
       try {
         let v = await wepy.getStorage({
@@ -323,20 +319,29 @@
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress = v.data
         this.fromAddress = v.data.showName
       } catch (e) {
-        console.log(e)
       }
       // 记住邮票
-
-      // try {
-      //   wepy.getStorage({
-      //     key: `letterInfo-shiftInfo-${k}`
-      //   }).then(v => {
-      //     this[k] = v.data
-      //   })
-      // } catch (e) {
-      //   this[k] = ''
-      // }
+      try {
+        let v = await wepy.getStorage({
+          key: 'letterInfo-letterStamp'
+        })
+        let letterStampId = v.data.id
+        let tls = this.letterStamps.find(ls => ls.id === letterStampId)
+        if (tls) {
+          tls.choose = true
+        } else {
+          this.letterStamps[0].choose = true
+        }
+      } catch (e) {
+        this.letterStamps[0].choose = true
+      }
       this.$apply()
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
     };
 
     /**
