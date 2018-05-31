@@ -153,7 +153,15 @@
     /**
      * 用户点击右上角分享
      */
-    async onShareAppMessage() {
+    onShareAppMessage() {
+      let userId = wepy.getStorageSync('userId')
+      let imageUrl = `${api.host}/media/share/default.png`
+      console.log(userId)
+      console.log(imageUrl)
+      return {
+        path: `/pages/write/index?fromUID=${userId}`,
+        imageUrl: imageUrl
+      }
     };
   }
 </script>
