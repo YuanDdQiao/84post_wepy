@@ -1,5 +1,6 @@
 <template>
   <view>
+    <view wx:if="writeIndexError">{{ writeIndexError }}</view>
     <swiper @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
 
       <block wx:for="{{ papers }}" wx:key="id">
@@ -41,7 +42,8 @@
       papers: {},
       current: 0,
       currentItem: {},
-      currentItemId: -1
+      currentItemId: -1,
+      writeIndexError: ''
     }
 
     /**
@@ -76,9 +78,18 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
+      // writeIndexError
+      this.writeIndexError = this.$parent.globalData.writeIndexError
+      this.$parent.globalData.writeIndexError = ''
       // 日期
       let d = new Date()
-      this.todayDate = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+      this.todayDate = `${d.getFullYear()}-${d.getMonth() + 1 }-${d.getDate()}`
       this.$apply()
       // 获取信纸
       let res = await api.request('letter/paper/')
@@ -106,12 +117,6 @@
       }
 
       this.$apply()
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
     };
 
     /**

@@ -67,7 +67,8 @@
 
     globalData = {
       userInfo: null,
-      letterInfo: {}
+      letterInfo: {},
+      writeIndexError: ''
     }
 
     constructor() {

@@ -178,20 +178,29 @@
             data: this.$parent.globalData.letterInfo
           })
           console.log(res.data)
+          let errLevel = 2
+          let errMsg = ''
           try {
-            submit = res.data.err_level === 0
+            errLevel = parseInt(res.data.err_level)
+            errMsg = String(res.data.err_msg)
           } catch (e) {
-            submit = false
+            errLevel = 2
+            errMsg = '未知错误，请重试'
           }
-        }
-        if (submit) {
-          wepy.navigateTo({
-            url: 'write-4'
-          })
-        } else {
-          wepy.pageScrollTo({
-            scrollTop: 0
-          })
+          if (errLevel === 0) {
+            wepy.navigateTo({
+              url: 'write-4'
+            })
+          } else if (errLevel === 1) {
+            wepy.pageScrollTo({
+              scrollTop: 0
+            })
+          } else {
+            this.$parent.globalData.writeIndexError = errMsg
+            wepy.switchTab({
+              url: 'index'
+            })
+          }
         }
       },
       bindInput(e) {
@@ -297,8 +306,10 @@
             key: `letterInfo-shiftInfo-${k}`
           })
           this[k] = v.data
+          this.$parent.globalData.letterInfo.shiftInfo[k] = v.data
         } catch (e) {
           this[k] = ''
+          this.$parent.globalData.letterInfo.shiftInfo[k] = ''
         }
       })
       // 记住地址
