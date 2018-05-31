@@ -29,6 +29,7 @@
         'pages/write/write-2',
         'pages/write/write-3',
         'pages/write/write-4',
+        'pages/write/write-5',
         'pages/box/index',
         'pages/my/index',
         'pages/my/recharge'
