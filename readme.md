@@ -12,6 +12,12 @@ brew install yarn
 git clone https://github.com/TeamUsefulUseless/84post_wepy.git
 ```
 
+更换源（国内访问加速，可跳过）
+
+```
+yarn config set registry 'https://registry.npm.taobao.org'
+```
+
 安装依赖
 
 ```
