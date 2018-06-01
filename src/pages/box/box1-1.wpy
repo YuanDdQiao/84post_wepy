@@ -1,9 +1,19 @@
 <template>
-    <view>
-        <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-        <!--<button  formType="submit">按钮测试</button>-->
-        <!--</form>-->
-    </view>
+  <view>
+
+    <block wx:if="{{ letters.length !== 0 }}">
+      <block wx:for="{{ letters }}" wx:key="id">
+        <form report-submit="True" @submit="bindNoSenseForm" data-id="{{ item.id }}">
+          <button formType="submit">
+            <image src="{{ item.thumbnailUrl }}"></image>
+          </button>
+        </form>
+      </block>
+    </block>
+    <block wx:else>
+      您周围没有已经送达的信件
+    </block>
+  </view>
 </template>
 
 <script>
@@ -15,13 +25,16 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '平邮取件'
+      navigationBarTitleText: '平邮取件',
+      enablePullDownRefresh: true
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      letters: []
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
@@ -41,6 +54,16 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
+      await api.getAuthScope('scope.userLocation')
+      let res = await wepy.getLocation()
+      console.log(res)
+      let r = await api.request({
+        url: 'box/around/',
+        method: 'POST',
+        data: res
+      })
+      this.letters = r.data
+      this.$apply()
     };
 
     /**
@@ -72,6 +95,8 @@
      * 页面相关事件处理函数--监听用户下拉动作
      */
     async onPullDownRefresh() {
+      this.onLoad()
+      wepy.stopPullDownRefresh()
     };
 
     /**

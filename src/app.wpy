@@ -63,7 +63,7 @@
         selectedColor: '#00b5ad'
       },
       networkTimeout: {
-        request: 5000
+        request: 60000
       },
       debug: true
     }

@@ -208,6 +208,10 @@
               url: 'index'
             })
           }
+        } else {
+          wepy.pageScrollTo({
+            scrollTop: 0
+          })
         }
       },
       bindInput(e) {

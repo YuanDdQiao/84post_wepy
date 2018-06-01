@@ -34,7 +34,7 @@
       bindChooseBox(e) {
         api.formIdSubmit(e.detail.formId)
         console.log(e.target.dataset.ltype)
-        if (parseInt(e.target.dataset.ltype) === 0) {
+        if (parseInt(e.target.dataset.ltype) === 1) {
           wepy.navigateTo({ url: 'box1-1' })
         } else {
           wepy.navigateTo({ url: 'box1-2' })
