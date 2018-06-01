@@ -31,6 +31,8 @@
         'pages/write/write-4',
         'pages/write/write-5',
         'pages/box/index',
+        'pages/box/box1-1',
+        'pages/box/box1-2',
         'pages/my/index',
         'pages/my/recharge'
       ],

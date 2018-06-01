@@ -1,11 +1,9 @@
 <template>
-  <view>
-    <block wx:for="{{ boxTypes }}" wx:key="id">
-      <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
-        <button formType="submit">{{ item.name }}</button>
-      </form>
-    </block>
-  </view>
+    <view>
+        <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+        <!--<button  formType="submit">按钮测试</button>-->
+        <!--</form>-->
+    </view>
 </template>
 
 <script>
@@ -17,29 +15,21 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '信箱'
+      navigationBarTitleText: '取件'
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {
-      boxTypes: []
-    }
+    data = {}
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindChooseBox(e) {
-        api.formIdSubmit(e.detail.formId)
-        console.log(e.target.dataset.ltype)
-        if (parseInt(e.target.dataset.ltype) === 0) {
-          wepy.navigateTo({ url: 'box1-1' })
-        } else {
-          wepy.navigateTo({ url: 'box1-2' })
-        }
-      }
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
     }
 
     /**
@@ -51,12 +41,6 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-      api.request('box/type/').then(
-        r => {
-          this.boxTypes = r.data
-          this.$apply()
-        }
-      )
     };
 
     /**
