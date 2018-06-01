@@ -46,18 +46,18 @@
         list: [{
           pagePath: 'pages/write/index',
           text: '写信'
-          // iconPath: 'images/index.png',
-          // selectedIconPath: 'images/index_selected.png'
+          iconPath: 'images/write.png',
+          selectedIconPath: 'images/write_selected.png'
         }, {
           pagePath: 'pages/box/index',
           text: '信箱'
-          // iconPath: 'images/user.png',
-          // selectedIconPath: 'images/user_selected.png'
+          iconPath: 'images/mailbox.png',
+          selectedIconPath: 'images/mailbox_selected.png'
         }, {
           pagePath: 'pages/my/index',
           text: '我的'
-          // iconPath: 'images/user.png',
-          // selectedIconPath: 'images/user_selected.png'
+          iconPath: 'images/me.png',
+          selectedIconPath: 'images/me_selected.png'
         }],
         color: '#707070',
         selectedColor: '#00b5ad'

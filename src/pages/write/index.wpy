@@ -171,4 +171,9 @@
     border: red solid 3px;
   }
 
+  button{
+    color:#FF4A19;
+    width:60vw;
+  }
+
 </style>
