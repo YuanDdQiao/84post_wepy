@@ -6,10 +6,10 @@
       <block wx:for="{{ papers }}" wx:key="id">
         <swiper-item item-id="{{ item.id }}" class="papers">
           <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
-            <view>{{ item.demo_text }}</view>
+            <view class="demotext">{{ item.demo_text }}</view>
             <view>{{ todayDate }}</view>
           </view>
-          <view>{{ item.name }}</view>
+          <view class="papername">{{ item.name }}</view>
         </swiper-item>
       </block>
       <view></view>
@@ -168,11 +168,9 @@
 
 <style lang="less">
   .papers {
-    border: red 2px solid;
-    height: 48vh;
+    /* border: red 2px solid; */
     padding: 20rpx;
-    width: 100rpx;
-    text-align: center;
+
   }
 
   button{
@@ -189,19 +187,32 @@
   }
 
   .paper-01{
-    /* Rectangle 18: */
     background: #FCF7E8;
-    border: 14rpx solid #E5DCC2;
-    border: 12rpx solid #FCF7E8;
-    box-shadow: 0 4px 6px 0 rgba(128,106,38,0.43);
-
+    border: 2px solid #E5DCC2;
+    outline: 6px solid #FCF7E8;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    width:630rpx;
+    height:720rpx;
   }
 
   .paperselector{
-    height:74vh;
+    height:76vh;
     margin: 20rpx;
     padding: 10rpx;
-    text-align: center;
+    width:690rpx;
   }
 
+  .papername{
+    font-size: 30rpx;
+    margin-top:40rpx;
+    color:gray;
+    text-align:center;
+
+
+  }
+
+  .demotext{
+    padding: 20rpx;
+    color:#A0936C;
+  }
 </style>
