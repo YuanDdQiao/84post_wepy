@@ -1,9 +1,12 @@
 <template>
-    <view>
-        <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-        <!--<button  formType="submit">按钮测试</button>-->
-        <!--</form>-->
-    </view>
+  <view>
+
+    <form report-submit="True" @submit="bindSubmitForm">
+      <input type="text" placeholder="请输入取件号" @input="bindInput"/>
+      <button>？</button>
+      <button formType="submit">下一步</button>
+    </form>
+  </view>
 </template>
 
 <script>
@@ -21,15 +24,36 @@
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      pickUpCode: ''
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      bindInput(e) {
+        this.pickUpCode = e.detail.value
+      },
+      async bindSubmitForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        let res = await api.request(`box/pickup_uuid/${this.pickUpCode}/`)
+        if (res.data.id) {
+          this.$parent.globalData.pickUp = {
+            id: res.data.id,
+            uuid: res.data.uuid,
+            type: 2
+          }
+          console.log(this.$parent.globalData.pickUp)
+        } else {
+          wepy.showModal({
+            title: '提示',
+            content: '您输入的取件号不存在，请检查后重试',
+            showCancel: false
+          })
+        }
+
+      }
     }
 
     /**

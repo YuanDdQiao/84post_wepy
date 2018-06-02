@@ -3,7 +3,7 @@
 
     <block wx:if="{{ letters.length !== 0 }}">
       <block wx:for="{{ letters }}" wx:key="id">
-        <form report-submit="True" @submit="bindNoSenseForm" data-id="{{ item.id }}">
+        <form report-submit="True" @submit="bindChooseStamp" data-id="{{ item.id }}">
           <button formType="submit">
             <image src="{{ item.thumbnailUrl }}"></image>
           </button>
@@ -40,9 +40,14 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      bindChooseStamp(e) {
+        api.formIdSubmit(e.detail.formId)
+        this.$parent.globalData.pickUp = {
+          id: e.target.dataset.id,
+          type: 1
+        }
+        console.log(this.$parent.globalData.pickUp)
+      }
     }
 
     /**
