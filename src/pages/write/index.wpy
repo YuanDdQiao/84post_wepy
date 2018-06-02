@@ -1,10 +1,10 @@
 <template>
   <view>
     <view wx:if="writeIndexError">{{ writeIndexError }}</view>
-    <swiper @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
+    <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
 
       <block wx:for="{{ papers }}" wx:key="id">
-        <swiper-item item-id="{{ item.id }}" class="show-border">
+        <swiper-item item-id="{{ item.id }}" class="papers">
           <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
             <view>{{ item.demo_text }}</view>
             <view>{{ todayDate }}</view>
@@ -15,7 +15,7 @@
       <view></view>
 
     </swiper>
-    <view>滑动选择信纸</view>
+    <view class="choosepapernote">滑动选择信纸</view>
     <form report-submit="True" @submit="bindStartWriting">
       <button formType="submit">开始</button>
     </form>
@@ -167,13 +167,41 @@
 </script>
 
 <style lang="less">
-  .show-border {
-    border: red solid 3px;
+  .papers {
+    border: red 2px solid;
+    height: 48vh;
+    padding: 20rpx;
+    width: 100rpx;
+    text-align: center;
   }
 
   button{
-    color:#FF4A19;
-    width:60vw;
+    color:white;
+    width:30vw;
+    background-color: #FF4A19;
+  }
+
+  .choosepapernote{
+    text-align: center;
+    font-size: 30rpx;
+    margin:20rpx;
+    color:gray;
+  }
+
+  .paper-01{
+    /* Rectangle 18: */
+    background: #FCF7E8;
+    border: 14rpx solid #E5DCC2;
+    border: 12rpx solid #FCF7E8;
+    box-shadow: 0 4px 6px 0 rgba(128,106,38,0.43);
+
+  }
+
+  .paperselector{
+    height:74vh;
+    margin: 20rpx;
+    padding: 10rpx;
+    text-align: center;
   }
 
 </style>
