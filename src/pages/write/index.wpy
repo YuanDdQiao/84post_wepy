@@ -89,7 +89,7 @@
       this.$parent.globalData.writeIndexError = ''
       // 日期
       let d = new Date()
-      this.todayDate = `${d.getFullYear()}-${d.getMonth() + 1 }-${d.getDate()}`
+      this.todayDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
       this.$apply()
       // 获取信纸
       let res = await api.request('letter/paper/')
