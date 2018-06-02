@@ -33,6 +33,7 @@
         'pages/box/index',
         'pages/box/box1-1',
         'pages/box/box1-2',
+        'pages/box/box-2',
         'pages/my/index',
         'pages/my/recharge'
       ],
