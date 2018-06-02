@@ -1,10 +1,8 @@
 <template>
   <view>
-
-    <form report-submit="True" @submit="bindSubmitForm">
-      <input type="text" placeholder="请输入取件号" @input="bindInput"/>
-      <button>？</button>
-      <button formType="submit">下一步</button>
+    <image src="{{ thumbUrl }}"></image>
+    <form report-submit="True" @submit="bindOpenLetter">
+      <button formType="submit">开</button>
     </form>
   </view>
 </template>
@@ -18,42 +16,23 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '取件'
+      navigationBarTitleText: '很有仪式感的打开'
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      pickUpCode: ''
+      pickUpId: 0,
+      thumbUrl: ''
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindInput(e) {
-        this.pickUpCode = e.detail.value
-      },
-      async bindSubmitForm(e) {
+      bindOpenLetter(e) {
         api.formIdSubmit(e.detail.formId)
-        let res = await api.request(`box/pickup_uuid/${this.pickUpCode}/`)
-        if (res.data.id) {
-          this.$parent.globalData.pickUp = {
-            id: res.data.id,
-            uuid: res.data.uuid,
-            type: 2
-          }
-          console.log(this.$parent.globalData.pickUp)
-          wepy.navigateTo({ url: 'box-2' })
-        } else {
-          wepy.showModal({
-            title: '提示',
-            content: '您输入的取件号不存在，请检查后重试',
-            showCancel: false
-          })
-        }
-
       }
     }
 
@@ -66,6 +45,19 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
+      this.pickUpId = this.$parent.globalData.pickUp.id
+      let res = await api.request(`letter/publicthumb/${this.pickUpId}/`)
+      if (res.data.url) {
+        this.thumbUrl = res.data.url
+        this.$apply()
+      } else {
+        await wepy.showModal({
+          title: '提示',
+          content: '该信件不存在，请返回重试',
+          showCancel: false
+        })
+        wepy.navigateBack()
+      }
     };
 
     /**
