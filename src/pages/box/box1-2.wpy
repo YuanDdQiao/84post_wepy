@@ -49,7 +49,7 @@
         } else {
           wepy.showModal({
             title: '提示',
-            content: '您输入的取件号不存在，请检查后重试',
+            content: '您输入的取件号不存在或已被取走',
             showCancel: false
           })
         }
@@ -109,10 +109,11 @@
      * 用户点击右上角分享
      */
     onShareAppMessage() {
+      let userId = wepy.getStorageSync('userId')
+      let imageUrl = `${api.host}/media/share/default.png`
       return {
-        title: null,
-        path: null,
-        imageUrl: null
+        path: `/pages/box/index?fromUID=${userId}`,
+        imageUrl: imageUrl
       }
     };
   }

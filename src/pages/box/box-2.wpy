@@ -24,6 +24,8 @@
      */
     data = {
       pickUpId: 0,
+      pickUpUUID: null,
+      pickUpType: 0,
       thumbUrl: ''
     }
 
@@ -31,8 +33,30 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindOpenLetter(e) {
+      async bindOpenLetter(e) {
         api.formIdSubmit(e.detail.formId)
+        let pickUpI = null
+        if (this.pickUpUUID) {
+          pickUpI = this.pickUpUUID
+        } else {
+          pickUpI = this.pickUpId
+        }
+        let ret = await api.request(`box/open/${this.pickUpType}/${pickUpI}/`)
+        console.log(ret.data)
+        if (ret.data.result) {
+          this.$parent.globalData.pickUp.content = ret.data.content
+          this.$parent.globalData.pickUp.viewClass = ret.data.viewClass
+          this.$parent.globalData.pickUp.viewStyle = ret.data.viewStyle
+          wepy.redirectTo({
+            url: 'box-3'
+          })
+        } else {
+          wepy.showModal({
+            title: '取件失败',
+            content: '可能是信件已被他人取走',
+            showCancel: false
+          })
+        }
       }
     }
 
@@ -46,6 +70,10 @@
      */
     async onLoad() {
       this.pickUpId = this.$parent.globalData.pickUp.id
+      this.pickUpType = this.$parent.globalData.pickUp.type
+      if (this.pickUpType) {
+        this.pickUpUUID = this.$parent.globalData.pickUp.uuid
+      }
       let res = await api.request(`letter/publicthumb/${this.pickUpId}/`)
       if (res.data.url) {
         this.thumbUrl = res.data.url
@@ -101,10 +129,11 @@
      * 用户点击右上角分享
      */
     onShareAppMessage() {
+      let userId = wepy.getStorageSync('userId')
+      let imageUrl = `${api.host}/media/share/default.png`
       return {
-        title: null,
-        path: null,
-        imageUrl: null
+        path: `/pages/box/index?fromUID=${userId}`,
+        imageUrl: imageUrl
       }
     };
   }
