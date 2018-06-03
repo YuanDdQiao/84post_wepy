@@ -127,7 +127,7 @@
   }
 
   .typename{
-    font-size: 50rpx;
+    font-size: 42rpx;
     font-weight: bold;
     margin-top: 10rpx;
   }

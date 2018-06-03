@@ -15,7 +15,7 @@
       <view class="{{ toNameError ? 'error' : '' }}">
         <view class="infotype">称呼</view>
         <input class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="toName" value="{{ toName }}"/>
-        <view>{{ toNameErrorInfo }}</view>
+        <view class="errorinfo">{{ toNameErrorInfo }}</view>
       </view>
 
       <view class="{{ toAddressError ? 'error' : '' }}">
@@ -26,13 +26,13 @@
             <view>{{ toAddress }}</view>
           </button>
         </form>
-        <view>{{ toAddressErrorInfo }}</view>
+        <view class="errorinfo">{{ toAddressErrorInfo }}</view>
       </view>
 
       <view class="{{ toZipError ? 'error' : '' }}">
         <view class="infotype">邮编</view>
         <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}"/>
-        <view>{{ toZipErrorInfo }}</view>
+        <view class="errorinfo">{{ toZipErrorInfo }}</view>
       </view>
 
       <view>
@@ -419,8 +419,11 @@
     /* border: red 3px solid; */
   }
 
-  .error {
-    color: red
+  .errorinfo {
+    color: red;
+    font-size: 30rpx;
+    padding-left: 30rpx;
+    display: block;
   }
 
   .roletype{
@@ -443,7 +446,7 @@
     margin-left:40rpx;
     margin-right:40rpx;
     font-size: 30rpx;
-    transition-duration: 1s;
+    transition: 1s all ease;
   }
 
   .inputbox:hover{
@@ -451,7 +454,7 @@
     margin-left:40rpx;
     margin-right:40rpx;
     font-size: 30rpx;
-    transition-duration: 1s;
+    transition: 1s all ease;
   }
 
   .choosebutton{
@@ -464,15 +467,29 @@
     background-color: white;
   }
 
+
   .stampbutton{
     width: 140rpx;
     height: 140rpx;
     margin-top: 20rpx;
     margin-bottom: 15rpx;
-    margin-right: 24rpx;
+    margin-right: 36rpx;
     float: left;
     padding: 6rpx;
     border: 2px #1562B3 dashed;
+    border-radius: 6px;
+    background-color: white;
+  }
+
+  .stampbutton:hover{
+    width: 140rpx;
+    height: 140rpx;
+    margin-top: 20rpx;
+    margin-bottom: 15rpx;
+    margin-right: 36rpx;
+    float: left;
+    padding: 6rpx;
+    border: 2px #1562B3 solid;
     border-radius: 6px;
     background-color: white;
   }
@@ -486,14 +503,18 @@
 
   .stampselector{
     margin-left: 40rpx;
-    margin-right: 12rpx;
-    width: 670rpx;
-    height: 400rpx;
+    margin-right: 6rpx;
+    width: 704rpx;
+    height: 200rpx;
   }
 
   .nextbutton{
     position: relative;
-
+    margin-top: 40rpx;
+    margin-bottom: 80rpx;
+    width: 60vw;
+    color:white;
+    background-color: #FF4A19;
   }
 
 

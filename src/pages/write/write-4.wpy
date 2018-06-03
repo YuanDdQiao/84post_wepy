@@ -7,29 +7,29 @@
     </view>
     <image src="{{ thumbnailUrl }}"></image>
 
-    <block wx:if="{{ fee !== 0}}">
-      <view>您需支付 {{ fee }} 点券</view>
-      <view>余额 {{ balance }} 点券</view>
+    <block  wx:if="{{ fee !== 0}}">
+      <view class="previewnote">您需支付 {{ fee }} 点券</view>
+      <view class="previewnote">余额 {{ balance }} 点券</view>
     </block>
-    <block wx:else>
-      预览您要寄出的信
+    <block class="previewnote" wx:else>
+      <view class="previewnote">预览您要寄出的信</view>
     </block>
 
     <block wx:if="{{ fee !== 0}}">
       <block wx:if="{{ balance >= fee }}">
         <form report-submit="True" @submit="bindPayForm">
-          <button formType="submit">确认支付并继续</button>
+          <button class="confirmbutton" formType="submit">确认支付并继续</button>
         </form>
       </block>
       <block wx:else>
         <form report-submit="True" @submit="bindPayForm">
-          <button formType="submit">充值并继续</button>
+          <button class="confirmbutton" formType="submit">充值并继续</button>
         </form>
       </block>
     </block>
     <block wx:else>
       <form report-submit="True" @submit="bindPayForm">
-        <button formType="submit">确认并继续</button>
+        <button class="confirmbutton" formType="submit">确认并继续</button>
       </form>
     </block>
 
@@ -184,5 +184,26 @@
 </script>
 
 <style lang="less">
+
+  .previewnote{
+    display: block;
+    font-size: 32rpx;
+    text-align: center;
+    margin-top: 40rpx;
+  }
+
+  button{
+    position: relative;
+    margin-top: 40rpx;
+    width: 60vw;
+
+  }
+
+  .confirmbutton{
+    color:white;
+    background-color: #FF4A19;
+    margin-top: 80rpx;
+  }
+
 
 </style>
