@@ -7,13 +7,13 @@
     </view>
     <block wx:for="{{ letterTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindSubmit">
-        <button formType="submit" id="{{ index }}">
-          <view>{{ item.name }}</view>
-          <view>
+        <button class="typechoose" formType="submit" id="{{ index }}">
+          <view class="typename">{{ item.name }}</view>
+          <view class="typeprice">
             <block wx:if="{{ item.price === 0}}">免费</block>
             <block wx:else>{{ item.price }} 点券</block>
           </view>
-          <view>{{ item.describe }}</view>
+          <view class="typenote">{{ item.describe }}</view>
         </button>
       </form>
     </block>
@@ -121,4 +121,24 @@
 
 <style lang="less">
 
+  .typechoose{
+    margin: 40rpx;
+    background-color: #FAF9F6;
+  }
+
+  .typename{
+    font-size: 50rpx;
+    font-weight: bold;
+    margin-top: 10rpx;
+  }
+
+  .typeprice{
+    font-size: 30rpx;
+    margin-top: -20rpx;
+  }
+
+  .typenote{
+    font-size: 30rpx;
+    margin-top: -20rpx;
+  }
 </style>
