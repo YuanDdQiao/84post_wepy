@@ -251,10 +251,6 @@
 
   }
 
-  swiperitem.paper{
-    width:550rpx;
-  }
-
   .demotext{
     white-space: pre-wrap;
     height: 690rpx;
