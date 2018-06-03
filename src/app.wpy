@@ -39,9 +39,9 @@
       ],
       window: {
         backgroundTextStyle: 'light',
-        navigationBarBackgroundColor: '#fff',
+        navigationBarBackgroundColor: '#0D55A1',
         navigationBarTitleText: '84号邮局',
-        navigationBarTextStyle: 'black'
+        navigationBarTextStyle: 'white'
       },
       tabBar: {
         list: [{

@@ -7,7 +7,7 @@
         <swiper-item item-id="{{ item.id }}" class="papers">
           <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
             <view class="demotext">{{ item.demo_text }}</view>
-            <view>{{ todayDate }}</view>
+            <view class="todaydate">{{ todayDate }}</view>
           </view>
           <!-- <view class="papername">{{ item.name }}</view> -->
         </swiper-item>
@@ -184,12 +184,13 @@
   .choosepapernote{
     text-align: center;
     font-size: 30rpx;
-    margin:20rpx;
+    margin-top: 0rpx;
+    margin-bottom: 20rpx;
     color:gray;
   }
 
   .paper-01{
-    /* 泛黄 */
+    /* 暖阳 */
     background: #FCF7E8;
     border: 2px solid #E5DCC2;
     outline: 6px solid #FCF7E8;
@@ -202,15 +203,15 @@
   }
 
   .paper-02{
-    /*  */
+    /* 纯白 */
     background: #FFFFFF;
     border: 3px solid #FBBAD0;
     border-style: double;
-    border-radius: 2%;
+    border-radius: 1%;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
     width:550rpx;
     height:720rpx;
-    color:#6E5F31;
+    color:#6E1A36;
     font-size: 32rpx;
     padding: 40rpx;
   }
@@ -224,13 +225,13 @@
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
     width:550rpx;
     height:720rpx;
-    color:#6E5F31;
+    color:#052B53;
     font-size: 32rpx;
     padding: 40rpx;
   }
 
   .paperselector{
-    height:78vh;
+    height:850rpx;
     margin-top: 20rpx;
     margin-bottom: 20rpx;
     margin-left: 0;
@@ -254,11 +255,11 @@
     width:550rpx;
   }
 
-  /* .demotext-01{
-    padding: 20rpx;
-    color:#A0936C;
-    font-size: 30rpx;
-  } */
+  .demotext{
+    white-space: pre-wrap;
+    height: 690rpx;
+    line-height: 60rpx;
+  }
 
   .writeIndexError{
     text-align: center;
@@ -266,4 +267,11 @@
     background-color: rgba(255,14,14,0.75);
     font-size: 30rpx;
   }
+
+  .todaydate{
+    position: relative;
+    bottom: 10rpx;
+    font-size: 30rpx;
+  }
+
 </style>
