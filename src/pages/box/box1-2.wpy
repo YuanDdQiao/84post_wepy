@@ -49,7 +49,7 @@
         } else {
           wepy.showModal({
             title: '提示',
-            content: '您输入的取件号不存在，请检查后重试',
+            content: '您输入的取件号不存在或已被取走',
             showCancel: false
           })
         }

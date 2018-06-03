@@ -1,9 +1,8 @@
 <template>
   <view>
-    <image src="{{ thumbUrl }}"></image>
-    <form report-submit="True" @submit="bindOpenLetter">
-      <button formType="submit">开</button>
-    </form>
+    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+    <!--<button  formType="submit">按钮测试</button>-->
+    <!--</form>-->
   </view>
 </template>
 
@@ -16,46 +15,21 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '很有仪式感的打开'
+      navigationBarTitleText: '阅读信件'
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {
-      pickUpId: 0,
-      pickUpUUID: null,
-      pickUpType: 0,
-      thumbUrl: ''
-    }
+    data = {}
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      async bindOpenLetter(e) {
-        api.formIdSubmit(e.detail.formId)
-        let pickUpI = null
-        if (this.pickUpUUID) {
-          pickUpI = this.pickUpUUID
-        } else {
-          pickUpI = this.pickUpId
-        }
-        let ret = await api.request(`box/open/${this.pickUpType}/${pickUpI}/`)
-        console.log(ret.data)
-        if (ret.data.result) {
-          this.$parent.globalData.pickUp.content = ret.data.content
-          wepy.redirectTo({
-            url: 'box-3'
-          })
-        } else {
-          wepy.showModal({
-            title: '取件失败',
-            content: '可能是信件已被他人取走',
-            showCancel: false
-          })
-        }
-      }
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
     }
 
     /**
@@ -67,23 +41,7 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-      this.pickUpId = this.$parent.globalData.pickUp.id
-      this.pickUpType = this.$parent.globalData.pickUp.type
-      if (this.pickUpType) {
-        this.pickUpUUID = this.$parent.globalData.pickUp.uuid
-      }
-      let res = await api.request(`letter/publicthumb/${this.pickUpId}/`)
-      if (res.data.url) {
-        this.thumbUrl = res.data.url
-        this.$apply()
-      } else {
-        await wepy.showModal({
-          title: '提示',
-          content: '该信件不存在，请返回重试',
-          showCancel: false
-        })
-        wepy.navigateBack()
-      }
+      console.log(this.$parent.globalData.pickUp)
     };
 
     /**
