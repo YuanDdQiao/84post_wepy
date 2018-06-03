@@ -445,6 +445,7 @@
     margin-right:40rpx;
     font-size: 30rpx;
     transition: 1s all ease;
+    color: #1562B3;
   }
 
 
@@ -461,14 +462,16 @@
     margin-right:40rpx;
     font-size: 30rpx;
     color: #1562B3;
-    border: 2px #1562B3 dashed;
-    border-radius: 6px;
+    border-bottom: 2px #1562B3 dashed;
+    background-color: #FAF9F6;
+    text-align: left;
+    border-radius: 0;
+    padding-left: 0;
   }
 
   .choosebutton:after{
     border:none;
   }
-
 
 
   .stampbutton{
@@ -482,6 +485,7 @@
     border: 2px #1562B3 dashed;
     border-radius: 6px;
     background-color: white;
+
   }
 
   .stampbutton:after{
