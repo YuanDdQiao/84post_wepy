@@ -1,9 +1,10 @@
 <template>
   <view>
-    <view>
-      <view>写</view>
-      <view>选</view>
-      <view>寄</view>
+    <view class="processbarholder ">
+
+      <view class="progress processdone">写</view>
+      <view class="progress-middle">选</view>
+      <view class="progress">寄</view>
     </view>
     <view wx:if="errorInfo  !== '' ">{{ errorInfo }}</view>
     <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
@@ -206,4 +207,41 @@
     color:#6E5F31;
 
   }
+
+  .processbarholder{
+    width:100vw;
+    height:70rpx;
+    position: relative;
+    background-color: #194E87;
+    font-size: 28rpx;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 40rpx;
+
+  }
+
+  .progress {
+    width: 33vw;
+    height: 70rpx;
+    float:left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .progress-middle{
+    width: 34vw;
+    height: 70rpx;
+    float:left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .processdone{
+    border-top: 2px solid white;
+    color:white;
+  }
+
 </style>
