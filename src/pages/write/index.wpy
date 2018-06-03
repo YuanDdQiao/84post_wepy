@@ -187,9 +187,33 @@
   }
 
   .paper-01{
+    /* 泛黄 */
     background: #FCF7E8;
     border: 2px solid #E5DCC2;
     outline: 6px solid #FCF7E8;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    width:630rpx;
+    height:720rpx;
+  }
+
+  .paper-02{
+    /*  */
+    background: #FFFFFF;
+    border: 3px solid #FBBAD0;
+    border-style: double;
+    border-radius: 2%;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    width:630rpx;
+    height:720rpx;
+
+  }
+
+  .paper-03{
+    /* 八十四 */
+    background: #FAF9F6;
+    border: 2px solid #1562B3;
+    border-style: dashed;
+    outline: 6px solid #FAF9F6;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
     width:630rpx;
     height:720rpx;
@@ -211,8 +235,11 @@
 
   }
 
-  .demotext{
+  /* .demotext-01{
     padding: 20rpx;
     color:#A0936C;
-  }
+    font-size: 30rpx;
+  } */
+
+
 </style>

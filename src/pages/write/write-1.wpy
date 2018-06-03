@@ -11,8 +11,8 @@
         <!--<input type="text"   />-->
         <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}"></textarea>
-        <view>{{ todayDate }}</view>
-        <view>{{ wordCount }}/{{ maxLength }} 字</view>
+        <view class="todaydate">{{ todayDate }}</view>
+        <view class="wordcount">{{ wordCount }}/{{ maxLength }} 字</view>
         <button formType="submit">下一步</button>
       </form>
 
@@ -167,5 +167,39 @@
 </script>
 
 <style lang="less">
+  .edit-letter-01{
+    background: #FCF7E8;
+    border: 2px solid #E5DCC2;
+    outline: 6px solid #FCF7E8;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    width:720rpx;
+    height:900rpx;
+    margin: 10rpx;
+  }
 
+  button{
+    color:white;
+    width:30vw;
+    background-color: #FF4A19;
+  }
+
+  .todaydate{
+    font-size: 30rpx;
+
+  }
+
+  .wordcount{
+    font-size: 30rpx;
+
+  }
+
+  textarea{
+    padding: 20rpx;
+    height:780rpx;
+    width:690rpx;
+    font-size: 28rpx;
+    line-height: 20rpx;
+
+
+  }
 </style>
