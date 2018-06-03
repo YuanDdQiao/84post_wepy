@@ -1,4 +1,4 @@
-<template>
+<template >
   <view>
     <view class="processbarholder ">
 
@@ -12,9 +12,9 @@
         <!--<input type="text"   />-->
         <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}"></textarea>
-        <view class="todaydate">{{ todayDate }}</view>
         <view class="wordcount">{{ wordCount }}/{{ maxLength }} 字</view>
-        <button formType="submit">下一步</button>
+        <view class="todaydate">{{ todayDate }}</view>
+        <button formType="submit">写好了</button>
       </form>
 
     </view>
@@ -173,73 +173,49 @@
     border: 2px solid #E5DCC2;
     outline: 6px solid #FCF7E8;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
-    width:720rpx;
+    width:660rpx;
     height:900rpx;
-    margin: 10rpx;
+    margin-right:40rpx;
+    margin-left:40rpx;
+    padding: 0;
+    color:#6E5F31;
   }
 
   button{
     color:white;
     width:30vw;
     background-color: #FF4A19;
+    margin-top: 60rpx;
   }
 
   .todaydate{
+    position: relative;
+    display: inline;
+    bottom: 22rpx;
+    left: 468rpx;
     font-size: 30rpx;
 
   }
 
   .wordcount{
+    position: relative;
     font-size: 30rpx;
-
+    bottom: -30rpx;
+    left: 40rpx;
   }
 
   textarea{
-    padding: 20rpx;
-    height:780rpx;
-    width:690rpx;
+    padding: 40rpx;
+    padding-bottom: 0;
+    height:760rpx;
+    width:580rpx;
     font-size: 30rpx;
     line-height: 60rpx;
+    border-bottom: 1px rgba(160,147,105,0.43) dashed;
 
   }
 
-  .edit-letter-01{
-    color:#6E5F31;
 
-  }
 
-  .processbarholder{
-    width:100vw;
-    height:70rpx;
-    position: relative;
-    background-color: #09427F;
-    font-size: 24rpx;
-    color: rgba(255,255,255,0.3);
-    margin-bottom: 40rpx;
-
-  }
-
-  .progress {
-    width: 33vw;
-    height: 70rpx;
-    float:left;
-    text-align: center;
-    padding-top: 18rpx;
-    border-top: 2px dashed rgba(255,255,255,0.3);
-  }
-
-  .progress-middle{
-    width: 34vw;
-    height: 70rpx;
-    float:left;
-    text-align: center;
-    padding-top: 18rpx;
-    border-top: 2px dashed rgba(255,255,255,0.3);
-  }
-
-  .processdone{
-    border-top: 2px solid white;
-    color:white;
-  }
 
 </style>
