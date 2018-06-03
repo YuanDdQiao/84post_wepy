@@ -197,9 +197,13 @@
     padding: 20rpx;
     height:780rpx;
     width:690rpx;
-    font-size: 28rpx;
-    line-height: 20rpx;
+    font-size: 30rpx;
+    line-height: 60rpx;
 
+  }
+
+  .edit-letter-01{
+    color:#6E5F31;
 
   }
 </style>
