@@ -10,19 +10,19 @@
     <view wx:if="pageError">{{ pageError }}</view>
 
     <form report-submit="True" @submit="bindSubmit">
-      <view>收信人</view>
+      <view class="roletype">收信人</view>
 
       <view class="{{ toNameError ? 'error' : '' }}">
-        <view>称呼</view>
-        <input type="text" confirm-type="next" @input="bindInput" data-name="toName" value="{{ toName }}"/>
+        <view class="infotype">称呼</view>
+        <input class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="toName" value="{{ toName }}"/>
         <view>{{ toNameErrorInfo }}</view>
       </view>
 
       <view class="{{ toAddressError ? 'error' : '' }}">
-        <view>地址</view>
+        <view class="infotype">地址</view>
         <form report-submit="True" @submit="bindToAddress">
 
-          <button formType="submit">
+          <button class="choosebutton" formType="submit">
             <view>{{ toAddress }}</view>
           </button>
         </form>
@@ -30,50 +30,50 @@
       </view>
 
       <view class="{{ toZipError ? 'error' : '' }}">
-        <view>邮编</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}"/>
+        <view class="infotype">邮编</view>
+        <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}"/>
         <view>{{ toZipErrorInfo }}</view>
       </view>
 
       <view>
-        <view>手机号</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}"/>
+        <view class="infotype">手机号</view>
+        <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}"/>
       </view>
 
-      <view>寄信人</view>
+      <view class="roletype">寄信人</view>
 
       <view>
-        <view>称呼</view>
-        <input type="text" confirm-type="next" @input="bindInput" data-name="fromName" value="{{ fromName }}"/>
+        <view class="infotype">称呼</view>
+        <input  class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="fromName" value="{{ fromName }}"/>
       </view>
 
       <view>
-        <view>地址</view>
+        <view class="infotype">地址</view>
         <form report-submit="True" @submit="bindFromAddress">
 
-          <button formType="submit">
+          <button class="choosebutton" formType="submit">
             <view>{{ fromAddress }}</view>
           </button>
         </form>
       </view>
 
       <view>
-        <view>邮编</view>
-        <input type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}"/>
+        <view class="infotype">邮编</view>
+        <input  class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}"/>
       </view>
 
       <view>
-        <view>手机号</view>
-        <input type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}"/>
+        <view class="infotype">手机号</view>
+        <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}"/>
       </view>
 
-      <view>邮票</view>
-      <view>
+      <view class="infotype" >邮票</view>
+      <view class="stampselector">
         <block wx:for="{{ letterStamps }}" wx:key="id">
           <form report-submit="True" @submit="bindStampChoose">
-            <button formType="submit" id="{{ index }}">
-              <view class="{{ item.choose? 'choose' : '' }}">
-                <image src="{{ item.icon }}"></image>
+            <button class="stampbutton" formType="submit" id="{{ index }}">
+              <view class="{{ item.choose? 'choose' : '' }} stampview">
+                <image class="stampview" src="{{ item.icon }}"></image>
               </view>
             </button>
           </form>
@@ -81,7 +81,7 @@
       </view>
 
       <view>
-        <button formType="submit">下一步</button>
+        <button class="nextbutton" formType="submit">下一步</button>
       </view>
 
     </form>
@@ -416,11 +416,86 @@
 
 <style lang="less">
   .choose {
-    border: red 3px solid;
+    /* border: red 3px solid; */
   }
 
   .error {
     color: red
   }
+
+  .roletype{
+    font-size: 50rpx;
+    margin: 40rpx;
+    margin-top: 80rpx;
+  }
+
+  .infotype{
+    font-size: 30rpx;
+    margin-top: 80rpx;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-bottom: 20rpx;
+
+  }
+
+  .inputbox{
+    border-bottom: 2px #1562B3 dashed;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    font-size: 30rpx;
+    transition-duration: 1s;
+  }
+
+  .inputbox:hover{
+    border-bottom: 2px #1562B3 solid;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    font-size: 30rpx;
+    transition-duration: 1s;
+  }
+
+  .choosebutton{
+    margin-left:40rpx;
+    margin-right:40rpx;
+    font-size: 30rpx;
+    color: #1562B3;
+    border: 2px #1562B3 dashed;
+    border-radius: 6px;
+    background-color: white;
+  }
+
+  .stampbutton{
+    width: 140rpx;
+    height: 140rpx;
+    margin-top: 20rpx;
+    margin-bottom: 15rpx;
+    margin-right: 24rpx;
+    float: left;
+    padding: 6rpx;
+    border: 2px #1562B3 dashed;
+    border-radius: 6px;
+    background-color: white;
+  }
+
+  .stampview{
+    width: 120rpx;
+    height: 120rpx;
+    margin: 0;
+
+  }
+
+  .stampselector{
+    margin-left: 40rpx;
+    margin-right: 12rpx;
+    width: 670rpx;
+    height: 400rpx;
+  }
+
+  .nextbutton{
+    position: relative;
+
+  }
+
+
 
 </style>
