@@ -23,7 +23,7 @@
         <view class="infotype">地址</view>
         <form report-submit="True" @submit="bindToAddress">
 
-          <button class="choosebutton" formType="submit">
+          <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit">
             <view>{{ toAddress }}</view>
           </button>
         </form>
@@ -52,7 +52,7 @@
         <view class="infotype">地址</view>
         <form report-submit="True" @submit="bindFromAddress">
 
-          <button class="choosebutton" formType="submit">
+          <button class="choosebutton {{fromAddressChosen ? 'chosen' : ''}}" formType="submit">
             <view>{{ fromAddress }}</view>
           </button>
         </form>
@@ -117,6 +117,8 @@
 
       toAddress: '点击选择地址',
       fromAddress: '点击选择地址',
+      toAddressChosen: false,
+      fromAddressChosen: false,
       toAddressError: false,
       toAddressErrorInfo: '',
 
@@ -251,6 +253,7 @@
         })
 
         this.toAddress = this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName
+        this.toAddressChosen = true
         this.$apply()
       },
       async bindFromAddress(e) {
@@ -277,6 +280,7 @@
         })
 
         this.fromAddress = this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName
+        this.fromAddressChosen = true
         this.$apply()
       }
     }
@@ -332,6 +336,7 @@
 
         this.$parent.globalData.letterInfo.shiftInfo.toAddress = v.data
         this.toAddress = v.data.showName
+        this.toAddressChosen = true
       } catch (e) {
       }
       try {
@@ -341,6 +346,7 @@
 
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress = v.data
         this.fromAddress = v.data.showName
+        this.fromAddressChosen = true
       } catch (e) {
       }
       // 记住邮票
@@ -530,8 +536,10 @@
     font-size: 24rpx;
     color: rgba(255,255,255,0.3);
     margin-bottom: 40rpx;
-
   }
 
+  .chosen {
+    color: red;
+  }
 
 </style>
