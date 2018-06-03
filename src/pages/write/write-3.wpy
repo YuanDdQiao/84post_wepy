@@ -420,13 +420,15 @@
   .errorinfo {
     color: red;
     font-size: 30rpx;
-    padding-left: 32rpx;
+    padding-left: 40rpx;
+    padding-top: 20rpx;
     display: block;
   }
 
   .roletype{
     font-size: 50rpx;
-    margin: 40rpx;
+    margin-bottom: 20rpx;
+    margin-left: 40rpx;
     margin-top: 80rpx;
   }
 
@@ -435,7 +437,7 @@
     margin-top: 80rpx;
     margin-left:40rpx;
     margin-right:40rpx;
-    margin-bottom: 20rpx;
+    margin-bottom: 10rpx;
 
   }
 
