@@ -1,14 +1,8 @@
 <template>
   <view>
-    <block wx:for="{{letters}}" wx:key="id">
-      <form report-submit="True" @submit="bindNoSenseForm">
-        <button formType="submit">
-          <view>
-            <image src="{{ item.thumbnail }}"></image>
-          </view>
-        </button>
-      </form>
-    </block>
+    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+    <!--<button  formType="submit">按钮测试</button>-->
+    <!--</form>-->
   </view>
 </template>
 
@@ -21,24 +15,23 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '我的信'
+      navigationBarTitleText: '物流详情'
     }
 
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      type: 1,
-      letters: []
+      expressNumber: null
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindNoSenseForm(e) {
-        api.formIdSubmit(e.detail.formId)
-      }
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
     }
 
     /**
@@ -50,25 +43,15 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad(options) {
-      console.log(options)
-      if (options.type === 'sent') {
-        wepy.setNavigationBarTitle({ title: '寄出的信' })
-        this.type = 1
-      } else if (options.type === 'got') {
-        wepy.setNavigationBarTitle({ title: '收到的信' })
-        this.type = 2
-      } else {
+      this.expressNumber = options.q
+      if (!this.expressNumber) {
         await wepy.showModal({
           title: '参数错误',
-          content: '未选择查询类型',
+          content: '未输入运单号',
           showCancel: false
         })
         wepy.reLaunch({ url: '/pages/my/index' })
       }
-      this.$apply()
-      let ret = await api.request(`my/list/${options.type}/`)
-      this.letters = ret.data
-      this.$apply()
     };
 
     /**

@@ -23,14 +23,14 @@
           ->
         </button>
       </form>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindQueryForm">
         <button formType="submit">
           <text>根据运单号查询</text>
           ->
         </button>
       </form>
     </view>
-    <view>
+    <view style="display: none;">
       <text>我的信息</text>
       <form report-submit="True" @submit="bindEditName">
 
@@ -81,6 +81,13 @@
 
         <button formType="submit">
           <text>关闭调试模式</text>
+          ->
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindClearStorage">
+
+        <button formType="submit">
+          <text>清除 Storage</text>
           ->
         </button>
       </form>
@@ -147,8 +154,11 @@
           url: 'list?type=sent'
         })
       },
-      bindNoSenseForm(e) {
+      bindQueryForm(e) {
         api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: 'query'
+        })
       },
       bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
@@ -241,6 +251,10 @@
       },
       async bindStopDebug(e) {
         api.stopDebug()
+      },
+      async bindClearStorage() {
+        await wepy.clearStorage()
+        api.login()
       }
     }
 
@@ -258,7 +272,7 @@
     /**
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
-    async onShow() {
+    onShow() {
       api.request('user/balance/').then((e) => {
         this.balance = e.data.balance
         this.$apply()
@@ -307,9 +321,9 @@
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    async onPullDownRefresh() {
-      this.onShow()
+    onPullDownRefresh() {
       wepy.stopPullDownRefresh()
+      this.onShow()
     };
 
     /**
