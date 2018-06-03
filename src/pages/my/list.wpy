@@ -1,8 +1,14 @@
 <template>
   <view>
-    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-    <!--<button  formType="submit">按钮测试</button>-->
-    <!--</form>-->
+    <block wx:for="{{letters}}" wx:key="id">
+      <form report-submit="True" @submit="bindNoSenseForm">
+        <button formType="submit">
+          <view>
+            <image src="{{ item.thumbnail }}"></image>
+          </view>
+        </button>
+      </form>
+    </block>
   </view>
 </template>
 
@@ -22,16 +28,17 @@
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      type: 1
+      type: 1,
+      letters: []
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      bindNoSenseForm(e) {
+        api.formIdSubmit(e.detail.formId)
+      }
     }
 
     /**
@@ -58,6 +65,9 @@
         })
         wepy.reLaunch({ url: '/pages/my/index' })
       }
+      this.$apply()
+      let ret = await api.request(`my/list/${options.type}/`)
+      this.letters = ret.data
       this.$apply()
     };
 
