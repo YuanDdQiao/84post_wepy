@@ -8,7 +8,7 @@
       <view class="progress processdone">寄</view>
     </view>
 
-    <view wx:if="pageError">{{ pageError }}</view>
+    <view class="pageError" wx:if="pageError">{{ pageError }}</view>
 
     <form report-submit="True" @submit="bindSubmit">
       <view class="roletype">收信人</view>
@@ -454,6 +454,7 @@
     font-size: 30rpx;
     transition: 1s all ease;
     color: #1562B3;
+
   }
 
 
@@ -469,12 +470,13 @@
     margin-left:40rpx;
     margin-right:40rpx;
     font-size: 30rpx;
-    color: #1562B3;
+    color: gray;
     border-bottom: 2px #1562B3 dashed;
     background-color: #FAF9F6;
     text-align: left;
     border-radius: 0;
     padding-left: 0;
+    font-style: italic;
   }
 
   .choosebutton:after{
@@ -541,7 +543,9 @@
   }
 
   .chosen {
-    color: red;
+    color: #1562B3;
+    font-style: normal;
+
   }
 
 </style>

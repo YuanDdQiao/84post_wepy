@@ -194,11 +194,12 @@
     background: #FCF7E8;
     border: 2px solid #E5DCC2;
     outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
     height:720rpx;
     color:#6E5F31;
     font-size: 32rpx;
+    height: 70vh;
     padding: 40rpx;
   }
 
@@ -207,10 +208,10 @@
     background: #FFFFFF;
     border: 3px solid #FBBAD0;
     border-style: double;
-    border-radius: 1%;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
     width:550rpx;
-    height:720rpx;
+    height: 70vh;
     color:#6E1A36;
     font-size: 32rpx;
     padding: 40rpx;
@@ -218,20 +219,20 @@
 
   .paper-03{
     /* 八十四 */
-    background: #FAF9F6;
+    background: #F3F2F0;
     border: 2px solid #1562B3;
     border-style: dashed;
-    outline: 6px solid #FAF9F6;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.43);
+    outline: 6px solid #F3F2F0;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
-    height:720rpx;
+    height: 70vh;
     color:#052B53;
     font-size: 32rpx;
     padding: 40rpx;
   }
 
   .paperselector{
-    height:850rpx;
+    height: 80vh;
     margin-top: 20rpx;
     margin-bottom: 20rpx;
     margin-left: 0;
@@ -253,7 +254,7 @@
 
   .demotext{
     white-space: pre-wrap;
-    height: 690rpx;
+    height: 68vh;
     line-height: 60rpx;
   }
 

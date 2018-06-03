@@ -1,9 +1,10 @@
 <template>
   <view>
-    <view>
-      <view>写</view>
-      <view>选</view>
-      <view>寄</view>
+    <view class="processbarholder ">
+
+      <view class="progress processdone">写</view>
+      <view class="progress-middle processdone">选</view>
+      <view class="progress processdone">寄</view>
     </view>
     <image src="{{ thumbnailUrl }}"></image>
 

@@ -125,21 +125,29 @@
   .typechoose{
     margin: 40rpx;
     background-color: #FAF9F6;
+    height: 24vh;
+    border: 2px #1562B3 dashed;
+  }
+
+  .typechoose:after{
+    border: none;
   }
 
   .typename{
-    font-size: 42rpx;
+    font-size: 48rpx;
     font-weight: bold;
-    margin-top: 10rpx;
+    margin-top: 0;
+    color: #052B53;
   }
 
   .typeprice{
     font-size: 30rpx;
-    margin-top: -20rpx;
+    margin-top: -2vh;
+    color:  #FF4A19;
   }
 
   .typenote{
-    font-size: 30rpx;
-    margin-top: -20rpx;
+    font-size: 34rpx;
+    margin-top: 1.6vh;
   }
 </style>
