@@ -115,6 +115,7 @@
     globalData = {
       userInfo: null,
       letterInfo: {},
+      pickUp: {},
       writeIndexError: ''
     }
 

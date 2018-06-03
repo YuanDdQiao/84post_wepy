@@ -1,8 +1,25 @@
 <template>
   <view>
-    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-    <!--<button  formType="submit">按钮测试</button>-->
-    <!--</form>-->
+    <view class="{{ pickUp.viewClass }}" style="{{ pickUp.viewStyle }}">
+      <view>{{ pickUp.content }}</view>
+      <view>{{ pickUp.submitDate }}</view>
+    </view>
+
+    <block wx:if="{{saved}}">
+      <!--已经保存（非挂号信）-->
+      <view class="{{saveError ? 'error' : ''}}">{{ saveMsg }}</view>
+    </block>
+    <block wx:else>
+      <!--选择是否保存（挂号信）-->
+      <view>
+        <form report-submit="True" @submit="bindSaveForm">
+          <button formType="submit">我要咯</button>
+        </form>
+        <form report-submit="True" @submit="bindUnsaveForm">
+          <button formType="submit">塞回去</button>
+        </form>
+      </view>
+    </block>
   </view>
 </template>
 
@@ -21,15 +38,31 @@
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      saved: false,
+      saveMsg: '已经保存在我的信件',
+      pickUp: {},
+      saveError: false
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      async bindSaveForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        let ret = await api.request(`box/save/${this.pickUp.id}/`)
+        this.saved = true
+        if (!ret.data.result) {
+          this.saveError = true
+          this.saveMsg = '信件保存失败（可能已经被取）'
+        }
+        this.$apply()
+      },
+      bindUnsaveForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateBack()
+      }
     }
 
     /**
@@ -41,7 +74,11 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-      console.log(this.$parent.globalData.pickUp)
+      this.pickUp = this.$parent.globalData.pickUp
+      this.saved = this.pickUp.saved
+      this.$apply()
+      console.log(this.pickUp)
+      this.$parent.globalData.pickUp = {} // 清理之前保存的信息
     };
 
     /**
@@ -96,5 +133,7 @@
 </script>
 
 <style lang="less">
-
+  .error {
+    color: red;
+  }
 </style>

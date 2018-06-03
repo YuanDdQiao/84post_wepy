@@ -47,6 +47,8 @@
           this.$parent.globalData.pickUp.content = ret.data.content
           this.$parent.globalData.pickUp.viewClass = ret.data.viewClass
           this.$parent.globalData.pickUp.viewStyle = ret.data.viewStyle
+          this.$parent.globalData.pickUp.saved = ret.data.saved
+          this.$parent.globalData.pickUp.submitDate = ret.data.submitDate
           wepy.redirectTo({
             url: 'box-3'
           })
