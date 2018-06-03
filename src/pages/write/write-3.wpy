@@ -72,8 +72,8 @@
       <view class="stampselector">
         <block wx:for="{{ letterStamps }}" wx:key="id">
           <form report-submit="True" @submit="bindStampChoose">
-            <button class="stampbutton" formType="submit" id="{{ index }}">
-              <view class="{{ item.choose? 'choose' : '' }} stampview">
+            <button class="stampbutton {{ item.choose? 'choose' : '' }}" formType="submit" id="{{ index }}">
+              <view class=" stampview">
                 <image class="stampview" src="{{ item.icon }}"></image>
               </view>
             </button>
@@ -416,14 +416,11 @@
 </script>
 
 <style lang="less">
-  .choose {
-    /* border: red 3px solid; */
-  }
 
   .errorinfo {
     color: red;
     font-size: 30rpx;
-    padding-left: 30rpx;
+    padding-left: 32rpx;
     display: block;
   }
 
@@ -450,6 +447,7 @@
     transition: 1s all ease;
   }
 
+
   .inputbox:hover{
     border-bottom: 2px #1562B3 solid;
     margin-left:40rpx;
@@ -465,8 +463,12 @@
     color: #1562B3;
     border: 2px #1562B3 dashed;
     border-radius: 6px;
-    background-color: white;
   }
+
+  .choosebutton:after{
+    border:none;
+  }
+
 
 
   .stampbutton{
@@ -482,23 +484,21 @@
     background-color: white;
   }
 
-  .stampbutton:hover{
-    width: 140rpx;
-    height: 140rpx;
-    margin-top: 20rpx;
-    margin-bottom: 15rpx;
-    margin-right: 36rpx;
-    float: left;
-    padding: 6rpx;
+  .stampbutton:after{
+    border:none;
+  }
+
+  .choose{
+
     border: 2px #1562B3 solid;
     border-radius: 6px;
-    background-color: white;
   }
 
   .stampview{
     width: 120rpx;
     height: 120rpx;
     margin: 0;
+    border-radius: 2px;
 
   }
 
