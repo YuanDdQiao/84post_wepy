@@ -79,6 +79,8 @@
         'pages/box/box-3',
         'pages/my/index',
         'pages/my/list',
+        'pages/my/query',
+        'pages/my/express',
         'pages/my/recharge'
       ],
       window: {

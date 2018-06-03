@@ -1,0 +1,109 @@
+<template>
+  <view>
+    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
+    <!--<button  formType="submit">按钮测试</button>-->
+    <!--</form>-->
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '@/utils/api'
+
+  export default class extends wepy.page {
+    /**
+     * 页面配置对象，对应于原生的 page.json 文件
+     */
+    config = {
+      navigationBarTitleText: '物流详情'
+    }
+
+    /**
+     * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
+     */
+    data = {
+      expressNumber: null
+    }
+
+    /**
+     * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
+     */
+    methods = {
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
+    }
+
+    /**
+     * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
+     */
+    events = {}
+
+    /**
+     * 生命周期函数--监听页面加载（一个页面只会调用一次）
+     */
+    async onLoad(options) {
+      this.expressNumber = options.q
+      if (!this.expressNumber) {
+        await wepy.showModal({
+          title: '参数错误',
+          content: '未输入运单号',
+          showCancel: false
+        })
+        wepy.reLaunch({ url: '/pages/my/index' })
+      }
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
+    };
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
+     */
+    async onReady() {
+    };
+
+    /**
+     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
+     */
+    async onHide() {
+    };
+
+    /**
+     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
+     */
+    async onUnload() {
+    };
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    async onPullDownRefresh() {
+    };
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    async onReachBottom() {
+    };
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage() {
+      return {
+        title: null,
+        path: null,
+        imageUrl: null
+      }
+    };
+  }
+</script>
+
+<style lang="less">
+
+</style>

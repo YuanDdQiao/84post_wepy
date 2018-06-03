@@ -23,7 +23,7 @@
           ->
         </button>
       </form>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindQueryForm">
         <button formType="submit">
           <text>根据运单号查询</text>
           ->
@@ -154,8 +154,11 @@
           url: 'list?type=sent'
         })
       },
-      bindNoSenseForm(e) {
+      bindQueryForm(e) {
         api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: 'query'
+        })
       },
       bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
