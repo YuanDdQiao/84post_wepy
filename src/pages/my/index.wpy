@@ -9,14 +9,14 @@
     </view>
     <view>
       <text>信件</text>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindSentForm">
 
         <button formType="submit">
           <text>寄出的信</text>
           ->
         </button>
       </form>
-      <form report-submit="True" @submit="bindNoSenseForm">
+      <form report-submit="True" @submit="bindGotForm">
 
         <button formType="submit">
           <text>收到的信</text>
@@ -135,6 +135,18 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
+      bindGotForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: 'list?type=got'
+        })
+      },
+      bindSentForm(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: 'list?type=sent'
+        })
+      },
       bindNoSenseForm(e) {
         api.formIdSubmit(e.detail.formId)
       },
