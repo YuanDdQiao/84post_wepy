@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="wholepage">
 
     <view>
       <image class="pathpreview" src="{{ roadThumb }}"></image>
@@ -7,35 +7,39 @@
 
 
     <block wx:if="{{letterTypeType === 0}}">
-      <view>
-        <view class="note">您的邮件（平邮）已寄出！</view>
+      <view class="noteholder">
+        <view class="bignote">您的邮件（平邮）已寄出！</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
     <block wx:elif="{{letterTypeType === 1}}">
-      <view>
-        <view class="note">您的挂号信已寄出！</view>
+      <view class="noteholder">
+        <view class="bignote">您的挂号信已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
         <form report-submit="True" @submit="bindNoSenseForm">
-          <button formType="submit">追踪信件</button>
+          <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
+      </view>
+      <view class="timeholder">
         <view class="note">预计到达时间：3 - 7 天</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
     <block wx:else>
-      <view>
-        <view class="note">您的快递已寄出！</view>
+      <view class="noteholder">
+        <view class="bignote">您的快递已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
         <form report-submit="True" @submit="bindNoSenseForm">
-          <button formType="submit">追踪信件</button>
+          <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
+      </view>
+      <view class="timeholder">
         <view class="note">预计到达时间：1 - 3 天</view>
         <view class="note"> 目的地：{{ toAddress }}</view>
+        <button class="functionbutton" open-type="share">告诉别人</button>
       </view>
     </block>
 
-    <button open-type="share">告诉别人</button>
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
     </form>
@@ -184,6 +188,7 @@
     margin-top: 40rpx;
     margin-bottom:4vh;
     width:670rpx;
+    height: 40vh;
     box-shadow:0 4px 10px 0 rgba(160,147,105,0.3);
   }
 
@@ -192,18 +197,70 @@
     margin-top:3vh;
   }
 
-  .note{
-    text-align:center;
-    margin-bottom:2vh;
-    margin-top:2vh;
-    font-size:32rpx;
+  .bignote{
+    margin-bottom:3vh;
+    font-size:42rpx;
     color:#1562B3;
 
   }
 
+  .note{
+    margin-bottom:2vh;
+    font-size:34rpx;
+    color:#1562B3;
+    float:left;
+    margin-top:1vh;
+  }
+
+  .noteholder{
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-top:40rpx;
+    width:670rpx;
+    height:12vh;
+  }
+
+  .timeholder{
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-top:40rpx;
+    width:670rpx;
+    height:12vh;
+  }
+
+
+
+  .functionbutton{
+    font-size:32rpx;
+    margin:0;
+    float:right;
+    width:186rpx;
+    display:flex;
+    background-color:#1562B3;
+    padding:0;
+    justify-content:space-around;
+    flex-direction:column;
+    height:72rpx;
+    color:#FAF9F6;
+
+  }
+
+  .functionbutton:after{
+    border: none;
+  }
+
   .confirmbutton{
-    color: white;
-    background-color: #F17250;
+    color:white;
+    background-color:#F17250;
+    position:absolute;
+    bottom:4vh;
+    margin-left:20vw;
+    margin-right:20vw;
+
+  }
+
+  .wholepage{
+    height: 100vh
   }
 
 </style>
