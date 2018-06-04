@@ -1,4 +1,4 @@
-<template >
+<template>
   <view>
     <view class="processbarholder ">
 
@@ -6,7 +6,6 @@
       <view class="progress-middle">选</view>
       <view class="progress">寄</view>
     </view>
-    <view wx:if="errorInfo  !== '' ">{{ errorInfo }}</view>
     <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <!--<input type="text"   />-->
@@ -48,8 +47,7 @@
       maxLength: 2000,
       inputValue: '',
       todayDate: '',
-      paperType: {},
-      errorInfo: ''
+      paperType: {}
     }
 
     /**
@@ -59,20 +57,34 @@
       bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         this.$parent.globalData.letterInfo.content = this.inputValue
-        if (this.inputValue.length > this.maxLength) {
-          this.errorInfo = `内容长度必须在 ${this.minLength}-${this.maxLength} 字之间`
-          this.$apply()
+        if (this.inputValue.length === 0) {
+          wepy.showModal({
+            title: '嘤嘤嘤',
+            content: '你还没填内容呢伦家不接收空白的信件嘛QAQ',
+            showCancel: false
+          })
+          wepy.pageScrollTo({
+            scrollTop: 0
+          })
+        } else if (this.inputValue.length > this.maxLength) {
+          wepy.showModal({
+            title: '嘤嘤嘤',
+            content: '你写的内容太多了伦家拿不动嘛QAQ',
+            showCancel: false
+          })
           wepy.pageScrollTo({
             scrollTop: 0
           })
         } else if (this.inputValue.length < this.minLength) {
-          this.errorInfo = `内容长度必须在 ${this.minLength}-${this.maxLength} 字之间`
-          this.$apply()
+          wepy.showModal({
+            title: '嘤嘤嘤',
+            content: '你写的太少了伦家不想跑嘛QAQ',
+            showCancel: false
+          })
           wepy.pageScrollTo({
             scrollTop: 0
           })
         } else {
-          this.errorInfo = ''
           this.$apply()
           wepy.navigateTo({
             url: 'write-2'
