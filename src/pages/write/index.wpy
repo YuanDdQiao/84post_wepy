@@ -178,7 +178,7 @@
   button{
     color:white;
     width:30vw;
-    background-color: #FF4A19;
+    background-color: #F17250;
   }
 
   .choosepapernote{

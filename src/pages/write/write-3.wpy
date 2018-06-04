@@ -529,7 +529,7 @@
     margin-bottom: 80rpx;
     width: 60vw;
     color:white;
-    background-color: #FF4A19;
+    background-color: #F17250;
   }
 
   .processbarholderfix{

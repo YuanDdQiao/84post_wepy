@@ -10,13 +10,16 @@
     <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <!--<input type="text"   />-->
+        <view class="noteanddone">
+          <button formType="submit">写好了</button>
+        </view>
         <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}"></textarea>
         <view class="dateandword">
           <view class="wordcount">{{ wordCount }}/{{ maxLength }} 字</view>
           <view class="todaydate">{{ todayDate }}</view>
         </view>
-        <button formType="submit">写好了</button>
+
       </form>
 
     </view>
@@ -176,11 +179,14 @@
     outline: 6px solid #FCF7E8;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:660rpx;
-    height:80vh;
+    height:86vh;
     margin-right:40rpx;
     margin-left:40rpx;
     padding: 0;
     color:#6E5F31;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .edit-letter-02{
@@ -190,11 +196,14 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
     width:660rpx;
-    height:80vh;
+    height:86vh;
     margin-right:40rpx;
     margin-left:40rpx;
     padding: 0;
     color:#6E1A36;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .edit-letter-03{
@@ -204,28 +213,54 @@
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:660rpx;
-    height:80vh;
+    height:87vh;
     margin-right:40rpx;
     margin-left:40rpx;
     padding: 0;
     color:#052B53;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   button{
-    position: absolute;
+    position: relative;
     color:white;
-    width:280rpx;
-    background-color: #FF4A19;
-    bottom: 2vh;
-    text-align: center;
-    margin-left: 235rpx;
-    margin-right: 235rpx;
+    width:140rpx;
+    float: right;
+    height: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top:1vh;
+    margin-bottom:1vh;
+    font-size: 24rpx;
+    font-weight: bold;
+    margin-right: 1vh;
+
+  }
+
+  .edit-letter-01 button{
+    background-color: #9E9477;
+
+  }
+
+  .edit-letter-02 button{
+    background-color: #DA6D92;
+  }
+
+  .edit-letter-03 button{
+    background-color: #09427F;
+  }
+
+  button:after{
+    border: none;
   }
 
   .todaydate{
     display: inline;
-    margin-left: 270rpx;
-    float: left;
+    float: right;
 
   }
 
@@ -234,21 +269,53 @@
   }
 
   textarea{
-    padding: 40rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    padding-top: 10rpx;
     padding-bottom: 0;
-    height:68vh;
+    height:73vh;
     width:584rpx;
     font-size: 30rpx;
     line-height: 60rpx;
-    border-bottom: 1px #D8D8D8 dashed;
+
+  }
+
+  .edit-letter-01 textarea{
+    border-bottom: 1px #E5DCC2 dashed;
+    border-top: 1px #E5DCC2 dashed;
+
+  }
+
+  .edit-letter-02 textarea{
+    border-bottom: 1px #FFD8E5 dashed;
+    border-top: 1px #FFD8E5 dashed;
+
+  }
+
+  .edit-letter-03 textarea{
+    border-bottom: 1px #BAC7D5 dashed;
+    border-top: 1px #BAC7D5 dashed;
 
   }
 
   .dateandword{
-    position: relative;
-    padding-left: 40rpx;
     font-size: 30rpx;
-    margin-top: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    height: 4vh;
+    width:584rpx;
+  }
+
+  .noteanddone{
+    height: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width:660rpx;
   }
 
 
