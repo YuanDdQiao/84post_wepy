@@ -6,7 +6,7 @@
       <view class="progress-middle processdone">选</view>
       <view class="progress processdone">寄</view>
     </view>
-    <image src="{{ thumbnailUrl }}"></image>
+    <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
 
     <block  wx:if="{{ fee !== 0}}">
       <view class="previewnote">您需支付 {{ fee }} 点券</view>
@@ -202,9 +202,18 @@
 
   .confirmbutton{
     color:white;
-    background-color: #FF4A19;
+    background-color: #F17250;
     margin-top: 80rpx;
   }
 
+  .envelopepreview{
+    width:670rpx;
+    height:400 rpx;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    text-align:center;
+    box-shadow:0 4px 10px 0 rgba(160,147,105,0.3);
+
+  }
 
 </style>

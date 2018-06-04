@@ -124,7 +124,7 @@
 
   .typechoose{
     margin: 40rpx;
-    background-color: #FAF9F6;
+    background-color: white;
     height: 24vh;
     border: 2px #1562B3 dashed;
   }

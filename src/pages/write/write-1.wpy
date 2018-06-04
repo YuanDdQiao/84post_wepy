@@ -243,15 +243,17 @@
 
   .edit-letter-01 button{
     background-color: #9E9477;
-
+    color: #FCF7E8;
   }
 
   .edit-letter-02 button{
     background-color: #DA6D92;
+    color: #FFFFFF;
   }
 
   .edit-letter-03 button{
     background-color: #09427F;
+    color: #F3F2F0;
   }
 
   button:after{

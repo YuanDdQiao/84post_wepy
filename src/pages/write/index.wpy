@@ -196,10 +196,9 @@
     outline: 6px solid #FCF7E8;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
-    height:720rpx;
+    height: 68vh;
     color:#6E5F31;
     font-size: 32rpx;
-    height: 70vh;
     padding: 40rpx;
   }
 
@@ -211,7 +210,7 @@
     border-radius: 6px;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
     width:550rpx;
-    height: 70vh;
+    height: 68vh;
     color:#6E1A36;
     font-size: 32rpx;
     padding: 40rpx;
@@ -225,7 +224,7 @@
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
-    height: 70vh;
+    height: 68vh;
     color:#052B53;
     font-size: 32rpx;
     padding: 40rpx;
@@ -234,7 +233,7 @@
   .paperselector{
     height: 80vh;
     margin-top: 20rpx;
-    margin-bottom: 20rpx;
+    margin-bottom: 0.4vh;
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
@@ -267,7 +266,7 @@
 
   .todaydate{
     position: relative;
-    bottom: 10rpx;
+    bottom: 40rpx;
     left: 400rpx;
     font-size: 30rpx;
 
