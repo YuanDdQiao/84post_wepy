@@ -1,13 +1,108 @@
 {
-  "description": "84post",
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "postcss": false,
-    "minified": false
+    "minified": false,
+    "newFeature": true
   },
+  "miniprogramRoot": "./dist",
   "compileType": "miniprogram",
+  "libVersion": "2.0.4",
   "appid": "wxb564393a08251db4",
-  "projectname": "84post",
-  "miniprogramRoot": "./dist"
+  "projectname": "84%E5%8F%B7%E9%82%AE%E5%B1%80",
+  "isGameTourist": false,
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": 1,
+      "list": [
+        {
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/my/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "写信",
+          "pathName": "pages/write/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "充值",
+          "pathName": "pages/my/recharge",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "写信-1",
+          "pathName": "pages/write/write-1",
+          "query": "id=1"
+        },
+        {
+          "id": -1,
+          "name": "写信-2",
+          "pathName": "pages/write/write-2",
+          "query": "id=1"
+        },
+        {
+          "id": -1,
+          "name": "写信-3",
+          "pathName": "pages/write/write-3",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "信箱",
+          "pathName": "pages/box/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "寄出的信",
+          "pathName": "pages/my/list",
+          "query": "type=sent"
+        },
+        {
+          "id": -1,
+          "name": "收到的信",
+          "pathName": "pages/my/list",
+          "query": "type=got"
+        },
+        {
+          "id": -1,
+          "name": "根据运单号查询（无参数）",
+          "pathName": "pages/my/query",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "根据运单号查询（带参数）",
+          "pathName": "pages/my/query",
+          "query": "q=abcd"
+        }
+      ]
+    }
+  }
 }
