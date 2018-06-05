@@ -1,8 +1,8 @@
 <template>
   <view>
-    <image src="{{ thumbUrl }}"></image>
+    <image class="mailpreview" src="{{ thumbUrl }}"></image>
     <form report-submit="True" @submit="bindOpenLetter">
-      <button formType="submit">开</button>
+      <button class="confirmbutton" formType="submit">拆开</button>
     </form>
   </view>
 </template>
@@ -142,5 +142,23 @@
 </script>
 
 <style lang="less">
+
+  .mailpreview{
+    margin-top:40rpx;
+    padding:0;
+    width:670rpx;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-bottom:0;
+    height:400rpx;
+    box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
+  }
+
+  .confirmbutton{
+    color:white;
+    background-color: #F17250;
+    margin-top: 10vh;
+    width:30vw;
+  }
 
 </style>

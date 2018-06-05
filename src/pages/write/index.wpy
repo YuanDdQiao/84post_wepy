@@ -203,7 +203,7 @@
   }
 
   .paper-02{
-    /* 纯白 */
+    /* 蠢白 */
     background: #FFFFFF;
     border: 3px solid #FBBAD0;
     border-style: double;

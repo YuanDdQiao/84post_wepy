@@ -1,5 +1,5 @@
 <template>
-  <image class="typelogo" src="/images/84_EXPRESS.png"></image>
+
 
   <view class="safebox">
 
@@ -8,6 +8,7 @@
       <input class="inputbox" type="text" placeholder="请输入取件号" @input="bindInput"/>
       <view class="note"><text >取件号是当信件到达目的地后通过短信或微信通知发送给收件人的号码。挂号信以及快递必须凭取件号取件，以保证信件的隐私。</text></view>
       <button class="confirmbutton" formType="submit">取件</button>
+      <image class="typelogo" src="/images/84_EXPRESS.png"></image>
     </form>
   </view>
 
@@ -145,7 +146,7 @@
 
   .safebox{
     width:88vw;
-    height:84vh;
+    height:90vh;
     background-color:#F2F4F6;
     border:1vw #8A949C solid;
     border-radius:8px;
@@ -153,7 +154,6 @@
     margin-right:5vw;
     margin-top:5vw;
     outline:30vh solid #F3F2F0;
-
 
   }
 
@@ -168,12 +168,13 @@
 
 
   .typelogo{
-    height:50rpx;
-    position:absolute;
-    bottom:4vh;
-    margin-left:210rpx;
-    margin-right:210rpx;
-    width:330rpx;
+    height:41rpx;
+    margin-left:auto;
+    margin-right:auto;
+    width:260rpx;
+    margin-top:10vh;
+    display:flex;
+
 
   }
 

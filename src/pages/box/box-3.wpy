@@ -1,19 +1,19 @@
 <template>
   <view>
     <view class="{{ pickUp.viewClass }}" style="{{ pickUp.viewStyle }}">
-      <view>{{ pickUp.content }}</view>
-      <view>{{ pickUp.submitDate }}</view>
+      <view class="textarea">{{ pickUp.content }}</view>
+      <view class="date">{{ pickUp.submitDate }}</view>
     </view>
 
     <block wx:if="{{saved}}">
       <!--已经保存（非挂号信）-->
-      <view class="{{saveError ? 'error' : ''}}">{{ saveMsg }}</view>
+      <view class="{{saveError ? 'error' : ''}} savenote">{{ saveMsg }}</view>
     </block>
     <block wx:else>
       <!--选择是否保存（挂号信）-->
       <view>
         <form report-submit="True" @submit="bindSaveForm">
-          <button formType="submit">我要咯</button>
+          <button class="confirmbutton" formType="submit">我要咯</button>
         </form>
         <form report-submit="True" @submit="bindUnsaveForm">
           <button formType="submit">塞回去</button>
@@ -136,4 +136,111 @@
   .error {
     color: red;
   }
+
+  button{
+    position: relative;
+    margin-top: 40rpx;
+    width: 60vw;
+
+  }
+
+  .confirmbutton{
+    color:white;
+    background-color: #F17250;
+    margin-top: 80rpx;
+  }
+
+  .view-letter-01{
+    background:#FCF7E8;
+    border: 2px solid #E5DCC2;
+    outline: 6px solid #FCF7E8;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
+    width:660rpx;
+    margin-right:40rpx;
+    margin-left:40rpx;
+    padding:0;
+    color:#6E5F31;
+    margin-top:40rpx;
+
+  }
+
+  .view-letter-02{
+    background:#FFFFFF;
+    border: 3px solid #FBBAD0;
+    border-style: double;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
+    width:660rpx;
+    margin-right:40rpx;
+    margin-left:40rpx;
+    padding:0;
+    color:#6E1A36;
+    margin-top:40rpx;
+
+  }
+
+
+  .view-letter-03{
+    background:#F3F2F0;
+    border:2px solid #1562B3;
+    border-style:dashed;
+    outline:6px solid #F3F2F0;
+    box-shadow:0 4px 20px 0 #a09369;
+    width:660rpx;
+    margin-right:40rpx;
+    margin-left:40rpx;
+    padding:0;
+    color:#052B53;
+    margin-top:40rpx;
+
+  }
+
+  .textarea{
+    padding-left:40rpx;
+    padding-right:40rpx;
+    padding-top:40rpx;
+    padding-bottom:0;
+    width:584rpx;
+    font-size:30rpx;
+    line-height:60rpx;
+    margin-bottom:40px;
+
+  }
+
+  .view-letter-01 .date{
+    color:#6E5F31;
+    font-size:30rpx;
+    margin-bottom:18px;
+    margin-right:60rpx;
+    text-align:right;
+
+  }
+
+  .view-letter-02 .date{
+    color:#6E1A36;
+    font-size:30rpx;
+    margin-bottom:18px;
+    margin-right:60rpx;
+    text-align:right;
+
+  }
+
+  .view-letter-03 .date{
+    color:#052B53;
+    font-size:30rpx;
+    margin-bottom:18px;
+    margin-right:60rpx;
+    text-align:right;
+
+  }
+
+  .savenote{
+    margin-top:32px;
+    text-align:center;
+    font-size:30rpx;
+    margin-bottom:35px;
+    color:gray;
+
+  }
+
 </style>

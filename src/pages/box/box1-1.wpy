@@ -4,8 +4,8 @@
     <block wx:if="{{ letters.length !== 0 }}">
       <block wx:for="{{ letters }}" wx:key="id">
         <form report-submit="True" @submit="bindChooseStamp" data-id="{{ item.id }}">
-          <button formType="submit">
-            <image src="{{ item.thumbnailUrl }}"></image>
+          <button class="mailpreviewbutton" formType="submit">
+            <image class="mailimage" src="{{ item.thumbnailUrl }}"></image>
           </button>
         </form>
       </block>
@@ -135,6 +135,29 @@
     align-items: center;
     text-align: center;
     height: 100vh;
+  }
+
+  .mailpreviewbutton{
+    margin-top:40rpx;
+    padding:0;
+    width:670rpx;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-bottom:0;
+    height:400rpx;
+    box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
+  }
+
+  .mailimage{
+    width:670rpx;
+    height:400rpx;
+    margin:0;
+    padding:0;
+  }
+
+  .mailpreviewbutton:after{
+    border: none;
+
   }
 
 </style>
