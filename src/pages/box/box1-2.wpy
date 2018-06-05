@@ -1,12 +1,17 @@
 <template>
-  <view>
+  <image class="typelogo" src="/images/84_EXPRESS.png"></image>
+
+  <view class="safebox">
 
     <form report-submit="True" @submit="bindSubmitForm">
-      <input type="text" placeholder="请输入取件号" @input="bindInput"/>
-      <button>？</button>
-      <button formType="submit">下一步</button>
+      <image class="safelogo" src="/images/safe.svg"></image>
+      <input class="inputbox" type="text" placeholder="请输入取件号" @input="bindInput"/>
+      <view class="note"><text >取件号是当信件到达目的地后通过短信或微信通知发送给收件人的号码。挂号信以及快递必须凭取件号取件，以保证信件的隐私。</text></view>
+      <button class="confirmbutton" formType="submit">取件</button>
     </form>
   </view>
+
+
 </template>
 
 <script>
@@ -119,5 +124,77 @@
 </script>
 
 <style lang="less">
+  .inputbox{
+    border:2px #1562B3 dashed;
+    border-radius:2px;
+    margin-left:13vw;
+    margin-right:13vw;
+    font-size:38rpx;
+    height:6vh;
+    width:62vw;
+    color:#1562B3;
+    text-align:center;
+    margin-bottom:3vh;
+
+  }
+
+
+  .inputbox:hover{
+    border: 2px #1562B3 solid;
+  }
+
+  .safebox{
+    width:88vw;
+    height:84vh;
+    background-color:#F2F4F6;
+    border:1vw #8A949C solid;
+    border-radius:8px;
+    margin-left:5vw;
+    margin-right:5vw;
+    margin-top:5vw;
+    outline:30vh solid #F3F2F0;
+
+
+  }
+
+  .safelogo{
+    width:20vw;
+    margin-bottom:3vh;
+    margin-left:34vw;
+    margin-right:34vw;
+    height:26vh;
+
+  }
+
+
+  .typelogo{
+    height:50rpx;
+    position:absolute;
+    bottom:4vh;
+    margin-left:210rpx;
+    margin-right:210rpx;
+    width:330rpx;
+
+  }
+
+  .note{
+    width:74vw;
+    margin-left:7vw;
+    margin-right:7vw;
+    font-size:32rpx;
+    color:gray;
+    text-align:center;
+    margin-bottom:10vh;
+
+  }
+
+  .confirmbutton{
+    color:white;
+    background-color:#F17250;
+    margin-top:80rpx;
+    width:40vw;
+
+  }
+
 
 </style>

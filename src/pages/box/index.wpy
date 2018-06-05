@@ -2,7 +2,7 @@
   <view>
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
-        <button formType="submit">{{ item.name }}</button>
+        <button class="typechoose" formType="submit">{{ item.name }}</button>
       </form>
     </block>
   </view>
@@ -111,5 +111,25 @@
 </script>
 
 <style lang="less">
+
+  .typechoose{
+    margin:40rpx;
+    background-color:white;
+    height:22vh;
+    border:2px #1562B3 dashed;
+    text-align:left;
+    font-size:52rpx;
+    padding-left:50rpx;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    color:#1562B3;
+
+  }
+
+  .typechoose:after{
+    border: none;
+  }
+
 
 </style>

@@ -11,7 +11,7 @@
       </block>
     </block>
     <block wx:else>
-      您周围没有已经送达的信件
+      <view class="nomail">您周围没有已经送达的信件</view>
     </block>
   </view>
 </template>
@@ -126,5 +126,15 @@
 </script>
 
 <style lang="less">
+
+  .nomail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 38rpx;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+  }
 
 </style>
