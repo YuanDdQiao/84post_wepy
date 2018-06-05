@@ -1,0 +1,88 @@
+<template>
+  <view class="{{ viewClass }}" style="{{ viewStyle }}">
+    <view>{{ content }}</view>
+    <view>{{ submitDate }}</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '@/utils/api'
+
+  export default class extends wepy.page {
+    /**
+     * 页面配置对象，对应于原生的 page.json 文件
+     */
+    config = {
+      navigationBarTitleText: '阅读信件'
+    }
+
+    /**
+     * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
+     */
+    data = {
+      viewClass: '',
+      viewStyle: '',
+      content: '',
+      submitDate: ''
+    }
+
+    /**
+     * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
+     */
+    methods = {
+      // bindNoSenseForm(e) {
+      //   api.formIdSubmit(e.detail.formId)
+      // },
+    }
+
+    /**
+     * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
+     */
+    events = {}
+
+    /**
+     * 生命周期函数--监听页面加载（一个页面只会调用一次）
+     */
+    async onLoad(options) {
+      console.log(options)
+      let uuid = options.uuid
+      api.request(`my/read/${uuid}/`).then(ret => {
+        this.content = ret.data.content
+        this.viewClass = ret.data.viewClass
+        this.viewStyle = ret.data.viewStyle
+        this.submitDate = ret.data.submitDate
+        this.$apply()
+      })
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
+    };
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
+     */
+    async onReady() {
+    };
+
+    /**
+     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
+     */
+    async onHide() {
+    };
+
+    /**
+     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
+     */
+    async onUnload() {
+    };
+  }
+</script>
+
+<style lang="less">
+
+</style>

@@ -79,6 +79,7 @@
         'pages/box/box-3',
         'pages/my/index',
         'pages/my/list',
+        'pages/my/read',
         'pages/my/query',
         'pages/my/express',
         'pages/my/recharge'
