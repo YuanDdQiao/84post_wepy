@@ -101,6 +101,12 @@
 					"name": "根据运单号查询（带参数）",
 					"pathName": "pages/my/query",
 					"query": "q=abcd"
+				},
+				{
+					"id": -1,
+					"name": "平邮提醒",
+					"pathName": "pages/complex/normal",
+					"query": ""
 				}
 			]
 		}

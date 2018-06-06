@@ -90,7 +90,8 @@
         'pages/my/read',
         'pages/my/query',
         'pages/my/express',
-        'pages/my/recharge'
+        'pages/my/recharge',
+        'pages/complex/normal'
       ],
       window: {
         backgroundTextStyle: 'light',
