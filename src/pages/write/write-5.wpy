@@ -6,13 +6,13 @@
     </view>
 
 
-    <block wx:if="{{letterTypeType === 0}}">
+    <block wx:if="{{letterTypeType === 1}}">
       <view class="noteholder">
         <view class="bignote">您的邮件（平邮）已寄出！</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
-    <block wx:elif="{{letterTypeType === 1}}">
+    <block wx:elif="{{letterTypeType === 2}}">
       <view class="noteholder">
         <view class="bignote">您的挂号信已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
@@ -67,7 +67,7 @@
      */
     data = {
       roadThumb: '',
-      letterTypeType: 0,
+      letterTypeType: 1,
       toAddress: '',
       expressNumber: ''
     }
