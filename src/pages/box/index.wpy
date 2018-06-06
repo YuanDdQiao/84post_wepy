@@ -2,7 +2,9 @@
   <view>
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
-        <button class="typechoose" formType="submit">{{ item.name }}</button>
+        <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+          <button class="typechoose" formType="submit">{{ item.name }}</button>
+        </view>
       </form>
     </block>
   </view>
