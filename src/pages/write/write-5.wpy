@@ -199,9 +199,10 @@
   }
 
   .bignote{
-    margin-bottom:3vh;
+    margin-bottom:5vh;
     font-size:42rpx;
     color:#1562B3;
+    text-align:center;
 
   }
 
@@ -216,7 +217,7 @@
   .noteholder{
     margin-left:40rpx;
     margin-right:40rpx;
-    margin-top:40rpx;
+    margin-top:2vh;
     width:670rpx;
     height:12vh;
   }

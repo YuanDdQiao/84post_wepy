@@ -4,9 +4,9 @@
       <block wx:for="{{ letters }}" wx:key="id">
         <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
               data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
-          <button formType="submit">
+          <button class="mailpreviewbutton" formType="submit">
             <view>
-              <image src="{{ item.thumbnail }}"></image>
+              <image class="mailimage" src="{{ item.thumbnail }}"></image>
             </view>
           </button>
         </form>
@@ -14,10 +14,10 @@
     </block>
     <block wx:else>
       <block wx:if="{{type === 1}}">
-        <view>你还没寄过信哦</view>
+        <view class="nomail">你还没寄过信哦</view>
       </block>
       <block wx:elif="{{type === 2}}">
-        <view>你还没收到过信哦</view>
+        <view class="nomail">你还没收到过信哦</view>
       </block>
       <block wx:else>
         <view>哎呀出 bug 了。。</view>
@@ -152,5 +152,41 @@
 </script>
 
 <style lang="less">
+
+
+
+    .nomail{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      font-size: 38rpx;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      color: gray;
+    }
+
+    .mailpreviewbutton{
+      margin-top:40rpx;
+      padding:0;
+      width:670rpx;
+      margin-left:40rpx;
+      margin-right:40rpx;
+      margin-bottom:0;
+      height:400rpx;
+      box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
+    }
+
+    .mailimage{
+      width:670rpx;
+      height:400rpx;
+      margin:0;
+      padding:0;
+    }
+
+    .mailpreviewbutton:after{
+      border: none;
+
+    }
 
 </style>
