@@ -8,6 +8,9 @@
     <block wx:if="{{saved}}">
       <!--已经保存（非挂号信）-->
       <view class="{{saveError ? 'error' : ''}} savenote">{{ saveMsg }}</view>
+      <form report-submit="True" @submit="bindBack">
+        <button formType="submit">完成</button>
+      </form>
     </block>
     <block wx:else>
       <!--选择是否保存（挂号信）-->
@@ -62,6 +65,9 @@
       bindUnsaveForm(e) {
         api.formIdSubmit(e.detail.formId)
         wepy.navigateBack()
+      },
+      bindBack(e) {
+        wepy.reLaunch({url: '/pages/box/index'})
       }
     }
 
