@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="menulist">
     <!--<form report-submit="True" @submit="bindNoSenseForm">-->
     <!--<button  formType="submit">按钮测试</button>-->
     <!--</form>-->
@@ -8,20 +8,20 @@
     <!--&lt;!&ndash;<image></image>&ndash;&gt;-->
     <!--</view>-->
     <view>
-      请点击下面的按钮后发送「充值」（充值二字已经为您复制）
+      <view class="note">请点击下面的按钮后发送「充值」（充值二字已经为您复制）</view>
       <view>
         <block wx:for="{{ price }}" wx:key="id">
-          <button open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
+          <button class="rechargetype" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
                   id="recharge-{{ item.id }}">
-            <view>¥{{ item.price / 100 }}</view>
-            <view>充值 {{ item.point }} 点券</view>
-            <view>（其中充值点券 {{ item.point_paid }}，赠送点券 {{ item.point_gift }} ）</view>
+            <view class="typename">¥{{ item.price / 100 }}</view>
+            <view class="typeprice">充值 {{ item.point }} 点券</view>
+            <view class="typenote">（其中充值点券 {{ item.point_paid }}，赠送点券 {{ item.point_gift }} ）</view>
           </button>
         </block>
       </view>
     </view>
 
-    充值完成后一般即时到账。如果支付成功后超过1h仍旧未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。
+    <view class="note">充值完成后一般即时到账。如果支付成功后超过1h仍旧未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
   </view>
 </template>
 
@@ -125,5 +125,48 @@
 </script>
 
 <style lang="less">
+  .menulist{
+    width:670rpx;
+    margin-left: 40rpx;
+    margin-top: 40rpx;
+    margin-right: 40rpx;
+    /* background-color: gray; */
 
+  }
+
+  .note{
+    font-size: 30rpx;
+    text-align: center;
+    margin-bottom: 2vh;
+  }
+
+  .rechargetype{
+    margin-bottom:40rpx;
+    background-color:white;
+    border:2px #1562B3 dashed;
+    padding-bottom:40rpx;
+
+  }
+
+  .rechargetype:after{
+    border: none;
+  }
+
+  .typename{
+    font-size: 48rpx;
+    font-weight: bold;
+    margin-top: 0;
+    color: #052B53;
+  }
+
+  .typeprice{
+    font-size: 30rpx;
+    margin-top: -2vh;
+    color:  #FF4A19;
+  }
+
+  .typenote{
+    font-size: 34rpx;
+    margin-top: 1.6vh;
+  }
 </style>

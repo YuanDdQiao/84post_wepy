@@ -10,7 +10,7 @@
 
     <block  wx:if="{{ fee !== 0}}">
       <view class="previewnote">您需支付 {{ fee }} 点券</view>
-      <view class="previewnote">余额 {{ balance }} 点券</view>
+      <view class="previewnote gray">余额 {{ balance }} 点券</view>
     </block>
     <block class="previewnote" wx:else>
       <view class="previewnote">预览您要寄出的信</view>
@@ -214,6 +214,10 @@
     text-align:center;
     box-shadow:0 4px 10px 0 rgba(160,147,105,0.3);
 
+  }
+
+  .gray{
+    color:gray;
   }
 
 </style>

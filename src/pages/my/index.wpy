@@ -1,34 +1,35 @@
 <template>
-  <view>
-    <view>
-      <text>点券</text>
-      {{ balance }} 点券
-      <form report-submit="True" @submit="bindRecharge">
-        <button formType="submit">充值</button>
-      </form>
+  <view class="menulist">
+    <view class="sectionholder">
+      <text class="sectiontitle">点券</text>
+      <view class="subholder balanceholder">
+        {{ balance }} 点券
+        <form report-submit="True" @submit="bindRecharge">
+          <button class="addbalancebutton" formType="submit">充值</button>
+        </form>
+      </view>
     </view>
-    <view>
-      <text>信件</text>
-      <form report-submit="True" @submit="bindSentForm">
+    <view class="sectionholder">
+      <text class="sectiontitle">信件</text>
+      <view class="subholder">
+        <form report-submit="True" @submit="bindSentForm">
 
-        <button formType="submit">
-          <text>寄出的信</text>
-          ->
-        </button>
-      </form>
-      <form report-submit="True" @submit="bindGotForm">
+          <button class="menubutton" formType="submit">
+            <text>寄出的信</text>
+          </button>
+        </form>
+        <form report-submit="True" @submit="bindGotForm">
 
-        <button formType="submit">
-          <text>收到的信</text>
-          ->
-        </button>
-      </form>
-      <form report-submit="True" @submit="bindQueryForm">
-        <button formType="submit">
-          <text>根据运单号查询</text>
-          ->
-        </button>
-      </form>
+          <button class="menubutton" formType="submit">
+            <text>收到的信</text>
+          </button>
+        </form>
+        <form report-submit="True" @submit="bindQueryForm">
+          <button class="menubutton lastmenubutton" formType="submit">
+            <text>根据运单号查询</text>
+          </button>
+        </form>
+    </view>
     </view>
     <view style="display: none;">
       <text>我的信息</text>
@@ -69,28 +70,31 @@
       </form>
     </view>
     <view wx-if="{{ canDebug }}">
-      <text>调试面板</text>
-      <form report-submit="True" @submit="bindStartDebug">
+      <text class="sectiontitle">调试面板</text>
+      <view class="subholder">
 
-        <button formType="submit">
-          <text>开启调试模式</text>
-          ->
-        </button>
-      </form>
-      <form report-submit="True" @submit="bindStopDebug">
+        <form report-submit="True" @submit="bindStartDebug">
 
-        <button formType="submit">
-          <text>关闭调试模式</text>
-          ->
-        </button>
-      </form>
-      <form report-submit="True" @submit="bindClearStorage">
+          <button class="menubutton" formType="submit">
+            <text>开启调试模式</text>
+            ->
+          </button>
+        </form>
+        <form report-submit="True" @submit="bindStopDebug">
 
-        <button formType="submit">
-          <text>清除 Storage</text>
-          ->
-        </button>
-      </form>
+          <button class="menubutton" formType="submit">
+            <text>关闭调试模式</text>
+            ->
+          </button>
+        </form>
+        <form report-submit="True" @submit="bindClearStorage">
+
+          <button class="menubutton lastmenubutton" formType="submit">
+            <text>清除 Storage</text>
+            ->
+          </button>
+        </form>
+    </view>
     </view>
     <!--<form report-submit="True" @submit="bindNoSenseForm">-->
     <!--<button  formType="submit">按钮测试</button>-->
@@ -347,5 +351,80 @@
 </script>
 
 <style lang="less">
+
+
+  .menulist{
+    width:670rpx;
+    margin-left: 40rpx;
+    margin-top: 40rpx;
+    margin-right: 40rpx;
+    /* background-color: gray; */
+
+  }
+
+  .sectionholder{
+    margin-bottom: 20px;
+  }
+
+  .sectiontitle{
+    display:block;
+    margin-bottom:14px;
+  }
+
+  .subholder{
+    width:590rpx;
+    background-color:#F1EEE6;
+    padding-left:40rpx;
+    padding-right:40rpx;
+    border-radius:4px;
+  }
+
+  .balanceholder{
+    height:90px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+
+
+  .addbalancebutton{
+    width:138rpx;
+    font-size:30rpx;
+    display:inline;
+    float:right;
+    height:74rpx;
+    background-color: #F17250;
+    color:white;
+
+  }
+
+  .addbalancebutton:after{
+    border: none;
+  }
+
+  .menubutton{
+    display:block;
+    padding-left:0;
+    text-align:left;
+    background:0;
+    padding-top:2vh;
+    padding-bottom:2vh;
+    font-size:32rpx;
+    border-radius:0;
+    border-bottom:1px #D4D1C8 solid;
+
+  }
+
+  .lastmenubutton{
+    border: 0;
+  }
+
+  .menubutton:after{
+    border:none;
+
+  }
+
 
 </style>

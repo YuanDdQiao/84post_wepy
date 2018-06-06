@@ -168,7 +168,7 @@
 
 
   .typelogo{
-    height:41rpx;
+    height:38rpx;
     margin-left:auto;
     margin-right:auto;
     width:260rpx;

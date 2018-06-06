@@ -201,6 +201,10 @@
     align-items: center;
   }
 
+  .edit-letter-01 ::selection {
+    background: #DED8C6;
+  }
+
   .edit-letter-02{
     background: #FFFFFF;
     border: 3px solid #FBBAD0;
@@ -216,6 +220,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .edit-letter-02 ::selection {
+    background: #FAE8EE;
   }
 
   .edit-letter-03{
@@ -235,10 +243,14 @@
     align-items: center;
   }
 
+  .edit-letter-03 ::selection {
+    background: #DBDAD8;
+  }
+
   button{
     position: relative;
     color:white;
-    width:140rpx;
+    width:130rpx;
     float: right;
     height: 4vh;
     display: flex;
