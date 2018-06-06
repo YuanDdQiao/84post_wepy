@@ -2,8 +2,13 @@
   <view>
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
-        <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
-          <button class="typechoose" formType="submit">{{ item.name }}</button>
+        <view>
+          <button class="holder {{ item.class_attr }}"  style="{{ item.style_attr }}" formType="submit">
+            <view class="subholder">
+              <view class="itemname">{{ item.name }}</view>
+              <view class="stamp"></view>
+            </view>
+          </button>
         </view>
       </form>
     </block>
@@ -114,23 +119,62 @@
 
 <style lang="less">
 
-  .typechoose{
+  .holder{
     margin:40rpx;
-    background-color:white;
-    height:22vh;
-    border:2px #1562B3 dashed;
+    height:26vh;
     text-align:left;
-    font-size:52rpx;
-    padding-left:50rpx;
+    padding-left:0;
+    padding-right:0;
+    padding-top:3vh;
+    padding-bottom:3vh;
     display:flex;
     flex-direction:column;
     justify-content:space-around;
     color:#1562B3;
+    background:#FFFFFF;
+    box-shadow:0 4px 6px 0 #E4E2DC;
+    border-radius:6px;
+
 
   }
 
-  .typechoose:after{
+  .subholder{
+    margin:0;
+    height:100%;
+    border-top:2px #E6E6E6 dashed;
+    border-bottom:6px #1562B3 double;
+    padding-left:40rpx;
+    padding-right:80rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  .holder:after{
     border: none;
+  }
+
+  .stamp{
+    height:160rpx;
+    width:160rpx;
+    /* background-color: red; */
+
+  }
+
+  .box-type-01 .stamp{
+    background-image: url(/images/LetterStamp1.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+
+  }
+
+
+  .itemname{
+    font-weight: bold;
+    font-size: 62rpx;
   }
 
 

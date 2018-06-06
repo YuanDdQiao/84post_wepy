@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="83px" height="83px" viewBox="0 0 83 83" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3 Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Wireframe-&amp;-UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="信箱-copy" transform="translate(-250.000000, -121.000000)">
+            <g id="Group-3-Copy-2" transform="translate(292.323909, 162.676091) rotate(-21.000000) translate(-292.323909, -162.676091) translate(251.823909, 122.176091)">
+                <text id="84" font-family="AmericanTypewriter, American Typewriter" font-size="32.76" font-weight="normal" letter-spacing="0.735297614" fill="#1562B3">
+                    <tspan x="18.27" y="40.08">84</tspan>
+                </text>
+                <text id="normal" font-family="AmericanTypewriter-Semibold, American Typewriter" font-size="10.08" font-weight="500" letter-spacing="0.609878916" fill="#1562B3">
+                    <tspan x="20.79" y="54.36">normal</tspan>
+                </text>
+                <circle id="Oval" stroke="#1562B3" stroke-width="1.89" cx="40.005" cy="40.005" r="40.005"></circle>
+                <circle id="Oval-Copy" stroke="#1562B3" stroke-width="0.63" cx="40.005" cy="40.005" r="36.855"></circle>
+                <polygon id="Star" fill="#1562B3" points="40.32 67.41 38.0981717 68.5780842 38.5225032 66.1040421 36.7250064 64.3519158 39.2090859 63.9909579 40.32 61.74 41.4309141 63.9909579 43.9149936 64.3519158 42.1174968 66.1040421 42.5418283 68.5780842"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
