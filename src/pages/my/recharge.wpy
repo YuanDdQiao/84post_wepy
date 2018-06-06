@@ -11,17 +11,20 @@
       <view class="note">请点击下面的按钮后发送「充值」（充值二字已经为您复制）</view>
       <view>
         <block wx:for="{{ price }}" wx:key="id">
-          <button class="rechargetype" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
-                  id="recharge-{{ item.id }}">
-            <view class="typename">¥{{ item.price / 100 }}</view>
-            <view class="typeprice">充值 {{ item.point }} 点券</view>
-            <view class="typenote">（其中充值点券 {{ item.point_paid }}，赠送点券 {{ item.point_gift }} ）</view>
+          <button class="button" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"  id="recharge-{{ item.id }}">
+            <view class="infoholder">
+              <view class="priceholder">
+              <view class="points">{{ item.point }} 点券</view>
+              <view class="price">¥{{ item.price / 100 }}</view>
+              </view>
+              <view class="typenote">其中充值点券 {{ item.point_paid }}，赠送点券 {{ item.point_gift }} </view>
+            </view>
           </button>
         </block>
       </view>
     </view>
 
-    <view class="note">充值完成后一般即时到账。如果支付成功后超过1h仍旧未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
+    <view class="note">充值完成后一般即时到账。如果支付成功后超过一小时仍旧未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
   </view>
 </template>
 
@@ -129,43 +132,73 @@
     margin-left: 40rpx;
     margin-top: 40rpx;
     margin-right: 40rpx;
+    margin-bottom: 6vh;
     /* background-color: gray; */
 
   }
 
   .note{
-    font-size: 30rpx;
+    font-size: 28rpx;
     text-align: center;
     margin-bottom: 2vh;
+    margin-top: 6vh;
+    color:gray;
   }
 
-  .rechargetype{
-    margin-bottom:40rpx;
-    background-color:white;
-    border:2px #1562B3 dashed;
+  .button{
+    margin-top:6vh;
+    background-color:#ED725A;
     padding-bottom:40rpx;
+    padding-top:40rpx;
+    padding-left:0;
+    padding-right:0;
+    box-shadow:0 3px 10px 0 #c6bb99;
+    border-radius:8px;
 
   }
 
-  .rechargetype:after{
+  .button:after{
     border: none;
   }
 
-  .typename{
-    font-size: 48rpx;
-    font-weight: bold;
-    margin-top: 0;
-    color: #052B53;
+  .price{
+    font-size:48rpx;
+    font-weight:bold;
+    color:white;
+    margin-top:4rpx;
+
   }
 
-  .typeprice{
-    font-size: 30rpx;
-    margin-top: -2vh;
-    color:  #FF4A19;
+  .points{
+    font-size:62rpx;
+    color:white;
+    font-weight:bold;
+    text-align:left;
   }
 
   .typenote{
-    font-size: 34rpx;
-    margin-top: 1.6vh;
+    font-size:32rpx;
+    text-align:left;
+    color:white;
+    margin-bottom:10rpx;
+
+
   }
+
+  .infoholder{
+    border-bottom:2px #FA977C dashed;
+    border-top:2px #FA977C dashed;
+    padding-left:40rpx;
+    padding-right:40rpx;
+
+  }
+
+  .priceholder{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:top;
+  }
+
+
 </style>
