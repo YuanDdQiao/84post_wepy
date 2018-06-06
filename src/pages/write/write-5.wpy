@@ -8,7 +8,7 @@
 
     <block wx:if="{{letterTypeType === 1}}">
       <view class="noteholder">
-        <view class="bignote">您的邮件（平邮）已寄出！</view>
+        <view class="bignote">您的平邮已寄出！</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
