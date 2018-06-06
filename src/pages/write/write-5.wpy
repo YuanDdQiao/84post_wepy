@@ -36,9 +36,10 @@
       <view class="timeholder">
         <view class="note">预计到达时间：1 - 3 天</view>
         <view class="note"> 目的地：{{ toAddress }}</view>
-        <button class="functionbutton" open-type="share">告诉别人</button>
       </view>
     </block>
+
+    <button class="functionbutton" open-type="share">告诉别人</button>
 
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
