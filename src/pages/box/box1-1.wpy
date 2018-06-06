@@ -117,10 +117,9 @@
      */
     onShareAppMessage() {
       let userId = wepy.getStorageSync('userId')
-      let imageUrl = `${api.host}/media/share/default.png`
       return {
         path: `/pages/box/index?fromUID=${userId}`,
-        imageUrl: imageUrl
+        imageUrl: api.imageUrl
       }
     };
   }

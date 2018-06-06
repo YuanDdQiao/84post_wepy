@@ -171,14 +171,16 @@
      * 用户点击右上角分享
      */
     onShareAppMessage() {
-      console.log('onShareAppMessage')
       let userId = wepy.getStorageSync('userId')
-      let uuid = this.$parent.globalData.currentLetter.uuid
-      let imageUrl = `${api.host}/media/thumbnails/${uuid}.png`
-      console.log(imageUrl)
+      let path = `/pages/write/index?fromUID=${userId}`
+      if (this.letterTypeType === 1) {
+        path = `/pages/complex/normal?fromUID=${userId}`
+      } else {
+        path = `/pages/express/index?fromUID=${userId}&q=${this.expressNumber}`
+      }
       return {
-        path: `/pages/write/index?fromUID=${userId}`, // TODO: auto view
-        imageUrl: imageUrl
+        path: path,
+        imageUrl: api.imageUrl
       }
     };
   }

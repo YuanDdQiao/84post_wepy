@@ -5,6 +5,7 @@ import 'wepy-async-function'
 // const host = 'http://127.0.0.1:8000'
 const host = 'https://84.singee.site'
 const apiRoot = `${host}/api/v1`
+const imageUrl = `${host}/media/share/default.png`
 
 // 普通请求
 const request = async (options, showLoading = true, auth = true) => {
@@ -163,5 +164,6 @@ export default {
   formIdSubmit,
   getAuthScope,
   startDebug,
-  stopDebug
+  stopDebug,
+  imageUrl
 }

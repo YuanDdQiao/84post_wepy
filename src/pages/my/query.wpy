@@ -102,10 +102,10 @@
      * 用户点击右上角分享
      */
     onShareAppMessage() {
+      let userId = wepy.getStorageSync('userId')
       return {
-        title: null,
-        path: null,
-        imageUrl: null
+        path: `/pages/query/index?fromUID=${userId}`,
+        imageUrl: api.imageUrl
       }
     };
   }
