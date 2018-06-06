@@ -6,13 +6,13 @@
     </view>
 
 
-    <block wx:if="{{letterTypeType === 0}}">
+    <block wx:if="{{letterTypeType === 1}}">
       <view class="noteholder">
-        <view class="bignote">您的邮件（平邮）已寄出！</view>
+        <view class="bignote">您的平邮已寄出！</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
-    <block wx:elif="{{letterTypeType === 1}}">
+    <block wx:elif="{{letterTypeType === 2}}">
       <view class="noteholder">
         <view class="bignote">您的挂号信已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
@@ -36,9 +36,10 @@
       <view class="timeholder">
         <view class="note">预计到达时间：1 - 3 天</view>
         <view class="note"> 目的地：{{ toAddress }}</view>
-        <button class="functionbutton" open-type="share">告诉别人</button>
       </view>
     </block>
+
+    <button class="functionbutton" open-type="share">告诉别人</button>
 
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
@@ -67,7 +68,7 @@
      */
     data = {
       roadThumb: '',
-      letterTypeType: 0,
+      letterTypeType: 1,
       toAddress: '',
       expressNumber: ''
     }

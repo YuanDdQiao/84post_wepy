@@ -10,11 +10,16 @@
 
     <block  wx:if="{{ fee !== 0}}">
       <view class="previewnote">您需支付 {{ fee }} 点券</view>
+<<<<<<< HEAD
       <view class="previewnote gray">余额 {{ balance }} 点券</view>
+=======
+>>>>>>> 6dcbcd691d38421a4638323a04eb6bce1e29de3e
     </block>
     <block class="previewnote" wx:else>
-      <view class="previewnote">预览您要寄出的信</view>
+      <view class="previewnote">平邮免费</view>
     </block>
+
+    <view class="previewnote">余额 {{ balance }} 点券</view>
 
     <block wx:if="{{ fee !== 0}}">
       <block wx:if="{{ balance >= fee }}">
