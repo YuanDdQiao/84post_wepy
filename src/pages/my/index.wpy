@@ -257,6 +257,11 @@
         api.stopDebug()
       },
       async bindClearStorage() {
+        wepy.showModal({
+          title: '清除成功',
+          content: '已经清除掉所有内部存储内容并重新登录',
+          showCancel: false
+        })
         await wepy.clearStorage()
         api.login()
       }
