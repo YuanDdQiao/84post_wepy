@@ -47,6 +47,14 @@
     color:white;
   }
 
+  .nomore{
+    text-align:center;
+    font-size:30rpx;
+    color:gray;
+    margin-top:10vh;
+    margin-bottom:12vh;
+  }
+
 
 
 </style>

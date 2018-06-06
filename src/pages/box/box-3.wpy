@@ -204,6 +204,7 @@
     font-size:30rpx;
     line-height:60rpx;
     margin-bottom:40px;
+    white-space: pre-wrap;
 
   }
 

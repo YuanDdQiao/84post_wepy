@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="letterlist">
 
     <block wx:if="{{ letters.length !== 0 }}">
       <block wx:for="{{ letters }}" wx:key="id">
@@ -9,6 +9,7 @@
           </button>
         </form>
       </block>
+      <view class="nomore">没有更多信件了</view>
     </block>
     <block wx:else>
       <view class="nomail">您周围没有已经送达的信件</view>
@@ -160,5 +161,10 @@
     border: none;
 
   }
+
+  .letterlist{
+    margin-bottom: 4vh;
+  }
+
 
 </style>

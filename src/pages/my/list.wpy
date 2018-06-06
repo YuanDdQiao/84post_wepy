@@ -10,6 +10,7 @@
           </button>
         </form>
       </block>
+      <view class="nomore">没有更多信件了</view>
     </block>
     <block wx:else>
       <block wx:if="{{type === 1}}">
@@ -178,5 +179,6 @@
       border: none;
 
     }
+
 
 </style>
