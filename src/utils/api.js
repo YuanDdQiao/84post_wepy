@@ -5,7 +5,12 @@ import 'wepy-async-function'
 // const host = 'http://127.0.0.1:8000'
 const host = 'https://84.singee.site'
 const apiRoot = `${host}/api/v1`
-const imageUrl = `${host}/media/share/default.png`
+
+const shareInfo = {
+  title: '来给我写封信吧！',
+  imageUrl: `${host}/media/share/default.png`,
+  boxTitle: '看看你的邮件到哪了！'
+}
 
 // 普通请求
 const request = async (options, showLoading = true, auth = true) => {
@@ -165,5 +170,5 @@ export default {
   getAuthScope,
   startDebug,
   stopDebug,
-  imageUrl
+  shareInfo
 }

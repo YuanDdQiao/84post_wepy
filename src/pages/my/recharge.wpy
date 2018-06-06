@@ -117,7 +117,7 @@
       let userId = wepy.getStorageSync('userId')
       return {
         path: `/pages/my/recharge?fromUID=${userId}`,
-        imageUrl: api.imageUrl
+        imageUrl: api.shareInfo.imageUrl
       }
     };
   }

@@ -176,11 +176,12 @@
       if (this.letterTypeType === 1) {
         path = `/pages/complex/normal?fromUID=${userId}`
       } else {
-        path = `/pages/express/index?fromUID=${userId}&q=${this.expressNumber}`
+        path = `/pages/my/express?fromUID=${userId}&q=${this.expressNumber}`
       }
       return {
+        title: '我给你写了一封信，请查收～',
         path: path,
-        imageUrl: api.imageUrl
+        imageUrl: api.shareInfo.imageUrl
       }
     };
   }

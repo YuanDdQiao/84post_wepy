@@ -342,8 +342,9 @@
     onShareAppMessage() {
       let userId = wepy.getStorageSync('userId')
       return {
+        title: api.shareInfo.title,
         path: `/pages/write/index?fromUID=${userId}`,
-        imageUrl: api.imageUrl
+        imageUrl: api.shareInfo.imageUrl
       }
     };
   }

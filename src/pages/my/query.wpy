@@ -104,8 +104,9 @@
     onShareAppMessage() {
       let userId = wepy.getStorageSync('userId')
       return {
+        title: '物流查询',
         path: `/pages/query/index?fromUID=${userId}`,
-        imageUrl: api.imageUrl
+        imageUrl: api.shareInfo.imageUrl
       }
     };
   }
