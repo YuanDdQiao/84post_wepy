@@ -16,7 +16,7 @@
       <view class="noteholder">
         <view class="bignote">您的挂号信已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
-        <form report-submit="True" @submit="bindNoSenseForm">
+        <form report-submit="True" @submit="bindTrack" data-express="{{ expressNumber }}">
           <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
       </view>
@@ -29,7 +29,7 @@
       <view class="noteholder">
         <view class="bignote">您的快递已寄出！</view>
         <view class="note">运单号：{{ expressNumber }}</view>
-        <form report-submit="True" @submit="bindNoSenseForm">
+        <form report-submit="True" @submit="bindTrack" data-express="{{ expressNumber }}">
           <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
       </view>
@@ -77,11 +77,13 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindNoSenseForm(e) {
-        api.formIdSubmit(e.detail.formId)
-      },
       bindGoBack(e) {
+        api.formIdSubmit(e.detail.formId)
         wepy.reLaunch({ url: 'index' })
+      },
+      bindTrack(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({url: `/pages/my/express?q=${e.target.dataset.express}`})
       }
     }
 
