@@ -4,21 +4,19 @@
       <block wx:for="{{ letters }}" wx:key="id">
         <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
               data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
-          <view class="mailholder">
-            <button class="mailpreviewbutton" formType="submit">
-                <view wx:if="{{ item.letter_type.type !== 1}}">
-                  <image class="mailimage" src="{{ item.thumbnail }}"></image>
+          <button class="mailpreviewbutton" formType="submit">
+            <view>
+              <image class="mailimage" src="{{ item.thumbnail }}"></image>
+              <view class="nubmerholder" wx:if="{{ item.letter_type.type !== 1}}">
+                <view class="expressnumber">运单号：{{ item.express_number }}</view>
+                <view>
+                  <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
+                    <button class="copybutton" formType="submit">复制</button>
+                  </form>
                 </view>
-            </button>
-            <view class="numberandbuttonholder">
-              <view>运单号：{{ item.express_number }}</view>
-              <view>
-                <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
-                  <button formType="submit">复制</button>
-                </form>
               </view>
             </view>
-          </view>
+          </button>
         </form>
       </block>
       <view class="nomore">没有更多信件了</view>
@@ -174,19 +172,16 @@
     .mailpreviewbutton{
       margin-top:40rpx;
       padding:0;
-      width:670rpx;
-      margin-left:40rpx;
-      margin-right:40rpx;
       margin-bottom:0;
-      height:400rpx;
-      box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
+
     }
 
     .mailimage{
-      width:670rpx;
-      height:400rpx;
       margin:0;
       padding:0;
+      height: 400rpx;
+      width: 670rpx;
+      box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
     }
 
     .mailpreviewbutton:after{
@@ -194,9 +189,30 @@
 
     }
 
-    .numberandbuttonholder{
-      background-color: red;
+    .nubmerholder{
+      margin-left:60rpx;
+      margin-right:60rpx;
+      display:flex;
+      flex-direction:row;
+      justify-content:space-between;
+      align-items:center;
+
     }
+
+    .expressnumber{
+      font-size: 28rpx;
+      color:gray;
+
+
+    }
+
+    .copybutton{
+      font-size:28rpx;
+      color:gray;
+      background-color:#F5F3EC;
+
+    }
+
 
 
 </style>
