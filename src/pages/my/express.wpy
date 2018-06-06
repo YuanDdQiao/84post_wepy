@@ -1,5 +1,14 @@
 <template>
   <view>
+    <view>运单号：{{ expressNumber }}</view>
+    <view>
+      <block wx:if="{{ info.length !== 0}}">
+
+      </block>
+      <block wx:else>
+        还没有物流信息哦，估计是运输人员还没起床，请稍后再试 ( •̀ .̫ •́ )✧
+      </block>
+    </view>
     <!--<form report-submit="True" @submit="bindNoSenseForm">-->
     <!--<button  formType="submit">按钮测试</button>-->
     <!--</form>-->
@@ -22,7 +31,8 @@
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
-      expressNumber: null
+      expressNumber: null,
+      info: []
     }
 
     /**
@@ -52,6 +62,11 @@
         })
         wepy.reLaunch({ url: '/pages/my/index' })
       }
+
+      let ret = await api.request(`my/query/${this.expressNumber}`)
+      console.log(ret.data)
+      this.info = ret.data.info
+      this.$apply()
     };
 
     /**

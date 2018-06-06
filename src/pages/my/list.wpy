@@ -2,7 +2,8 @@
   <view>
     <block wx:if="{{ letters.length !== 0}}">
       <block wx:for="{{ letters }}" wx:key="id">
-        <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}">
+        <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
+              data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
           <button formType="submit">
             <view>
               <image src="{{ item.thumbnail }}"></image>
@@ -54,9 +55,18 @@
         api.formIdSubmit(e.detail.formId)
         console.log(e)
         if (this.type === 1) {
-
+          console.log(e.target.dataset.type)
+          if (e.target.dataset.type === 1) {
+            wepy.showModal({
+              title: '哎呀抱歉',
+              content: '平邮没有物流信息 Ծ‸Ծ',
+              showCancel: false
+            })
+          } else {
+            wepy.navigateTo({ url: `express?q=${e.target.dataset.express}` })
+          }
         } else if (this.type === 2) {
-          wepy.navigateTo({url: `read?uuid=${e.target.dataset.uuid}`})
+          wepy.navigateTo({ url: `read?uuid=${e.target.dataset.uuid}` })
         }
       }
     }
