@@ -1,9 +1,11 @@
 <template>
-  <view class="querybox">
-    <form report-submit="True" @submit="bindQuery">
+  <view class="queryform">
+    <form class="flex" report-submit="True" @submit="bindQuery">
+      <image class="logo" src="/images/84_logo.png"></image>
+      <image class="queryformlogo" src="/images/queryform.svg"></image>
       <input class="inputbox" type="text" placeholder="请输入运单号" value="{{qValue}}" @input="bindInput"/>
-      <button>？</button>
-      <button class="confirmbutton" formType="submit">下一步</button>
+      <view class="note">填写并提交查询单即可得知邮件的运输情况。运单号可在寄出信件之后获得。您也可以在 “寄出的信” 里再次查看。</view>
+      <button class="confirmbutton" formType="submit">提交查询单</button>
     </form>
   </view>
 </template>
@@ -114,37 +116,76 @@
 
 <style lang="less">
 
-  .querybox{
+  .queryform{
     width: 670rpx;
     margin-left: 40rpx;
     margin-right: 40rpx;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 40rpx;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #D4CEBE;
   }
 
 
   .inputbox{
-    border:2px #1562B3 dashed;
+    border-bottom:2px #1562B3 dashed;
     border-radius:2px;
-    margin-left:13vw;
-    margin-right:13vw;
     font-size:38rpx;
     height:6vh;
-    width:62vw;
     color:#1562B3;
     text-align:center;
-    margin-bottom:3vh;
+    position:relative;
+    width:540rpx;
+    margin-right:65rpx;
+    margin-left:65rpx;
+    margin-bottom:4vh;
 
   }
 
   .confirmbutton{
-      color:white;
-      width:30vw;
-      background-color: #F17250;
+    color:white;
+    width:260rpx;
+    background-color:#F17250;
+    bottom:-12vh;
+    margin-left:205rpx;
+    margin-right:205rpx;
+
   }
 
 
   .inputbox:hover{
-    border: 2px #1562B3 solid;
+    border-bottom: 2px #1562B3 solid;
   }
+
+  .note{
+    width:74vw;
+    margin-left:7vw;
+    margin-right:7vw;
+    font-size:30rpx;
+    color:gray;
+    text-align:center;
+
+  }
+
+  .logo{
+    width:8vh;
+    height:8vh;
+    margin-bottom:4vh;
+    margin-top:6vh;
+
+
+  }
+
+  .queryformlogo{
+    height:18vh;
+    margin-bottom:12vh;
+  }
+
+  .flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
 </style>

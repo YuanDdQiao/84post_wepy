@@ -9,37 +9,42 @@
     <block wx:if="{{letterTypeType === 1}}">
       <view class="noteholder">
         <view class="bignote">您的平邮已寄出！</view>
-        <view class="note">目的地：{{ toAddress }}</view>
+        <view class="note normal">目的地：{{ toAddress }}</view>
       </view>
     </block>
     <block wx:elif="{{letterTypeType === 2}}">
-      <view class="noteholder">
-        <view class="bignote">您的挂号信已寄出！</view>
+      <view class="bignote">您的挂号信已寄出！</view>
+      <view class="infoholder">
         <view class="note">运单号：{{ expressNumber }}</view>
         <form report-submit="True" @submit="bindTrack" data-express="{{ expressNumber }}">
           <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
+        <view class="note notice"> *日后可在寄出的信中进行查询</view>
+
       </view>
-      <view class="timeholder">
+      <view class="infoholder">
         <view class="note">预计到达时间：3 - 7 天</view>
         <view class="note">目的地：{{ toAddress }}</view>
       </view>
     </block>
     <block wx:else>
-      <view class="noteholder">
-        <view class="bignote">您的快递已寄出！</view>
+      <view class="bignote">您的快递已寄出！</view>
+      <view class="infoholder">
+
         <view class="note">运单号：{{ expressNumber }}</view>
         <form report-submit="True" @submit="bindTrack" data-express="{{ expressNumber }}">
           <button class="functionbutton" formType="submit">追踪信件</button>
         </form>
+        <view class="note notice"> *日后可在寄出的信中进行查询</view>
       </view>
-      <view class="timeholder">
+      <view class="infoholder">
         <view class="note">预计到达时间：1 - 3 天</view>
+        <button class="functionbutton" open-type="share">告诉 Ta</button>
         <view class="note"> 目的地：{{ toAddress }}</view>
       </view>
     </block>
 
-    <button class="functionbutton" open-type="share">告诉别人</button>
+
 
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
@@ -189,13 +194,12 @@
 
 <style lang="less">
   .pathpreview{
-    margin-left: 40rpx;
-    margin-right: 40rpx;
-    margin-top: 40rpx;
-    margin-bottom:4vh;
+    margin-left:40rpx;
+    margin-right:40rpx;
+    margin-top:40rpx;
     width:670rpx;
-    height: 40vh;
-    box-shadow:0 4px 10px 0 rgba(160,147,105,0.3);
+    height:400rpx;
+
   }
 
   button{
@@ -208,6 +212,7 @@
     font-size:42rpx;
     color:#1562B3;
     text-align:center;
+    margin-top:5vh;
 
   }
 
@@ -216,15 +221,17 @@
     font-size:34rpx;
     color:#1562B3;
     float:left;
-    margin-top:1vh;
+
   }
 
-  .noteholder{
+  .infoholder{
     margin-left:40rpx;
     margin-right:40rpx;
-    margin-top:2vh;
     width:670rpx;
-    height:12vh;
+    height:14vh;
+    margin-bottom:1vh;
+
+
   }
 
   .timeholder{
@@ -239,7 +246,7 @@
 
   .functionbutton{
     font-size:32rpx;
-    margin:0;
+    margin-top:0;
     float:right;
     width:186rpx;
     display:flex;
@@ -249,6 +256,7 @@
     flex-direction:column;
     height:72rpx;
     color:#FAF9F6;
+
 
   }
 
@@ -268,6 +276,19 @@
 
   .wholepage{
     height: 100vh
+  }
+
+  .normal{
+    text-align:center;
+    float:none;
+
+  }
+
+  .notice{
+    color:red;
+    display:inline;
+    font-size:30rpx;
+
   }
 
 </style>

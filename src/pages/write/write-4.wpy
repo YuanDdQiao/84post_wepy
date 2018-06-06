@@ -16,8 +16,6 @@
       <view class="previewnote">平邮免费</view>
     </block>
 
-    <view class="previewnote">余额 {{ balance }} 点券</view>
-
     <block wx:if="{{ fee !== 0}}">
       <block wx:if="{{ balance >= fee }}">
         <form report-submit="True" @submit="bindPayForm">
