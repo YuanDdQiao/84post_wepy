@@ -8,8 +8,6 @@
       <view class="progress processdone">寄</view>
     </view>
 
-    <view class="pageError" wx:if="pageError">{{ pageError }}</view>
-
     <form report-submit="True" @submit="bindSubmit">
       <view class="roletype">收信人</view>
 
@@ -108,7 +106,6 @@
      */
     data = {
       letterStamps: [],
-      pageError: '',
 
       toName: '',
       fromName: '',
@@ -200,8 +197,11 @@
               url: 'write-4'
             })
           } else if (errLevel === 1) {
-            this.pageError = errMsg
-            this.$apply()
+            wepy.showModal({
+              title: '提示',
+              content: errMsg,
+              showCancel: false
+            })
             wepy.pageScrollTo({
               scrollTop: 0
             })
