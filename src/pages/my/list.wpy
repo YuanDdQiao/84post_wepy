@@ -6,6 +6,14 @@
               data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
           <button class="mailpreviewbutton" formType="submit">
             <view>
+              <view wx:if="{{ item.letter_type.type !== 1}}">
+                <view>运单号：{{ item.express_number }}</view>
+                <view>
+                  <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
+                    <button formType="submit">复制</button>
+                  </form>
+                </view>
+              </view>
               <image class="mailimage" src="{{ item.thumbnail }}"></image>
             </view>
           </button>
@@ -68,6 +76,11 @@
         } else if (this.type === 2) {
           wepy.navigateTo({ url: `read?uuid=${e.target.dataset.uuid}` })
         }
+      },
+      bindCopy(e) {
+        wepy.setClipboardData({
+          data: e.target.dataset.express
+        })
       }
     }
 
