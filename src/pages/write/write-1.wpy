@@ -1,27 +1,23 @@
 <template>
   <view>
     <view class="processbarholder">
-
       <view class="progress processdone">写</view>
       <view class="progress-middle">选</view>
       <view class="progress">寄</view>
     </view>
     <view class="{{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
-        <!--<input type="text"   />-->
         <view class="noteanddone">
           <view class="autosavenote">已自动保存草稿</view>
           <button formType="submit">写好了</button>
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
-                  maxlength="{{ maxLength }}"></textarea>
+                  maxlength="{{ maxLength }}" fixed="true"></textarea>
         <view class="dateandword">
           <view>{{ wordCount }}/{{ maxLength }} 字</view>
           <view>{{ todayDate }}</view>
         </view>
-
       </form>
-
     </view>
   </view>
 </template>
@@ -337,23 +333,15 @@
     display:flex;
     flex-direction:row;
     align-items:center;
-
-
   }
-
   .autosavenote{
     padding-left:40rpx;
     display:inline;
     font-size:28rpx;
     color:gray;
-
   }
-
   .godown{
-    position: sticky;
+    position: fixed;
   }
-
-
-
 
 </style>
