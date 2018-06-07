@@ -8,20 +8,22 @@
     </view>
     <block wx:for="{{ letterTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindSubmit">
-        <button class="holder" formType="submit" id="{{ index }}">
-          <view class="subholder">
-            <view class="infoholder">
-              <view class="itemname">{{ item.name }}</view>
-              <view class="typeprice">
-                <block wx:if="{{ item.price === 0}}">免费</block>
-                <block wx:else>{{ item.price }} 点券</block>
-              </view>
+        <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+          <button class="holder" formType="submit" id="{{ index }}">
+            <view class="subholder">
+              <view class="infoholder">
+                <view class="itemname">{{ item.name }}</view>
+                <view class="typeprice">
+                  <block wx:if="{{ item.price === 0}}">免费</block>
+                  <block wx:else>{{ item.price }} 点券</block>
+                </view>
 
-            <view class="typenote">{{ item.describe }}</view>
+                <view class="typenote">{{ item.describe }}</view>
+              </view>
+              <view class="stamp"></view>
             </view>
-            <view class="stamp"></view>
-          </view>
-        </button>
+          </button>
+        </view>
       </form>
     </block>
   </view>
