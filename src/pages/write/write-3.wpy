@@ -89,7 +89,10 @@
             </block>
           </view>
   </view>
-            <button class="nextbutton" formType="submit">下一步</button>
+      <form report-submit="True" @submit="bindReset">
+            <button formType="submit">重置</button>
+      </form>
+      <button class="nextbutton" formType="submit">下一步</button>
 
   </form>
   </view>
@@ -292,6 +295,28 @@
         this.fromAddress = this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName
         this.fromAddressChosen = true
         this.$apply()
+      },
+      async bindReset(e) {
+        let m = await wepy.showModal({
+          title: '重置',
+          content: '本操作将会清空该页所有信息（包括已经自动保存的），该操作不可撤销，是否确认重置？',
+          confirmText: '确认'
+        })
+        if (m.confirm) {
+          // 清空 this.$parent
+          this.$parent.globalData.letterInfo.shiftInfo = {}
+          this.$parent.globalData.letterInfo.letterStamp = {}
+          // 清空 storage
+          let list = ['toName', 'toAddress', 'toZip', 'toTel', 'fromName', 'fromAddress', 'fromZip', 'fromTel']
+          for (let i in list) {
+            wepy.removeStorageSync(`letterInfo-shiftInfo-${list[i]}`)
+          }
+          wepy.removeStorageSync(`letterInfo-letterStamp`)
+          // 清空 PageData
+          this.toName = ''
+          // onLoad
+          this.onLoad()
+        }
       }
     }
 
@@ -348,6 +373,9 @@
         this.toAddress = v.data.showName
         this.toAddressChosen = true
       } catch (e) {
+        this.$parent.globalData.letterInfo.shiftInfo.toAddress = {}
+        this.toAddress = '点击选择地址'
+        this.toAddressChosen = false
       }
       try {
         let v = await wepy.getStorage({
@@ -358,6 +386,9 @@
         this.fromAddress = v.data.showName
         this.fromAddressChosen = true
       } catch (e) {
+        this.$parent.globalData.letterInfo.shiftInfo.fromAddress = {}
+        this.fromAddress = '点击选择地址'
+        this.fromAddressChosen = false
       }
       // 记住邮票
       try {
