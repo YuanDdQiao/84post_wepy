@@ -74,6 +74,8 @@ const request = async (options, showLoading = true, auth = true) => {
   } else if (response.statusCode === 403) {
     content = '您当前未登录或权限不足，请重试'
     needRelogin = true
+  } else if (response.statusCode === 404) {
+    return response
   } else {
     content = `未知原因（请求状态码：${response.statusCode}））`
   }
