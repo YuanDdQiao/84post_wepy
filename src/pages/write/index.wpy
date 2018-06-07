@@ -175,7 +175,7 @@
 
   button{
     color:white;
-    width:30vw;
+    width:60vw;
     background-color: #F17250;
   }
 
@@ -269,5 +269,7 @@
     font-size: 30rpx;
 
   }
+
+
 
 </style>

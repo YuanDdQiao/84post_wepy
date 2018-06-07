@@ -125,7 +125,7 @@
 
 <style lang="less">
   .inputbox{
-    border:2px #1562B3 dashed;
+    border-bottom:2px #1562B3 dashed;
     border-radius:2px;
     margin-left:13vw;
     margin-right:13vw;
@@ -152,7 +152,7 @@
     margin-left:5vw;
     margin-right:5vw;
     margin-top:5vw;
-    outline:30vh solid #F3F2F0;
+    outline:4px solid #F3F2F0;
 
   }
 
