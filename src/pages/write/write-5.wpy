@@ -267,9 +267,10 @@
     color:white;
     background-color:#F17250;
     position:absolute;
-    bottom:4vh;
+    bottom:6vh;
     margin-left:20vw;
     margin-right:20vw;
+
 
   }
 
@@ -294,7 +295,7 @@
     margin-left:20vw;
     margin-right:20vw;
     position:absolute;
-    bottom:12vh;
+    bottom:15vh;
   }
 
 </style>

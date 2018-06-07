@@ -1,15 +1,15 @@
 <template>
-  <view>
-    <view>
-      您的信件已寄出，不过。。。。由于是平邮所以。。。。。没有物流追踪我也不知道到哪了请耐心等待～
+  <view class="holder">
+    <view class="note">
+      您的信件已寄出，不过由于是平邮所以没有物流追踪。我也不知道到哪了，请耐心等待～
     </view>
-    <view>
+    <view class="note">
       TIPS：平邮需要您在收件地址附近打开「信箱 - 平邮」查找哦
     </view>
     <view>
-      <view>快速通道</view>
+      <view class="links">快速通道</view>
       <form report-submit="True" @submit="bindWrite">
-        <button formType="submit">寄一封</button>
+        <button  formType="submit">寄封信</button>
       </form>
       <form report-submit="True" @submit="bindSearch">
         <button formType="submit">找邮件</button>
@@ -89,5 +89,33 @@
 </script>
 
 <style lang="less">
+
+    .holder{
+      margin-left: 40rpx;
+      margin-right: 40rpx;
+      margin-top: 40rpx;
+
+    }
+
+    .note{
+      text-align: center;
+      font-size: 32rpx;
+      margin-bottom:8vh;
+
+    }
+
+    .links{
+      text-align: center;
+      font-size: 38rpx;
+      margin-bottom: 6vh;
+      color:#1562B3;
+
+    }
+
+    button{
+      margin-bottom: 1vh;
+    }
+
+
 
 </style>

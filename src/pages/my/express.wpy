@@ -190,7 +190,6 @@
 
     .type-0 .info{
       font-weight: bold;
-      color: #F17250;
     }
 
     .type-1 .info{
@@ -207,6 +206,7 @@
 
     .type-4 .info{
       font-weight: bold;
+      color: #F17250;
     }
 
     .type-5 .info{
