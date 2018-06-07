@@ -282,11 +282,11 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     onShow() {
-      api.request('user/balance/').then((e) => {
+      api.request('user/balance/', false).then((e) => {
         this.balance = e.data.balance
         this.$apply()
       })
-      api.request('user/info/').then((e) => {
+      api.request('user/info/', false).then((e) => {
         let userInfo = {}
         let data = e.data
 
