@@ -5,6 +5,7 @@
       <block wx:if="{{ info.length !== 0}}">
         <block wx:for="{{ info }}" wx:key="id">
           <view class="type-{{ item.type }} oneline">
+            <view class="{{status === 3 ? 'class-1' : 'class-2'}}"></view>
             <view class="info">{{item.info}}</view>
             <view class="date">{{item.date}} {{item.time}}</view>
           </view>
@@ -38,7 +39,8 @@
      */
     data = {
       expressNumber: null,
-      info: []
+      info: [],
+      status: -1
     }
 
     /**
@@ -72,6 +74,7 @@
       let ret = await api.request(`my/query/${this.expressNumber}/`)
       console.log(ret.data)
       this.info = ret.data.info
+      this.status = ret.data.status
       this.$apply()
     };
 
