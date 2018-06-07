@@ -203,7 +203,7 @@
 
 
   .choose-box-type-01 .stamp{
-    background-image: url(https://84.singee.site/media/postmark/normal_qedSmjC.png;
+    background-image: url(https://84.singee.site/media/postmark/normal_qedSmjC.png);
     background-size: cover;
     background-repeat: no-repeat;
     transform: rotate(-20deg);
