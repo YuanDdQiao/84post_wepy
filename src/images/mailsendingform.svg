@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="265px" height="122px" viewBox="0 0 265 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Wireframe-&amp;-UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="写信_填写信息-UI" transform="translate(-55.000000, -218.000000)">
+            <g id="Group" transform="translate(54.000000, 207.000000)">
+                <text id="MAIL-SENDING-INFO-FO" font-family="SFCompactDisplay-Bold, SF Compact Display" font-size="23" font-style="condensed" font-weight="bold" fill="#C2C2C2">
+                    <tspan x="0" y="132">MAIL SENDING INFO FORM</tspan>
+                </text>
+                <path d="M3.5,87.5 L104.5,87.5" id="Line" stroke="#D8D8D8" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M163.5,87.5 L264.5,87.5" id="Line-Copy" stroke="#D8D8D8" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M134,101 C126.268014,101 120,94.7319865 120,87 C120,79.2680135 126.268014,73 134,73 C141.731986,73 148,79.2680135 148,87 C148,94.7319865 141.731986,101 134,101 Z M127.113167,82 L127.113167,92 L140.886056,92 L140.886815,82 L127.113167,82 Z M134,87.1664 L130.111111,83.6664 L137.929139,83.6664 L134,87.1664 Z M131.083333,86.75 L128.734056,89.1664 L128.734056,84.6664 L131.083333,86.75 Z M132.298611,87.8336 L133.473639,88.875 C133.635423,89 133.797972,89.0836 134,89.0836 C134.202806,89.0836 134.364583,89.000006 134.526361,88.875 L135.579861,87.9164 L137.929139,90.3328 L129.868056,90.3335814 L132.298611,87.8336 Z M136.835389,86.8336 L139.265944,84.6672 L139.265944,89.3758 L136.835389,86.8336 Z" id="Combined-Shape" fill="#D8D8D8"></path>
+                <text id="寄件信息单" font-family="PingFangSC-Semibold, PingFang SC" font-size="52" font-weight="500" letter-spacing="1.44000018" fill="#C2C2C2">
+                    <tspan x="0" y="55">寄件信息单</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

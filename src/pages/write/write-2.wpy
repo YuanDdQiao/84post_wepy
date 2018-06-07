@@ -133,7 +133,7 @@
 
   .itemname{
     font-weight:bold;
-    font-size:62rpx;
+    font-size:52rpx;
     margin:0;
     color:#052B53;
 
@@ -156,12 +156,12 @@
 
   .holder{
     margin:40rpx;
-    height:26vh;
+    height:320rpx;
     text-align:left;
     padding-left:0;
     padding-right:0;
-    padding-top:3vh;
-    padding-bottom:3vh;
+    padding-top:2vh;
+    padding-bottom:2vh;
     display:flex;
     flex-direction:column;
     justify-content:space-around;
@@ -169,6 +169,8 @@
     background:#FFFFFF;
     box-shadow:0 4px 6px 0 #E4E2DC;
     border-radius:6px;
+
+
 
 
   }
@@ -183,8 +185,6 @@
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
-    padding-top:2vh;
-    padding-bottom:2vh;
 
   }
 
@@ -195,7 +195,46 @@
   .stamp{
     height:160rpx;
     width:160rpx;
-    background-color: red;
 
+  }
+
+
+  .choose-box-type-01 .stamp{
+    background-image: url(https://84.singee.site/media/postmark/normal.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(-20deg);
+
+
+  }
+
+  .choose-box-type-02 .stamp{
+    background-image: url(https://84.singee.site/media/postmark/express.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(10deg);
+
+  }
+
+  .choose-box-type-03 .stamp{
+    background-image: url(https://84.singee.site/media/postmark/premium.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(3deg);
+
+  }
+
+  .choose-box-type-01 .subholder{
+    border-bottom:0px #1562B3 solid;
+
+  }
+
+  .choose-box-type-02 .subholder{
+    border-bottom:3px #1562B3 solid;
+
+  }
+
+  .choose-box-type-03 .subholder{
+    border-bottom:6px #1562B3 double;
   }
 </style>
