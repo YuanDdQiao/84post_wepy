@@ -119,7 +119,7 @@
       let userId = wepy.getStorageSync('userId')
       return {
         title: '物流信息',
-        path: `/pages/write/index?fromUID=${userId}&q=${this.expressNumber}`,
+        path: `/pages/my/express?fromUID=${userId}&q=${this.expressNumber}`,
         imageUrl: api.shareInfo.imageUrl
       }
     };
