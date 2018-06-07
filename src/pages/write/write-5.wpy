@@ -39,12 +39,11 @@
       </view>
       <view class="infoholder">
         <view class="note">预计到达时间：1 - 3 天</view>
-        <button class="functionbutton" open-type="share">告诉 Ta</button>
         <view class="note"> 目的地：{{ toAddress }}</view>
       </view>
     </block>
 
-
+    <button class="functionbutton" open-type="share">告诉 Ta</button>
 
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
