@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="container">
 
     <view class="processbarholder ">
 
@@ -93,8 +93,7 @@
             <button class="resetbutton" formType="submit">重置</button>
       </form>
       <button class="nextbutton" formType="submit">下一步</button>
-
-  </form>
+      </form>
   </view>
 </template>
 
@@ -598,13 +597,14 @@
     }
 
     .infoform{
-      width: 670rpx;
-      margin-left: 40rpx;
-      margin-right: 40rpx;
-      text-align: center;
-      margin-top: 40rpx;
-      background: #FFFFFF;
-      box-shadow: 0 2px 4px 0 #D4CEBE;
+      width:670rpx;
+      margin-left:40rpx;
+      margin-right:40rpx;
+      text-align:center;
+      background:#FFFFFF;
+      box-shadow:0 2px 4px 0 #D4CEBE;
+
+
     }
 
     .infoformlogo{
@@ -642,6 +642,14 @@
       margin-top:4vh;
 
     }
+
+    .container{
+      margin-bottom: 6vh;
+
+    }
+
+
+
 
 
 </style>
