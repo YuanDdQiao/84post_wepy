@@ -316,9 +316,9 @@
           // 清空 PageData
           this.toName = ''
           // onLoad
-          this.onLoad().then(e => {
-            this.onShow()
-          })
+          await this.onLoad()
+          await this.onShow()
+          await wepy.pageScrollTo({scrollTop: 0})
         }
       }
     }
