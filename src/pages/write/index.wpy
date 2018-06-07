@@ -78,12 +78,6 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad() {
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
       // writeIndexError
       this.writeIndexError = this.$parent.globalData.writeIndexError
       this.$parent.globalData.writeIndexError = ''
@@ -117,6 +111,12 @@
       }
 
       this.$apply()
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
     };
 
     /**
