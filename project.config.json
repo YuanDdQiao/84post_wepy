@@ -97,10 +97,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 10,
 					"name": "根据运单号查询（带参数）",
 					"pathName": "pages/my/query",
-					"query": "q=abcd"
+					"query": "q=518182634711"
 				},
 				{
 					"id": -1,
