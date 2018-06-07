@@ -8,13 +8,19 @@
     </view>
     <block wx:for="{{ letterTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindSubmit">
-        <button class="typechoose" formType="submit" id="{{ index }}">
-          <view class="typename">{{ item.name }}</view>
-          <view class="typeprice">
-            <block wx:if="{{ item.price === 0}}">免费</block>
-            <block wx:else>{{ item.price }} 点券</block>
+        <button class="holder" formType="submit" id="{{ index }}">
+          <view class="subholder">
+            <view class="infoholder">
+              <view class="itemname">{{ item.name }}</view>
+              <view class="typeprice">
+                <block wx:if="{{ item.price === 0}}">免费</block>
+                <block wx:else>{{ item.price }} 点券</block>
+              </view>
+
+            <view class="typenote">{{ item.describe }}</view>
+            </view>
+            <view class="stamp"></view>
           </view>
-          <view class="typenote">{{ item.describe }}</view>
         </button>
       </form>
     </block>
@@ -122,32 +128,72 @@
 
 <style lang="less">
 
-  .typechoose{
-    margin: 40rpx;
-    background-color: white;
-    height: 24vh;
-    border: 2px #1562B3 dashed;
+
+  .itemname{
+    font-weight:bold;
+    font-size:62rpx;
+    margin:0;
+    color:#052B53;
+
   }
 
-  .typechoose:after{
-    border: none;
-  }
-
-  .typename{
-    font-size: 48rpx;
-    font-weight: bold;
-    margin-top: 0;
-    color: #052B53;
-  }
 
   .typeprice{
-    font-size: 30rpx;
-    margin-top: -2vh;
-    color:  #FF4A19;
+    font-size:30rpx;
+    color:#FF4A19;
+    margin-top:-3vh;
+
+
   }
 
   .typenote{
-    font-size: 34rpx;
-    margin-top: 1.6vh;
+    font-size:28rpx;
+    margin-top:1vh;
+
+  }
+
+  .holder{
+    margin:40rpx;
+    height:26vh;
+    text-align:left;
+    padding-left:0;
+    padding-right:0;
+    padding-top:3vh;
+    padding-bottom:3vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    color:#1562B3;
+    background:#FFFFFF;
+    box-shadow:0 4px 6px 0 #E4E2DC;
+    border-radius:6px;
+
+
+  }
+
+  .subholder{
+    margin:0;
+    height:100%;
+    border-top:2px #E6E6E6 dashed;
+    padding-left:40rpx;
+    padding-right:40rpx;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:2vh;
+    padding-bottom:2vh;
+
+  }
+
+  .holder:after{
+    border: none;
+  }
+
+  .stamp{
+    height:160rpx;
+    width:160rpx;
+    background-color: red;
+
   }
 </style>

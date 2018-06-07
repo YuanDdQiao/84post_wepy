@@ -10,13 +10,14 @@
       <form report-submit="True" @submit="bindSubmit">
         <!--<input type="text"   />-->
         <view class="noteanddone">
+          <view class="autosavenote">已自动保存草稿</view>
           <button formType="submit">写好了</button>
         </view>
         <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}"></textarea>
         <view class="dateandword">
-          <view class="wordcount">{{ wordCount }}/{{ maxLength }} 字</view>
-          <view class="todaydate">{{ todayDate }}</view>
+          <view>{{ wordCount }}/{{ maxLength }} 字</view>
+          <view>{{ todayDate }}</view>
         </view>
 
       </form>
@@ -248,20 +249,16 @@
   }
 
   button{
-    position: relative;
-    color:white;
-    width:130rpx;
-    float: right;
-    height: 4vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-top:1vh;
-    margin-bottom:1vh;
-    font-size: 24rpx;
-    font-weight: bold;
-    margin-right: 1vh;
+    float:right;
+    height:4vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    font-size:24rpx;
+    font-weight:bold;
+    margin-right:1vh;
+
 
   }
 
@@ -284,24 +281,14 @@
     border: none;
   }
 
-  .todaydate{
-    display: inline;
-    float: right;
-
-  }
-
-  .wordcount{
-    float: left;
-  }
-
   textarea{
     padding-left: 40rpx;
     padding-right: 40rpx;
     padding-top: 10rpx;
     padding-bottom: 0;
-    height:73vh;
+    height:72vh;
     width:584rpx;
-    font-size: 30rpx;
+    font-size: 32rpx;
     line-height: 60rpx;
 
   }
@@ -325,23 +312,37 @@
   }
 
   .dateandword{
-    font-size: 30rpx;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    height: 4vh;
+    font-size:28rpx;
+    margin-left:auto;
+    margin-right:auto;
+    height:7vh;
     width:584rpx;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:1vh;
+
+
   }
 
   .noteanddone{
-    height: 6vh;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
+    height:7vh;
+    padding:0;
     width:660rpx;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+
+
+  }
+
+  .autosavenote{
+    padding-left:40rpx;
+    display:inline;
+    font-size:28rpx;
+    color:gray;
+
   }
 
 
