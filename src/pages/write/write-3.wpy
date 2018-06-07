@@ -39,14 +39,14 @@
           <view class="{{ toZipError ? 'error' : '' }}">
             <view class="infotypeholder">
               <view class="infotype">邮编</view>
-              <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}"/>
+              <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}" maxlength="6"/>
             </view>
             <view class="errorinfo">{{ toZipErrorInfo }}</view>
           </view>
 
           <view class="infotypeholder">
             <view class="infotype">手机</view>
-            <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}"/>
+            <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}" maxlength="11"/>
           </view>
 
           <view class="roletype">- 寄信人 -</view>
@@ -68,12 +68,12 @@
 
           <view class="infotypeholder">
             <view class="infotype">邮编</view>
-            <input  class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}"/>
+            <input  class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}" maxlength="6"/>
           </view>
 
           <view class="infotypeholder">
             <view class="infotype">手机</view>
-            <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}"/>
+            <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}" maxlength="11" />
           </view>
 
           <view class="roletype" >- 邮票 -</view>
@@ -603,7 +603,7 @@
       text-align:center;
       background:#FFFFFF;
       box-shadow:0 2px 4px 0 #D4CEBE;
-
+      margin-top:110rpx;
 
     }
 

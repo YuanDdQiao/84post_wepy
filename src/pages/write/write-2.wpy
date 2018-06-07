@@ -6,26 +6,28 @@
       <view class="progress-middle processdone">选</view>
       <view class="progress">寄</view>
     </view>
-    <block wx:for="{{ letterTypes }}" wx:key="id">
-      <form report-submit="True" @submit="bindSubmit">
-        <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
-          <button class="holder" formType="submit" id="{{ index }}">
-            <view class="subholder">
-              <view class="infoholder">
-                <view class="itemname">{{ item.name }}</view>
-                <view class="typeprice">
-                  <block wx:if="{{ item.price === 0}}">免费</block>
-                  <block wx:else>{{ item.price }} 点券</block>
-                </view>
+  <view class="topmargin">
+      <block wx:for="{{ letterTypes }}" wx:key="id">
+        <form report-submit="True" @submit="bindSubmit">
+          <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+            <button class="holder" formType="submit" id="{{ index }}">
+              <view class="subholder">
+                <view class="infoholder">
+                  <view class="itemname">{{ item.name }}</view>
+                  <view class="typeprice">
+                    <block wx:if="{{ item.price === 0}}">免费</block>
+                    <block wx:else>{{ item.price }} 点券</block>
+                  </view>
 
-                <view class="typenote">{{ item.describe }}</view>
+                  <view class="typenote">{{ item.describe }}</view>
+                </view>
+                <view class="stamp"></view>
               </view>
-              <view class="stamp"></view>
-            </view>
-          </button>
-        </view>
-      </form>
-    </block>
+            </button>
+          </view>
+        </form>
+      </block>
+  </view>
   </view>
 </template>
 
@@ -236,5 +238,9 @@
 
   .choose-box-type-03 .subholder{
     border-bottom:6px #1562B3 double;
+  }
+
+  .topmargin{
+    margin-top: 110rpx;
   }
 </style>

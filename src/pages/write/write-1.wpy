@@ -187,19 +187,21 @@
 
 <style lang="less">
   .edit-letter-01{
-    background: #FCF7E8;
-    border: 2px solid #E5DCC2;
-    outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
+    background:#FCF7E8;
+    border:2px solid #E5DCC2;
+    outline:6px solid #FCF7E8;
+    box-shadow:0 4px 10px 0 #a09369;
     width:660rpx;
     height:86vh;
     margin-right:40rpx;
     margin-left:40rpx;
-    padding: 0;
+    padding:0;
     color:#6E5F31;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:110rpx;
+
   }
 
   .edit-letter-01 ::selection {
@@ -221,6 +223,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top:110rpx;
   }
 
   .edit-letter-02 ::selection {
@@ -242,6 +245,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top:110rpx;
   }
 
   .edit-letter-03 ::selection {
