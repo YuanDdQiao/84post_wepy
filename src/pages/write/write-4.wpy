@@ -224,7 +224,8 @@
     margin-left:40rpx;
     margin-right:40rpx;
     text-align:center;
-    box-shadow:0 4px 10px 0 rgba(160,147,105,0.3);
+    box-shadow:0 4px 10px 0 rgba(160, 147, 105, 0.3);
+    margin-top:55px;
 
   }
 

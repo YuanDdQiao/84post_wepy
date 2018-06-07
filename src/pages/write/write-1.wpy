@@ -1,12 +1,12 @@
 <template>
   <view>
-    <view class="processbarholder ">
+    <view class="processbarholder">
 
       <view class="progress processdone">写</view>
       <view class="progress-middle">选</view>
       <view class="progress">寄</view>
     </view>
-    <view class="{{ paperType.edit_class_attr }}" style="{{ paperType.edit_style_attr }}">
+    <view class="{{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <!--<input type="text"   />-->
         <view class="noteanddone">
@@ -347,6 +347,10 @@
     font-size:28rpx;
     color:gray;
 
+  }
+
+  .godown{
+    z-index: -100;
   }
 
 
