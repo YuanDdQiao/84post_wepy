@@ -374,7 +374,7 @@
   .sectiontitle{
     display:block;
     margin-bottom:14px;
-    font-size: 40rpx;
+    font-size: 38rpx;
   }
 
   .subholder{
@@ -419,8 +419,8 @@
     padding-bottom:2vh;
     font-size:32rpx;
     border-radius:0;
-    border-bottom:2px #ECE9E1 solid;
-
+    border-bottom:2px #F1F1F1 solid;
+    color:#626262;
   }
 
   .lastmenubutton{

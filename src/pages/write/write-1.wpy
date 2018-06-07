@@ -322,7 +322,7 @@
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:1vh;
+    margin-top:73vh;
 
   }
 
