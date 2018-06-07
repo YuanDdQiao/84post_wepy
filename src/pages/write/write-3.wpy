@@ -236,6 +236,7 @@
         let key = e.currentTarget.dataset.name
         let value = e.detail.value
         console.log(`${key}: ${value}`)
+        this[key] = value
         this.$parent.globalData.letterInfo.shiftInfo[key] = value
         wepy.setStorage({
           key: `letterInfo-shiftInfo-${key}`,
@@ -315,7 +316,9 @@
           // 清空 PageData
           this.toName = ''
           // onLoad
-          this.onLoad()
+          this.onLoad().then(e => {
+            this.onShow()
+          })
         }
       }
     }
