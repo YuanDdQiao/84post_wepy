@@ -193,6 +193,18 @@ const stopDebug = async () => {
   })
 }
 
+// 签到
+const qiandao = async () => {
+  let r = await request('qiandao/')
+  if (r.data.success) {
+    wepy.showModal({
+      title: r.data.title,
+      content: r.data.info,
+      showCancel: false
+    })
+  }
+}
+
 export default {
   host,
   request,
@@ -201,5 +213,6 @@ export default {
   getAuthScope,
   startDebug,
   stopDebug,
-  shareInfo
+  shareInfo,
+  qiandao
 }

@@ -139,8 +139,9 @@
       this.use('promisify')
     }
 
-    onLaunch() {
-      api.login()
+    async onLaunch() {
+      await api.login()
+      api.qiandao()
     }
   }
 </script>
