@@ -1,5 +1,5 @@
 <template>
-  <view class="container">
+  <view class="bigholder">
 
     <view class="processbarholder ">
 
@@ -89,10 +89,11 @@
             </block>
           </view>
   </view>
+      <button class="nextbutton" formType="submit">下一步</button>
       <form report-submit="True" @submit="bindReset">
             <button class="resetbutton" formType="submit">重置</button>
       </form>
-      <button class="nextbutton" formType="submit">下一步</button>
+
       </form>
   </view>
 </template>
@@ -565,16 +566,18 @@
     }
 
     .resetbutton{
-      margin-top: 6vh;
-      width: 60vw;
+      margin-top:40rpx;
+      width:60vw;
+      margin-bottom:10vh;
+
     }
 
     .nextbutton{
-      margin-top:3vh;
-      margin-bottom:6vh;
+      margin-top:6vh;
       width:60vw;
       color:white;
       background-color:#F17250;
+
     }
 
     .processbarholderfix{
@@ -644,7 +647,7 @@
 
     }
 
-    .container{
+    .bigholder{
       margin-bottom: 6vh;
 
     }

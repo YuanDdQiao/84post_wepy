@@ -379,7 +379,7 @@
 
   .subholder{
     width:590rpx;
-    background-color:#F5F3EC;
+    background-color:#FFFEFC;
     padding-left:40rpx;
     padding-right:40rpx;
     border-radius:6px;

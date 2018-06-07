@@ -182,11 +182,12 @@
     height:100%;
     border-top:2px #E6E6E6 dashed;
     padding-left:40rpx;
-    padding-right:40rpx;
+    padding-right:30rpx;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
+
 
   }
 

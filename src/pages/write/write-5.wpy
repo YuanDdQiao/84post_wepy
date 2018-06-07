@@ -264,8 +264,7 @@
   }
 
   .confirmbutton{
-    color:white;
-    background-color:#F17250;
+
     position:absolute;
     bottom:6vh;
     margin-left:20vw;
@@ -292,6 +291,8 @@
   }
 
   .sharebutton{
+    color:white;
+    background-color:#F17250;
     margin-left:20vw;
     margin-right:20vw;
     position:absolute;
