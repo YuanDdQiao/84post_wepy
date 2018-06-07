@@ -1,6 +1,7 @@
 <template>
-  <view>
+  <view class="gofix">
     <view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>
+    <view class="choosepapernote">滑动选择信纸</view>
     <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
 
       <block wx:for="{{ papers }}" wx:key="id">
@@ -15,9 +16,8 @@
       <view></view>
 
     </swiper>
-    <view class="choosepapernote">滑动选择信纸</view>
     <form report-submit="True" @submit="bindStartWriting">
-      <button formType="submit">开始</button>
+      <button formType="submit">选好了</button>
     </form>
   </view>
 </template>
@@ -180,11 +180,16 @@
   }
 
   .choosepapernote{
-    text-align: center;
-    font-size: 30rpx;
-    margin-top: 0rpx;
-    margin-bottom: 20rpx;
+    text-align:center;
+    font-size:38rpx;
+    marin:0;
     color:gray;
+    height:8vh;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;
+
   }
 
   .paper-01{
@@ -194,7 +199,7 @@
     outline: 6px solid #FCF7E8;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
-    height: 68vh;
+    height:64vh;
     color:#6E5F31;
     font-size: 32rpx;
     padding: 40rpx;
@@ -208,7 +213,7 @@
     border-radius: 6px;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
     width:550rpx;
-    height: 68vh;
+    height:64vh;
     color:#6E1A36;
     font-size: 32rpx;
     padding: 40rpx;
@@ -222,7 +227,7 @@
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
     width:550rpx;
-    height: 68vh;
+    height:64vh;
     color:#052B53;
     font-size: 32rpx;
     padding: 40rpx;
@@ -268,6 +273,10 @@
     left: 400rpx;
     font-size: 30rpx;
 
+  }
+
+  .gofix{
+    position: fixed;
   }
 
 

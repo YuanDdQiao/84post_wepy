@@ -13,7 +13,7 @@
           <view class="autosavenote">已自动保存草稿</view>
           <button formType="submit">写好了</button>
         </view>
-        <textarea @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
+        <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}"></textarea>
         <view class="dateandword">
           <view>{{ wordCount }}/{{ maxLength }} 字</view>
@@ -286,6 +286,7 @@
   }
 
   textarea{
+    position: fixed;
     padding-left: 40rpx;
     padding-right: 40rpx;
     padding-top: 10rpx;
@@ -326,6 +327,8 @@
     justify-content:space-between;
     align-items:center;
     margin-bottom:1vh;
+    margin-top:73vh;
+
 
 
   }
@@ -350,7 +353,7 @@
   }
 
   .godown{
-    z-index: -100;
+    position: sticky;
   }
 
 

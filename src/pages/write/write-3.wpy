@@ -539,8 +539,9 @@
     }
 
     .choose{
-      border: 2px #1562B3 solid;
-      border-radius: 6px;
+      border:3px #FF4A19 solid;
+      border-radius:6px;
+
     }
 
     .stampview{
