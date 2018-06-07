@@ -68,7 +68,7 @@
         wepy.reLaunch({ url: '/pages/my/index' })
       }
 
-      let ret = await api.request(`my/query/${this.expressNumber}`)
+      let ret = await api.request(`my/query/${this.expressNumber}/`)
       console.log(ret.data)
       this.info = ret.data.info
       this.$apply()
