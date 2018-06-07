@@ -138,6 +138,7 @@
       margin-top:40rpx;
       background:#FFFFFF;
       box-shadow:0 2px 4px 0 #D4CEBE;
+      margin-bottom: 40rpx;
 
     }
 
@@ -189,7 +190,7 @@
     }
 
     .type-0 .info{
-      font-weight: bold;
+
     }
 
     .type-1 .info{

@@ -140,7 +140,7 @@
 
 
   .inputbox:hover{
-    border: 2px #1562B3 solid;
+    border-bottom: : 2px #1562B3 solid;
   }
 
   .safebox{
@@ -152,7 +152,7 @@
     margin-left:5vw;
     margin-right:5vw;
     margin-top:5vw;
-    outline:4px solid #F3F2F0;
+    outline:30vh solid #F3F2F0;
 
   }
 
