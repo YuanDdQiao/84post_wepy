@@ -174,7 +174,6 @@
     .mailpreviewbutton{
       margin-top:40rpx;
       padding:0;
-      margin-bottom:6vh;
 
 
     }
@@ -199,7 +198,7 @@
       flex-direction:row;
       justify-content:space-between;
       align-items:center;
-      margin-top:5rpx;
+      margin-bottom:6vh;
 
 
     }

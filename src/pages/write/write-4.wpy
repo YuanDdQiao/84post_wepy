@@ -28,6 +28,8 @@
         </form>
       </block>
     </block>
+
+
     <block wx:else>
       <form report-submit="True" @submit="bindPayForm">
         <button class="confirmbutton" formType="submit">确认并继续</button>
@@ -35,7 +37,7 @@
     </block>
 
     <form report-submit="True" @submit="bindBackForm">
-      <button formType="submit">返回并修改</button>
+      <button class="backbutton" formType="submit">返回并修改</button>
     </form>
   </view>
 </template>
@@ -194,16 +196,26 @@
   }
 
   button{
-    position: relative;
-    margin-top: 40rpx;
-    width: 60vw;
+    position:absolute;
+    width:60vw;
+    margin-left:20vw;
+    margin-right:20vw;
+    margin-top:80rpx;
 
+
+  }
+
+  .backbutton{
+    bottom: 6vh;
   }
 
   .confirmbutton{
     color:white;
-    background-color: #F17250;
-    margin-top: 80rpx;
+    background-color:#F17250;
+    bottom:16vh;
+
+
+
   }
 
   .envelopepreview{

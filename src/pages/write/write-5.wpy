@@ -43,7 +43,7 @@
       </view>
     </block>
 
-    <button class="functionbutton" open-type="share">告诉 Ta</button>
+    <button class="sharebutton" open-type="share">告诉 Ta</button>
 
     <form report-submit="True" @submit="bindGoBack">
       <button class="confirmbutton" formType="submit">完成</button>
@@ -288,6 +288,13 @@
     display:inline;
     font-size:30rpx;
 
+  }
+
+  .sharebutton{
+    margin-left:20vw;
+    margin-right:20vw;
+    position:absolute;
+    bottom:12vh;
   }
 
 </style>

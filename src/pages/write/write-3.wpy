@@ -90,7 +90,7 @@
           </view>
   </view>
       <form report-submit="True" @submit="bindReset">
-            <button formType="submit">重置</button>
+            <button class="resetbutton" formType="submit">重置</button>
       </form>
       <button class="nextbutton" formType="submit">下一步</button>
 
@@ -465,11 +465,13 @@
 <style lang="less">
 
     .errorinfo {
-      color: red;
-      font-size: 30rpx;
-      padding-left: 40rpx;
-      padding-top: 20rpx;
-      display: block;
+      color:red;
+      font-size:30rpx;
+      padding-left:170rpx;
+      padding-top:20rpx;
+      display:block;
+      text-align:left;
+
     }
 
     .roletype{
@@ -559,12 +561,17 @@
 
     }
 
-    .nextbutton{
+    .resetbutton{
       margin-top: 6vh;
-      margin-bottom: 6vh;
       width: 60vw;
+    }
+
+    .nextbutton{
+      margin-top:3vh;
+      margin-bottom:6vh;
+      width:60vw;
       color:white;
-      background-color: #F17250;
+      background-color:#F17250;
     }
 
     .processbarholderfix{
