@@ -2,22 +2,24 @@
   <view>
     <block wx:if="{{ letters.length !== 0}}">
       <block wx:for="{{ letters }}" wx:key="id">
-        <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
-              data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
-          <button class="mailpreviewbutton" formType="submit">
-            <view>
-              <image class="mailimage" src="{{ item.thumbnail }}"></image>
-              <view class="nubmerholder" wx:if="{{ item.letter_type.type !== 1}}">
-                <view class="expressnumber">运单号：{{ item.express_number }}</view>
-                <view>
-                  <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
-                    <button class="copybutton" formType="submit">复制</button>
-                  </form>
-                </view>
+        <view>
+          <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
+                data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
+            <button class="mailpreviewbutton" formType="submit">
+              <view>
+                <image class="mailimage" src="{{ item.thumbnail }}"></image>
               </view>
+            </button>
+          </form>
+          <view class="nubmerholder" wx:if="{{ item.letter_type.type !== 1}}">
+            <view class="expressnumber">运单号：{{ item.express_number }}</view>
+            <view>
+              <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
+                <button class="copybutton" formType="submit">复制</button>
+              </form>
             </view>
-          </button>
-        </form>
+          </view>
+        </view>
       </block>
       <view class="nomore">没有更多信件了</view>
     </block>
