@@ -5,8 +5,7 @@
       <block wx:if="{{ info.length !== 0}}">
         <block wx:for="{{ info }}" wx:key="id">
           <view class="type-{{ item.type }} oneline">
-            <view class="{{status === 3 ? 'class-1' : 'class-2'}}"></view>
-            <view class="info">{{item.info}}</view>
+            <view class="info {{status === 3 ? 'class-1' : 'class-2'}}">{{item.info}}</view>
             <view class="date">{{item.date}} {{item.time}}</view>
           </view>
         </block>
@@ -207,7 +206,13 @@
 
     }
 
-    .type-4 .info{
+    .type-4 .info.class-1{
+      /*已签收*/
+      font-weight: bold;
+      color: gray;
+    }
+    .type-4 .info.class-2{
+      /*未签收*/
       font-weight: bold;
       color: #F17250;
     }
