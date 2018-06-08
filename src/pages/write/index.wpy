@@ -77,7 +77,8 @@
     /**
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    async onLoad() {
+    async onLoad(options) {
+      console.log(options)
       // writeIndexError
       this.writeIndexError = this.$parent.globalData.writeIndexError
       this.$parent.globalData.writeIndexError = ''
