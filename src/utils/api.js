@@ -53,6 +53,7 @@ const request = async (options, showLoading = true, auth = true) => {
   } catch (e) {
     // 无网络或请求超时
     error = true
+    console.warn(e)
   }
 
   if (showLoading) {
