@@ -60,6 +60,7 @@ const request = async (options, showLoading = true, auth = true) => {
     wepy.hideLoading()
   }
 
+  let title = '网络请求错误'
   let content = '网络错误'
   let needRelogin = false
   if (error) {
@@ -77,13 +78,22 @@ const request = async (options, showLoading = true, auth = true) => {
   } else if (response.statusCode === 404) {
     return response
   } else if (response.statusCode >= 460 && response.statusCode <= 469) {
-    content = `（${response.statusCode}）${response.data.msg}`
+    if (response.data.title) {
+      title = response.data.title
+    } else {
+      title = '系统维护'
+    }
+    if (response.data.msg) {
+      content = response.data.msg
+    } else {
+      content = '系统维护中，请稍后再试'
+    }
   } else {
     content = `未知原因（请求状态码：${response.statusCode}））`
   }
 
   let retryModal = await wepy.showModal({
-    title: '网络请求错误',
+    title: title,
     content: content,
     confirmText: '重试',
     showCancel: false
