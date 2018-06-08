@@ -8,7 +8,8 @@
     <!--&lt;!&ndash;<image></image>&ndash;&gt;-->
     <!--</view>-->
     <view>
-      <view class="note">请点击下面的按钮后发送「充值」（充值二字已经为您复制）</view>
+      <view class="note">请点击下面的按钮后发送「充值」</view>
+      <view>充值二字已经为您复制</view>
       <view>
         <block wx:for="{{ price }}" wx:key="id">
           <button class="button" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"  id="recharge-{{ item.id }}">
