@@ -1,5 +1,7 @@
 # 安装与编译
 
+> 安装详细步骤可参考 [Mac 安装 WePY](https://blog.singee.me/2018/06/05/mac-install-wepy/)
+
 安装 yarn
 
 ```
@@ -46,3 +48,5 @@ wepy build --watch   # 这个选项会自动更新
 3. 借鉴此源码内核心算法的
 
 如确有相关使用需求，请联系 imsingee@gmail.com 获取商业授权
+
+
