@@ -31,7 +31,7 @@
         </form>
     </view>
     </view>
-    <view style="display: none;">
+    <view wx:if="{{ infoDisplay }}">
       <text>我的信息</text>
       <form report-submit="True" @submit="bindEditName">
 
@@ -132,7 +132,8 @@
       canDebug: false,
       nameModalHidden: true,
       zipCodeModalHidden: true,
-      payEnabled: true
+      payEnabled: true,
+      infoDisplay: false
     }
 
     /**
@@ -294,6 +295,11 @@
       })
       api.request('global/pay_enabled/').then((e) => {
         this.payEnabled = e.data.value
+        this.$apply()
+      })
+      api.request('global/info_display/').then((e) => {
+        this.infoDisplay = e.data.value
+        this.$apply()
       })
     };
 
