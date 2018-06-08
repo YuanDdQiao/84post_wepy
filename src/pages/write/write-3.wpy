@@ -569,6 +569,7 @@
       margin-top:40rpx;
       width:60vw;
       margin-bottom:10vh;
+      border: 1px #ED725A dashed;
 
     }
 
