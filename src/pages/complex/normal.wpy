@@ -1,10 +1,17 @@
 <template>
   <view class="holder">
-    <view class="note">
-      您的信件已寄出，不过由于是平邮所以没有物流追踪。我也不知道到哪了，请耐心等待～
+    <image class="icon" src="/images/shipping.svg"></image>
+    <view class="title">
+      您的信件已寄出!
     </view>
+
     <view class="note">
-      TIPS：平邮需要您在收件地址附近打开「信箱 - 平邮」查找哦
+      不过平邮不支持物流查询。物流进度位置，请耐心等待～
+    </view>
+
+
+    <view class="tips">
+      TIPS：平邮收信时需要您在收件地址附近打开「信箱 - 平邮」查找哦。
     </view>
     <view>
       <view class="links">快速通道</view>
@@ -12,7 +19,7 @@
         <button  formType="submit">寄封信</button>
       </form>
       <form report-submit="True" @submit="bindSearch">
-        <button formType="submit">找邮件</button>
+        <button formType="submit">去信箱</button>
       </form>
     </view>
 
@@ -97,10 +104,27 @@
 
     }
 
+    .title{
+      text-align:center;
+      font-size:44rpx;
+      margin-bottom:2vh;
+
+    }
+
     .note{
-      text-align: center;
-      font-size: 32rpx;
-      margin-bottom:8vh;
+      text-align:center;
+      font-size:32rpx;
+      margin-bottom:6vh;
+
+
+    }
+
+    .tips{
+      text-align:center;
+      font-size:28rpx;
+      margin-bottom:6vh;
+      font-weight:bold;
+      color:gray;
 
     }
 
@@ -113,7 +137,33 @@
     }
 
     button{
-      margin-bottom: 1vh;
+      margin-bottom: 2vh;
+      border: 2px #14579F dashed;
+      background-color: white;
+      color: #14579F;
+    }
+
+    button:after{
+      border: none;
+    }
+
+    .logo{
+      width:8vh;
+      height:8vh;
+      margin-bottom:6vh;
+      margin-top:6vh;
+
+
+    }
+
+    image{
+      width:300rpx;
+      height:300rpx;
+      display:inline-block;
+      overflow:hidden;
+      margin-left:185rpx;
+      margin-right:185rpx;
+
     }
 
 
