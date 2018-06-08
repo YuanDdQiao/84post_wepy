@@ -78,7 +78,7 @@ const request = async (options, showLoading = true, auth = true) => {
   } else if (response.statusCode === 404) {
     return response
   } else if (response.statusCode >= 460 && response.statusCode <= 469) {
-    if (response.data.title) {
+    if (response.data.title || response.data.title === '') {
       title = response.data.title
     } else {
       title = '系统维护'
