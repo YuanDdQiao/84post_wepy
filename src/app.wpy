@@ -132,7 +132,7 @@
 
     async onLaunch() {
       await api.login()
-      api.qiandao()
+      await api.qiandao()
     }
   }
 </script>

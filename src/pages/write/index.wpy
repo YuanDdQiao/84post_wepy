@@ -86,8 +86,14 @@
       let d = new Date()
       this.todayDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
       this.$apply()
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    async onShow() {
       // 获取信纸
-      let res = await api.request('letter/paper/')
+      let res = await api.request('letter/paper/', false)
       this.papers = res.data
       // 选择信纸
       try {
@@ -110,14 +116,7 @@
         this.currentItem = this.papers[0]
         this.currentItemId = this.currentItem.id
       }
-
       this.$apply()
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
     };
 
     /**

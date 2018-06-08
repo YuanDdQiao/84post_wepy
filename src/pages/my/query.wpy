@@ -37,7 +37,6 @@
         api.formIdSubmit(e.detail.formId)
         if (!this.qValue) {
           wepy.showModal({
-            title: '参数错误',
             content: '请输入运单号',
             showCancel: false
           })
@@ -107,7 +106,7 @@
       let userId = wepy.getStorageSync('userId')
       return {
         title: '物流查询',
-        path: `/pages/query/index?fromUID=${userId}`,
+        path: `/pages/my/query?fromUID=${userId}`,
         imageUrl: api.shareInfo.imageUrl
       }
     };

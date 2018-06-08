@@ -64,6 +64,7 @@ const request = async (options, showLoading = true, auth = true) => {
   let title = '网络请求错误'
   let content = '网络错误'
   let needRelogin = false
+  let autoRetry = false
   if (error) {
     content = '无法连接服务器，请检查网络后重试'
   } else if (response.statusCode === 200) {
@@ -76,6 +77,9 @@ const request = async (options, showLoading = true, auth = true) => {
   } else if (response.statusCode === 403) {
     content = '您当前未登录或权限不足，请重试'
     needRelogin = true
+    if (!wepy.getStorageSync('token')) {
+      autoRetry = true
+    }
   } else if (response.statusCode === 404) {
     return response
   } else if (response.statusCode >= 460 && response.statusCode <= 469) {
@@ -93,18 +97,27 @@ const request = async (options, showLoading = true, auth = true) => {
     content = `未知原因（请求状态码：${response.statusCode}））`
   }
 
-  let retryModal = await wepy.showModal({
-    title: title,
-    content: content,
-    confirmText: '重试',
-    showCancel: false
-  })
+  let retry = false
+  if (autoRetry) {
+    retry = true
+  } else {
+    let retryModal = await wepy.showModal({
+      title: title,
+      content: content,
+      confirmText: '重试',
+      showCancel: false
+    })
+    if (retryModal.confirm) {
+      retry = true
+    }
+  }
 
-  if (retryModal.confirm) {
+  if (retry) {
     console.log('重试网络请求')
     // 重新登录
     if (needRelogin) {
       await login()
+      await qiandao()
     }
     // 重试
     let newRequest = await request(options, showLoading, auth)

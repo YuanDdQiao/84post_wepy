@@ -71,6 +71,19 @@
       }
 
       let ret = await api.request(`my/query/${this.expressNumber}/`)
+      if (ret.statusCode === 404) {
+        this.info = [{
+          type: 0,
+          info: '运单不存在'
+        }]
+        this.status = 0
+        this.$apply()
+        await wepy.showModal({
+          content: '该运单信息不存在',
+          showCancel: false
+        })
+        wepy.redirectTo({url: '/pages/my/query'})
+      }
       console.log(ret.data)
       this.info = ret.data.info
       this.status = ret.data.status
