@@ -56,8 +56,8 @@
         this.$parent.globalData.letterInfo.content = this.inputValue
         if (this.inputValue.length === 0) {
           wepy.showModal({
-            title: '嘤嘤嘤',
-            content: '你还没填内容呢伦家不接收空白的信件嘛QAQ',
+            title: '此处无字胜有字',
+            content: '您还没有填写内容',
             showCancel: false
           })
           wepy.pageScrollTo({
@@ -65,8 +65,8 @@
           })
         } else if (this.inputValue.length > this.maxLength) {
           wepy.showModal({
-            title: '嘤嘤嘤',
-            content: '你写的内容太多了伦家拿不动嘛QAQ',
+            title: '字数过多',
+            content: '最多字数 2000 字，克制很重要',
             showCancel: false
           })
           wepy.pageScrollTo({
@@ -74,8 +74,8 @@
           })
         } else if (this.inputValue.length < this.minLength) {
           wepy.showModal({
-            title: '嘤嘤嘤',
-            content: '你写的太少了伦家不想跑嘛QAQ',
+            title: '奇了怪了',
+            content: '你是不是把我们的代码给删了？',
             showCancel: false
           })
           wepy.pageScrollTo({
