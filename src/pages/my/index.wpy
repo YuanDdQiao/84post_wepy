@@ -37,35 +37,30 @@
 
         <button formType="submit">
           <text>称呼：{{ userInfo.name }}</text>
-          ->
         </button>
       </form>
       <form report-submit="True" @submit="bindAddressChoose">
 
         <button formType="submit">
           <text>地址：{{ userInfo.address }}</text>
-          ->
         </button>
       </form>
       <form report-submit="True" @submit="bindEditZipCode">
 
         <button formType="submit">
           <text>邮编：{{ userInfo.zipCode }}</text>
-          ->
         </button>
       </form>
       <view>
 
         <button open-type='getPhoneNumber' @getphonenumber='bindGetPhoneNumber'>
           <text>手机号：{{ userInfo.tel }}</text>
-          ->
         </button>
       </view>
       <form report-submit="True" @submit="bindNoSenseForm">
 
         <button formType="submit">
           <text>常用联系人</text>
-          ->
         </button>
       </form>
     </view>
@@ -77,21 +72,18 @@
 
           <button class="menubutton" formType="submit">
             <text>开启调试模式</text>
-            ->
           </button>
         </form>
         <form report-submit="True" @submit="bindStopDebug">
 
           <button class="menubutton" formType="submit">
             <text>关闭调试模式</text>
-            ->
           </button>
         </form>
         <form report-submit="True" @submit="bindClearStorage">
 
           <button class="menubutton lastmenubutton" formType="submit">
             <text>清除 Storage</text>
-            ->
           </button>
         </form>
     </view>
@@ -139,7 +131,8 @@
       staff: false,
       canDebug: false,
       nameModalHidden: true,
-      zipCodeModalHidden: true
+      zipCodeModalHidden: true,
+      payEnabled: true
     }
 
     /**
@@ -166,14 +159,17 @@
       },
       bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
-        // wepy.showModal({
-        //   title: '提示',
-        //   content: '充值功能暂未开放',
-        //   showCancel: false
-        // })
-        wepy.navigateTo({
-          url: '/pages/my/recharge'
-        })
+        if (this.payEnabled) {
+          wepy.navigateTo({
+            url: '/pages/my/recharge'
+          })
+        } else {
+          wepy.showModal({
+            title: '提示',
+            content: '充值功能暂未开放',
+            showCancel: false
+          })
+        }
       },
       bindGetPhoneNumber(e) {
         api.request({
@@ -275,18 +271,8 @@
     /**
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    async onLoad() {
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    onShow() {
-      api.request('user/balance/', false).then((e) => {
-        this.balance = e.data.balance
-        this.$apply()
-      })
-      api.request('user/info/', false).then((e) => {
+    onLoad() {
+      api.request('user/info/').then((e) => {
         let userInfo = {}
         let data = e.data
 
@@ -304,6 +290,19 @@
         this.userInfo = userInfo
         this.staff = data.staff
         this.canDebug = data.staff
+        this.$apply()
+      })
+      api.request('global/pay_enabled/').then((e) => {
+        this.payEnabled = e.data.value
+      })
+    };
+
+    /**
+     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
+     */
+    onShow() {
+      api.request('user/balance/', false).then((e) => {
+        this.balance = e.data.balance
         this.$apply()
       })
     };
@@ -332,6 +331,7 @@
      */
     onPullDownRefresh() {
       wepy.stopPullDownRefresh()
+      this.onLoad()
       this.onShow()
     };
 

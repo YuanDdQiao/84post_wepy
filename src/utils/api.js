@@ -76,6 +76,8 @@ const request = async (options, showLoading = true, auth = true) => {
     needRelogin = true
   } else if (response.statusCode === 404) {
     return response
+  } else if (response.statusCode >= 460 && response.statusCode <= 469) {
+    content = `（${response.statusCode}）${response.data.msg}`
   } else {
     content = `未知原因（请求状态码：${response.statusCode}））`
   }

@@ -1,6 +1,5 @@
 <style lang="less">
-
-  page{
+  page {
   background-color: #FAF9F6;
   }
 
@@ -54,23 +53,13 @@
     color:gray;
     margin-top:10vh;
     height:14vh;
-
   }
-
-
-
 </style>
 
 <script>
   import wepy from 'wepy'
   import 'wepy-async-function'
   import api from '@/utils/api'
-
-  import { setStore } from 'wepy-redux'
-  import configStore from './store'
-
-  const store = configStore()
-  setStore(store)
 
   export default class extends wepy.app {
     config = {
