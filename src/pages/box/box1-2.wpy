@@ -43,8 +43,18 @@
       },
       async bindSubmitForm(e) {
         api.formIdSubmit(e.detail.formId)
-        let res = await api.request(`box/pickup_uuid/${this.pickUpCode}/`)
-        if (res.data.id) {
+        await api.getAuthScope('scope.userLocation')
+        let location = await wepy.getLocation()
+        console.log(location)
+        let res = await api.request({
+          url: `box/pickup/`,
+          method: 'POST',
+          data: {
+            pickUpCode: this.pickUpCode,
+            location: location
+          }
+        })
+        if (res.data.success) {
           this.$parent.globalData.pickUp = {
             id: res.data.id,
             uuid: res.data.uuid,
@@ -53,9 +63,15 @@
           console.log(this.$parent.globalData.pickUp)
           wepy.navigateTo({ url: 'box-2' })
         } else {
+          let title
+          if (res.data.modalTitle === undefined) {
+            title = ''
+          } else {
+            title = res.data.modalTitle
+          }
           wepy.showModal({
-            title: '提示',
-            content: '您输入的取件号不存在或已被取走',
+            title: title,
+            content: res.data.msg,
             showCancel: false
           })
         }
