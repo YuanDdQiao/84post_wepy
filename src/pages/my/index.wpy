@@ -66,6 +66,15 @@
         </form>
     </view>
     </view>
+    <view class="sectionholder">
+      <text class="sectiontitle">联系我们</text>
+      <view class="subholder">
+          <button class="menubutton lastmenubutton" open-type="feedback">
+            <text>反馈与建议</text>
+          </button>
+      </view>
+    </view>
+
     <view wx-if="{{ canDebug }}">
       <text class="sectiontitle">调试面板</text>
       <view class="subholder">
@@ -84,10 +93,13 @@
         </form>
         <form report-submit="True" @submit="bindClearStorage">
 
-          <button class="menubutton lastmenubutton" formType="submit">
+          <button class="menubutton" formType="submit">
             <text>清除 Storage</text>
           </button>
         </form>
+        <button class="menubutton lastmenubutton" open-type="contact">
+          <text>打开客服消息</text>
+        </button>
     </view>
     </view>
     <!--<form report-submit="True" @submit="bindNoSenseForm">-->
