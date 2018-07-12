@@ -13,7 +13,7 @@
       <view class="previewnote gray">余额 {{ balance }} 点券</view>
     </block>
     <block class="previewnote" wx:else>
-      <view class="previewnote">平邮免费</view>
+      <view class="previewnote">免费</view>
     </block>
 
     <block wx:if="{{ fee !== 0}}">
