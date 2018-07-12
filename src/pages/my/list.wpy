@@ -4,7 +4,8 @@
       <block wx:for="{{ letters }}" wx:key="id">
         <view>
           <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
-                data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}">
+                data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}"
+                data-can_track="{{ item.letter_type.can_track }}" data-type_name="{{ item.letter_type.name }}">
             <button class="mailpreviewbutton" formType="submit">
               <view>
                 <image class="mailimage" src="{{ item.thumbnail }}"></image>
@@ -67,10 +68,9 @@
         console.log(e)
         if (this.type === 1) {
           console.log(e.target.dataset.type)
-          if (e.target.dataset.type === 1) {
+          if (!e.target.dataset.can_track) {
             wepy.showModal({
-              title: '哎呀抱歉',
-              content: '平邮没有物流信息 Ծ‸Ծ',
+              content: `${e.target.dataset.type_name}不支持查询物流信息`,
               showCancel: false
             })
           } else {
