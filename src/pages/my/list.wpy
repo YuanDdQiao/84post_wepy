@@ -11,7 +11,7 @@
               </view>
             </button>
           </form>
-          <view class="nubmerholder" wx:if="{{ item.letter_type.type !== 1}}">
+          <view class="nubmerholder" wx:if="{{ item.letter_type.can_track }}">
             <view class="expressnumber">运单号：{{ item.express_number }}</view>
             <view>
               <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
