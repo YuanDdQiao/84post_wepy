@@ -5,7 +5,7 @@
 
     <form report-submit="True" @submit="bindSubmitForm">
       <image class="safelogo" src="/images/safe.svg"></image>
-      <input class="inputbox" type="text" placeholder="请输入取件号" @input="bindInput"/>
+      <input class="inputbox" type="text" placeholder="请输入取件号" @input="bindInput" value="{{ pickUpCode }}"/>
       <view class="note"><text >取件号是当信件到达目的地后通过短信或微信通知发送给收件人的号码。挂号信以及快递必须凭取件号取件，以保证信件的隐私。</text></view>
       <button class="confirmbutton" formType="submit">取件</button>
       <image class="typelogo" src="/images/84_EXPRESS.png"></image>
@@ -86,7 +86,11 @@
     /**
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    async onLoad() {
+    async onLoad(options) {
+      let scene = decodeURIComponent(options.scene).split('_')
+      if (scene[0] === 'PickUpCode') {
+        this.pickUpCode = scene[1]
+      }
     };
 
     /**
