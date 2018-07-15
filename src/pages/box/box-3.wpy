@@ -19,7 +19,7 @@
           <button class="confirmbutton" formType="submit">我要咯</button>
         </form>
         <form report-submit="True" @submit="bindUnsaveForm">
-          <button formType="submit">塞回去</button>
+          <button class="lastbutton" formType="submit">塞回去</button>
         </form>
       </view>
     </block>
@@ -150,6 +150,7 @@
 
   }
 
+
   .confirmbutton{
     color:white;
     background-color: #F17250;
@@ -248,6 +249,10 @@
     margin-bottom:35px;
     color:gray;
 
+  }
+
+  .lastbutton{
+    margin-bottom: 80rpx;
   }
 
 </style>
