@@ -159,64 +159,59 @@
 <style lang="less">
 
 
+  .nomail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: ~"38rpx";
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    color: gray;
+  }
 
-    .nomail{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      font-size: 38rpx;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-      color: gray;
-    }
+  .mailpreviewbutton {
+    margin-top: ~"40rpx";
+    padding: 0;
 
-    .mailpreviewbutton{
-      margin-top:40rpx;
-      padding:0;
+  }
 
+  .mailimage {
+    margin: 0;
+    padding: 0;
+    height: ~"400rpx";
+    width: ~"670rpx";
+    box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.4);
+  }
 
-    }
+  .mailpreviewbutton:after {
+    border: none;
 
-    .mailimage{
-      margin:0;
-      padding:0;
-      height: 400rpx;
-      width: 670rpx;
-      box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
-    }
+  }
 
-    .mailpreviewbutton:after{
-      border: none;
+  .nubmerholder {
+    margin-left: ~"60rpx";
+    margin-right: ~"60rpx";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6vh;
 
-    }
+  }
 
-    .nubmerholder{
-      margin-left:60rpx;
-      margin-right:60rpx;
-      display:flex;
-      flex-direction:row;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:6vh;
+  .expressnumber {
+    font-size: ~"28rpx";
+    color: gray;
 
+  }
 
-    }
+  .copybutton {
+    font-size: ~"28rpx";
+    color: gray;
+    background-color: #F5F3EC;
 
-    .expressnumber{
-      font-size: 28rpx;
-      color:gray;
-
-
-    }
-
-    .copybutton{
-      font-size:28rpx;
-      color:gray;
-      background-color:#F5F3EC;
-
-    }
-
+  }
 
 
 </style>

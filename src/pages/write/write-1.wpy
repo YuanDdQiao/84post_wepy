@@ -182,21 +182,21 @@
 </script>
 
 <style lang="less">
-  .edit-letter-01{
-    background:#FCF7E8;
-    border:2px solid #E5DCC2;
-    outline:6px solid #FCF7E8;
-    box-shadow:0 4px 10px 0 #a09369;
-    width:660rpx;
-    height:86vh;
-    margin-right:40rpx;
-    margin-left:40rpx;
-    padding:0;
-    color:#6E5F31;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:110rpx;
+  .edit-letter-01 {
+    background: #FCF7E8;
+    border: 2px solid #E5DCC2;
+    outline: 6px solid #FCF7E8;
+    box-shadow: 0 4px 10px 0 #a09369;
+    width: ~"660rpx";
+    height: 86vh;
+    margin-right: ~"40rpx";
+    margin-left: ~"40rpx";
+    padding: 0;
+    color: #6E5F31;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: ~"110rpx";
 
   }
 
@@ -204,143 +204,144 @@
     background: #DED8C6;
   }
 
-  .edit-letter-02{
+  .edit-letter-02 {
     background: #FFFFFF;
     border: 3px solid #FBBAD0;
     border-style: double;
     border-radius: 8px;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,0.2);
-    width:660rpx;
-    height:86vh;
-    margin-right:40rpx;
-    margin-left:40rpx;
+    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
+    width: ~"660rpx";
+    height: 86vh;
+    margin-right: ~"40rpx";
+    margin-left: ~"40rpx";
     padding: 0;
-    color:#6E1A36;
+    color: #6E1A36;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top:110rpx;
+    margin-top: ~"110rpx";
   }
 
   .edit-letter-02 ::selection {
     background: #FAE8EE;
   }
 
-  .edit-letter-03{
+  .edit-letter-03 {
     background: #F3F2F0;
     border: 2px solid #1562B3;
     border-style: dashed;
     outline: 6px solid #F3F2F0;
-    box-shadow: 0 4px 10px 0 rgba(160,147,105,1);
-    width:660rpx;
-    height:87vh;
-    margin-right:40rpx;
-    margin-left:40rpx;
+    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+    width: ~"660rpx";
+    height: 87vh;
+    margin-right: ~"40rpx";
+    margin-left: ~"40rpx";
     padding: 0;
-    color:#052B53;
+    color: #052B53;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top:110rpx;
+    margin-top: ~"110rpx";
   }
 
   .edit-letter-03 ::selection {
     background: #DBDAD8;
   }
 
-  button{
-    float:right;
-    height:4vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-around;
-    align-items:center;
-    font-size:24rpx;
-    font-weight:bold;
-    margin-right:1vh;
-
+  button {
+    float: right;
+    height: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: ~"24rpx";
+    font-weight: bold;
+    margin-right: 1vh;
 
   }
 
-  .edit-letter-01 button{
+  .edit-letter-01 button {
     background-color: #9E9477;
     color: #FCF7E8;
   }
 
-  .edit-letter-02 button{
+  .edit-letter-02 button {
     background-color: #DA6D92;
     color: #FFFFFF;
   }
 
-  .edit-letter-03 button{
+  .edit-letter-03 button {
     background-color: #09427F;
     color: #F3F2F0;
   }
 
-  button:after{
+  button:after {
     border: none;
   }
 
-  textarea{
+  textarea {
     position: fixed;
-    padding-left: 40rpx;
-    padding-right: 40rpx;
-    padding-top: 10rpx;
+    padding-left: ~"40rpx";
+    padding-right: ~"40rpx";
+    padding-top: ~"10rpx";
     padding-bottom: 0;
-    height:72vh;
-    width:584rpx;
-    font-size: 32rpx;
-    line-height: 60rpx;
+    height: 72vh;
+    width: ~"584rpx";
+    font-size: ~"32rpx";
+    line-height: ~"60rpx";
 
   }
 
-  .edit-letter-01 textarea{
+  .edit-letter-01 textarea {
     border-bottom: 1px #E5DCC2 dashed;
     border-top: 1px #E5DCC2 dashed;
 
   }
 
-  .edit-letter-02 textarea{
+  .edit-letter-02 textarea {
     border-bottom: 1px #FFD8E5 dashed;
     border-top: 1px #FFD8E5 dashed;
 
   }
 
-  .edit-letter-03 textarea{
+  .edit-letter-03 textarea {
     border-bottom: 1px #BAC7D5 dashed;
     border-top: 1px #BAC7D5 dashed;
 
   }
 
-  .dateandword{
-    font-size:28rpx;
-    margin-left:auto;
-    margin-right:auto;
-    height:7vh;
-    width:584rpx;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:73vh;
+  .dateandword {
+    font-size: ~"28rpx";
+    margin-left: auto;
+    margin-right: auto;
+    height: 7vh;
+    width: ~"584rpx";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 73vh;
 
   }
 
-  .noteanddone{
-    height:7vh;
-    padding:0;
-    width:660rpx;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
+  .noteanddone {
+    height: 7vh;
+    padding: 0;
+    width: ~"660rpx";
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
-  .autosavenote{
-    padding-left:40rpx;
-    display:inline;
-    font-size:28rpx;
-    color:gray;
+
+  .autosavenote {
+    padding-left: ~"40rpx";
+    display: inline;
+    font-size: ~"28rpx";
+    color: gray;
   }
-  .godown{
+
+  .godown {
     position: fixed;
   }
 

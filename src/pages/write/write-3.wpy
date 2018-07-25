@@ -10,91 +10,97 @@
     <form report-submit="True" @submit="bindSubmit">
       <view class="infoform">
 
-          <image class="logo" src="/images/84_logo.png"></image>
-          <image class="infoformlogo" src="/images/mailsendingform.svg"></image>
-          <view class="note">发送邮件需要填写并提交寄件信息单，请正确填写收信人和寄件人信息并选择邮票。寄信嘛，要有仪式感。</view>
-          <view class="roletype">- 收信人 -</view>
+        <image class="logo" src="/images/84_logo.png"></image>
+        <image class="infoformlogo" src="/images/mailsendingform.svg"></image>
+        <view class="note">发送邮件需要填写并提交寄件信息单，请正确填写收信人和寄件人信息并选择邮票。寄信嘛，要有仪式感。</view>
+        <view class="roletype">- 收信人 -</view>
 
-          <view class="{{ toNameError ? 'error' : '' }} ">
-            <view class="infotypeholder">
-            <view class="infotype">称呼</view>
-            <input class="inputbox {{ toNameError ? '.lineerror' : '' }}" type="text" confirm-type="next" @input="bindInput" data-name="toName" value="{{ toName }}"/>
-            </view>
-            <view class="errorinfo">{{ toNameErrorInfo }}</view>
-          </view>
-
-          <view class="{{ toAddressError ? 'error' : '' }}">
-            <view class="infotypeholder">
-              <view class="infotype">地址</view>
-              <form report-submit="True" @submit="bindToAddress">
-
-                <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit">
-                  <view>{{ toAddress }}</view>
-                </button>
-              </form>
-            </view>
-            <view class="errorinfo">{{ toAddressErrorInfo }}</view>
-          </view>
-
-          <view class="{{ toZipError ? 'error' : '' }}">
-            <view class="infotypeholder">
-              <view class="infotype">邮编</view>
-              <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip" value="{{ toZip }}" maxlength="6"/>
-            </view>
-            <view class="errorinfo">{{ toZipErrorInfo }}</view>
-          </view>
-
-          <view class="infotypeholder">
-            <view class="infotype">手机</view>
-            <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toTel" value="{{ toTel }}" maxlength="11"/>
-          </view>
-
-          <view class="roletype">- 寄信人 -</view>
-
+        <view class="{{ toNameError ? 'error' : '' }} ">
           <view class="infotypeholder">
             <view class="infotype">称呼</view>
-            <input  class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="fromName" value="{{ fromName }}"/>
+            <input class="inputbox {{ toNameError ? '.lineerror' : '' }}" type="text" confirm-type="next"
+                   @input="bindInput" data-name="toName" value="{{ toName }}"/>
           </view>
+          <view class="errorinfo">{{ toNameErrorInfo }}</view>
+        </view>
 
+        <view class="{{ toAddressError ? 'error' : '' }}">
           <view class="infotypeholder">
             <view class="infotype">地址</view>
-            <form report-submit="True" @submit="bindFromAddress">
+            <form report-submit="True" @submit="bindToAddress">
 
-              <button class="choosebutton {{fromAddressChosen ? 'chosen' : ''}}" formType="submit">
-                <view>{{ fromAddress }}</view>
+              <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit">
+                <view>{{ toAddress }}</view>
               </button>
             </form>
           </view>
+          <view class="errorinfo">{{ toAddressErrorInfo }}</view>
+        </view>
 
+        <view class="{{ toZipError ? 'error' : '' }}">
           <view class="infotypeholder">
             <view class="infotype">邮编</view>
-            <input  class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip" value="{{ fromZip }}" maxlength="6"/>
+            <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip"
+                   value="{{ toZip }}" maxlength="6"/>
           </view>
+          <view class="errorinfo">{{ toZipErrorInfo }}</view>
+        </view>
 
-          <view class="infotypeholder">
-            <view class="infotype">手机</view>
-            <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel" value="{{ fromTel }}" maxlength="11" />
-          </view>
+        <view class="infotypeholder">
+          <view class="infotype">手机</view>
+          <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toTel"
+                 value="{{ toTel }}" maxlength="11"/>
+        </view>
 
-          <view class="roletype" >- 邮票 -</view>
-          <view class="stampselector">
-            <block wx:for="{{ letterStamps }}" wx:key="id">
-              <form report-submit="True" @submit="bindStampChoose">
-                <button class="stampbutton {{ item.choose? 'choose' : '' }}" formType="submit" id="{{ index }}">
-                  <view class=" stampview">
-                    <image class="stampview" src="{{ item.icon }}"></image>
-                  </view>
-                </button>
-              </form>
-            </block>
-          </view>
-  </view>
+        <view class="roletype">- 寄信人 -</view>
+
+        <view class="infotypeholder">
+          <view class="infotype">称呼</view>
+          <input class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="fromName"
+                 value="{{ fromName }}"/>
+        </view>
+
+        <view class="infotypeholder">
+          <view class="infotype">地址</view>
+          <form report-submit="True" @submit="bindFromAddress">
+
+            <button class="choosebutton {{fromAddressChosen ? 'chosen' : ''}}" formType="submit">
+              <view>{{ fromAddress }}</view>
+            </button>
+          </form>
+        </view>
+
+        <view class="infotypeholder">
+          <view class="infotype">邮编</view>
+          <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip"
+                 value="{{ fromZip }}" maxlength="6"/>
+        </view>
+
+        <view class="infotypeholder">
+          <view class="infotype">手机</view>
+          <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel"
+                 value="{{ fromTel }}" maxlength="11"/>
+        </view>
+
+        <view class="roletype">- 邮票 -</view>
+        <view class="stampselector">
+          <block wx:for="{{ letterStamps }}" wx:key="id">
+            <form report-submit="True" @submit="bindStampChoose">
+              <button class="stampbutton {{ item.choose? 'choose' : '' }}" formType="submit" id="{{ index }}">
+                <view class=" stampview">
+                  <image class="stampview" src="{{ item.icon }}"></image>
+                </view>
+              </button>
+            </form>
+          </block>
+        </view>
+      </view>
       <button class="nextbutton" formType="submit">下一步</button>
       <form report-submit="True" @submit="bindReset">
-            <button class="resetbutton" formType="submit">重置</button>
+        <button class="resetbutton" formType="submit">重置</button>
       </form>
 
-      </form>
+    </form>
   </view>
 </template>
 
@@ -318,7 +324,7 @@
           // onLoad
           await this.onLoad()
           await this.onShow()
-          await wepy.pageScrollTo({scrollTop: 0})
+          await wepy.pageScrollTo({ scrollTop: 0 })
         }
       }
     }
@@ -467,194 +473,185 @@
 
 <style lang="less">
 
-    .errorinfo {
-      color:red;
-      font-size:30rpx;
-      padding-left:170rpx;
-      padding-top:20rpx;
-      display:block;
-      text-align:left;
+  .errorinfo {
+    color: red;
+    font-size: ~"30rpx";
+    padding-left: ~"170rpx";
+    padding-top: ~"20rpx";
+    display: block;
+    text-align: left;
 
-    }
+  }
 
-    .roletype{
-      font-size:54rpx;
-      margin-bottom:60rpx;
-      margin-top:80rpx;
-      font-weight:bold;
-      color:#1562B3;
+  .roletype {
+    font-size: ~"54rpx";
+    margin-bottom: ~"60rpx";
+    margin-top: ~"80rpx";
+    font-weight: bold;
+    color: #1562B3;
 
+  }
 
-    }
+  .infotype {
+    font-size: ~"38rpx";
 
-    .infotype{
-      font-size:38rpx;
+  }
 
-    }
+  .inputbox {
+    border-bottom: 2px #1562B3 dashed;
+    font-size: ~"32rpx";
+    color: #1562B3;
+    width: ~"434rpx";
+    text-align: left;
+  }
 
-    .inputbox{
-      border-bottom:2px #1562B3 dashed;
-      font-size:32rpx;
-      color:#1562B3;
-      width:434rpx;
-      text-align:left;
-    }
+  .inputbox:hover {
+    border-bottom: 2px #1562B3 solid;
+  }
 
+  .choosebutton {
+    font-size: ~"32rpx";
+    color: gray;
+    border-bottom: 2px #1562B3 dashed;
+    text-align: left;
+    border-radius: 0;
+    padding-left: 0;
+    font-style: italic;
+    width: ~"434rpx";
+    background-color: white;
 
-    .inputbox:hover{
-      border-bottom: 2px #1562B3 solid;
-    }
+  }
 
-    .choosebutton{
-      font-size: 32rpx;
-      color: gray;
-      border-bottom: 2px #1562B3 dashed;
-      text-align: left;
-      border-radius: 0;
-      padding-left: 0;
-      font-style: italic;
-      width:434rpx;
-      background-color: white;
+  .choosebutton:after {
+    border: none;
+  }
 
-    }
+  .stampbutton {
+    width: ~"140rpx";
+    height: ~"140rpx";
+    margin-bottom: ~"15rpx";
+    padding: ~"6rpx";
+    border: 2px #1562B3 dashed;
+    border-radius: 6px;
+    background-color: white;
 
-    .choosebutton:after{
-      border:none;
-    }
+  }
 
+  .stampbutton:after {
+    border: none;
+  }
 
-    .stampbutton{
-      width:140rpx;
-      height:140rpx;
-      margin-bottom:15rpx;
-      padding:6rpx;
-      border:2px #1562B3 dashed;
-      border-radius:6px;
-      background-color:white;
+  .choose {
+    border: 3px #FF4A19 solid;
+    border-radius: 6px;
 
+  }
 
-    }
+  .stampview {
+    width: ~"120rpx";
+    height: ~"120rpx";
+    margin: 0;
+    border-radius: 2px;
 
-    .stampbutton:after{
-      border:none;
-    }
+  }
 
-    .choose{
-      border:3px #FF4A19 solid;
-      border-radius:6px;
+  .stampselector {
+    margin-left: ~"40rpx";
+    margin-right: ~"40rpx";
+    width: ~"590rpx";
+    height: ~"200rpx";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-    }
+  }
 
-    .stampview{
-      width: 120rpx;
-      height: 120rpx;
-      margin: 0;
-      border-radius: 2px;
+  .resetbutton {
+    margin-top: ~"40rpx";
+    width: 60vw;
+    margin-bottom: 10vh;
+    border: 1px #ED725A dashed;
 
-    }
+  }
 
-    .stampselector{
-      margin-left:40rpx;
-      margin-right:40rpx;
-      width:590rpx;
-      height:200rpx;
-      display:flex;
-      flex-direction:row;
-      justify-content:space-between;
+  .nextbutton {
+    margin-top: 6vh;
+    width: 60vw;
+    color: white;
+    background-color: #F17250;
 
+  }
 
-    }
+  .processbarholderfix {
+    width: 100vw;
+    height: ~"70rpx";
+    position: fixed;
+    background-color: #09427F;
+    font-size: ~"24rpx";
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: ~"40rpx";
+  }
 
-    .resetbutton{
-      margin-top:40rpx;
-      width:60vw;
-      margin-bottom:10vh;
-      border: 1px #ED725A dashed;
+  .chosen {
+    color: #1562B3;
+    font-style: normal;
 
-    }
+  }
 
-    .nextbutton{
-      margin-top:6vh;
-      width:60vw;
-      color:white;
-      background-color:#F17250;
+  .lineerror {
+    border-bottom: 2px red dashed;
+  }
 
-    }
+  .infoform {
+    width: ~"670rpx";
+    margin-left: ~"40rpx";
+    margin-right: ~"40rpx";
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #D4CEBE;
+    margin-top: ~"110rpx";
 
-    .processbarholderfix{
-      width:100vw;
-      height:70rpx;
-      position: fixed;
-      background-color: #09427F;
-      font-size: 24rpx;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 40rpx;
-    }
+  }
 
-    .chosen {
-      color: #1562B3;
-      font-style: normal;
+  .infoformlogo {
+    height: 18vh;
+    margin-bottom: 4vh;
 
-    }
+  }
 
-    .lineerror{
-      border-bottom: 2px red dashed;
-    }
+  .logo {
+    width: 8vh;
+    height: 8vh;
+    margin-bottom: 6vh;
+    margin-top: 6vh;
 
-    .infoform{
-      width:670rpx;
-      margin-left:40rpx;
-      margin-right:40rpx;
-      text-align:center;
-      background:#FFFFFF;
-      box-shadow:0 2px 4px 0 #D4CEBE;
-      margin-top:110rpx;
+  }
 
-    }
+  .note {
+    width: 74vw;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    font-size: ~"30rpx";
+    color: gray;
+    text-align: center;
 
-    .infoformlogo{
-      height:18vh;
-      margin-bottom:4vh;
+  }
 
-    }
+  .infotypeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-left: ~"60rpx";
+    padding-right: ~"60rpx";
+    margin-top: 4vh;
 
-    .logo{
-      width:8vh;
-      height:8vh;
-      margin-bottom:6vh;
-      margin-top:6vh;
+  }
 
+  .bigholder {
+    margin-bottom: 6vh;
 
-    }
-
-    .note{
-      width:74vw;
-      margin-left:7vw;
-      margin-right:7vw;
-      font-size:30rpx;
-      color:gray;
-      text-align:center;
-
-    }
-
-    .infotypeholder{
-      display:flex;
-      flex-direction:row;
-      justify-content:space-between;
-      align-items:baseline;
-      padding-left:60rpx;
-      padding-right:60rpx;
-      margin-top:4vh;
-
-    }
-
-    .bigholder{
-      margin-bottom: 6vh;
-
-    }
-
-
-
+  }
 
 
 </style>

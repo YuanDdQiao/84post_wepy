@@ -29,7 +29,7 @@
             <text>根据运单号查询</text>
           </button>
         </form>
-    </view>
+      </view>
     </view>
     <view class="sectionholder" wx:if="{{ infoDisplay }}">
       <text class="sectiontitle">我的信息</text>
@@ -64,14 +64,14 @@
             <text>常用联系人</text>
           </button>
         </form>
-    </view>
+      </view>
     </view>
     <view class="sectionholder">
       <text class="sectiontitle">联系我们</text>
       <view class="subholder">
-          <button class="menubutton lastmenubutton" open-type="feedback">
-            <text>反馈与建议</text>
-          </button>
+        <button class="menubutton lastmenubutton" open-type="feedback">
+          <text>反馈与建议</text>
+        </button>
       </view>
     </view>
 
@@ -100,7 +100,7 @@
         <button class="menubutton lastmenubutton" open-type="contact">
           <text>打开客服消息</text>
         </button>
-    </view>
+      </view>
     </view>
     <!--<form report-submit="True" @submit="bindNoSenseForm">-->
     <!--<button  formType="submit">按钮测试</button>-->
@@ -378,78 +378,76 @@
 <style lang="less">
 
 
-  .menulist{
-    width:670rpx;
-    margin-left: 40rpx;
-    margin-top: 40rpx;
-    margin-right: 40rpx;
-    padding-bottom: 80rpx;
+  .menulist {
+    width: ~"670rpx";
+    margin-left: ~"40rpx";
+    margin-top: ~"40rpx";
+    margin-right: ~"40rpx";
+    padding-bottom: ~"80rpx";
     /* background-color: gray; */
 
   }
 
-  .sectionholder{
+  .sectionholder {
     margin-bottom: 20px;
   }
 
-  .sectiontitle{
-    display:block;
-    margin-bottom:14px;
-    font-size: 38rpx;
+  .sectiontitle {
+    display: block;
+    margin-bottom: 14px;
+    font-size: ~"38rpx";
   }
 
-  .subholder{
-    width:590rpx;
-    background-color:#FFFEFC;
-    padding-left:40rpx;
-    padding-right:40rpx;
-    border-radius:6px;
+  .subholder {
+    width: ~"590rpx";
+    background-color: #FFFEFC;
+    padding-left: ~"40rpx";
+    padding-right: ~"40rpx";
+    border-radius: 6px;
   }
 
-  .balanceholder{
-    height:90px;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
+  .balanceholder {
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
-
-
-  .addbalancebutton{
-    width:138rpx;
-    font-size:30rpx;
-    display:inline;
-    float:right;
-    height:74rpx;
+  .addbalancebutton {
+    width: ~"138rpx";
+    font-size: ~"30rpx";
+    display: inline;
+    float: right;
+    height: ~"74rpx";
     background-color: #F17250;
-    color:white;
+    color: white;
 
   }
 
-  .addbalancebutton:after{
+  .addbalancebutton:after {
     border: none;
   }
 
-  .menubutton{
-    display:block;
-    padding-left:0;
-    text-align:left;
-    background:0;
-    padding-top:2vh;
-    padding-bottom:2vh;
-    font-size:32rpx;
-    border-radius:0;
-    border-bottom:2px #F1F1F1 solid;
-    color:#626262;
+  .menubutton {
+    display: block;
+    padding-left: 0;
+    text-align: left;
+    background: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    font-size: ~"32rpx";
+    border-radius: 0;
+    border-bottom: 2px #F1F1F1 solid;
+    color: #626262;
   }
 
-  .lastmenubutton{
+  .lastmenubutton {
     border: 0;
   }
 
-  .menubutton:after{
-    border:none;
+  .menubutton:after {
+    border: none;
   }
 
 

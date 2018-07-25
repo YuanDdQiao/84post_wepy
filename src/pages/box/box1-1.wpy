@@ -127,41 +127,41 @@
 
 <style lang="less">
 
-  .nomail{
+  .nomail {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-size: 38rpx;
+    font-size: ~"38rpx";
     align-items: center;
     text-align: center;
     height: 100vh;
     color: gray;
   }
 
-  .mailpreviewbutton{
-    margin-top:40rpx;
-    padding:0;
-    width:670rpx;
-    margin-left:40rpx;
-    margin-right:40rpx;
-    margin-bottom:0;
-    height:400rpx;
-    box-shadow: 0 4px 12px 0 rgba(160,147,105,0.4);
+  .mailpreviewbutton {
+    margin-top: ~"40rpx";
+    padding: 0;
+    width: ~"670rpx";
+    margin-left: ~"40rpx";
+    margin-right: ~"40rpx";
+    margin-bottom: 0;
+    height: ~"400rpx";
+    box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.4);
   }
 
-  .mailimage{
-    width:670rpx;
-    height:400rpx;
-    margin:0;
-    padding:0;
+  .mailimage {
+    width: ~"670rpx";
+    height: ~"400rpx";
+    margin: 0;
+    padding: 0;
   }
 
-  .mailpreviewbutton:after{
+  .mailpreviewbutton:after {
     border: none;
 
   }
 
-  .letterlist{
+  .letterlist {
     margin-bottom: 4vh;
   }
 

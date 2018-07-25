@@ -12,11 +12,12 @@
       <view class="note2">(充值二字已经为您复制)</view>
       <view>
         <block wx:for="{{ price }}" wx:key="id">
-          <button class="button" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"  id="recharge-{{ item.id }}">
+          <button class="button" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
+                  id="recharge-{{ item.id }}">
             <view class="infoholder">
               <view class="priceholder">
-              <view class="points">{{ item.point }} 点券</view>
-              <view class="price">¥{{ item.price / 100 }}</view>
+                <view class="points">{{ item.point }} 点券</view>
+                <view class="price">¥{{ item.price / 100 }}</view>
               </view>
               <block wx:if="{{ item.point_gift !== 0 }}">
                 <view class="typenote">赠送 {{ item.point_gift }} 点券</view>
@@ -130,90 +131,90 @@
 </script>
 
 <style lang="less">
-  .menulist{
-    width:670rpx;
-    margin-left: 40rpx;
-    margin-top: 40rpx;
-    margin-right: 40rpx;
+  .menulist {
+    width: ~"670rpx";
+    margin-left: ~"40rpx";
+    margin-top: ~"40rpx";
+    margin-right: ~"40rpx";
     margin-bottom: 14vh;
 
   }
 
-  .note{
-    font-size: 28rpx;
+  .note {
+    font-size: ~"28rpx";
     text-align: center;
     margin-bottom: 2vh;
     margin-top: 6vh;
-    color:gray;
+    color: gray;
   }
 
-  .note2{
-    font-size: 28rpx;
+  .note2 {
+    font-size: ~"28rpx";
     text-align: center;
     margin-bottom: 2vh;
-    color:gray;
+    color: gray;
   }
 
-  .endnote{
-    font-size:28rpx;
-    text-align:center;
-    margin-top:6vh;
-    color:gray;
-    height:14vh;
+  .endnote {
+    font-size: ~"28rpx";
+    text-align: center;
+    margin-top: 6vh;
+    color: gray;
+    height: 14vh;
   }
 
-  .button{
-    margin-top:6vh;
-    background-color:#FF673D;
-    padding-bottom:40rpx;
-    padding-top:40rpx;
-    padding-left:0;
-    padding-right:0;
-    box-shadow:0 3px 10px 0 #c6bb99;
-    border-radius:8px;
+  .button {
+    margin-top: 6vh;
+    background-color: #FF673D;
+    padding-bottom: ~"40rpx";
+    padding-top: ~"40rpx";
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: 0 3px 10px 0 #c6bb99;
+    border-radius: 8px;
 
   }
 
-  .button:after{
+  .button:after {
     border: none;
   }
 
-  .price{
-    font-size:52rpx;
-    font-weight:bold;
-    color:white;
+  .price {
+    font-size: ~"52rpx";
+    font-weight: bold;
+    color: white;
 
   }
 
-  .points{
-    font-size:62rpx;
-    color:white;
-    font-weight:bold;
-    text-align:left;
+  .points {
+    font-size: ~"62rpx";
+    color: white;
+    font-weight: bold;
+    text-align: left;
   }
 
-  .typenote{
-    font-size:32rpx;
-    text-align:left;
-    color:white;
-    margin-bottom:10rpx;
-    margin-top:-2vh;
-
-  }
-
-  .infoholder{
-    border-bottom:2px #FFC1B0 dashed;
-    border-top:2px #FFC1B0 dashed;
-    padding-left:40rpx;
-    padding-right:40rpx;
+  .typenote {
+    font-size: ~"32rpx";
+    text-align: left;
+    color: white;
+    margin-bottom: ~"10rpx";
+    margin-top: -2vh;
 
   }
 
-  .priceholder{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
+  .infoholder {
+    border-bottom: 2px #FFC1B0 dashed;
+    border-top: 2px #FFC1B0 dashed;
+    padding-left: ~"40rpx";
+    padding-right: ~"40rpx";
+
+  }
+
+  .priceholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
   }
 

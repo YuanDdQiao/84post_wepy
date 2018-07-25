@@ -82,7 +82,7 @@
           content: '该运单信息不存在',
           showCancel: false
         })
-        wepy.redirectTo({url: '/pages/my/query'})
+        wepy.redirectTo({ url: '/pages/my/query' })
       }
       console.log(ret.data)
       this.info = ret.data.info
@@ -143,97 +143,96 @@
 
 <style lang="less">
 
-    .expressform{
-      width:590rpx;
-      margin-left:40rpx;
-      margin-right:40rpx;
-      padding-left:40rpx;
-      padding-right:40rpx;
-      text-align:center;
-      margin-top:40rpx;
-      background:#FFFFFF;
-      box-shadow:0 2px 4px 0 #D4CEBE;
-      margin-bottom: 40rpx;
+  .expressform {
+    width: ~"590rpx";
+    margin-left: ~"40rpx";
+    margin-right: ~"40rpx";
+    padding-left: ~"40rpx";
+    padding-right: ~"40rpx";
+    text-align: center;
+    margin-top: ~"40rpx";
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #D4CEBE;
+    margin-bottom: ~"40rpx";
 
-    }
+  }
 
-    .expressnumber{
-      border-bottom:2px #D0D0D0 dashed;
-      height:10vh;
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      margin-bottom:4vh;
-      font-size:38rpx;
-      justify-content:space-around;
-      font-weight:bold;
-      color:#797979;
+  .expressnumber {
+    border-bottom: 2px #D0D0D0 dashed;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 4vh;
+    font-size: ~"38rpx";
+    justify-content: space-around;
+    font-weight: bold;
+    color: #797979;
 
+  }
 
-    }
+  .oneline {
+    margin-bottom: 24px;
+  }
 
-    .oneline{
-      margin-bottom: 24px;
-    }
+  .info {
+    color: #797979;
+    font-size: ~"34rpx";
+    margin-bottom: 4px;
+    text-align: left;
 
-    .info{
-      color:#797979;
-      font-size:34rpx;
-      margin-bottom:4px;
-      text-align: left;
+  }
 
-    }
+  .date {
+    text-align: left;
+    font-size: ~"32rpx";
+    color: #A3A3A3;
 
-    .date{
-      text-align:left;
-      font-size:32rpx;
-      color:#A3A3A3;
+  }
 
-    }
+  .endnote {
+    border-top: 2px #D0D0D0 dashed;
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 4vh;
+    font-size: ~"30rpx";
+    justify-content: space-around;
+    color: #797979;
 
-    .endnote{
-      border-top:2px #D0D0D0 dashed;
-      height:8vh;
-      display:flex;
-      flex-direction:row;
-      align-items:center;
-      margin-bottom:4vh;
-      font-size:30rpx;
-      justify-content:space-around;
-      color:#797979;
+  }
 
-    }
+  .type-0 .info {
 
-    .type-0 .info{
+  }
 
-    }
+  .type-1 .info {
 
-    .type-1 .info{
+  }
 
-    }
+  .type-2 .info {
 
-    .type-2 .info{
+  }
 
-    }
+  .type-3 .info {
 
-    .type-3 .info{
+  }
 
-    }
+  .type-4 .info.got {
+    /*已签收*/
+  }
 
-    .type-4 .info.got{
-      /*已签收*/
-    }
-    .type-4 .info.noget{
-      /*未签收*/
-      font-weight: bold;
-      color: #F17250;
-    }
+  .type-4 .info.noget {
+    /*未签收*/
+    font-weight: bold;
+    color: #F17250;
+  }
 
-    .type-5 .info{
-      color: #45AE45;
-      font-weight: bold;
-    }
-
+  .type-5 .info {
+    color: #45AE45;
+    font-weight: bold;
+  }
 
 
 </style>

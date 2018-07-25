@@ -3,7 +3,7 @@
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
         <view>
-          <button class="holder {{ item.class_attr }}"  style="{{ item.style_attr }}" formType="submit">
+          <button class="holder {{ item.class_attr }}" style="{{ item.style_attr }}" formType="submit">
             <view class="subholder">
               <view class="itemname">{{ item.name }}</view>
               <view class="stamp"></view>
@@ -119,31 +119,30 @@
 
 <style lang="less">
 
-  .holder{
-    margin:40rpx;
-    height:26vh;
-    text-align:left;
-    padding-left:0;
-    padding-right:0;
-    padding-top:3vh;
-    padding-bottom:3vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-around;
-    color:#1562B3;
-    background:#FFFFFF;
-    box-shadow:0 4px 6px 0 #E4E2DC;
-    border-radius:6px;
-
+  .holder {
+    margin: ~"40rpx";
+    height: 26vh;
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #1562B3;
+    background: #FFFFFF;
+    box-shadow: 0 4px 6px 0 #E4E2DC;
+    border-radius: 6px;
 
   }
 
-  .subholder{
-    margin:0;
-    height:100%;
-    border-top:2px #E6E6E6 dashed;
-    padding-left:40rpx;
-    padding-right:60rpx;
+  .subholder {
+    margin: 0;
+    height: 100%;
+    border-top: 2px #E6E6E6 dashed;
+    padding-left: ~"40rpx";
+    padding-right: ~"60rpx";
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -151,27 +150,26 @@
 
   }
 
-  .holder:after{
+  .holder:after {
     border: none;
   }
 
-  .stamp{
-    height:160rpx;
-    width:160rpx;
+  .stamp {
+    height: ~"160rpx";
+    width: ~"160rpx";
     /* background-color: red; */
 
   }
 
-  .box-type-01 .stamp{
+  .box-type-01 .stamp {
     background-image: url(https://84.singee.site/media/postmark/normal_qedSmjC.png);
     background-size: cover;
     background-repeat: no-repeat;
     transform: rotate(-20deg);
 
-
   }
 
-  .box-type-02 .stamp{
+  .box-type-02 .stamp {
     background-image: url(https://84.singee.site/media/postmark/express_3vRa3CK.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -179,7 +177,7 @@
 
   }
 
-  .box-type-03 .stamp{
+  .box-type-03 .stamp {
     background-image: url(https://84.singee.site/media/postmark/premium_z1oMDAm.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -187,23 +185,23 @@
 
   }
 
-  .box-type-01 .subholder{
-    border-bottom:0px #1562B3 solid;
+  .box-type-01 .subholder {
+    border-bottom: 0px #1562B3 solid;
 
   }
 
-  .box-type-02 .subholder{
-    border-bottom:3px #1562B3 solid;
+  .box-type-02 .subholder {
+    border-bottom: 3px #1562B3 solid;
 
   }
 
-  .box-type-03 .subholder{
-    border-bottom:6px #1562B3 double;
+  .box-type-03 .subholder {
+    border-bottom: 6px #1562B3 double;
   }
 
-  .itemname{
+  .itemname {
     font-weight: bold;
-    font-size: 62rpx;
+    font-size: ~"62rpx";
   }
 
 

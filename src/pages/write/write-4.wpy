@@ -8,7 +8,7 @@
     </view>
     <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
 
-    <block  wx:if="{{ fee !== 0}}">
+    <block wx:if="{{ fee !== 0}}">
       <view class="previewnote">您需支付 {{ fee }} 点券</view>
       <view class="previewnote gray">余额 {{ balance }} 点券</view>
     </block>
@@ -188,49 +188,46 @@
 
 <style lang="less">
 
-  .previewnote{
+  .previewnote {
     display: block;
-    font-size: 32rpx;
+    font-size: ~"32rpx";
     text-align: center;
-    margin-top: 40rpx;
+    margin-top: ~"40rpx";
   }
 
-  button{
-    position:absolute;
-    width:60vw;
-    margin-left:20vw;
-    margin-right:20vw;
-    margin-top:80rpx;
-
+  button {
+    position: absolute;
+    width: 60vw;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: ~"80rpx";
 
   }
 
-  .backbutton{
+  .backbutton {
     bottom: 6vh;
   }
 
-  .confirmbutton{
-    color:white;
-    background-color:#F17250;
-    bottom:16vh;
-
-
+  .confirmbutton {
+    color: white;
+    background-color: #F17250;
+    bottom: 16vh;
 
   }
 
-  .envelopepreview{
-    width:670rpx;
-    height:400rpx;
-    margin-left:40rpx;
-    margin-right:40rpx;
-    text-align:center;
-    box-shadow:0 4px 10px 0 rgba(160, 147, 105, 0.3);
-    margin-top:55px;
+  .envelopepreview {
+    width: ~"670rpx";
+    height: ~"400rpx";
+    margin-left: ~"40rpx";
+    margin-right: ~"40rpx";
+    text-align: center;
+    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.3);
+    margin-top: 55px;
 
   }
 
-  .gray{
-    color:gray;
+  .gray {
+    color: gray;
   }
 
 </style>
