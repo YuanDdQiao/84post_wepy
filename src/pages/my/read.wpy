@@ -1,6 +1,7 @@
 <template>
   <view class="{{ viewClass }}" style="{{ viewStyle }}">
     <view class="textarea">{{ content }}</view>
+    <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
 </template>
@@ -24,7 +25,8 @@
       viewClass: '',
       viewStyle: '',
       content: '',
-      submitDate: ''
+      submitDate: '',
+      sign: ''
     }
 
     /**
@@ -52,6 +54,7 @@
         this.viewClass = ret.data.viewClass
         this.viewStyle = ret.data.viewStyle
         this.submitDate = ret.data.submitDate
+        this.sign = ret.data.sign
         this.$apply()
       })
     };
@@ -92,6 +95,19 @@
     margin-top: ~"80rpx";
   }
 
+  @text_font_size: ~"30rpx";
+
+  .date, .sign {
+    font-size: @text_font_size;
+    margin-bottom: 18px;
+    margin-right: ~"60rpx";
+    text-align: right;
+  }
+
+  .sign {
+    margin-bottom: 0;
+  }
+
   .view-letter-01 {
     background: #FCF7E8;
     border: 2px solid #E5DCC2;
@@ -104,12 +120,15 @@
     color: #6E5F31;
     margin-top: ~"40rpx";
 
+    .date, .sign {
+      color: #6E5F31;
+    }
+
   }
 
   .view-letter-02 {
     background: #FFFFFF;
-    border: 3px solid #FBBAD0;
-    border-style: double;
+    border: 3px double #FBBAD0;
     border-radius: 6px;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
     width: ~"660rpx";
@@ -119,12 +138,15 @@
     color: #6E1A36;
     margin-top: ~"40rpx";
 
+    .date, .sign {
+      color: #6E1A36;
+    }
+
   }
 
   .view-letter-03 {
     background: #F3F2F0;
-    border: 2px solid #1562B3;
-    border-style: dashed;
+    border: 2px dashed #1562B3;
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 20px 0 #a09369;
     width: ~"660rpx";
@@ -134,45 +156,19 @@
     color: #052B53;
     margin-top: ~"40rpx";
 
+    .date, .sign {
+      color: #052B53;
+    }
+
   }
 
   .textarea {
-    padding-left: ~"40rpx";
-    padding-right: ~"40rpx";
-    padding-top: ~"40rpx";
-    padding-bottom: 0;
+    padding: ~"40rpx" ~"40rpx" 0;
     width: ~"584rpx";
-    font-size: ~"30rpx";
-    line-height: ~"60rpx";
+    font-size: @text_font_size;
+    line-height: 2;
     margin-bottom: 40px;
     white-space: pre-wrap;
-  }
-
-  .view-letter-01 .date {
-    color: #6E5F31;
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-
-  }
-
-  .view-letter-02 .date {
-    color: #6E1A36;
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-
-  }
-
-  .view-letter-03 .date {
-    color: #052B53;
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-
   }
 
   .savenote {
@@ -181,6 +177,5 @@
     font-size: ~"30rpx";
     margin-bottom: 35px;
     color: gray;
-
   }
 </style>
