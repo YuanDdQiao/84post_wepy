@@ -45,6 +45,7 @@
         console.log(ret.data)
         if (ret.data.result) {
           this.$parent.globalData.pickUp.content = ret.data.content
+          this.$parent.globalData.pickUp.sign = ret.data.sign
           this.$parent.globalData.pickUp.viewClass = ret.data.viewClass
           this.$parent.globalData.pickUp.viewStyle = ret.data.viewStyle
           this.$parent.globalData.pickUp.saved = ret.data.saved

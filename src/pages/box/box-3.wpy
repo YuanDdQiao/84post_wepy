@@ -2,6 +2,7 @@
   <view>
     <view class="{{ pickUp.viewClass }}" style="{{ pickUp.viewStyle }}">
       <view class="textarea">{{ pickUp.content }}</view>
+      <view class="sign">{{ pickUp.sign }}</view>
       <view class="date">{{ pickUp.submitDate }}</view>
     </view>
 
@@ -167,13 +168,11 @@
     padding: 0;
     color: #6E5F31;
     margin-top: ~"40rpx";
-
   }
 
   .view-letter-02 {
     background: #FFFFFF;
-    border: 3px solid #FBBAD0;
-    border-style: double;
+    border: 3px double #FBBAD0;
     border-radius: 6px;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
     width: ~"660rpx";
@@ -182,13 +181,11 @@
     padding: 0;
     color: #6E1A36;
     margin-top: ~"40rpx";
-
   }
 
   .view-letter-03 {
     background: #F3F2F0;
-    border: 2px solid #1562B3;
-    border-style: dashed;
+    border: 2px dashed #1562B3;
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 20px 0 #a09369;
     width: ~"660rpx";
@@ -197,7 +194,6 @@
     padding: 0;
     color: #052B53;
     margin-top: ~"40rpx";
-
   }
 
   .textarea {
@@ -210,34 +206,17 @@
     line-height: ~"60rpx";
     margin-bottom: 40px;
     white-space: pre-wrap;
-
   }
 
-  .view-letter-01 .date {
-    color: #6E5F31;
+  .date, .sign {
     font-size: ~"30rpx";
     margin-bottom: 18px;
     margin-right: ~"60rpx";
     text-align: right;
-
   }
 
-  .view-letter-02 .date {
-    color: #6E1A36;
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-
-  }
-
-  .view-letter-03 .date {
-    color: #052B53;
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-
+  .sign {
+    margin-bottom: 0;
   }
 
   .savenote {
