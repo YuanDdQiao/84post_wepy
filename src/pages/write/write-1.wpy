@@ -13,6 +13,7 @@
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
+        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder="落款签名"/>
         <view class="dateandword">
           <view>{{ wordCount }}/{{ maxLength }} 字</view>
           <view>{{ todayDate }}</view>
@@ -44,7 +45,8 @@
       maxLength: 2000,
       inputValue: '',
       todayDate: '',
-      paperType: {}
+      paperType: {},
+      sign: ''
     }
 
     /**
@@ -54,6 +56,7 @@
       bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         this.$parent.globalData.letterInfo.content = this.inputValue
+        this.$parent.globalData.letterInfo.sign = this.sign
         if (this.inputValue.length === 0) {
           wepy.showModal({
             title: '此处无字胜有字',
@@ -83,6 +86,7 @@
           })
         } else {
           this.$apply()
+          console.log(this.$parent.globalData.letterInfo)
           wepy.navigateTo({
             url: 'write-2'
           })
@@ -95,6 +99,13 @@
         wepy.setStorage({
           key: 'letterContent',
           data: this.inputValue
+        })
+      },
+      bindSign(e) {
+        this.sign = e.detail.value
+        wepy.setStorage({
+          key: 'letterSign',
+          data: this.sign
         })
       }
     }
@@ -123,6 +134,12 @@
         this.inputValue = res.data
       } catch (e) {
         this.inputValue = ''
+      }
+      try {
+        let res = await wepy.getStorage({ key: 'letterSign' })
+        this.sign = res.data
+      } catch (e) {
+        this.sign = ''
       }
       this.wordCount = this.inputValue.length
       this.$apply()
@@ -285,27 +302,32 @@
 
   textarea {
     position: fixed;
-    padding-left: ~"40rpx";
-    padding-right: ~"40rpx";
-    padding-top: ~"10rpx";
-    padding-bottom: 0;
-    height: 72vh;
+    padding: ~"10rpx" ~"40rpx" 0 ~"40rpx";
+    height: 66vh;
     width: ~"584rpx";
     font-size: ~"32rpx";
     line-height: ~"60rpx";
   }
 
+  .sign {
+    position: fixed;
+    bottom: 10vh;
+    right: ~"43rpx";
+    text-align: right;
+    font-size: ~"32rpx";
+    line-height: ~"60rpx";
+    padding-right: ~"40rpx";
+  }
+
   .dateandword {
     font-size: ~"28rpx";
-    margin-left: auto;
-    margin-right: auto;
+    margin: 73vh auto auto;
     height: 7vh;
     width: ~"584rpx";
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 73vh;
   }
 
   .noteanddone {
