@@ -2,8 +2,8 @@ import wepy from 'wepy'
 import 'wepy-async-function'
 
 // 服务器接口地址
-const host = 'http://127.0.0.1:8000'
-// const host = 'https://84.singee.site'
+// const host = 'http://127.0.0.1:8000'
+const host = 'https://84.singee.site'
 const apiRoot = `${host}/api/v1`
 
 // 分享信息
