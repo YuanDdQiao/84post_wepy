@@ -5,7 +5,7 @@
       <view class="progress-middle">选</view>
       <view class="progress">寄</view>
     </view>
-    <view class="{{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
+    <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <view class="noteanddone">
           <view class="autosavenote">已自动保存草稿</view>
@@ -182,70 +182,89 @@
 </script>
 
 <style lang="less">
-  .edit-letter-01 {
-    background: #FCF7E8;
-    border: 2px solid #E5DCC2;
-    outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 #a09369;
-    width: ~"660rpx";
-    height: 86vh;
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #6E5F31;
+
+  .edit-letter-common {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: ~"110rpx";
 
+    margin: ~"110rpx" ~"40rpx" auto ~"40rpx";
+    padding: 0;
+
+    width: ~"660rpx";
+    height: 86vh;
   }
 
-  .edit-letter-01 ::selection {
-    background: #DED8C6;
+  .edit-letter-01 {
+    @bg_color: #FCF7E8;
+
+    background: @bg_color;
+    border: 2px solid #E5DCC2;
+    outline: 6px solid @bg_color;
+    box-shadow: 0 4px 10px 0 #a09369;
+    color: #6E5F31;
+
+    &::selection {
+      background: #DED8C6;
+    }
+
+    button {
+      background-color: #9E9477;
+      color: @bg_color;
+    }
+
+    textarea {
+      border-bottom: 1px #E5DCC2 dashed;
+      border-top: 1px #E5DCC2 dashed;
+    }
   }
 
   .edit-letter-02 {
-    background: #FFFFFF;
-    border: 3px solid #FBBAD0;
-    border-style: double;
+    @bg_color: #FFFFFF;
+
+    background: @bg_color;
+    border: 3px double #FBBAD0;
     border-radius: 8px;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
-    width: ~"660rpx";
-    height: 86vh;
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
     color: #6E1A36;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: ~"110rpx";
-  }
 
-  .edit-letter-02 ::selection {
-    background: #FAE8EE;
+    &::selection {
+      background: #FAE8EE;
+    }
+
+    button {
+      background-color: #DA6D92;
+      color: @bg_color;
+    }
+
+    textarea {
+      border-bottom: 1px #FFD8E5 dashed;
+      border-top: 1px #FFD8E5 dashed;
+    }
   }
 
   .edit-letter-03 {
-    background: #F3F2F0;
-    border: 2px solid #1562B3;
-    border-style: dashed;
-    outline: 6px solid #F3F2F0;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    width: ~"660rpx";
-    height: 87vh;
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #052B53;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: ~"110rpx";
-  }
+    @bg_color: #F3F2F0;
 
-  .edit-letter-03 ::selection {
-    background: #DBDAD8;
+    background: @bg_color;
+    border: 2px dashed #1562B3;
+    outline: 6px solid @bg_color;
+    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+    color: #052B53;
+
+    &::selection {
+      background: #DBDAD8;
+    }
+
+    button {
+      background-color: #09427F;
+      color: @bg_color;
+    }
+
+    textarea {
+      border-bottom: 1px #BAC7D5 dashed;
+      border-top: 1px #BAC7D5 dashed;
+    }
   }
 
   button {
@@ -258,22 +277,6 @@
     font-size: ~"24rpx";
     font-weight: bold;
     margin-right: 1vh;
-
-  }
-
-  .edit-letter-01 button {
-    background-color: #9E9477;
-    color: #FCF7E8;
-  }
-
-  .edit-letter-02 button {
-    background-color: #DA6D92;
-    color: #FFFFFF;
-  }
-
-  .edit-letter-03 button {
-    background-color: #09427F;
-    color: #F3F2F0;
   }
 
   button:after {
@@ -290,25 +293,6 @@
     width: ~"584rpx";
     font-size: ~"32rpx";
     line-height: ~"60rpx";
-
-  }
-
-  .edit-letter-01 textarea {
-    border-bottom: 1px #E5DCC2 dashed;
-    border-top: 1px #E5DCC2 dashed;
-
-  }
-
-  .edit-letter-02 textarea {
-    border-bottom: 1px #FFD8E5 dashed;
-    border-top: 1px #FFD8E5 dashed;
-
-  }
-
-  .edit-letter-03 textarea {
-    border-bottom: 1px #BAC7D5 dashed;
-    border-top: 1px #BAC7D5 dashed;
-
   }
 
   .dateandword {
@@ -322,7 +306,6 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 73vh;
-
   }
 
   .noteanddone {
