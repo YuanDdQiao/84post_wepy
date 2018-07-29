@@ -157,6 +157,7 @@
       // console.log(this.$parent.globalData)
       wepy.removeStorageSync('letterInfo-paperType')
       wepy.removeStorageSync('letterContent')
+      wepy.removeStorageSync('letterSign')
       wepy.removeStorageSync('letterInfo-shiftInfo-toName')
       wepy.removeStorageSync('letterInfo-shiftInfo-toTel')
       wepy.removeStorageSync('letterInfo-shiftInfo-toAddress')
