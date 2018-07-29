@@ -76,7 +76,8 @@
         wepy.reLaunch({ url: '/pages/box/index' })
       },
       async bindReply(e) {
-        let ret = await api.request(`letter/address/${this.pickUp.id}`)
+        let ret = await api.request(`letter/address/${this.pickUp.id}/`)
+        api.request(`letter/mark/replied/${this.pickUp.id}/`)
         console.log(ret)
         wepy.setStorageSync('letterInfo-shiftInfo-fromName', ret.data.to_name)
         wepy.setStorageSync('letterInfo-shiftInfo-fromTel', ret.data.to_tel)
