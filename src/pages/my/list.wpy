@@ -56,7 +56,8 @@
      */
     data = {
       type: 1,
-      letters: []
+      letters: [],
+      loaded: false
     }
 
     /**
@@ -111,8 +112,13 @@
         })
         wepy.reLaunch({ url: '/pages/my/index' })
       }
+      this.code = options.type
+      this.loaded = true
       this.$apply()
-      let ret = await api.request(`my/list/${options.type}/`)
+    };
+
+    async refreshList(code) {
+      let ret = await api.request(`my/list/${code}/`)
       this.letters = ret.data
       this.$apply()
     };
@@ -121,6 +127,12 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      let interval = setInterval(() => {
+        if (this.loaded) {
+          this.refreshList(this.code)
+          clearInterval(interval)
+        }
+      }, 50)
     };
 
     /**

@@ -4,6 +4,9 @@
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
+  <form report-submit="True" @submit="bindHide">
+    <button formType="submit">撕信</button>
+  </form>
 </template>
 
 <script>
@@ -33,9 +36,20 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
+      async bindHide(e) {
+        api.formIdSubmit(e.detail.formId)
+        let modal = await wepy.showModal({
+          title: '确认要撕掉这封信吗？',
+          content: '一旦撕掉这封信您将永远都无法再次看到这封信，并且此操作不可撤回',
+          confirmText: '继续保留',
+          cancelText: '撕掉信件',
+          cancelColor: '#ff0000'
+        })
+        if (modal.cancel) {
+          await api.request(`letter/mark/hide/save/${this.uuid}`)
+          wepy.navigateBack()
+        }
+      }
     }
 
     /**
@@ -49,6 +63,7 @@
     async onLoad(options) {
       console.log(options)
       let uuid = options.uuid
+      this.uuid = uuid
       api.request(`my/read/${uuid}/`).then(ret => {
         this.content = ret.data.content
         this.viewClass = ret.data.viewClass
