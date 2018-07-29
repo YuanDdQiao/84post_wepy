@@ -107,6 +107,11 @@
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import amap from '@/utils/amap'
+
+  function isArray(o) {
+    return Object.prototype.toString.call(o) === '[object Array]'
+  }
 
   export default class extends wepy.page {
     /**
@@ -253,13 +258,46 @@
         await api.getAuthScope('scope.userLocation')
 
         let res = await wepy.chooseLocation()
-
         console.log(res)
 
+        // postcode
+        amap.regeo(res.longitude, res.latitude).then(ret => {
+          if (parseInt(ret.data.status) !== 1) return
+          let pc = require('chinese-postcode')
+          console.log(ret)
+
+          let province = ret.data.regeocode.addressComponent.province
+          let city = ret.data.regeocode.addressComponent.city
+          let county = ret.data.regeocode.addressComponent.district
+
+          if (isArray(city)) {
+            city = province
+          }
+          province = province.replace(/[省市]$/, '')
+
+          let pcc = {
+            province,
+            city,
+            county
+          }
+          console.log(pcc)
+
+          let postcode = pc.getPostcode(pcc)
+          console.log(postcode)
+
+          if (postcode) {
+            this.toZip = postcode
+            this.$parent.globalData.letterInfo.shiftInfo.toZip = postcode
+            this.$apply()
+            wepy.setStorage({
+              key: `letterInfo-shiftInfo-toZip`,
+              data: postcode
+            })
+          }
+        })
+
         this.$parent.globalData.letterInfo.shiftInfo.toAddress = res
-
         this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.name
-
         if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
           this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.address
         }
@@ -280,13 +318,46 @@
         await api.getAuthScope('scope.userLocation')
 
         let res = await wepy.chooseLocation()
-
         console.log(res)
 
+        // postcode
+        amap.regeo(res.longitude, res.latitude).then(ret => {
+          if (parseInt(ret.data.status) !== 1) return
+          let pc = require('chinese-postcode')
+          console.log(ret)
+
+          let province = ret.data.regeocode.addressComponent.province
+          let city = ret.data.regeocode.addressComponent.city
+          let county = ret.data.regeocode.addressComponent.district
+
+          if (isArray(city)) {
+            city = province
+          }
+          province = province.replace(/[省市]$/, '')
+
+          let pcc = {
+            province,
+            city,
+            county
+          }
+          console.log(pcc)
+
+          let postcode = pc.getPostcode(pcc)
+          console.log(postcode)
+
+          if (postcode) {
+            this.fromZip = postcode
+            this.$parent.globalData.letterInfo.shiftInfo.fromZip = postcode
+            this.$apply()
+            wepy.setStorage({
+              key: `letterInfo-shiftInfo-fromZip`,
+              data: postcode
+            })
+          }
+        })
+
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress = res
-
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.name
-
         if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
           this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.address
         }
