@@ -3,12 +3,15 @@
     <view class="{{ pickUp.viewClass }}" style="{{ pickUp.viewStyle }}">
       <view class="textarea">{{ pickUp.content }}</view>
       <view class="sign">{{ pickUp.sign }}</view>
-      <view class="date">{{ pickUp.submitDate }}</view>
+      <view class="date">{{ submitDate }}</view>
     </view>
 
     <block wx:if="{{saved}}">
       <!--已经保存（非挂号信）-->
       <view class="{{saveError ? 'error' : ''}} savenote">{{ saveMsg }}</view>
+      <form report-submit="True" @submit="bindReply" wx:if="{{ pickUp.canReply }}">
+        <button formType="submit">回复</button>
+      </form>
       <form report-submit="True" @submit="bindBack">
         <button formType="submit">完成</button>
       </form>
@@ -16,10 +19,10 @@
     <block wx:else>
       <!--选择是否保存（挂号信）-->
       <view>
-        <form report-submit="True" @submit="bindSaveForm">
+        <form report-submit @submit="bindSaveForm">
           <button class="confirmbutton" formType="submit">我要咯</button>
         </form>
-        <form report-submit="True" @submit="bindUnsaveForm">
+        <form report-submit @submit="bindUnsaveForm">
           <button class="lastbutton" formType="submit">塞回去</button>
         </form>
       </view>
@@ -30,6 +33,7 @@
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import dayjs from 'dayjs'
 
   export default class extends wepy.page {
     /**
@@ -46,7 +50,8 @@
       saved: false,
       saveMsg: '已经保存在我的信件',
       pickUp: {},
-      saveError: false
+      saveError: false,
+      submitDate: ''
     }
 
     /**
@@ -69,6 +74,19 @@
       },
       bindBack(e) {
         wepy.reLaunch({ url: '/pages/box/index' })
+      },
+      async bindReply(e) {
+        let ret = await api.request(`letter/address/${this.pickUp.id}`)
+        console.log(ret)
+        wepy.setStorageSync('letterInfo-shiftInfo-fromName', ret.data.to_name)
+        wepy.setStorageSync('letterInfo-shiftInfo-fromTel', ret.data.to_tel)
+        wepy.setStorageSync('letterInfo-shiftInfo-fromAddress', ret.data.to_address)
+        wepy.setStorageSync('letterInfo-shiftInfo-fromZip', ret.data.to_zip)
+        wepy.setStorageSync('letterInfo-shiftInfo-toName', ret.data.from_name)
+        wepy.setStorageSync('letterInfo-shiftInfo-toTel', ret.data.from_tel)
+        wepy.setStorageSync('letterInfo-shiftInfo-toAddress', ret.data.from_address)
+        wepy.setStorageSync('letterInfo-shiftInfo-toZip', ret.data.from_zip)
+        wepy.reLaunch({ url: '/pages/write/index' })
       }
     }
 
@@ -80,9 +98,12 @@
     /**
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
-    async onLoad() {
+    async onLoad(options) {
       this.pickUp = this.$parent.globalData.pickUp
       this.saved = this.pickUp.saved
+      // let submitTime = new Date(this.pickUp.submitTime)
+      // this.submitDate = `${submitTime.getFullYear()}-${submitTime.getMonth() + 1}-${submitTime.getDate()}`
+      this.submitDate = dayjs(this.pickUp.submitTime).format('YYYY-MM-DD')
       this.$apply()
       console.log(this.pickUp)
       this.$parent.globalData.pickUp = {} // 清理之前保存的信息
