@@ -154,7 +154,8 @@
     async onUnload() {
       this.$parent.globalData.currentLetter = {}
       this.$parent.globalData.letterInfo = {}
-      // console.log(this.$parent.globalData)
+      console.log(this.$parent.globalData)
+
       wepy.removeStorageSync('letterInfo-paperType')
       wepy.removeStorageSync('letterContent')
       wepy.removeStorageSync('letterSign')
@@ -167,7 +168,6 @@
       wepy.removeStorageSync('letterInfo-shiftInfo-fromAddress')
       wepy.removeStorageSync('letterInfo-shiftInfo-fromZip')
       wepy.removeStorageSync('letterInfo-letterStamp')
-      api.login()
     };
 
     /**
