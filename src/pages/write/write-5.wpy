@@ -155,7 +155,17 @@
       this.$parent.globalData.currentLetter = {}
       this.$parent.globalData.letterInfo = {}
       // console.log(this.$parent.globalData)
-      wepy.clearStorageSync()
+      wepy.removeStorageSync('letterInfo-paperType')
+      wepy.removeStorageSync('letterContent')
+      wepy.removeStorageSync('letterInfo-shiftInfo-toName')
+      wepy.removeStorageSync('letterInfo-shiftInfo-toTel')
+      wepy.removeStorageSync('letterInfo-shiftInfo-toAddress')
+      wepy.removeStorageSync('letterInfo-shiftInfo-toZip')
+      wepy.removeStorageSync('letterInfo-shiftInfo-fromName')
+      wepy.removeStorageSync('letterInfo-shiftInfo-fromTel')
+      wepy.removeStorageSync('letterInfo-shiftInfo-fromAddress')
+      wepy.removeStorageSync('letterInfo-shiftInfo-fromZip')
+      wepy.removeStorageSync('letterInfo-letterStamp')
       api.login()
     };
 
