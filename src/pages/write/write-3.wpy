@@ -258,7 +258,16 @@
         await api.getAuthScope('scope.userLocation')
 
         let res = await wepy.chooseLocation()
-        console.log(res)
+        console.log(res.data)
+
+        this.$parent.globalData.letterInfo.shiftInfo.toAddress = res
+        this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.name
+        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.address
+        }
+        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
+        }
 
         // postcode
         amap.regeo(res.longitude, res.latitude).then(ret => {
@@ -269,6 +278,8 @@
           let province = ret.data.regeocode.addressComponent.province
           let city = ret.data.regeocode.addressComponent.city
           let county = ret.data.regeocode.addressComponent.district
+
+          this.$parent.globalData.letterInfo.shiftInfo.toAddress.formattedAddress = ret.data.regeocode.formatted_address
 
           if (isArray(city)) {
             city = province
@@ -295,16 +306,6 @@
             })
           }
         })
-
-        this.$parent.globalData.letterInfo.shiftInfo.toAddress = res
-        this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.name
-        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
-          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = res.address
-        }
-        if (this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName === '') {
-          this.$parent.globalData.letterInfo.shiftInfo.toAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
-        }
-
         wepy.setStorage({
           key: 'letterInfo-shiftInfo-toAddress',
           data: this.$parent.globalData.letterInfo.shiftInfo.toAddress
@@ -318,7 +319,16 @@
         await api.getAuthScope('scope.userLocation')
 
         let res = await wepy.chooseLocation()
-        console.log(res)
+        console.log(res.data)
+
+        this.$parent.globalData.letterInfo.shiftInfo.fromAddress = res
+        this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.name
+        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.address
+        }
+        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
+          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
+        }
 
         // postcode
         amap.regeo(res.longitude, res.latitude).then(ret => {
@@ -329,6 +339,8 @@
           let province = ret.data.regeocode.addressComponent.province
           let city = ret.data.regeocode.addressComponent.city
           let county = ret.data.regeocode.addressComponent.district
+
+          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.formattedAddress = ret.data.regeocode.formatted_address
 
           if (isArray(city)) {
             city = province
@@ -355,15 +367,6 @@
             })
           }
         })
-
-        this.$parent.globalData.letterInfo.shiftInfo.fromAddress = res
-        this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.name
-        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
-          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = res.address
-        }
-        if (this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName === '') {
-          this.$parent.globalData.letterInfo.shiftInfo.fromAddress.showName = `${res.address.latitude}, ${res.address.longtitude}`
-        }
 
         wepy.setStorage({
           key: 'letterInfo-shiftInfo-fromAddress',
