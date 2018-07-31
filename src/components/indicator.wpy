@@ -94,7 +94,7 @@
     left: 0;
 
     width: ~"750rpx";
-    height: ~"92rpx";
+    height: ~"40rpx";
 
     font-size: ~"28rpx";
     line-height: ~"40rpx";
