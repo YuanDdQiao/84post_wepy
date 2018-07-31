@@ -229,7 +229,6 @@
 
     async onLaunch() {
       await api.login()
-      await api.qiandao()
     }
   }
 </script>
