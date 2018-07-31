@@ -1,7 +1,21 @@
 <template>
   <view class="indicator">
     <view class="write">写信</view>
+    <view class="circles left-circles">
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+    </view>
     <view class="choose">选择类型</view>
+    <view class="circles right-circles">
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+      <view class="circle"></view>
+    </view>
     <view class="send">寄出</view>
   </view>
 </template>
@@ -99,6 +113,39 @@
 
     font-size: ~"28rpx";
     line-height: ~"28rpx";
+
+    .circles {
+      display: flex;
+      flex-direction: row;
+
+      &.left-circles {
+        position: absolute;
+        left: ~"160rpx";
+        top: ~"42rpx";
+
+        .circle:first-child {
+          margin-left: 0;
+        }
+      }
+
+      &.right-circles {
+        position: absolute;
+        right: ~"160rpx";
+        top: ~"42rpx";
+
+        .circle:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .circle {
+      width: ~"8rpx";
+      height: ~"8rpx";
+      border-radius: ~"4rpx";
+      background-color: @split-color;
+      margin: 0 ~"10rpx";
+    }
 
     .write {
       position: absolute;
