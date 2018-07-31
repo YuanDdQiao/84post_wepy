@@ -87,6 +87,7 @@
     box-shadow: 0 2px 4px 0 rgba(205, 205, 205, 0.50);
 
     display: flex;
+    align-items: center;
     flex-direction: row;
 
     position: fixed;
@@ -94,22 +95,29 @@
     left: 0;
 
     width: ~"750rpx";
-    height: ~"40rpx";
+    height: ~"92rpx";
 
     font-size: ~"28rpx";
-    line-height: ~"40rpx";
-
-    padding: ~"26rpx" ~"4rpx";
+    line-height: ~"28rpx";
 
     .write {
+      position: absolute;
+      left: ~"60rpx";
+      top: ~"32rpx";
       color: @complete-color;
     }
 
     .choose {
+      position: absolute;
+      left: ~"320rpx";
+      top: ~"32rpx";
       color: @weak-text-color;
     }
 
     .send {
+      position: absolute;
+      right: ~"60rpx";
+      top: ~"32rpx";
       color: @weak-text-color;
     }
   }
