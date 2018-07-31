@@ -1,22 +1,22 @@
 <template>
   <view class="indicator">
-    <view class="write">写信</view>
     <view class="circles left-circles">
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
+      <view class="circle {{ indicator.left >= 1 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.left >= 2 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.left >= 3 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.left >= 4 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.left >= 5 ? 'highlight' : ''}}"></view>
     </view>
-    <view class="choose">选择类型</view>
     <view class="circles right-circles">
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
-      <view class="circle"></view>
+      <view class="circle {{ indicator.right >= 1 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.right >= 2 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.right >= 3 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.right >= 4 ? 'highlight' : ''}}"></view>
+      <view class="circle {{ indicator.right >= 5 ? 'highlight' : ''}}"></view>
     </view>
-    <view class="send">寄出</view>
+    <view class="write {{ indicator.status >= 1 ? 'highlight' : ''}}">写信</view>
+    <view class="choose {{ indicator.status >= 2 ? 'highlight' : ''}}">选择类型</view>
+    <view class="send {{ indicator.status >= 3 ? 'highlight' : ''}}">寄出</view>
   </view>
 </template>
 
@@ -24,72 +24,35 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
-    /**
-     * 组件的对外属性，是属性名到属性设置的映射表，属性设置中可包含三个字段， type 表示属性类型、 value 表示属性初始值、 observer 表示属性值被更改时的响应函数
-     */
-    properties = {
-      status: Number
+    props = {
+      status: String,
+      left: String,
+      right: String
     }
 
-    /**
-     * 组件的内部数据，和 properties 一同用于组件的模版渲染
-     */
-    data = {}
+    data = {
+      indicator: {
+        status: 0
+      }
+    }
 
-    /**
-     * 组件的方法，包括事件响应函数和任意的自定义方法
-     */
-    methods = {}
+    onLoad() {
+      console.log(this.status)
+      console.log(this.left)
+      console.log(this.right)
 
-    /**
-     * 类似于mixins和traits的组件间代码复用机制
-     */
-    behaviors = []
+      this.indicator.status = this.status ? parseInt(this.status) : 0
+      this.indicator.left = this.left ? parseInt(this.left) : 0
+      if (!this.indicator.left && this.indicator.status >= 2) {
+        this.indicator.left = 5
+      }
+      this.indicator.right = this.right ? parseInt(this.right) : 0
+      if (!this.indicator.right && this.indicator.status >= 3) {
+        this.indicator.right = 5
+      }
 
-    /**
-     * 组件间关系定义，参见
-     */
-    relations = {}
-
-    /**
-     * 组件接受的外部样式类
-     */
-    externalClasses = []
-
-    /**
-     * 一些组件选项
-     */
-    options = {}
-
-    /**
-     * 生命周期函数--在组件实例进入页面节点树时执行，注意此时不能调用 setData
-     */
-    async created(options) {
-    };
-
-    /**
-     * 生命周期函数--在组件实例进入页面节点树时执行
-     */
-    async attached() {
-    };
-
-    /**
-     * 生命周期函数--在组件布局完成后执行，此时可以获取节点信息（使用 SelectorQuery ）
-     */
-    async ready() {
-    };
-
-    /**
-     * 生命周期函数--在组件实例被移动到节点树另一个位置时执行
-     */
-    async moved() {
-    };
-
-    /**
-     * 生命周期函数--在组件实例被从页面节点树移除时执行
-     */
-    async detached() {
-    };
+      this.$apply()
+    }
   }
 </script>
 
@@ -118,6 +81,18 @@
       display: flex;
       flex-direction: row;
 
+      .circle {
+        width: ~"8rpx";
+        height: ~"8rpx";
+        border-radius: ~"4rpx";
+        background-color: @split-color;
+        margin: 0 ~"10rpx";
+
+        &.highlight {
+          background-color: @complete-color;
+        }
+      }
+
       &.left-circles {
         position: absolute;
         left: ~"160rpx";
@@ -139,19 +114,11 @@
       }
     }
 
-    .circle {
-      width: ~"8rpx";
-      height: ~"8rpx";
-      border-radius: ~"4rpx";
-      background-color: @split-color;
-      margin: 0 ~"10rpx";
-    }
-
     .write {
       position: absolute;
       left: ~"60rpx";
       top: ~"32rpx";
-      color: @complete-color;
+      color: @weak-text-color;
     }
 
     .choose {
@@ -166,6 +133,10 @@
       right: ~"60rpx";
       top: ~"32rpx";
       color: @weak-text-color;
+    }
+
+    .highlight {
+      color: @complete-color;
     }
   }
 
