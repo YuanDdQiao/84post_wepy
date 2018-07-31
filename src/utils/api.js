@@ -2,15 +2,14 @@ import wepy from 'wepy'
 import 'wepy-async-function'
 
 // 服务器接口地址
-// const host = 'http://127.0.0.1:8000'
-const host = 'https://84.singee.site'
+const host = '__HOST__'
 const apiRoot = `${host}/api/v1`
 
 // 分享信息
 const shareInfo = {
   title: '来给我写封信吧！',
   imageUrl: `${host}/media/share/default.png`,
-  boxTitle: '看看你的邮件到哪了！'
+  boxTitle: '看看你的信件到哪了！'
 }
 
 // 普通请求（wx.request 封装）
