@@ -1,5 +1,5 @@
 <template>
-  <view class="more-space">
+  <view class="uber">
     <view class="text-center">
       <button class="btn btn-sm btn-inline">居中了</button>
       <button class="btn btn-sm btn-inline">最多</button>
