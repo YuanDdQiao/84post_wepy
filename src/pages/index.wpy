@@ -87,6 +87,14 @@
       async bindGetPoint(e) {
         api.formIdSubmit(e.detail.formId)
         this.qiandao()
+      },
+      async bindWrite(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({ url: '/pages/write/index' })
+      },
+      async bindBox(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({ url: '/pages/box/index' })
       }
     }
 
