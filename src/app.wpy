@@ -112,12 +112,6 @@
     box-shadow: 0 2px 4px 0 #D4CEBE;
   }
 
-  .indicator {
-    /* 进度指示 + 筛选器 */
-    background: #FDFDFD;
-    box-shadow: 0 2px 4px 0 rgba(205, 205, 205, 0.50);
-  }
-
   /* legacy */
 
   .container {
@@ -127,41 +121,6 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-  }
-
-  .processbarholder {
-    position: fixed;
-    width: 100vw;
-    height: ~"70rpx";
-    background-color: #09427F;
-    font-size: ~"26rpx";
-    color: rgba(255, 255, 255, 0.3);
-    top: 0;
-    z-index: 100;
-
-  }
-
-  .progress {
-    width: 33vw;
-    height: ~"70rpx";
-    float: left;
-    text-align: center;
-    padding-top: ~"18rpx";
-    border-top: 2px dashed rgba(255, 255, 255, 0.3);
-  }
-
-  .progress-middle {
-    width: 34vw;
-    height: ~"70rpx";
-    float: left;
-    text-align: center;
-    padding-top: ~"18rpx";
-    border-top: 2px dashed rgba(255, 255, 255, 0.3);
-  }
-
-  .processdone {
-    border-top: 2px solid white;
-    color: white;
   }
 
   .nomore {

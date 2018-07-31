@@ -1,10 +1,6 @@
 <template>
+  <indicator/>
   <view>
-    <view class="processbarholder">
-      <view class="progress processdone">写</view>
-      <view class="progress-middle">选</view>
-      <view class="progress">寄</view>
-    </view>
     <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <view class="noteanddone">
@@ -26,6 +22,7 @@
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import Indicator from '@/components/indicator'
 
   export default class extends wepy.page {
     /**
@@ -47,6 +44,10 @@
       todayDate: '',
       paperType: {},
       sign: ''
+    }
+
+    components = {
+      indicator: Indicator
     }
 
     /**

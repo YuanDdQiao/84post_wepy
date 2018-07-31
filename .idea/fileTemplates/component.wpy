@@ -1,0 +1,86 @@
+<template>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    /**
+     * 组件的对外属性，是属性名到属性设置的映射表，属性设置中可包含三个字段， type 表示属性类型、 value 表示属性初始值、 observer 表示属性值被更改时的响应函数
+     */
+    properties = {
+      myProperty: { // 属性名
+        type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+        value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
+        observer: function(newVal, oldVal, changedPath) {
+          // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串, 如：'_propertyChange'
+          // 通常 newVal 就是新设置的数据， oldVal 是旧数据
+        }
+      },
+      myProperty2: String // 简化的定义方式
+    }
+
+    /**
+     * 组件的内部数据，和 properties 一同用于组件的模版渲染
+     */
+    data = {}
+
+    /**
+     * 组件的方法，包括事件响应函数和任意的自定义方法
+     */
+    methods = {}
+
+    /**
+     * 类似于mixins和traits的组件间代码复用机制
+     */
+    behaviors = []
+
+    /**
+     * 组件间关系定义，参见
+     */
+    relations = {}
+
+    /**
+     * 组件接受的外部样式类
+     */
+    externalClasses = []
+
+    /**
+     * 一些组件选项
+     */
+    options = {}
+
+    /**
+     * 生命周期函数--在组件实例进入页面节点树时执行，注意此时不能调用 setData
+     */
+    async created(options) {
+    };
+
+    /**
+     * 生命周期函数--在组件实例进入页面节点树时执行
+     */
+    async attached() {
+    };
+
+    /**
+     * 生命周期函数--在组件布局完成后执行，此时可以获取节点信息（使用 SelectorQuery ）
+     */
+    async ready() {
+    };
+
+    /**
+     * 生命周期函数--在组件实例被移动到节点树另一个位置时执行
+     */
+    async moved() {
+    };
+
+    /**
+     * 生命周期函数--在组件实例被从页面节点树移除时执行
+     */
+    async detached() {
+    };
+  }
+</script>
+
+<style lang="less">
+</style>
