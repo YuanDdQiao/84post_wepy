@@ -36,7 +36,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '选择类型'
+      navigationBarTitleText: '选择信件类型'
     }
 
     components = {

@@ -47,7 +47,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '信封预览'
+      navigationBarTitleText: '预览并寄出'
     }
 
     components = {

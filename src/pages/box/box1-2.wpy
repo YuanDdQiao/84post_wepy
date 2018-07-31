@@ -9,7 +9,7 @@
       <view class="note">
         <text>取件号是当信件到达目的地后通过短信或微信通知发送给收件人的号码。挂号信以及快递必须凭取件号取件，以保证信件的隐私。</text>
       </view>
-      <button class="confirmbutton" formType="submit">取件</button>
+      <button class="confirmbutton" formType="submit">取信</button>
       <image class="typelogo" src="/images/84_EXPRESS.png"></image>
     </form>
   </view>
@@ -26,7 +26,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '取件'
+      navigationBarTitleText: '取信'
     }
 
     /**

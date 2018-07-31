@@ -16,7 +16,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '很有仪式感的打开'
+      navigationBarTitleText: '拆信'
     }
 
     /**

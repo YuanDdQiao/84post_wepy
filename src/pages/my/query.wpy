@@ -19,7 +19,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '查询物流'
+      navigationBarTitleText: '物流查询'
     }
 
     /**

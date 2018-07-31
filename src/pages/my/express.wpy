@@ -30,7 +30,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '物流详情'
+      navigationBarTitleText: '物流查询结果'
     }
 
     /**

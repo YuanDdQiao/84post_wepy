@@ -113,7 +113,7 @@
      * 页面配置对象，对应于原生的 page.json 文件
      */
     config = {
-      navigationBarTitleText: '填写信息'
+      navigationBarTitleText: '填写收发信息'
     }
 
     components = {
