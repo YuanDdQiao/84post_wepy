@@ -153,11 +153,11 @@
         'pages/box/box-2',
         'pages/box/box-3',
         'pages/my/index',
+        'pages/my/recharge',
         'pages/my/list',
         'pages/my/read',
-        'pages/my/query',
-        'pages/my/express',
-        'pages/my/recharge',
+        'pages/complex/query',
+        'pages/complex/express',
         'pages/complex/normal'
       ],
       window: {

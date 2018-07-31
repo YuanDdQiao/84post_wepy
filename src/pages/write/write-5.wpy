@@ -93,7 +93,7 @@
       },
       bindTrack(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.navigateTo({ url: `/pages/my/express?q=${e.target.dataset.express}` })
+        wepy.navigateTo({ url: `/pages/complex/express?q=${e.target.dataset.express}` })
       }
     }
 
@@ -197,7 +197,7 @@
       if (this.letterTypeType === 1) {
         path = `/pages/complex/normal?fromUID=${userId}`
       } else {
-        path = `/pages/my/express?fromUID=${userId}&q=${this.expressNumber}`
+        path = `/pages/complex/express?fromUID=${userId}&q=${this.expressNumber}`
       }
       return {
         title: '我给你写了一封信，请查收～',

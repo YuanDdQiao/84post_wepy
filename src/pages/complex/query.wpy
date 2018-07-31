@@ -106,7 +106,7 @@
       let userId = wepy.getStorageSync('userId')
       return {
         title: '物流查询',
-        path: `/pages/my/query?fromUID=${userId}`,
+        path: `/pages/complex/query?fromUID=${userId}`,
         imageUrl: api.shareInfo.imageUrl
       }
     };

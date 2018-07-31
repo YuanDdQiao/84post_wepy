@@ -70,7 +70,7 @@
         wepy.reLaunch({ url: '/pages/my/index' })
       }
 
-      let ret = await api.request(`my/query/${this.expressNumber}/`)
+      let ret = await api.request(`complex/query/${this.expressNumber}/`)
       if (ret.statusCode === 404) {
         this.info = [{
           type: 0,
@@ -82,7 +82,7 @@
           content: '该运单信息不存在',
           showCancel: false
         })
-        wepy.redirectTo({ url: '/pages/my/query' })
+        wepy.redirectTo({ url: '/pages/complex/query' })
       }
       console.log(ret.data)
       this.info = ret.data.info
@@ -134,7 +134,7 @@
       let userId = wepy.getStorageSync('userId')
       return {
         title: '物流信息',
-        path: `/pages/my/express?fromUID=${userId}&q=${this.expressNumber}`,
+        path: `/pages/complex/express?fromUID=${userId}&q=${this.expressNumber}`,
         imageUrl: api.shareInfo.imageUrl
       }
     };

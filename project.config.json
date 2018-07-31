@@ -93,13 +93,13 @@
 				{
 					"id": -1,
 					"name": "根据运单号查询（无参数）",
-					"pathName": "pages/my/query",
+          "pathName": "pages/complex/query",
 					"query": ""
 				},
 				{
 					"id": 10,
 					"name": "根据运单号查询（带参数）",
-					"pathName": "pages/my/query",
+          "pathName": "pages/complex/query",
 					"query": "q=518182634711"
 				},
 				{
