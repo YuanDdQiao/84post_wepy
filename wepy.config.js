@@ -14,7 +14,6 @@ module.exports = {
   },
   resolve: {
     alias: {
-      counter: path.join(__dirname, 'src/components/counter'),
       '@': path.join(__dirname, 'src')
     },
     aliasFields: ['wepy', 'weapp'],
@@ -24,9 +23,6 @@ module.exports = {
     less: {
       compress: prod
     },
-    /*sass: {
-      outputStyle: 'compressed'
-    },*/
     babel: {
       sourceMap: true,
       presets: [
@@ -40,16 +36,21 @@ module.exports = {
       ]
     }
   },
-  plugins: {},
+  plugins: {
+    'replace': {
+      filter: /api\.js$/g,
+      config: {
+        find: /__HOST__/g,
+        replace: process.env.API_HOST === 'local' ? 'http://127.0.0.1:8000' : 'https://84.singee.site'
+      }
+    }
+  },
   appConfig: {
     noPromiseAPI: ['createSelectorQuery']
   }
 }
 
 if (prod) {
-
-  // 压缩sass
-  // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
   // 压缩js
   module.exports.plugins = {
