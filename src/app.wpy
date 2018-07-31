@@ -7,10 +7,6 @@
     min-height: calc(~"100% - 90rpx");
     padding: ~"45rpx";
 
-    color: @text-color;
-    font-size: ~"28rpx";
-    letter-spacing: 0;
-
     background: url(@bg) no-repeat center center;
     background-size: cover;
 
@@ -22,6 +18,22 @@
   view {
     margin: 0;
     padding: 0;
+
+    color: @text-color;
+    font-size: ~"28rpx";
+    line-height: ~"28rpx";
+    text-align: center;
+    letter-spacing: 0;
+  }
+
+  button {
+    background: none;
+    margin: 0;
+    padding: 0;
+
+    &::after {
+      border: none;
+    }
   }
 
   button.btn {
@@ -30,11 +42,7 @@
     font-size: ~"36rpx";
     letter-spacing: 0;
 
-    &::after {
-      border: none;
-    }
-
-    /*展示样式*/
+    // 展示样式
 
     &.btn-block {
       display: block;
@@ -44,7 +52,7 @@
       display: inline-block;
     }
 
-    /*按钮尺寸*/
+    // 按钮尺寸
 
     &.btn-sm {
       width: ~"192rpx";
@@ -59,7 +67,7 @@
       width: ~"624rpx";
     }
 
-    /*按钮类别（颜色）*/
+    // 按钮类别（颜色）
 
     & {
       background-image: linear-gradient(-180deg, #FCFCFC 0%, #F9F9F9 100%);
@@ -91,7 +99,7 @@
   }
 
   .uber {
-    /*底板*/
+    /* 底板 */
     background-image: linear-gradient(-180deg, #FBFBFB 0%, #F9F9F9 100%);
     border: 1px solid #DCDCDC;
     box-shadow: 0 2px 4px 0 rgba(225, 225, 225, 0.50);
@@ -110,7 +118,7 @@
     box-shadow: 0 2px 4px 0 rgba(205, 205, 205, 0.50);
   }
 
-  /*legacy*/
+  /* legacy */
 
   .container {
     height: 100%;

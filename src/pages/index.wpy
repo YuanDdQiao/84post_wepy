@@ -1,22 +1,23 @@
 <template>
-  <view class="uber">
-    <view class="text-center">
-      <button class="btn btn-sm btn-inline">居中了</button>
-      <button class="btn btn-sm btn-inline">最多</button>
-      <button class="btn btn-sm btn-inline">三个字</button>
-    </view>
-    <view>
-      <button class="btn btn-md btn-inline btn-primary">主要按钮</button>
-      <button class="btn btn-md btn-inline">次要按钮</button>
-    </view>
-    <button class="btn btn-lg">次要大按钮</button>
-    <button class="btn">默认样式</button>
+  <view class="top">
+    <form report-submit="True" @submit="bindHelp">
+      <button class="help" formType="submit">?</button>
+    </form>
+    <view class="blank"></view>
+    <form report-submit="True" @submit="bindRecharge">
+      <button class="point" formType="submit">
+        <view>剩余点券：{{ pointStr }}</view>
+        <view class="split">|</view>
+        <view class="plus">+</view>
+      </button>
+    </form>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import utils from '@/utils/utils'
 
   export default class extends wepy.page {
     /**
@@ -29,14 +30,26 @@
     /**
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
-    data = {}
+    data = {
+      point: 0,
+      pointStr: '0'
+    }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindSubmit(e) {
+      async bindHelp(e) {
         api.formIdSubmit(e.detail.formId)
+        wepy.showModal({
+          title: '@季节',
+          content: '和你抱在一起睡过一张床的某人喊你补充内容！',
+          showCancel: false
+        })
+      },
+      async bindRecharge(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({ url: '/pages/my/recharge' })
       }
     }
 
@@ -55,9 +68,64 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.refreshPoint()
+    };
+
+    async refreshPoint() {
+      api.request('user/balance/', false).then((e) => {
+        this.point = e.data.balance
+        this.pointStr = utils.parseStr(e.data.balance, 4)
+        this.$apply()
+      })
     };
   }
 </script>
 
 <style lang="less">
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .help {
+      height: ~"52rpx";
+      min-width: ~"52rpx";
+
+      line-height: ~"52rpx";
+      font-weight: bold;
+
+      background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
+      border: ~"1.3rpx" solid #DCDCDC;
+      border-radius: 50%;
+      box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.50);
+
+      // 文字颜色
+      color: #8C8C8C;
+    }
+
+    .blank {
+      flex-grow: 1;
+    }
+
+    .point {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      height: ~"52rpx";
+      width: ~"262rpx";
+      line-height: ~"52rpx";
+      text-align: center;
+      background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
+      border: ~"1.3rpx" solid #DCDCDC;
+      border-radius: ~"26rpx";
+
+      .split {
+      }
+      .plus {
+      }
+    }
+  }
+
+
 </style>
