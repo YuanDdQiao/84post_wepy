@@ -49,7 +49,7 @@
     methods = {
       bindWrite(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.switchTab({ url: '/pages/write/index' })
+        wepy.redirectTo({ url: '/pages/write/index' })
       },
       bindSearch(e) {
         api.formIdSubmit(e.detail.formId)

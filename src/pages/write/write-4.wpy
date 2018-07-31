@@ -1,11 +1,6 @@
 <template>
+  <indicator status="2" right="4"></indicator>
   <view>
-    <view class="processbarholder ">
-
-      <view class="progress processdone">写</view>
-      <view class="progress-middle processdone">选</view>
-      <view class="progress processdone">寄</view>
-    </view>
     <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
 
     <block wx:if="{{ fee !== 0}}">
@@ -45,6 +40,7 @@
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import Indicator from '@/components/indicator'
 
   export default class extends wepy.page {
     /**
@@ -52,6 +48,10 @@
      */
     config = {
       navigationBarTitleText: '信封预览'
+    }
+
+    components = {
+      indicator: Indicator
     }
 
     /**

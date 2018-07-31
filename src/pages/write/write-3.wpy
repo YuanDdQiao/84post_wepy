@@ -1,12 +1,6 @@
 <template>
+  <indicator status="2" right="2"></indicator>
   <view class="bigholder">
-
-    <view class="processbarholder ">
-
-      <view class="progress processdone">写</view>
-      <view class="progress-middle processdone">选</view>
-      <view class="progress processdone">寄</view>
-    </view>
     <form report-submit="True" @submit="bindSubmit">
       <view class="infoform">
 
@@ -108,6 +102,7 @@
   import wepy from 'wepy'
   import api from '@/utils/api'
   import amap from '@/utils/amap'
+  import Indicator from '@/components/indicator'
 
   function isArray(o) {
     return Object.prototype.toString.call(o) === '[object Array]'
@@ -119,6 +114,10 @@
      */
     config = {
       navigationBarTitleText: '填写信息'
+    }
+
+    components = {
+      indicator: Indicator
     }
 
     /**
@@ -231,8 +230,8 @@
             })
           } else {
             this.$parent.globalData.writeIndexError = errMsg
-            wepy.switchTab({
-              url: 'index'
+            wepy.redirectTo({
+              url: '/pages/write/index'
             })
           }
         } else {
@@ -609,16 +608,14 @@
     border-radius: 6px;
     background-color: white;
 
+    &.choose {
+      border: 3px #FF4A19 solid;
+      border-radius: 6px;
+    }
   }
 
   .stampbutton:after {
     border: none;
-  }
-
-  .choose {
-    border: 3px #FF4A19 solid;
-    border-radius: 6px;
-
   }
 
   .stampview {
@@ -626,7 +623,6 @@
     height: ~"120rpx";
     margin: 0;
     border-radius: 2px;
-
   }
 
   .stampselector {
@@ -637,7 +633,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
   }
 
   .resetbutton {
@@ -645,7 +640,6 @@
     width: 60vw;
     margin-bottom: 10vh;
     border: 1px #ED725A dashed;
-
   }
 
   .nextbutton {
@@ -653,23 +647,11 @@
     width: 60vw;
     color: white;
     background-color: #F17250;
-
-  }
-
-  .processbarholderfix {
-    width: 100vw;
-    height: ~"70rpx";
-    position: fixed;
-    background-color: #09427F;
-    font-size: ~"24rpx";
-    color: rgba(255, 255, 255, 0.3);
-    margin-bottom: ~"40rpx";
   }
 
   .chosen {
     color: #1562B3;
     font-style: normal;
-
   }
 
   .lineerror {

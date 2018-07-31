@@ -1,11 +1,6 @@
 <template>
+  <indicator status="2"></indicator>
   <view>
-    <view class="processbarholder ">
-
-      <view class="progress processdone">写</view>
-      <view class="progress-middle processdone">选</view>
-      <view class="progress">寄</view>
-    </view>
     <view class="topmargin">
       <block wx:for="{{ letterTypes }}" wx:key="id">
         <form report-submit="True" @submit="bindSubmit">
@@ -34,6 +29,7 @@
 <script>
   import wepy from 'wepy'
   import api from '@/utils/api'
+  import Indicator from '@/components/indicator'
 
   export default class extends wepy.page {
     /**
@@ -41,6 +37,10 @@
      */
     config = {
       navigationBarTitleText: '选择类型'
+    }
+
+    components = {
+      indicator: Indicator
     }
 
     /**
