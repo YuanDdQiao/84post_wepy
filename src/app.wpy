@@ -7,7 +7,7 @@
     min-height: calc(~"100% - 90rpx");
     padding: ~"45rpx";
 
-    background: url(@bg) no-repeat center center;
+    background: #FCF8F5 url(@bg) no-repeat center center;
     background-size: cover;
 
     & > view.more-space {
@@ -182,11 +182,13 @@
         'pages/complex/normal'
       ],
       window: {
-        backgroundTextStyle: 'light',
+        backgroundTextStyle: 'dark',
         navigationBarBackgroundColor: '#0D55A1',
         navigationBarTitleText: '84号邮局',
         navigationBarTextStyle: 'white',
-        backgroundColor: '#FAF9F6'
+        backgroundColor: '#FCF8F5',
+        backgroundColorTop: '#FCF8F5',
+        backgroundColorBottom: '#FCF8F5'
       },
       networkTimeout: {
         request: 60000
