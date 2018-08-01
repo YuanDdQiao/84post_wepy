@@ -276,6 +276,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: ~"20rpx";
+    border-radius: ~"300rpx";
   }
 
 </style>
