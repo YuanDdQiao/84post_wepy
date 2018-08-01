@@ -1,10 +1,15 @@
 <template>
+  <view class="indicator">
+    <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}}" wx:for="{{ paperType.types }}"
+          wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
+    </view>
+  </view>
   <view class="gofix">
     <view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>
     <view class="choosepapernote">滑动选择信纸</view>
     <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
 
-      <block wx:for="{{ papers }}" wx:key="id">
+      <block wx:for="{{ paper.showPapers }}" wx:key="id">
         <swiper-item item-id="{{ item.id }}" class="papers">
           <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
             <view class="demotext">{{ item.demo_text }}</view>
@@ -13,11 +18,10 @@
           <!-- <view class="papername">{{ item.name }}</view> -->
         </swiper-item>
       </block>
-      <view></view>
 
     </swiper>
     <form report-submit="True" @submit="bindStartWriting">
-      <button formType="submit">选好了</button>
+      <button formType="submit" class="btn btn-primary">就选它</button>
     </form>
   </view>
 </template>
@@ -38,6 +42,15 @@
      * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
      */
     data = {
+      paperType: {
+        types: [],
+        currentItemId: 0
+      },
+      paper: {
+        papers: [],
+        showPapers: [],
+        currentItemId: 0
+      },
       todayDate: '',
       papers: {},
       current: 0,
@@ -66,6 +79,12 @@
       bindSwiperCurrentChange(e) {
         this.current = e.detail.current
         this.currentItem = this.papers[this.current]
+      },
+      async bindChoosePaperType(e) {
+        console.log(e)
+        this.paperType.currentItemId = parseInt(e.currentTarget.dataset.id)
+        this.$apply()
+        this.setShowPapers()
       }
     }
 
@@ -78,7 +97,6 @@
      * 生命周期函数--监听页面加载（一个页面只会调用一次）
      */
     async onLoad(options) {
-      console.log(options)
       // writeIndexError
       this.writeIndexError = this.$parent.globalData.writeIndexError
       this.$parent.globalData.writeIndexError = ''
@@ -92,62 +110,33 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
-      // 获取信纸
-      let res = await api.request('letter/paper/', false)
-      this.papers = res.data
+      await this.getPaperTypes()
+      await this.getPapers()
+      await this.setShowPapers()
+      // // 获取信纸
+      // let res = await api.request('letter/paper/', false)
+      // this.papers = res.data
       // 选择信纸
-      try {
-        let v = await wepy.getStorage({
-          key: 'letterInfo-paperType'
-        })
-        this.currentItemId = v.data.id
-
-        let pci = this.papers.find(p => p.id === this.currentItemId)
-        if (pci) {
-          this.currentItem = pci
-          this.currentItemId = this.currentItem.id
-        } else {
-          console.log('No id for letterInfo-paperType')
-          this.currentItem = this.papers[0]
-          this.currentItemId = this.currentItem.id
-        }
-      } catch (e) {
-        console.log('No storage for letterInfo-paperType')
-        this.currentItem = this.papers[0]
-        this.currentItemId = this.currentItem.id
-      }
-      this.$apply()
-    };
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
-    async onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
-    async onUnload() {
-    };
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    async onPullDownRefresh() {
-    };
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    async onReachBottom() {
+      // try {
+      //   let v = await wepy.getStorage({
+      //     key: 'letterInfo-paperType'
+      //   })
+      //   this.currentItemId = v.data.id
+      //
+      //   let pci = this.papers.find(p => p.id === this.currentItemId)
+      //   if (pci) {
+      //     this.currentItem = pci
+      //     this.currentItemId = this.currentItem.id
+      //   } else {
+      //     console.log('No id for letterInfo-paperType')
+      //     this.currentItem = this.papers[0]
+      //     this.currentItemId = this.currentItem.id
+      //   }
+      // } catch (e) {
+      //   console.log('No storage for letterInfo-paperType')
+      //   this.currentItem = this.papers[0]
+      //   this.currentItemId = this.currentItem.id
+      // }
     };
 
     /**
@@ -161,10 +150,50 @@
         imageUrl: api.shareInfo.imageUrl
       }
     };
+
+    async getPaperTypes() {
+      // 获取信纸类型
+      let r = await api.request('letter/paper/type/', false)
+      console.log(r)
+      this.paperType.types = r.data
+
+      // 选择信纸类型
+      this.paperType.currentItemId = r.data[0].id
+      this.$apply()
+    }
+
+    async getPapers() {
+      // 获取信纸
+      let r = await api.request('letter/paper/', false)
+      console.log(r)
+      this.paper.papers = r.data
+
+      // 选择信纸
+      this.paper.currentItemId = r.data[0].id
+      this.$apply()
+    }
+
+    async setShowPapers() {
+      this.paper.showPapers = this.paper.papers.filter(p => p.type.find(t => t.id === this.paperType.currentItemId))
+      this.$apply()
+    }
   }
 </script>
 
 <style lang="less">
+  @import "../../colors";
+
+  .indicator {
+    .item {
+      flex-grow: 1;
+      color: @weak-text-color;
+
+      &.chosen {
+        color: @complete-color;
+      }
+    }
+  }
+
   .papers {
     /* border: red 2px solid; */
     padding: ~"20rpx";
@@ -173,11 +202,11 @@
     margin-right: ~"40rpx";
   }
 
-  button {
-    color: white;
-    width: 60vw;
-    background-color: #F17250;
-  }
+  /*button {*/
+  /*color: white;*/
+  /*width: 60vw;*/
+  /*background-color: #F17250;*/
+  /*}*/
 
   .choosepapernote {
     text-align: center;
