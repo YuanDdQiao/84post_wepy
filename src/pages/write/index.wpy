@@ -20,10 +20,13 @@
       </block>
 
     </swiper>
-    <form report-submit="True" @submit="bindStartWriting">
-      <button formType="submit" class="btn btn-primary">就选它</button>
-    </form>
+
   </view>
+
+  <form report-submit="True" @submit="bindStartWriting">
+    <button formType="submit" class="btn btn-primary confirmPaper">就选它</button>
+  </form>
+
 </template>
 
 <script>
@@ -192,6 +195,12 @@
         color: @complete-color;
       }
     }
+  }
+
+  button.confirmPaper {
+    position: fixed;
+    bottom: ~"144rpx";
+    left: ~"226rpx";
   }
 
   .papers {
