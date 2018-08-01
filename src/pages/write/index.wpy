@@ -4,22 +4,21 @@
           wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
     </view>
   </view>
-  <view class="gofix">
-    <view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>
-    <view class="choosepapernote">滑动选择信纸</view>
-    <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ currentItemId }}">
-
-      <block wx:for="{{ paper.showPapers }}" wx:key="id">
-        <swiper-item item-id="{{ item.id }}" class="papers">
+  <view>
+    <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
+    <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
+      <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
+              indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
+              wx:if="{{ type.id === paperType.currentItemId }}">
+        <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
           <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
             <view class="demotext">{{ item.demo_text }}</view>
             <view class="todaydate">{{ todayDate }}</view>
           </view>
           <!-- <view class="papername">{{ item.name }}</view> -->
         </swiper-item>
-      </block>
-
-    </swiper>
+      </swiper>
+    </block>
 
   </view>
 
@@ -50,15 +49,9 @@
         currentItemId: 0
       },
       paper: {
-        papers: [],
-        showPapers: [],
         currentItemId: 0
       },
       todayDate: '',
-      papers: {},
-      current: 0,
-      currentItem: {},
-      currentItemId: -1,
       writeIndexError: ''
     }
 
@@ -80,14 +73,15 @@
         })
       },
       bindSwiperCurrentChange(e) {
-        this.current = e.detail.current
-        this.currentItem = this.papers[this.current]
+        console.log(e)
+        this.paper.currentItemId = e.detail.currentItemId
+        this.$apply()
       },
       async bindChoosePaperType(e) {
         console.log(e)
         this.paperType.currentItemId = parseInt(e.currentTarget.dataset.id)
         this.$apply()
-        this.setShowPapers()
+        this.initPaperId()
       }
     }
 
@@ -114,8 +108,7 @@
      */
     async onShow() {
       await this.getPaperTypes()
-      await this.getPapers()
-      await this.setShowPapers()
+      await this.initPaperId()
       // // 获取信纸
       // let res = await api.request('letter/paper/', false)
       // this.papers = res.data
@@ -165,19 +158,16 @@
       this.$apply()
     }
 
-    async getPapers() {
-      // 获取信纸
-      let r = await api.request('letter/paper/', false)
-      console.log(r)
-      this.paper.papers = r.data
-
-      // 选择信纸
-      this.paper.currentItemId = r.data[0].id
-      this.$apply()
-    }
-
-    async setShowPapers() {
-      this.paper.showPapers = this.paper.papers.filter(p => p.type.find(t => t.id === this.paperType.currentItemId))
+    async initPaperId() {
+      console.log(this.paperType.types)
+      console.log(this.paperType.currentItemId)
+      let q = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
+      console.log(q)
+      if (q && q.papers[0]) {
+        this.paper.currentItemId = q.papers[0].id
+      } else {
+        this.paper.currentItemId = 0
+      }
       this.$apply()
     }
   }
@@ -205,29 +195,15 @@
 
   .papers {
     /* border: red 2px solid; */
-    padding: ~"20rpx";
-    width: ~"690rpx" !important;
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
-  }
-
-  /*button {*/
-  /*color: white;*/
-  /*width: 60vw;*/
-  /*background-color: #F17250;*/
-  /*}*/
-
-  .choosepapernote {
-    text-align: center;
-    font-size: ~"38rpx";
-    margin-top: 2vh;
-    color: gray;
-    height: 8vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-
+    /*padding: ~"20rpx";*/
+    /*width: ~"690rpx" !important;*/
+    /*margin-left: ~"40rpx";*/
+    /*margin-right: ~"40rpx";*/
+    position: flexed;
+    left: ~"62rpx";
+    top: ~"148rpx";
+    width: ~"628rpx";
+    height: ~"918rpx";
   }
 
   .paper-01 {
@@ -236,8 +212,6 @@
     border: 2px solid #E5DCC2;
     outline: 6px solid #FCF7E8;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    width: ~"550rpx";
-    height: 64vh;
     color: #6E5F31;
     font-size: ~"32rpx";
     padding: ~"40rpx";
@@ -250,8 +224,6 @@
     border-style: double;
     border-radius: 6px;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
-    width: ~"550rpx";
-    height: 64vh;
     color: #6E1A36;
     font-size: ~"32rpx";
     padding: ~"40rpx";
@@ -264,8 +236,6 @@
     border-style: dashed;
     outline: 6px solid #F3F2F0;
     box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    width: ~"550rpx";
-    height: 64vh;
     color: #052B53;
     font-size: ~"32rpx";
     padding: ~"40rpx";
@@ -308,10 +278,6 @@
     left: ~"400rpx";
     font-size: ~"30rpx";
 
-  }
-
-  .gofix {
-    position: fixed;
   }
 
 
