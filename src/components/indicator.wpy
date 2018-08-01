@@ -60,24 +60,6 @@
   @import "../colors";
 
   .indicator {
-    background: #FDFDFD;
-    box-shadow: 0 2px 4px 0 rgba(205, 205, 205, 0.50);
-
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: ~"750rpx";
-    height: ~"92rpx";
-
-    font-size: ~"28rpx";
-    line-height: ~"28rpx";
-
-    z-index: 999;
 
     .circles {
       display: flex;
