@@ -1,39 +1,40 @@
 <template>
   <indicator status="2" right="4"></indicator>
-  <view>
-    <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
+  <view class="more-space">
+    <view>
+      <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
+    </view>
 
-    <block wx:if="{{ fee !== 0}}">
-      <view class="previewnote">您需支付 {{ fee }} 点券</view>
-      <view class="previewnote gray">余额 {{ balance }} 点券</view>
-    </block>
-    <block class="previewnote" wx:else>
-      <view class="previewnote">免费</view>
-    </block>
+    <view>您的信件已经准备好！</view>
 
-    <block wx:if="{{ fee !== 0}}">
-      <block wx:if="{{ balance >= fee }}">
-        <form report-submit="True" @submit="bindPayForm">
-          <button class="confirmbutton" formType="submit">确认支付并继续</button>
-        </form>
-      </block>
-      <block wx:else>
-        <form report-submit="True" @submit="bindPayForm">
-          <button class="confirmbutton" formType="submit">充值并继续</button>
-        </form>
-      </block>
-    </block>
+    <view class="texts">
+      <view class="current">
+        <view>当前余额</view>
+        <view>{{ balance }} 点券</view>
+      </view>
+      <view class="after" wx:if="{{ balance >= fee }}">
+        <view>支付后余额</view>
+        <view>{{ balance-fee }} 点券</view>
+      </view>
+      <view class="fee">
+        <view>信件费用</view>
+        <view>{{ fee }}点券</view>
+      </view>
+    </view>
 
 
-    <block wx:else>
-      <form report-submit="True" @submit="bindPayForm">
-        <button class="confirmbutton" formType="submit">确认并继续</button>
+    <view class="buttons">
+      <form report-submit="True" @submit="bindBackForm">
+        <button class="btn btn-md btn-inline btn-back" formType="submit">返回修改</button>
       </form>
-    </block>
 
-    <form report-submit="True" @submit="bindBackForm">
-      <button class="backbutton" formType="submit">返回并修改</button>
-    </form>
+      <form report-submit="True" @submit="bindPayForm">
+        <button class="btn btn-primary btn-md btn-inline" formType="submit">
+          <text wx:if="{{ balance >= fee }}">支付并寄出</text>
+          <text wx:else>充值并继续</text>
+        </button>
+      </form>
+    </view>
   </view>
 </template>
 
@@ -195,24 +196,45 @@
     margin-top: ~"40rpx";
   }
 
-  button {
-    position: absolute;
-    width: 60vw;
-    margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: ~"80rpx";
+  .buttons {
+    text-align: center;
 
+    .btn-back {
+      margin-right: ~"26rpx";
+    }
   }
 
-  .backbutton {
-    bottom: 6vh;
-  }
+  .texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .confirmbutton {
-    color: white;
-    background-color: #F17250;
-    bottom: 16vh;
+    .current,
+    .after,
+    .fee {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 
+      width: ~"632rpx";
+
+      view {
+        font-size: ~"28rpx";
+        line-height: 1.2;
+
+        &:last-child {
+          flex-grow: 1;
+          text-align: right;
+        }
+      }
+    }
+
+    .fee {
+      view {
+        font-size: ~"36rpx";
+        line-height: 1.2;
+      }
+    }
   }
 
   .envelopepreview {
