@@ -46,9 +46,11 @@
     data = {
       paperType: {
         types: [],
+        currentItem: {},
         currentItemId: 0
       },
       paper: {
+        currentItem: {},
         currentItemId: 0
       },
       todayDate: '',
@@ -63,23 +65,30 @@
         api.formIdSubmit(e.detail.formId)
         // console.log(this.current)
         // console.log(this.currentItem.id)
-        this.$parent.globalData.letterInfo.paperType = this.currentItem
-        wepy.setStorage({
-          key: 'letterInfo-paperType',
-          data: this.currentItem
-        })
+        this.$parent.globalData.letterInfo.paperType = this.paper.currentItem
+        // wepy.setStorage({
+        //   key: 'letterInfo-paperType',
+        //   data: this.currentItem
+        // })
+        console.log('this.$parent.globalData', this.$parent.globalData)
         wepy.navigateTo({
           url: 'write-1'
         })
       },
       bindSwiperCurrentChange(e) {
         console.log(e)
-        this.paper.currentItemId = e.detail.currentItemId
+        this.paper.currentItemId = parseInt(e.detail.currentItemId)
+        console.log('this.paper.currentItemId', this.paper.currentItemId)
+        console.log('this.paperType.currentItem.papers', this.paperType.currentItem.papers)
+        console.log('this.paper.currentItemId', this.paper.currentItemId)
+        this.paper.currentItem = this.paperType.currentItem.papers.find(p => p.id === this.paper.currentItemId) || {}
+        console.log('this.paper.currentItem', this.paper.currentItem)
         this.$apply()
       },
       async bindChoosePaperType(e) {
         console.log(e)
         this.paperType.currentItemId = parseInt(e.currentTarget.dataset.id)
+        this.paperType.currentItem = this.paperType.types.find(t => t.id === this.paperType.currentItemId) || {}
         this.$apply()
         this.initPaperId()
       }
@@ -154,17 +163,22 @@
       this.paperType.types = r.data
 
       // 选择信纸类型
-      this.paperType.currentItemId = r.data[0].id
+      this.paperType.currentItemId = parseInt(r.data[0].id)
+      this.paperType.currentItem = this.paperType.types.find(p => p.id === this.paperType.currentItemId) || {}
+      console.log('this.paperType.currentItemId', this.paperType.currentItemId)
+      console.log('this.paperType.currentItem', this.paperType.currentItem)
       this.$apply()
     }
 
     async initPaperId() {
-      console.log(this.paperType.types)
-      console.log(this.paperType.currentItemId)
-      let q = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
+      console.log('this.paperType.types', this.paperType.types)
+      console.log('this.paperType.currentItemId', this.paperType.currentItemId)
+      // let q = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
+      let q = this.paperType.currentItem
       console.log(q)
       if (q && q.papers[0]) {
         this.paper.currentItemId = q.papers[0].id
+        this.paper.currentItem = this.paperType.currentItem.papers.find(p => p.id === this.paper.currentItemId)
       } else {
         this.paper.currentItemId = 0
       }
