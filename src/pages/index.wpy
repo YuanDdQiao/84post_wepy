@@ -6,7 +6,7 @@
     <view class="blank"></view>
     <form report-submit="True" @submit="bindRecharge">
       <button class="point" formType="submit">
-        <view>剩余点券：{{ pointStr }}</view>
+        <view class="balance">剩余点券:{{ pointStr }}</view>
         <view class="split">|</view>
         <view class="plus">+</view>
       </button>
@@ -18,30 +18,34 @@
   <view class="qiandao">
 
     <form report-submit="True" @submit="bindGetPoint">
-      <button class="btn" formType="submit">
+      <button class="dailycheckbutton" formType="submit">
         <block wx:if="{{ canQiandao }}">
-          点我取内裤
+          <image class="dailycheckimage" src="/images/dailycheck_normal.png" alt="check"/>
         </block>
         <block wx:else="{{ canQiandao }}">
-          内裤已经取走啦
+          <image class="dailycheckimage" src="/images/dailycheck_normal.png" alt="empty"/>
         </block>
       </button>
     </form>
 
   </view>
 
-  <view class="big-button">
+  <view>
     <form report-submit="True" @submit="bindWrite">
-      <button formType="submit">
-        <image class="writeicon" src="/images/write.png" alt="write"/>
+      <button class="btnicon" formType="submit">
+        <image class="btnicon" src="/images/write.png" alt="write"/>
       </button>
     </form>
     <form report-submit="True" @submit="bindBox">
-      <button formType="submit" class="box">
-        <view class="text">信箱</view>
+      <button class="btnicon"  formType="submit">
+        <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
       </button>
     </form>
   </view>
+
+   <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
+   <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
+
 
 </template>
 
@@ -177,26 +181,44 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-
       height: ~"52rpx";
-      width: ~"262rpx";
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
       line-height: ~"52rpx";
       text-align: center;
+      font-weight: bold;
       background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
       border: ~"1.3rpx" solid #DCDCDC;
       border-radius: ~"26rpx";
 
-      .split {
+
+      .balance{
+        color: @weak-text-color;
+        font-size: ~"24rpx";
       }
+
+      .split {
+        color: @split-color;
+        font-size: ~"20rpx";
+        margin-left: ~"8rpx";
+        margin-right: ~"8rpx";
+        border: 1px solid #f4f4f4;
+      }
+
       .plus {
+        color: @most-em-color;
+        font-size: ~"34rpx";
+        margin-bottom: ~"8rpx";
+
+        
       }
     }
   }
 
 
   .logo {
-    margin: ~"60rpx" auto;
-    line-height: ~"96rpx";
+    margin-top: 8vh;
+    margin-bottom: ~"20rpx";
   }
 
   .logoimage{
@@ -204,11 +226,27 @@
     height: ~"104rpx";
   }
 
+  .nail{
 
-  .writeicon {
-    width: ~"130rpx";
-    height: ~"130rpx";
+    height:16px;
+    width: 16px;
+    position: absolute;
+    bottom: ~"30rpx";
+
+    &.nail-right{
+      right: ~"30rpx";
+
+    }
+
+    &.nail-left{
+      left: ~"30rpx";
+    }
+
+    
   }
+
+
+
 
 
   .qiandao {
@@ -217,34 +255,27 @@
     .btn {
       margin: auto;
     }
+
+    .dailycheckimage{
+      height: ~"132rpx";
+      width: ~"264rpx";
+    }
+
+    .dailycheckbutton{
+      height: ~"132rpx";
+      width: ~"264rpx";
+      margin: auto auto 10vh;
+    }
+
+
   }
 
-  .big-button button {
-    position: relative;
-    margin: ~"30rpx" auto;
-
-    border-radius: ~"130rpx";
-
-    .text {
-      position: absolute;
-      left: 0;
-      bottom: ~"32rpx";
-      width: ~"260rpx";
-      text-align: center;
-    }
-
-
-    }
-
-    &.box {
-      background-image: linear-gradient(-180deg, #FBFBFB 0%, #F9F9F9 100%);
-      border: ~"2rpx" solid #DCDCDC;
-      box-shadow: 0 ~"8rpx" ~"8rpx" 0 rgba(225, 225, 225, 0.50);
-
-      .text {
-        color: @weak-text-color;
-
-    }
+  .btnicon {
+    width: ~"260rpx";
+    height: ~"260rpx";
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: ~"20rpx";
   }
 
 </style>
