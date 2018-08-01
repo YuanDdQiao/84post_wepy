@@ -4,19 +4,18 @@
     <view class="topmargin">
       <block wx:for="{{ letterTypes }}" wx:key="id">
         <form report-submit="True" @submit="bindSubmit">
-          <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+          <view class="{{ item.class_attr }}">
             <button class="holder" formType="submit" id="{{ index }}">
               <view class="subholder">
-                <view class="infoholder">
-                  <view class="itemname">{{ item.name }}</view>
-                  <view class="typeprice">
-                    <block wx:if="{{ item.price === 0}}">免费</block>
-                    <block wx:else>{{ item.price }} 点券</block>
-                  </view>
-
-                  <view class="typenote">{{ item.describe }}</view>
+                <view class="itemname">{{ item.name }}</view>
+                <view class="typeprice">
+                  <block wx:if="{{ item.price === 0}}">免费</block>
+                  <block wx:else>{{ item.price }} 点券</block>
                 </view>
-                <view class="stamp"></view>
+                <view class="typenote">{{ item.describe }}</view>
+                <view class="stamp">
+                  <image src="{{ item.postmark }}"></image>
+                </view>
               </view>
             </button>
           </view>
@@ -24,10 +23,12 @@
       </block>
     </view>
   </view>
-  <view>
+  <view class="help">
     <form report-submit="True" @submit="bindHelp">
-      <button class="help" formType="submit">?</button>
-      <view>了解详细规则</view>
+      <button formType="submit">
+        <view class="help-icon">?</view>
+        <view class="help-text">了解详细规则</view>
+      </button>
     </form>
   </view>
 </template>
@@ -115,53 +116,45 @@
 
 <style lang="less">
 
+  @import "../../colors";
+
   .help {
-    height: ~"52rpx";
-    width: ~"52rpx";
 
-    line-height: ~"52rpx";
-    font-weight: bold;
+    margin-top: ~"96rpx";
 
-    background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
-    border: ~"1.3rpx" solid #DCDCDC;
-    border-radius: 50%;
-    box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.50);
+    button:active,
+    button:focus,
+    button:hover {
+      border: none;
+      background: none;
+    }
 
-    // 文字颜色
-    color: #8C8C8C;
+    .help-icon {
+      height: ~"52rpx";
+      width: ~"52rpx";
 
-    margin: 0 auto;
+      line-height: ~"52rpx";
+      font-weight: bold;
+
+      background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
+      border: ~"1.3rpx" solid #DCDCDC;
+      border-radius: 50%;
+      box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.50);
+
+      margin: 0 auto ~"16rpx";
+    }
+
+    .help-text {
+      color: @weak-text-color;
+    }
   }
 
-  .itemname {
-    font-weight: bold;
-    font-size: ~"52rpx";
-    margin: 0;
-    color: #052B53;
-
-  }
-
-  .typeprice {
-    font-size: ~"30rpx";
-    color: #FF4A19;
-    margin-top: -3vh;
-
-  }
-
-  .typenote {
-    font-size: ~"28rpx";
-    margin-top: 1vh;
-
-  }
-
-  .holder {
-    margin: ~"40rpx";
-    height: ~"320rpx";
+  button.holder {
+    width: ~"660rpx";
+    height: ~"260rpx";
     text-align: left;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
+    margin: 0 auto ~"24rpx";
+    padding: 2vh 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -170,70 +163,90 @@
     box-shadow: 0 4px 6px 0 #E4E2DC;
     border-radius: 6px;
 
-  }
+    .subholder {
+      margin: 0;
+      height: 100%;
+      border-top: 2px #E6E6E6 dashed;
+      padding-left: ~"40rpx";
+      padding-right: ~"30rpx";
+      position: relative;
 
-  .subholder {
-    margin: 0;
-    height: 100%;
-    border-top: 2px #E6E6E6 dashed;
-    padding-left: ~"40rpx";
-    padding-right: ~"30rpx";
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+      display: flex;
+      flex-direction: column;
 
-  }
+      .itemname {
+        font-weight: bold;
+        font-size: ~"48rpx";
+        line-height: ~"67.2rpx";
+        text-align: left;
+        color: @brand-color;
+        margin-top: ~"24rpx";
+      }
 
-  .holder:after {
-    border: none;
-  }
+      .typeprice {
+        font-size: ~"28rpx";
+        line-height: ~"39.2rpx";
+        text-align: left;
+        color: #FF4A19;
+        margin-top: ~"6rpx";
+      }
 
-  .stamp {
-    height: ~"160rpx";
-    width: ~"160rpx";
+      .typenote {
+        font-size: ~"24rpx";
+        line-height: ~"28.8rpx";
+        text-align: left;
+        color: @weak-text-color;
+        margin-top: ~"14rpx";
+      }
 
-  }
+      .stamp {
+        position: absolute;
+        top: ~"34rpx";
+        left: ~"508rpx";
+        height: ~"120rpx";
+        width: ~"120rpx";
 
-  .choose-box-type-01 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/normal_qedSmjC.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(-20deg);
-
-  }
-
-  .choose-box-type-02 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/express_3vRa3CK.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(10deg);
-
-  }
-
-  .choose-box-type-03 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/premium_z1oMDAm.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(3deg);
-
-  }
-
-  .choose-box-type-01 .subholder {
-    border-bottom: 0 #1562B3 solid;
+        image {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
 
   }
 
-  .choose-box-type-02 .subholder {
-    border-bottom: 3px #1562B3 solid;
+  .choose-box-type-01 {
+    .stamp {
+      transform: rotate(-20deg);
+    }
 
+    .subholder {
+      border-bottom: 0 #1562B3 solid;
+    }
   }
 
-  .choose-box-type-03 .subholder {
-    border-bottom: 6px #1562B3 double;
+  .choose-box-type-02 {
+    .stamp {
+      transform: rotate(10deg);
+    }
+
+    .subholder {
+      border-bottom: 3px #1562B3 solid;
+    }
+  }
+
+  .choose-box-type-03 {
+    .stamp {
+      transform: rotate(3deg);
+    }
+
+    .subholder {
+      border-bottom: 6px #1562B3 double;
+    }
   }
 
   .topmargin {
+    // writen by Marcus Fei !!
     margin-top: ~"110rpx";
   }
 </style>
