@@ -116,7 +116,6 @@ const request = async (options, showLoading = true, auth = true) => {
     // 重新登录
     if (needRelogin) {
       await login()
-      await qiandao()
     }
     // 重试
     let newRequest = await request(options, showLoading, auth)
@@ -219,7 +218,6 @@ const stopDebug = async () => {
     enableDebug: false
   })
 }
-
 
 export default {
   host,
