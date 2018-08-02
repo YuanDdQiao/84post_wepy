@@ -1,17 +1,35 @@
 <template>
-  <view>
+  <view class="more-space">
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
         <view>
-          <button class="holder {{ item.class_attr }}" style="{{ item.style_attr }}" formType="submit">
+          <button class="holder {{ item.class_attr }}" formType="submit">
             <view class="subholder">
-              <view class="itemname">{{ item.name }}</view>
-              <view class="stamp"></view>
+              <view class="texts">
+                <view class="name">{{ item.name }}</view>
+                <view class="help_text">{{ item.help_text }}</view>
+              </view>
+              <view class="stamp">
+                <image src="{{ item.postmark }}"/>
+              </view>
             </view>
           </button>
         </view>
       </form>
     </block>
+    <view>
+      <form report-submit="True" @submit="bindShowReceived">
+        <button class="btn" formType="submit">我收到的信</button>
+      </form>
+      <form report-submit="True" @submit="bindShowSent">
+        <button class="btn" formType="submit">我寄出的信</button>
+      </form>
+    </view>
+    <view>
+      <form report-submit="True" @submit="bindGetExpress">
+        <button class="btn" formType="submit">物流查询</button>
+      </form>
+    </view>
   </view>
 </template>
 
@@ -46,6 +64,24 @@
         } else {
           wepy.navigateTo({ url: 'box1-2' })
         }
+      },
+      bindShowReceived(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: '/pages/my/list?type=got'
+        })
+      },
+      bindShowSent(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: '/pages/my/list?type=sent'
+        })
+      },
+      bindGetExpress(e) {
+        api.formIdSubmit(e.detail.formId)
+        wepy.navigateTo({
+          url: '/pages/complex/query'
+        })
       }
     }
 
@@ -67,43 +103,6 @@
     };
 
     /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
-    };
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
-    async onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
-    async onUnload() {
-    };
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    async onPullDownRefresh() {
-    };
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    async onReachBottom() {
-    };
-
-    /**
      * 用户点击右上角分享
      */
     onShareAppMessage() {
@@ -118,15 +117,14 @@
 </script>
 
 <style lang="less">
+  @import "../../colors";
 
   .holder {
-    margin: ~"40rpx";
-    height: 26vh;
+    margin: ~"20rpx" auto;
+    width: ~"630rpx";
+    height: ~"200rpx";
     text-align: left;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 3vh;
-    padding-bottom: 3vh;
+    padding: 3vh 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -135,73 +133,61 @@
     box-shadow: 0 4px 6px 0 #E4E2DC;
     border-radius: 6px;
 
+    .subholder {
+      margin: 0;
+      height: 100%;
+      padding-left: ~"40rpx";
+      padding-right: ~"60rpx";
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .texts {
+        .name {
+          text-align: left;
+          font-weight: bold;
+          font-size: ~"48rpx";
+          line-height: 1.4;
+          color: @brand-color;
+        }
+        .help_text {
+          text-align: left;
+          font-size: ~"28rpx";
+          line-height: 1.4;
+          color: @text-color;
+        }
+
+      }
+
+      .stamp {
+        height: ~"120rpx";
+        width: ~"120rpx";
+
+        image {
+          height: ~"120rpx";
+          width: ~"120rpx";
+        }
+      }
+    }
   }
 
-  .subholder {
-    margin: 0;
-    height: 100%;
-    border-top: 2px #E6E6E6 dashed;
-    padding-left: ~"40rpx";
-    padding-right: ~"60rpx";
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
+  .box-type-01 {
+    .stamp {
+      transform: rotate(-20deg);
+    }
   }
 
-  .holder:after {
-    border: none;
+  .box-type-02 {
+    .stamp {
+      transform: rotate(10deg);
+    }
   }
 
-  .stamp {
-    height: ~"160rpx";
-    width: ~"160rpx";
-    /* background-color: red; */
-
-  }
-
-  .box-type-01 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/normal_qedSmjC.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(-20deg);
-
-  }
-
-  .box-type-02 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/express_3vRa3CK.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(10deg);
-
-  }
-
-  .box-type-03 .stamp {
-    background-image: url(https://84.singee.site/media/postmark/premium_z1oMDAm.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    transform: rotate(3deg);
-
-  }
-
-  .box-type-01 .subholder {
-    border-bottom: 0px #1562B3 solid;
-
-  }
-
-  .box-type-02 .subholder {
-    border-bottom: 3px #1562B3 solid;
-
-  }
-
-  .box-type-03 .subholder {
-    border-bottom: 6px #1562B3 double;
-  }
-
-  .itemname {
-    font-weight: bold;
-    font-size: ~"62rpx";
+  .box-type-03 {
+    .stamp {
+      transform: rotate(3deg);
+    }
   }
 
 
