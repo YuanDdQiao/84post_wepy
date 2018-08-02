@@ -1,4 +1,4 @@
- <template>
+<template>
   <view class="top">
     <form report-submit="True" @submit="bindHelp">
       <button class="help" formType="submit">?</button>
@@ -37,14 +37,14 @@
       </button>
     </form>
     <form report-submit="True" @submit="bindBox">
-      <button class="btnicon"  formType="submit">
+      <button class="btnicon" formType="submit">
         <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
       </button>
     </form>
   </view>
 
-   <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
-   <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
+  <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
+  <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
 
 
 </template>
@@ -68,7 +68,8 @@
     data = {
       point: 0,
       pointStr: '0',
-      canQiandao: false
+      canQiandao: false,
+      payEnabled: false
     }
 
     /**
@@ -85,7 +86,17 @@
       },
       async bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.navigateTo({ url: '/pages/my/recharge' })
+        if (this.payEnabled) {
+          wepy.navigateTo({
+            url: '/pages/my/recharge'
+          })
+        } else {
+          wepy.showModal({
+            title: '提示',
+            content: '充值功能暂未开放',
+            showCancel: false
+          })
+        }
       },
       async bindGetPoint(e) {
         api.formIdSubmit(e.detail.formId)
@@ -116,6 +127,7 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.refreshGlobalSettings()
       this.refreshPoint()
       this.checkCanQiandao()
     };
@@ -145,6 +157,13 @@
         showCancel: false
       })
       this.checkCanQiandao()
+    }
+
+    async refreshGlobalSettings() {
+      api.request('global/pay_enabled/').then((e) => {
+        this.payEnabled = e.data.value
+        this.$apply()
+      })
     }
   }
 </script>
@@ -191,8 +210,7 @@
       border: ~"1.3rpx" solid #DCDCDC;
       border-radius: ~"26rpx";
 
-
-      .balance{
+      .balance {
         color: @weak-text-color;
         font-size: ~"24rpx";
       }
@@ -214,38 +232,33 @@
     }
   }
 
-
   .logo {
     margin-top: 8vh;
     margin-bottom: ~"20rpx";
   }
 
-  .logoimage{
+  .logoimage {
     width: ~"114rpx";
     height: ~"104rpx";
   }
 
-  .nail{
+  .nail {
 
-    height:16px;
+    height: 16px;
     width: 16px;
     position: absolute;
     bottom: ~"30rpx";
 
-    &.nail-right{
+    &.nail-right {
       right: ~"30rpx";
 
     }
 
-    &.nail-left{
+    &.nail-left {
       left: ~"30rpx";
     }
 
   }
-
-
-
-
 
   .qiandao {
     margin: auto;
@@ -254,17 +267,16 @@
       margin: auto;
     }
 
-    .dailycheckimage{
+    .dailycheckimage {
       height: ~"132rpx";
       width: ~"264rpx";
     }
 
-    .dailycheckbutton{
+    .dailycheckbutton {
       height: ~"132rpx";
       width: ~"264rpx";
       margin: auto auto 10vh;
     }
-
 
   }
 
