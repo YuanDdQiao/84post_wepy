@@ -1,15 +1,13 @@
 <template>
+  <view class="more-space uber">
 
-
-  <view class="safebox">
+    <view class="title">请输入取件码</view>
 
     <form report-submit="True" @submit="bindSubmitForm">
       <image class="safelogo" src="/images/safe.svg"></image>
-      <input class="inputbox" type="text" placeholder="请输入取件号" @input="bindInput" value="{{ pickUpCode }}"/>
-      <view class="note">
-        <text>取件号是当信件到达目的地后通过短信或微信通知发送给收件人的号码。挂号信以及快递必须凭取件号取件，以保证信件的隐私。</text>
-      </view>
-      <button class="confirmbutton" formType="submit">取信</button>
+      <input class="inputbox" type="text" placeholder="六位取件码" @input="bindInput" value="{{ pickUpCode }}"/>
+      <view class="note">取件码是当信件到达目的地后通过短信发送给收件人的号码，挂号信以及快递必须凭取件码取件。</view>
+      <button class="btn btn-primary" formType="submit">取信</button>
       <image class="typelogo" src="/images/84_EXPRESS.png"></image>
     </form>
   </view>
@@ -157,24 +155,10 @@
     color: #1562B3;
     text-align: center;
     margin-bottom: 3vh;
-
   }
 
   .inputbox:hover {
     border-bottom:: 2px #1562B3 solid;
-  }
-
-  .safebox {
-    width: 88vw;
-    height: 90vh;
-    background-color: #F2F4F6;
-    border: 1vw #8A949C solid;
-    border-radius: 8px;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    margin-top: 5vw;
-    outline: 30vh solid #F3F2F0;
-
   }
 
   .safelogo {
@@ -183,7 +167,6 @@
     margin-left: 34vw;
     margin-right: 34vw;
     height: 26vh;
-
   }
 
   .typelogo {
@@ -193,7 +176,6 @@
     width: ~"260rpx";
     margin-top: 10vh;
     display: flex;
-
   }
 
   .note {
@@ -201,18 +183,14 @@
     margin-left: 7vw;
     margin-right: 7vw;
     font-size: ~"32rpx";
+    line-height: 1.4;
     color: gray;
     text-align: center;
     margin-bottom: 10vh;
-
   }
 
-  .confirmbutton {
-    color: white;
-    background-color: #F17250;
-    margin-top: ~"80rpx";
-    width: 40vw;
-
+  .btn {
+    margin: 0 auto;
   }
 
 
