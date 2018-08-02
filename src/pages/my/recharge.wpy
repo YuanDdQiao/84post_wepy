@@ -1,35 +1,32 @@
 <template>
-  <view class="menulist">
-    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-    <!--<button  formType="submit">按钮测试</button>-->
-    <!--</form>-->
-    <!--<view>-->
-    <!--充值方式一：保存下面的二维码到相册后使用微信扫一扫打开-->
-    <!--&lt;!&ndash;<image></image>&ndash;&gt;-->
-    <!--</view>-->
+  <view>
+    <view class="note">请点击下面的按钮后发送「充值」</view>
+    <view class="note2">(充值二字已经为您复制)</view>
     <view>
-      <view class="note">请点击下面的按钮后发送「充值」</view>
-      <view class="note2">(充值二字已经为您复制)</view>
-      <view>
-        <block wx:for="{{ price }}" wx:key="id">
-          <button class="button" open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
-                  id="recharge-{{ item.id }}">
-            <view class="infoholder">
-              <view class="priceholder">
-                <view class="points">{{ item.point }} 点券</view>
-                <view class="price">¥{{ item.price / 100 }}</view>
-              </view>
-              <block wx:if="{{ item.point_gift !== 0 }}">
-                <view class="typenote">赠送 {{ item.point_gift }} 点券</view>
-              </block>
+      <block wx:for="{{ price }}" wx:key="id">
+        <button open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
+                id="recharge-{{ item.id }}">
+          <block wx:if="{{ item.featured_image }}">
+            <view class="container image-container">
+              <image src="{{ item.featured_image }}"></image>
             </view>
-          </button>
-        </block>
-      </view>
-    </view>
+          </block>
+          <block wx:else>
+            <view class="container text-container">
+              <view class="left">
+                <view class="left">{{ item.point }}</view>
+                <view class="right">点券</view>
+              </view>
+              <view class="right">¥ {{ item.price / 100}}</view>
+            </view>
+          </block>
 
-    <view class="endnote">充值完成后一般即时到账。如果支付成功后超过一小时仍未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
+        </button>
+      </block>
+    </view>
   </view>
+
+  <view class="endnote">充值完成后一般即时到账。如果支付成功后超过一小时仍未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
 </template>
 
 <script>
@@ -131,12 +128,54 @@
 </script>
 
 <style lang="less">
-  .menulist {
-    width: ~"670rpx";
-    margin-left: ~"40rpx";
+  @import "../../images";
+
+  .container {
+    width: ~"664rpx";
+    height: ~"216rpx";
     margin-top: ~"40rpx";
-    margin-right: ~"40rpx";
-    margin-bottom: 14vh;
+
+    &.image-container {
+      image {
+        width: ~"664rpx";
+        height: ~"216rpx";
+      }
+    }
+
+    &.text-container {
+      background: url("https://84.singee.site/media/common-price/price_bg.png") center center no-repeat;
+      background-size: ~"664rpx" ~"216rpx";
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .left {
+        margin-left: ~"52rpx";
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+
+        .left {
+          font-size: ~"106rpx";
+          font-weight: bold;
+          line-height: 1;
+        }
+
+        .right {
+          font-size: ~"36rpx";
+          font-weight: bold;
+          writing-mode: vertical-lr;
+        }
+      }
+
+      .right {
+        margin-right: ~"64rpx";
+        font-size: ~"50rpx";
+        font-weight: bold;
+        line-height: 1;
+      }
+    }
 
   }
 
@@ -156,67 +195,12 @@
   }
 
   .endnote {
-    font-size: ~"28rpx";
+    font-size: ~"24rpx";
+    line-height: 1.4;
     text-align: center;
     margin-top: 6vh;
     color: gray;
     height: 14vh;
   }
-
-  .button {
-    margin-top: 6vh;
-    background-color: #FF673D;
-    padding-bottom: ~"40rpx";
-    padding-top: ~"40rpx";
-    padding-left: 0;
-    padding-right: 0;
-    box-shadow: 0 3px 10px 0 #c6bb99;
-    border-radius: 8px;
-
-  }
-
-  .button:after {
-    border: none;
-  }
-
-  .price {
-    font-size: ~"52rpx";
-    font-weight: bold;
-    color: white;
-
-  }
-
-  .points {
-    font-size: ~"62rpx";
-    color: white;
-    font-weight: bold;
-    text-align: left;
-  }
-
-  .typenote {
-    font-size: ~"32rpx";
-    text-align: left;
-    color: white;
-    margin-bottom: ~"10rpx";
-    margin-top: -2vh;
-
-  }
-
-  .infoholder {
-    border-bottom: 2px #FFC1B0 dashed;
-    border-top: 2px #FFC1B0 dashed;
-    padding-left: ~"40rpx";
-    padding-right: ~"40rpx";
-
-  }
-
-  .priceholder {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-  }
-
 
 </style>
