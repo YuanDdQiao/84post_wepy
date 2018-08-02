@@ -206,8 +206,9 @@
     flex-direction: column;
     align-items: center;
 
-    margin: ~"110rpx" ~"40rpx" auto ~"40rpx";
+    /*margin: ~"110rpx" ~"40rpx" auto ~"40rpx";*/
     padding: 0;
+    margin: 0;
 
     width: ~"660rpx";
     height: 86vh;
