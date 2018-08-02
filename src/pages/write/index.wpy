@@ -4,7 +4,7 @@
           wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
     </view>
   </view>
-  <view>
+  <view class="indicator-space8 more-space writeindex-space">
     <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
     <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
       <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
@@ -23,8 +23,9 @@
   </view>
 
   <form report-submit="True" @submit="bindStartWriting">
-    <button formType="submit" class="btn btn-primary confirmPaper">就选它</button>
+    <button formType="submit" class="btn btn-primary btn-center">就选它</button>
   </form>
+
 
 </template>
 
@@ -190,6 +191,11 @@
 <style lang="less">
   @import "../../colors";
 
+  page{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .indicator {
     .item {
       flex-grow: 1;
@@ -201,24 +207,7 @@
     }
   }
 
-  button.confirmPaper {
-    position: fixed;
-    bottom: ~"144rpx";
-    left: ~"226rpx";
-  }
 
-  .papers {
-    /* border: red 2px solid; */
-    /*padding: ~"20rpx";*/
-    /*width: ~"690rpx" !important;*/
-    /*margin-left: ~"40rpx";*/
-    /*margin-right: ~"40rpx";*/
-    position: flexed;
-    left: ~"62rpx";
-    top: ~"148rpx";
-    width: ~"628rpx";
-    height: ~"918rpx";
-  }
 
   .paper-01 {
     /* 暖阳 */
@@ -254,13 +243,11 @@
   }
 
   .paperselector {
-    height: 78vh;
-    margin-left: 0;
-    margin-right: 0;
+    height: 70vh;
+    margin: 0;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: ~"10rpx";
-    width: ~"750rpx";
   }
 
   .papername {

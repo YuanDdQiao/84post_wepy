@@ -13,6 +13,22 @@
     & > view.more-space {
       margin: ~"15rpx";
     }
+
+    & > view.writeindex-space {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100vw;
+    }
+
+    & > view.indicator-space6{
+      margin-top:~"92rpx";
+    }
+
+    & > view.indicator-space8{
+      margin-top:~"107rpx";
+    }
   }
 
   view {
@@ -83,8 +99,19 @@
       color: white;
     }
 
+    &.btn-primary-single {
+      background-image: linear-gradient(-180deg, #FF8B6C 0%, #F17250 100%);
+      border: 1px solid #E7795C;
+      box-shadow: 0 1px 3px 0 rgba(117, 117, 117, 0.29);
+      color: white;
+    }
+
     &.btn-plain{
       background: none;
+    }
+
+    &.btn-center{
+      margin: auto;
     }
   }
 
@@ -98,7 +125,8 @@
   }
 
   .note {
-    font-size: ~"24rpx";
+    font-size: ~"28rpx";
+    line-height: ~"38rpx";
     color: @weak-text-color;
   }
 
@@ -154,6 +182,13 @@
     color: gray;
     margin-top: 10vh;
     height: 14vh;
+  }
+
+  .footerlogo{
+    height: ~"38rpx";
+    width: ~"260rpx";
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 
