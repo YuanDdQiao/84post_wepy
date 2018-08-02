@@ -11,7 +11,7 @@
               indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
               wx:if="{{ type.id === paperType.currentItemId }}">
         <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
-          <view class="{{ item.class_attr }}" style="{{ item.style_attr }}">
+          <view class="paper {{ item.class_attr }}">
             <view class="demotext">{{ item.demo_text }}</view>
             <view class="todaydate">{{ todayDate }}</view>
           </view>
@@ -207,7 +207,9 @@
     }
   }
 
-
+  .paper {
+    margin: 0 ~"60rpx";
+  }
 
   .paper-01 {
     /* 暖阳 */
@@ -276,7 +278,6 @@
     bottom: 7vh;
     left: ~"400rpx";
     font-size: ~"30rpx";
-
   }
 
 
