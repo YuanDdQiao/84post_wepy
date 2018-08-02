@@ -51,9 +51,8 @@ module.exports = {
 }
 
 if (prod) {
-
   // 压缩js
-  module.exports.plugins = {
+  module.exports.plugins = Object.assign(module.exports.plugins, {
     uglifyjs: {
       filter: /\.js$/,
       config: {}
@@ -69,5 +68,5 @@ if (prod) {
         }
       }
     }
-  }
+  })
 }
