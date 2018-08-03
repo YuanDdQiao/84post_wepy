@@ -1,6 +1,6 @@
 <template>
   <view class="top">
-    <form report-submit="True" @submit="bindHelp" wx:if="{{ false }}">
+    <form report-submit="True" @submit="bindHelp" wx:if="{{ true }}">
       <button class="help" formType="submit">?</button>
     </form>
     <view class="blank"></view>

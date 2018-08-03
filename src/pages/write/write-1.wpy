@@ -337,7 +337,7 @@
   textarea {
     position: fixed;
     padding: ~"20rpx" ~"40rpx";
-    height: calc(~"100vh - 92rpx - 90rpx - 92rpx - 80rpx - 108rpx");
+    height: calc(~"100vh - 92rpx - 90rpx - 92rpx - 80rpx - 108rpx - 10rpx");
     width: ~"584rpx";
     font-size: ~"32rpx";
     line-height: ~"60rpx";
@@ -352,6 +352,7 @@
     font-size: ~"32rpx";
     line-height: ~"60rpx";
     padding-right: ~"40rpx";
+    margin-bottom: ~"10rpx";
   }
 
   .dateandword {
@@ -364,6 +365,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-bottom:~"10rpx";
+
 
     .date {
       margin-right: ~"40rpx";
