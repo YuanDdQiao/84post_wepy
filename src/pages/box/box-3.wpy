@@ -1,33 +1,37 @@
 <template>
-  <view>
-    <view class="{{ pickUp.viewClass }}" style="{{ pickUp.viewStyle }}">
-      <view class="textarea">{{ pickUp.content }}</view>
-      <view class="sign">{{ pickUp.sign }}</view>
-      <view class="date">{{ submitDate }}</view>
+  <view class="letter {{ pickUp.viewClass }}">
+    <view class="textarea">{{ pickUp.content }}</view>
+    <view class="sign">{{ pickUp.sign }}</view>
+    <view class="date">{{ submitDate }}</view>
+  </view>
+
+  <view class="{{saveError ? 'error' : ''}} savenote">{{ saveMsg }}</view>
+
+  <block wx:if="{{saved}}">
+    <!--已经保存（挂号信/快递）-->
+    <view class="buttons">
+      <form report-submit="True" @submit="bindBack">
+        <button formType="submit" class="btn">完成</button>
+      </form>
+      <view class="center-space"></view>
+      <form report-submit="True" @submit="bindReply" wx:if="{{ pickUp.canReply }}">
+        <button formType="submit" class="btn btn-primary">回复</button>
+      </form>
     </view>
 
-    <block wx:if="{{saved}}">
-      <!--已经保存（非挂号信）-->
-      <view class="{{saveError ? 'error' : ''}} savenote">{{ saveMsg }}</view>
-      <form report-submit="True" @submit="bindReply" wx:if="{{ pickUp.canReply }}">
-        <button formType="submit">回复</button>
+  </block>
+  <block wx:else>
+    <!--选择是否保存（平邮）-->
+    <view class="buttons">
+      <form report-submit @submit="bindSaveForm">
+        <button class="btn btn-primary" formType="submit">我要咯</button>
       </form>
-      <form report-submit="True" @submit="bindBack">
-        <button formType="submit">完成</button>
+      <view class="center-space"></view>
+      <form report-submit @submit="bindUnsaveForm">
+        <button class="btn" formType="submit">塞回去</button>
       </form>
-    </block>
-    <block wx:else>
-      <!--选择是否保存（挂号信）-->
-      <view>
-        <form report-submit @submit="bindSaveForm">
-          <button class="confirmbutton" formType="submit">我要咯</button>
-        </form>
-        <form report-submit @submit="bindUnsaveForm">
-          <button class="lastbutton" formType="submit">塞回去</button>
-        </form>
-      </view>
-    </block>
-  </view>
+    </view>
+  </block>
 </template>
 
 <script>
@@ -48,7 +52,7 @@
      */
     data = {
       saved: false,
-      saveMsg: '已经保存在我的信件',
+      saveMsg: '',
       pickUp: {},
       saveError: false,
       submitDate: ''
@@ -62,6 +66,7 @@
         api.formIdSubmit(e.detail.formId)
         let ret = await api.request(`box/save/${this.pickUp.id}/`)
         this.saved = true
+        this.saveMsg = '已经保存在我的信件'
         if (!ret.data.result) {
           this.saveError = true
           this.saveMsg = '信件保存失败（可能已经被取）'
@@ -102,6 +107,11 @@
     async onLoad(options) {
       this.pickUp = this.$parent.globalData.pickUp
       this.saved = this.pickUp.saved
+      if (this.saved) {
+        this.saveMsg = '已经保存在我的信件'
+      } else {
+        this.saveMsg = '请选择是否保存信件'
+      }
       // let submitTime = new Date(this.pickUp.submitTime)
       // this.submitDate = `${submitTime.getFullYear()}-${submitTime.getMonth() + 1}-${submitTime.getDate()}`
       this.submitDate = dayjs(this.pickUp.submitTime).format('YYYY-MM-DD')
@@ -166,92 +176,65 @@
     color: red;
   }
 
-  button {
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .center-space {
+      flex-grow: 1;
+    }
+  }
+
+  .letter {
+    margin: 0 ~"15rpx";
+    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 28rpx - 2 * 64rpx - 60rpx");
     position: relative;
-    margin-top: ~"40rpx";
-    width: 60vw;
+    padding: ~"40rpx";
 
-  }
+    .textarea {
+      text-align: left;
+      font-size: ~"30rpx";
+      line-height: 2;
+      white-space: pre-wrap;
+    }
 
-  .confirmbutton {
-    color: white;
-    background-color: #F17250;
-    margin-top: ~"80rpx";
-  }
+    .date, .sign {
+      font-size: ~"30rpx";
+      line-height: 2;
+      text-align: right;
+    }
 
-  .view-letter-01 {
-    background: #FCF7E8;
-    border: 2px solid #E5DCC2;
-    outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #6E5F31;
-    margin-top: ~"40rpx";
-  }
+    &.view-letter-01 {
+      background: #FCF7E8;
+      border: 2px solid #E5DCC2;
+      outline: 6px solid #FCF7E8;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+      color: #6E5F31;
+    }
 
-  .view-letter-02 {
-    background: #FFFFFF;
-    border: 3px double #FBBAD0;
-    border-radius: 6px;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #6E1A36;
-    margin-top: ~"40rpx";
-  }
+    &.view-letter-02 {
+      background: #FFFFFF;
+      border: 3px double #FBBAD0;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
+      color: #6E1A36;
+    }
 
-  .view-letter-03 {
-    background: #F3F2F0;
-    border: 2px dashed #1562B3;
-    outline: 6px solid #F3F2F0;
-    box-shadow: 0 4px 20px 0 #a09369;
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #052B53;
-    margin-top: ~"40rpx";
-  }
-
-  .textarea {
-    padding-left: ~"40rpx";
-    padding-right: ~"40rpx";
-    padding-top: ~"40rpx";
-    padding-bottom: 0;
-    width: ~"584rpx";
-    font-size: ~"30rpx";
-    line-height: ~"60rpx";
-    margin-bottom: 40px;
-    white-space: pre-wrap;
-  }
-
-  .date, .sign {
-    font-size: ~"30rpx";
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-  }
-
-  .sign {
-    margin-bottom: 0;
+    &.view-letter-03 {
+      background: #F3F2F0;
+      border: 2px dashed #1562B3;
+      outline: 6px solid #F3F2F0;
+      box-shadow: 0 4px 20px 0 #a09369;
+      color: #052B53;
+    }
   }
 
   .savenote {
-    margin-top: 32px;
+    margin: ~"64rpx" 0;
     text-align: center;
     font-size: ~"30rpx";
-    margin-bottom: 35px;
     color: gray;
-
-  }
-
-  .lastbutton {
-    margin-bottom: ~"80rpx";
   }
 
 </style>
