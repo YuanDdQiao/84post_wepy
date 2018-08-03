@@ -45,11 +45,7 @@
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
-    methods = {
-      // bindNoSenseForm(e) {
-      //   api.formIdSubmit(e.detail.formId)
-      // },
-    }
+    methods = {}
 
     /**
      * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
@@ -82,49 +78,12 @@
           content: '该运单信息不存在',
           showCancel: false
         })
-        wepy.redirectTo({ url: '/pages/complex/query' })
+        wepy.navigateBack()
       }
       console.log(ret.data)
       this.info = ret.data.info
       this.status = ret.data.status
       this.$apply()
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
-    };
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
-    async onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
-    async onUnload() {
-    };
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    async onPullDownRefresh() {
-    };
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    async onReachBottom() {
     };
 
     /**
