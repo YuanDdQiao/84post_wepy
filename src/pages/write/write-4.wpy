@@ -1,11 +1,11 @@
 <template>
   <indicator status="2" right="4"></indicator>
   <view class="more-space">
-    <view>
+    <view class="envelop">
       <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
     </view>
 
-    <view>您的信件已经准备好！</view>
+    <view class="title">您的信件已经准备好！</view>
 
     <view class="texts">
       <view class="current">
@@ -197,11 +197,17 @@
   }
 
   .buttons {
+    margin-top: 5vh;
     text-align: center;
 
     .btn-back {
       margin-right: ~"26rpx";
     }
+  }
+
+  .title {
+    font-size: ~"40rpx";
+    margin: ~"60rpx" auto;
   }
 
   .texts {
@@ -219,8 +225,8 @@
       width: ~"632rpx";
 
       view {
-        font-size: ~"28rpx";
-        line-height: 1.2;
+        font-size: ~"32rpx";
+        line-height: 1.5;
 
         &:last-child {
           flex-grow: 1;
@@ -231,21 +237,30 @@
 
     .fee {
       view {
-        font-size: ~"36rpx";
-        line-height: 1.2;
+        font-size: ~"38rpx";
+        line-height: 1.5;
       }
     }
   }
 
-  .envelopepreview {
-    width: ~"670rpx";
-    height: ~"400rpx";
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
-    text-align: center;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.3);
-    margin-top: 55px;
+  .envelop {
+    width: ~"750rpx";
+    height: 46vh;
 
+    margin-left: ~"-60rpx";
+    margin-right: ~"-60rpx";
+    margin-top: ~"92rpx";
+
+    .envelopepreview {
+      width: ~"656rpx";
+      height: ~"392rpx";
+
+      margin: calc(~"(46vh - 392rpx) / 2") auto;
+
+      text-align: center;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.3);
+      transform: rotate(-6deg);
+    }
   }
 
   .gray {
