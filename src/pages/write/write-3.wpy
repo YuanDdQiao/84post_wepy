@@ -24,7 +24,7 @@
             <form report-submit="True" @submit="bindToAddress">
 
               <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit">
-                <view>{{ toAddress }}</view>
+                {{ toAddress }}
               </button>
             </form>
           </view>
@@ -59,7 +59,7 @@
           <form report-submit="True" @submit="bindFromAddress">
 
             <button class="choosebutton {{fromAddressChosen ? 'chosen' : ''}}" formType="submit">
-              <view>{{ fromAddress }}</view>
+              {{ fromAddress }}
             </button>
           </form>
         </view>
@@ -89,10 +89,12 @@
           </block>
         </view>
       </view>
-      <button class="nextbutton" formType="submit">下一步</button>
-      <form report-submit="True" @submit="bindReset">
-        <button class="resetbutton" formType="submit">重置</button>
-      </form>
+      <view class="buttons">
+        <button class="btn btn-primary" formType="submit">下一步</button>
+        <form report-submit="True" @submit="bindReset">
+          <button class="btn" formType="submit">重置</button>
+        </form>
+      </view>
 
     </form>
   </view>
@@ -545,6 +547,11 @@
 </script>
 
 <style lang="less">
+  .buttons {
+    .btn {
+      margin: ~"40rpx" auto;
+    }
+  }
 
   .errorinfo {
     color: red;
@@ -659,13 +666,12 @@
   }
 
   .infoform {
-    width: ~"670rpx";
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
+    width: ~"660rpx";
+    margin: 0 auto;
+    margin-top: ~"110rpx";
     text-align: center;
     background: #FFFFFF;
     box-shadow: 0 2px 4px 0 #D4CEBE;
-    margin-top: ~"110rpx";
 
   }
 
