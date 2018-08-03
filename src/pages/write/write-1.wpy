@@ -5,7 +5,7 @@
       <form report-submit="True" @submit="bindSubmit">
         <view class="noteanddone">
           <view class="autosavenote">已自动保存草稿</view>
-          <button formType="submit">写好了</button>
+          <button class="btn-complete" formType="submit">写好了</button>
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
@@ -231,8 +231,8 @@
     button {
       background-color: #9E9477;
       color: @bg_color;
-      padding-left: 12 rpx;
-      padding-right: 12 rpx;
+      padding-left: ~"12rpx";
+      padding-right: ~"12rpx";
       margin-right: ~"20rpx";
     }
 
@@ -267,8 +267,8 @@
     button {
       background-color: #DA6D92;
       color: @bg_color;
-      padding-left: 12 rpx;
-      padding-right: 12 rpx;
+      padding-left: ~"12rpx";
+      padding-right: ~"12rpx";
       margin-right: ~"20rpx";
     }
 
@@ -303,8 +303,8 @@
     button {
       background-color: #09427F;
       color: @bg_color;
-      padding-left: 12 rpx;
-      padding-right: 12 rpx;
+      padding-left: ~"12rpx";
+      padding-right: ~"12rpx";
       margin-right: ~"20rpx";
     }
 
@@ -322,7 +322,7 @@
     }
   }
 
-  button {
+  .btn-complete {
     float: right;
     height: 4vh;
     display: flex;
@@ -332,10 +332,6 @@
     font-size: ~"24rpx";
     font-weight: bold;
     margin-right: 1vh;
-  }
-
-  button:after {
-    border: none;
   }
 
   textarea {
