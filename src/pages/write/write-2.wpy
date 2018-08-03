@@ -23,7 +23,7 @@
       </block>
     </view>
   </view>
-  <view class="help">
+  <view class="help" wx:if="{{ false }}">
     <form report-submit="True" @submit="bindHelp">
       <button formType="submit">
         <view class="help-icon">?</view>
