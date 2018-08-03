@@ -30,7 +30,7 @@
       <button class="btn btn-md btn-left" open-type="share">分享给收信人</button>
 
       <form report-submit="True" @submit="bindTrack">
-        <button class="btn btn-primary btn-md" formType="submit">查看物流</button>
+        <button class="btn btn-md" formType="submit">查看物流</button>
       </form>
     </view>
 
@@ -184,20 +184,13 @@
       width: ~"632rpx";
 
       & > view {
-        font-size: ~"28rpx";
-        line-height: 1.2;
+        font-size: ~"34rpx";
+        line-height: 2;
 
         &:last-child {
           flex-grow: 1;
           text-align: right;
         }
-      }
-    }
-
-    .fee {
-      view {
-        font-size: ~"36rpx";
-        line-height: 1.2;
       }
     }
   }
@@ -213,18 +206,15 @@
     }
   }
 
-  .pathpreview {
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
-    margin-top: ~"40rpx";
-    width: ~"670rpx";
-    height: ~"400rpx";
+  .btn {
+    margin-top: 3vh;
   }
 
-  /*button {*/
-  /*width: 60vw;*/
-  /*margin-top: 3vh;*/
-  /*}*/
+  .pathpreview {
+    margin: ~"92rpx" auto 0;
+    width: ~"630rpx";
+    height: ~"376rpx";
+  }
 
   .bignote {
     margin-bottom: 5vh;
