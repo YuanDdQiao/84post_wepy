@@ -191,9 +191,10 @@
 <style lang="less">
   @import "../../colors";
 
-  page{
+  page {
     padding-left: 0;
     padding-right: 0;
+    width: ~"750rpx";
   }
 
   .indicator {
@@ -209,47 +210,65 @@
 
   .paper {
     margin: 0 ~"60rpx";
-  }
-
-  .paper-01 {
-    /* 暖阳 */
-    background: #FCF7E8;
-    border: 2px solid #E5DCC2;
-    outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    color: #6E5F31;
-    font-size: ~"32rpx";
     padding: ~"40rpx";
-  }
+    height: calc(~"100vh - 2 * 60rpx - 107rpx - 92rpx - 190rpx");
+    position: relative;
 
-  .paper-02 {
-    /* 蠢白 */
-    background: #FFFFFF;
-    border: 3px double #FBBAD0;
-    border-radius: 6px;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
-    color: #6E1A36;
-    font-size: ~"32rpx";
-    padding: ~"40rpx";
-  }
+    &.paper-01 {
+      /* 暖阳 */
+      background: #FCF7E8;
+      border: 2px solid #E5DCC2;
+      outline: 6px solid #FCF7E8;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+      color: #6E5F31;
+      font-size: ~"32rpx";
+    }
 
-  .paper-03 {
-    /* 八十四 */
-    background: #F3F2F0;
-    border: 2px dashed #1562B3;
-    outline: 6px solid #F3F2F0;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    color: #052B53;
-    font-size: ~"32rpx";
-    padding: ~"40rpx";
+    &.paper-02 {
+      /* 蠢白 */
+      background: #FFFFFF;
+      border: 3px double #FBBAD0;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
+      color: #6E1A36;
+      font-size: ~"32rpx";
+    }
+
+    &.paper-03 {
+      /* 八十四 */
+      background: #F3F2F0;
+      border: 2px dashed #1562B3;
+      outline: 6px solid #F3F2F0;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+      color: #052B53;
+      font-size: ~"32rpx";
+    }
+
+    .demotext {
+      white-space: pre-wrap;
+      text-align: left;
+      line-height: ~"60rpx";
+    }
+
+    .todaydate {
+      text-align: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: ~"40rpx";
+      /*position: relative;*/
+      /*bottom: 7vh;*/
+      /*left: ~"400rpx";*/
+      /*font-size: ~"30rpx";*/
+    }
   }
 
   .paperselector {
-    height: 70vh;
-    margin: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: ~"10rpx";
+    height: calc(~"100vh - 2 * 60rpx - 107rpx - 92rpx");
+    /*margin-bottom: ~"146rpx";*/
+
+    .wx-swiper-dots.wx-swiper-dots-horizontal {
+    }
   }
 
   .papername {
@@ -260,23 +279,10 @@
 
   }
 
-  .demotext {
-    white-space: pre-wrap;
-    height: 68vh;
-    line-height: ~"60rpx";
-  }
-
   .writeIndexError {
     text-align: center;
     color: white;
     background-color: rgba(255, 14, 14, 0.75);
-    font-size: ~"30rpx";
-  }
-
-  .todaydate {
-    position: relative;
-    bottom: 7vh;
-    left: ~"400rpx";
     font-size: ~"30rpx";
   }
 
