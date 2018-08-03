@@ -231,8 +231,8 @@
     button {
       background-color: #9E9477;
       color: @bg_color;
-      padding-left: 12rpx;
-      padding-right: 12rpx;
+      padding-left: 12 rpx;
+      padding-right: 12 rpx;
       margin-right: ~"20rpx";
     }
 
@@ -241,11 +241,11 @@
       border-top: 1px #E5DCC2 dashed;
     }
 
-    .date{
+    .date {
       color: #6E5F31;
     }
 
-    .words{
+    .words {
       color: #6E5F31;
     }
   }
@@ -267,8 +267,8 @@
     button {
       background-color: #DA6D92;
       color: @bg_color;
-      padding-left: 12rpx;
-      padding-right: 12rpx;
+      padding-left: 12 rpx;
+      padding-right: 12 rpx;
       margin-right: ~"20rpx";
     }
 
@@ -277,11 +277,11 @@
       border-top: 1px #FFD8E5 dashed;
     }
 
-    .date{
+    .date {
       color: #6E1A36;
     }
 
-    .words{
+    .words {
       color: #6E1A36;
     }
   }
@@ -303,8 +303,8 @@
     button {
       background-color: #09427F;
       color: @bg_color;
-      padding-left: 12rpx;
-      padding-right: 12rpx;
+      padding-left: 12 rpx;
+      padding-right: 12 rpx;
       margin-right: ~"20rpx";
     }
 
@@ -313,11 +313,11 @@
       border-top: 1px #BAC7D5 dashed;
     }
 
-    .date{
+    .date {
       color: #052B53;
     }
 
-    .words{
+    .words {
       color: #052B53;
     }
   }
@@ -340,8 +340,8 @@
 
   textarea {
     position: fixed;
-    padding: ~"20rpx" ~"40rpx" 0 ~"40rpx";
-    height: 64vh;
+    padding: ~"20rpx" ~"40rpx";
+    height: calc(~"100vh - 92rpx - 90rpx - 92rpx - 80rpx - 108rpx");
     width: ~"584rpx";
     font-size: ~"32rpx";
     line-height: ~"60rpx";
@@ -349,21 +349,19 @@
   }
 
   .sign {
-    position:fixed;
-    bottom:108rpx;
-    right:43rpx;
-    text-align:right;
-    font-size:32rpx;
-    line-height:60rpx;
-    padding-right:40rpx;
-
-
+    position: fixed;
+    bottom: ~"108rpx";
+    right: ~"43rpx";
+    text-align: right;
+    font-size: ~"32rpx";
+    line-height: ~"60rpx";
+    padding-right: ~"40rpx";
   }
 
   .dateandword {
-    font-size:28rpx;
+    font-size: ~"28rpx";
     position: fixed;
-    bottom:~"70rpx";
+    bottom: ~"70rpx";
     padding: 0;
     width: ~"660rpx";
     display: flex;
@@ -371,18 +369,15 @@
     align-items: center;
     justify-content: space-between;
 
-    .date{
+    .date {
       margin-right: ~"40rpx";
     }
 
-    .words{
+    .words {
       margin-left: ~"40rpx";
     }
 
-
   }
-
-
 
   .noteanddone {
     height: ~"92rpx";
