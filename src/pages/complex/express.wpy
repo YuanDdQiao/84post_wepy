@@ -1,5 +1,5 @@
 <template>
-  <view class="expressform">
+  <view class="more-space uber">
     <view class="expressnumber">运单号：{{ expressNumber }}</view>
     <view>
       <block wx:if="{{ info.length !== 0}}">
@@ -11,13 +11,10 @@
         </block>
       </block>
       <block wx:else>
-        还没有物流信息哦，估计是运输人员还没起床，请稍后再试 ( •̀ .̫ •́ )✧
+        <view>还没有物流信息哦，估计是运输人员还没起床，请稍后再试 ( •̀ .̫ •́ )✧</view>
       </block>
     </view>
     <view class="endnote">感谢您使用 84号邮局</view>
-    <!--<form report-submit="True" @submit="bindNoSenseForm">-->
-    <!--<button  formType="submit">按钮测试</button>-->
-    <!--</form>-->
   </view>
 </template>
 
@@ -101,65 +98,68 @@
 </script>
 
 <style lang="less">
+  @import "../../colors";
 
-  .expressform {
-    width: ~"590rpx";
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
-    padding-left: ~"40rpx";
-    padding-right: ~"40rpx";
-    text-align: center;
-    margin-top: ~"40rpx";
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 #D4CEBE;
-    margin-bottom: ~"40rpx";
-
+  .uber {
+    min-height: calc(~"100vh - 2 * 60rpx - 6rpx");
+    position: relative;
   }
 
   .expressnumber {
     border-bottom: 2px #D0D0D0 dashed;
-    height: 10vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 4vh;
-    font-size: ~"38rpx";
-    justify-content: space-around;
-    font-weight: bold;
-    color: #797979;
 
+    width: ~"566rpx";
+    height: 10vh;
+    margin: auto;
+
+    font-size: ~"32rpx";
+    font-weight: bold;
+    color: @weak-text-color;
+
+    text-align: center;
+    line-height: 10vh;
   }
 
   .oneline {
-    margin-bottom: 24px;
-  }
+    margin: ~"48rpx" ~"32rpx" 0;
 
-  .info {
-    color: #797979;
-    font-size: ~"34rpx";
-    margin-bottom: 4px;
-    text-align: left;
+    .info {
+      color: #797979;
+      font-size: ~"34rpx";
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-align: left;
 
-  }
+    }
 
-  .date {
-    text-align: left;
-    font-size: ~"32rpx";
-    color: #A3A3A3;
+    .date {
+      text-align: left;
+      font-size: ~"32rpx";
+      line-height: 1.2;
+      color: #A3A3A3;
+    }
 
+    &:last-child {
+      margin-bottom: calc(~"10vh + 48rpx");
+    }
   }
 
   .endnote {
+    position: absolute;
     border-top: 2px #D0D0D0 dashed;
-    height: 8vh;
+
+    left: ~"32rpx";
+    bottom: 0;
+
+    width: ~"566rpx";
+    height: 10vh;
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 4vh;
     font-size: ~"30rpx";
     justify-content: space-around;
-    color: #797979;
-
+    color: @weak-text-color;
   }
 
   .type-0 .info {
