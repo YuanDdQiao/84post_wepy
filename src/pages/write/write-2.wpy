@@ -122,13 +122,6 @@
 
     margin-top: ~"96rpx";
 
-    button:active,
-    button:focus,
-    button:hover {
-      border: none;
-      background: none;
-    }
-
     .help-icon {
       height: ~"52rpx";
       width: ~"52rpx";
