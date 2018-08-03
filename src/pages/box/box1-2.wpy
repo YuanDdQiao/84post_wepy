@@ -4,11 +4,11 @@
     <view class="title">请输入取件码</view>
 
     <form report-submit="True" @submit="bindSubmitForm">
-      <image class="headicon" src="/images/code.png"></image>
+      <image class="headicon" src="/images/pickup_code.png"></image>
       <input class="inputbox" type="text" placeholder="六位取件码" @input="bindInput" value="{{ pickUpCode }}"/>
       <view class="note">取件码是当信件到达目的地后通过短信发送给收件人的号码，挂号信以及快递必须凭取件码取件。</view>
-      <button class="btn btn-primary" formType="submit">取信</button>
-      <image class="typelogo" src="/images/84_EXPRESS.png"></image>
+      <button class="btn btn-primary btn-center" formType="submit">取信</button>
+      <image class="typelogo" src="/images/logo_icon.png"></image>
     </form>
   </view>
 
@@ -144,54 +144,56 @@
 </script>
 
 <style lang="less">
+  .uber {
+    height: calc(~"100vh - 2 * 60rpx - 6rpx");
+    position: relative;
+  }
+
+  .title {
+    font-size: ~"40rpx";
+    font-weight: bold;
+    margin-top: 4.6vh;
+  }
+
+  .headicon {
+    width: ~"196rpx";
+    height: ~"196rpx";
+    margin: 5.4vh auto 0;
+  }
+
   .inputbox {
     border-bottom: 2px #1562B3 dashed;
     border-radius: 2px;
-    margin-left: 13vw;
-    margin-right: 13vw;
-    font-size: ~"38rpx";
+
+    font-size: ~"32rpx";
     height: 6vh;
-    width: 62vw;
+    width: ~"487rpx";
+
+    margin: 8.5vh auto 0;
+
     color: #1562B3;
     text-align: center;
-    margin-bottom: 3vh;
-  }
 
-  .inputbox:hover {
-    border-bottom:: 2px #1562B3 solid;
-  }
-
-  .safelogo {
-    width: 20vw;
-    margin-bottom: 3vh;
-    margin-left: 34vw;
-    margin-right: 34vw;
-    height: 26vh;
-  }
-
-  .typelogo {
-    height: ~"38rpx";
-    margin-left: auto;
-    margin-right: auto;
-    width: ~"260rpx";
-    margin-top: 10vh;
-    display: flex;
+    &:hover {
+      border-bottom: 2px #1562B3 solid;
+    }
   }
 
   .note {
     width: 74vw;
-    margin-left: 7vw;
-    margin-right: 7vw;
-    font-size: ~"32rpx";
+    margin: 5.4vh auto 10vh;
+    font-size: ~"28rpx";
     line-height: 1.4;
     color: gray;
     text-align: center;
-    margin-bottom: 10vh;
   }
 
-  .btn {
-    margin: 0 auto;
+  .typelogo {
+    width: ~"36rpx";
+    height: ~"44rpx";
+    position: absolute;
+    left: ~"296rpx";
+    bottom: ~"54rpx";
   }
-
 
 </style>
