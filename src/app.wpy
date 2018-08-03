@@ -112,6 +112,7 @@
       text-align: left;
       border: none;
       background: none;
+      width: 100%;
     }
 
     &.btn-plain{
