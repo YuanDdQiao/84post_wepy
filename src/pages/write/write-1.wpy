@@ -1,6 +1,6 @@
 <template>
   <indicator status="1"></indicator>
-  <view>
+  <view class="indicator-space6">
     <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
         <view class="noteanddone">
@@ -11,8 +11,8 @@
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
         <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder="落款签名"/>
         <view class="dateandword">
-          <view>{{ wordCount }}/{{ maxLength }} 字</view>
-          <view>{{ todayDate }}</view>
+          <view class="words">{{ wordCount }}/{{ maxLength }} 字</view>
+          <view class="date">{{ todayDate }}</view>
         </view>
       </form>
     </view>
@@ -211,16 +211,17 @@
     margin: 0;
 
     width: ~"660rpx";
-    height: 86vh;
+    height: calc(~"100vh - 186rpx");
   }
 
   .edit-letter-01 {
+    /*暖阳*/
     @bg_color: #FCF7E8;
 
     background: @bg_color;
     border: 2px solid #E5DCC2;
     outline: 6px solid @bg_color;
-    box-shadow: 0 4px 10px 0 #a09369;
+    box-shadow: 0 1px 10px 3px #a09369;
     color: #6E5F31;
 
     &::selection {
@@ -230,21 +231,33 @@
     button {
       background-color: #9E9477;
       color: @bg_color;
+      padding-left: 12rpx;
+      padding-right: 12rpx;
+      margin-right: ~"20rpx";
     }
 
     textarea {
       border-bottom: 1px #E5DCC2 dashed;
       border-top: 1px #E5DCC2 dashed;
     }
+
+    .date{
+      color: #6E5F31;
+    }
+
+    .words{
+      color: #6E5F31;
+    }
   }
 
   .edit-letter-02 {
+    /*蠢白*/
     @bg_color: #FFFFFF;
 
     background: @bg_color;
     border: 3px double #FBBAD0;
     border-radius: 8px;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
+    box-shadow: 0 2px 4px 1px rgba(160, 147, 105, 0.2);
     color: #6E1A36;
 
     &::selection {
@@ -254,21 +267,33 @@
     button {
       background-color: #DA6D92;
       color: @bg_color;
+      padding-left: 12rpx;
+      padding-right: 12rpx;
+      margin-right: ~"20rpx";
     }
 
     textarea {
       border-bottom: 1px #FFD8E5 dashed;
       border-top: 1px #FFD8E5 dashed;
     }
+
+    .date{
+      color: #6E1A36;
+    }
+
+    .words{
+      color: #6E1A36;
+    }
   }
 
   .edit-letter-03 {
+    /*八十四*/
     @bg_color: #F3F2F0;
 
     background: @bg_color;
     border: 2px dashed #1562B3;
     outline: 6px solid @bg_color;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+    box-shadow: 0 2px 8px 4px #a09369;
     color: #052B53;
 
     &::selection {
@@ -278,11 +303,22 @@
     button {
       background-color: #09427F;
       color: @bg_color;
+      padding-left: 12rpx;
+      padding-right: 12rpx;
+      margin-right: ~"20rpx";
     }
 
     textarea {
       border-bottom: 1px #BAC7D5 dashed;
       border-top: 1px #BAC7D5 dashed;
+    }
+
+    .date{
+      color: #052B53;
+    }
+
+    .words{
+      color: #052B53;
     }
   }
 
@@ -304,45 +340,62 @@
 
   textarea {
     position: fixed;
-    padding: ~"10rpx" ~"40rpx" 0 ~"40rpx";
-    height: 66vh;
+    padding: ~"20rpx" ~"40rpx" 0 ~"40rpx";
+    height: 64vh;
     width: ~"584rpx";
     font-size: ~"32rpx";
     line-height: ~"60rpx";
+    text-align: left;
   }
 
   .sign {
-    position: fixed;
-    bottom: 10vh;
-    right: ~"43rpx";
-    text-align: right;
-    font-size: ~"32rpx";
-    line-height: ~"60rpx";
-    padding-right: ~"40rpx";
+    position:fixed;
+    bottom:108rpx;
+    right:43rpx;
+    text-align:right;
+    font-size:32rpx;
+    line-height:60rpx;
+    padding-right:40rpx;
+
+
   }
 
   .dateandword {
-    font-size: ~"28rpx";
-    margin: 73vh auto auto;
-    height: 7vh;
-    width: ~"584rpx";
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .noteanddone {
-    height: 7vh;
+    font-size:28rpx;
+    position: fixed;
+    bottom:~"70rpx";
     padding: 0;
     width: ~"660rpx";
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+
+    .date{
+      margin-right: ~"40rpx";
+    }
+
+    .words{
+      margin-left: ~"40rpx";
+    }
+
+
+  }
+
+
+
+  .noteanddone {
+    height: ~"92rpx";
+    padding: 0;
+    width: ~"660rpx";
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .autosavenote {
-    padding-left: ~"40rpx";
+    margin-left: ~"40rpx";
     display: inline;
     font-size: ~"28rpx";
     color: gray;

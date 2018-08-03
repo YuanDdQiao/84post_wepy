@@ -83,6 +83,8 @@
       width: ~"624rpx";
     }
 
+
+
     // 按钮类别（颜色）
 
     & {
@@ -104,6 +106,12 @@
       border: 1px solid #E7795C;
       box-shadow: 0 1px 3px 0 rgba(117, 117, 117, 0.29);
       color: white;
+    }
+
+    &.btn-menuitem {
+      text-align: left;
+      border: none;
+      background: none;
     }
 
     &.btn-plain{
@@ -138,6 +146,17 @@
     border-radius: 6px;
   }
 
+  .menugroup{
+    background-image: linear-gradient(-180deg, #FCFCFC 0%, #F9F9F9 100%);
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.33);
+    color: @text-color;
+    border-radius: 6px;
+    margin-bottom: ~"20rpx";
+    padding: ~"10rpx" ~"40rpx";
+
+  }
+
   .paper {
     /* 纸 */
     background: #FFFFFF;
@@ -163,6 +182,14 @@
 
     width: ~"750rpx";
     height: ~"92rpx";
+  }
+
+  .hr{
+    background-color: @split-color;
+    color: none;
+    width: 100%;
+    height: 1px;
+
   }
 
   /* legacy */

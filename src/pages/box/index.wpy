@@ -3,7 +3,7 @@
     <block wx:for="{{ boxTypes }}" wx:key="id">
       <form report-submit="True" @submit="bindChooseBox" data-ltype="{{ item.method }}">
         <view>
-          <button class="holder {{ item.class_attr }}" formType="submit">
+          <button class="btn holder {{ item.class_attr }}" formType="submit">
             <view class="subholder">
               <view class="texts">
                 <view class="name">{{ item.name }}</view>
@@ -17,17 +17,18 @@
         </view>
       </form>
     </block>
-    <view>
+    <view class="menugroup">
       <form report-submit="True" @submit="bindShowReceived">
-        <button class="btn" formType="submit">我收到的信</button>
+        <button class="btn btn-menuitem" formType="submit">我收到的信</button>
+        <view class="hr"></view>
       </form>
       <form report-submit="True" @submit="bindShowSent">
-        <button class="btn" formType="submit">我寄出的信</button>
+        <button class="btn btn-menuitem" formType="submit">我寄出的信</button>
       </form>
     </view>
-    <view>
+    <view class="menugroup">
       <form report-submit="True" @submit="bindGetExpress">
-        <button class="btn" formType="submit">物流查询</button>
+        <button class="btn btn-menuitem" formType="submit">物流查询</button>
       </form>
     </view>
   </view>
@@ -120,17 +121,15 @@
   @import "../../colors";
 
   .holder {
-    margin: ~"20rpx" auto;
-    width: ~"630rpx";
-    height: ~"200rpx";
+    margin-bottom: ~"20rpx";
+    width: ~"630rpx" !important;
+    height: ~"200rpx" !important;
     text-align: left;
     padding: 3vh 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     color: #1562B3;
-    background: #FFFFFF;
-    box-shadow: 0 4px 6px 0 #E4E2DC;
     border-radius: 6px;
 
     .subholder {
