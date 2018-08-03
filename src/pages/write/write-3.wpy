@@ -603,6 +603,10 @@
 
   }
 
+  .choosebutton:hover{
+    border-bottom: 2px #1562B3 solid;
+  }
+
   .choosebutton:after {
     border: none;
   }
