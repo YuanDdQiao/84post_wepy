@@ -210,7 +210,12 @@
       border: 2px solid #E5DCC2;
       outline: 6px solid #FCF7E8;
       box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-      color: #6E5F31;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #6E5F31;
+      }
     }
 
     &.view-letter-02 {
@@ -219,6 +224,12 @@
       border-radius: 6px;
       box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
       color: #6E1A36;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #6E1A36;
+      }
     }
 
     &.view-letter-03 {
@@ -227,6 +238,12 @@
       outline: 6px solid #F3F2F0;
       box-shadow: 0 4px 20px 0 #a09369;
       color: #052B53;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #052B53;
+      }
     }
   }
 
