@@ -5,36 +5,40 @@
       <image class="envelopepreview" src="{{ thumbnailUrl }}"></image>
     </view>
 
-    <view class="title">您的信件已经准备好！</view>
+    <view class="uber paymentwindow">
+      <view class="title">您的信件已经准备好！</view>
 
-    <view class="texts">
-      <view class="current">
-        <view>当前余额</view>
-        <view>{{ balance }} 点券</view>
+      <view class="texts">
+        <view class="current">
+          <view>当前余额</view>
+          <view>{{ balance }} 点券</view>
+        </view>
+        <view class="after" wx:if="{{ balance >= fee }}">
+          <view>支付后余额</view>
+          <view>{{ balance-fee }} 点券</view>
+        </view>
+        <view class="fee">
+          <view>信件费用</view>
+          <view>{{ fee }}点券</view>
+        </view>
       </view>
-      <view class="after" wx:if="{{ balance >= fee }}">
-        <view>支付后余额</view>
-        <view>{{ balance-fee }} 点券</view>
-      </view>
-      <view class="fee">
-        <view>信件费用</view>
-        <view>{{ fee }}点券</view>
+
+      <view class="buttons">
+        <form report-submit="True" @submit="bindBackForm">
+          <button class="btn btn-md btn-inline btn-back" formType="submit">返回修改</button>
+        </form>
+
+        <form report-submit="True" @submit="bindPayForm">
+          <button class="btn btn-primary btn-md btn-inline" formType="submit">
+            <text wx:if="{{ balance >= fee }}">支付并寄出</text>
+            <text wx:else>充值并继续</text>
+          </button>
+        </form>
       </view>
     </view>
 
 
-    <view class="buttons">
-      <form report-submit="True" @submit="bindBackForm">
-        <button class="btn btn-md btn-inline btn-back" formType="submit">返回修改</button>
-      </form>
 
-      <form report-submit="True" @submit="bindPayForm">
-        <button class="btn btn-primary btn-md btn-inline" formType="submit">
-          <text wx:if="{{ balance >= fee }}">支付并寄出</text>
-          <text wx:else>充值并继续</text>
-        </button>
-      </form>
-    </view>
   </view>
 </template>
 
@@ -198,6 +202,7 @@
 
   .buttons {
     margin-top: 5vh;
+    margin-bottom: 5vh;
     text-align: center;
 
     .btn-back {
@@ -221,6 +226,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-bottom: ~"4rpx";
 
       width: ~"632rpx";
 
@@ -239,23 +245,25 @@
       view {
         font-size: ~"38rpx";
         line-height: 1.5;
+        margin-top: ~"20rpx";
       }
     }
   }
 
   .envelop {
-    width: ~"750rpx";
-    height: 46vh;
+    /*width: ~"750rpx";*/
+    /*height: 46vh;*/
 
-    margin-left: ~"-60rpx";
-    margin-right: ~"-60rpx";
-    margin-top: ~"92rpx";
+    margin-left:-60rpx;
+    margin-right:-60rpx;
+    margin-top:80rpx;
+
 
     .envelopepreview {
       width: ~"656rpx";
       height: ~"392rpx";
 
-      margin: calc(~"(46vh - 392rpx) / 2") auto;
+      margin: calc(~"(46vh - 460rpx) / 2") auto;
 
       text-align: center;
       box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.3);
@@ -265,6 +273,19 @@
 
   .gray {
     color: gray;
+  }
+
+  .paymentwindow{
+    position:fixed;
+    width:100vw;
+    bottom:0;
+    left:0;
+    border-radius: 0 !important;
+    border-top: 1px solid #DCDCDC;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: 0 -2px 4px 0 rgba(225, 225, 225, 0.50);
+
   }
 
 </style>

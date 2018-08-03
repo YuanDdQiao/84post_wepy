@@ -564,7 +564,7 @@
   }
 
   .roletype {
-    font-size:54rpx;
+    font-size:~"48rpx";
     margin-bottom:80rpx;
     margin-top:100rpx;
     font-weight:bold;
@@ -647,19 +647,6 @@
     justify-content: space-between;
   }
 
-  .resetbutton {
-    margin-top: ~"40rpx";
-    width: 60vw;
-    margin-bottom: 10vh;
-    border: 1px #ED725A dashed;
-  }
-
-  .nextbutton {
-    margin-top: 6vh;
-    width: 60vw;
-    color: white;
-    background-color: #F17250;
-  }
 
   .chosen {
     color: #1562B3;
