@@ -149,6 +149,12 @@
         },
         {
           "id": -1,
+          "name": "物流查询结果（自动输入运单号）",
+          "pathName": "pages/complex/express",
+          "query": "q=518182634711"
+        },
+        {
+          "id": -1,
           "name": "平邮提醒",
           "pathName": "pages/complex/normal",
           "query": ""
