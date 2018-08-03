@@ -1,25 +1,25 @@
 <template>
   <view class="holder">
-    <image class="icon" src="/images/shipping.svg"></image>
+    <!--<image class="icon" src="/images/shipping.svg"></image>-->
     <view class="title">
-      您的信件已寄出!
+      您的信件正在运输中
     </view>
 
     <view class="note">
-      平邮信件不支持物流查询，进度无法获取，请耐心等待～
+      平邮不支持物流查询，请时不时到「信箱 - 平邮」中看看有没有你的信件
     </view>
 
 
-    <view class="tips">
-      提示：平邮收信需在收件地址附近打开「信箱 - 平邮」查收。
-    </view>
-    <view>
-      <view class="links">快速通道</view>
+    <!--<view class="tips">-->
+    <!--提示：平邮收信需在收件地址附近打开「信箱 - 平邮」查收。-->
+    <!--</view>-->
+    <view class="buttons">
+      <!--<view class="links">快速通道</view>-->
       <form report-submit="True" @submit="bindWrite">
-        <button formType="submit">寄封信</button>
+        <button class="btn btn-lg" formType="submit">寄封信</button>
       </form>
       <form report-submit="True" @submit="bindSearch">
-        <button formType="submit">去信箱</button>
+        <button class="btn btn-lg" formType="submit">去信箱</button>
       </form>
     </view>
 
@@ -61,52 +61,19 @@
      * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
      */
     events = {}
-
-    /**
-     * 生命周期函数--监听页面加载（一个页面只会调用一次）
-     */
-    async onLoad() {
-    };
-
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
-    async onShow() {
-    };
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
-    async onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
-    async onUnload() {
-    };
   }
 </script>
 
 <style lang="less">
 
   .holder {
-    margin-left: ~"40rpx";
-    margin-right: ~"40rpx";
-    margin-top: ~"40rpx";
-
+    margin: ~"40rpx" auto 0;
   }
 
   .title {
     text-align: center;
     font-size: ~"44rpx";
+    margin-top: 15vh;
     margin-bottom: 2vh;
 
   }
@@ -114,6 +81,8 @@
   .note {
     text-align: center;
     font-size: ~"32rpx";
+    line-height: 1.4;
+    margin-top: 4vh;
     margin-bottom: 6vh;
 
   }
@@ -132,19 +101,22 @@
     font-size: ~"38rpx";
     margin-bottom: 6vh;
     color: #1562B3;
-
   }
 
-  button {
-    margin-bottom: 2vh;
-    border: 2px #14579F dashed;
-    background-color: white;
-    color: #14579F;
+  .buttons {
+    margin-top: 10vh;
   }
 
-  button:after {
-    border: none;
+  .btn {
+    margin: 0 auto 2vh;
   }
+
+  /*button {*/
+  /*margin-bottom: 2vh;*/
+  /*border: 2px #14579F dashed;*/
+  /*background-color: white;*/
+  /*color: #14579F;*/
+  /*}*/
 
   .logo {
     width: 8vh;
