@@ -4,7 +4,7 @@
     <view class="title">请输入取件码</view>
 
     <form report-submit="True" @submit="bindSubmitForm">
-      <image class="safelogo" src="/images/safe.svg"></image>
+      <image class="headicon" src="/images/code.png"></image>
       <input class="inputbox" type="text" placeholder="六位取件码" @input="bindInput" value="{{ pickUpCode }}"/>
       <view class="note">取件码是当信件到达目的地后通过短信发送给收件人的号码，挂号信以及快递必须凭取件码取件。</view>
       <button class="btn btn-primary" formType="submit">取信</button>

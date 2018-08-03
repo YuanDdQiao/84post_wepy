@@ -192,6 +192,15 @@
 
   }
 
+  .headicon{
+    width: ~"264rpx";
+    height: ~"264rpx";
+    margin-bottom: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
   /* legacy */
 
   .container {
