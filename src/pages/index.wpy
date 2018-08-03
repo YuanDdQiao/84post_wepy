@@ -20,10 +20,10 @@
     <form report-submit="True" @submit="bindGetPoint">
       <button class="dailycheckbutton" formType="submit">
         <block wx:if="{{ canQiandao }}">
-          <image class="dailycheckimage" src="/images/dailycheck_normal.png" alt="check"/>
+          <image class="dailycheckimage" src="{{ dailyCheckImages.normal }}" alt="check"/>
         </block>
         <block wx:else="{{ canQiandao }}">
-          <image class="dailycheckimage" src="/images/dailycheck_done.png" alt="empty"/>
+          <image class="dailycheckimage" src="{{ dailyCheckImages.done }}" alt="empty"/>
         </block>
       </button>
     </form>
@@ -69,7 +69,11 @@
       point: 0,
       pointStr: '0',
       canQiandao: false,
-      payEnabled: false
+      payEnabled: false,
+      dailyCheckImages: {
+        normal: '/images/dailycheck_normal.png',
+        done: '/images/dailycheck_done.png'
+      }
     }
 
     /**
@@ -143,8 +147,10 @@
     async checkCanQiandao() {
       // todo: 下一次 check 时间（自动缓存）
       let r = await api.request('my/qiandao/test/', false)
-      console.log(r.data)
+      console.log('r.data', r.data)
       this.canQiandao = r.data.can
+      this.dailyCheckImages = r.data.images
+      console.log('this.dailyCheckImages', this.dailyCheckImages)
       this.$apply()
     }
 
