@@ -1,6 +1,6 @@
 <template>
   <view class="more-space uber">
-    <view class="title">请输入取件码</view>
+    <view class="title">请输入运单号</view>
     <form report-submit @submit="bindQuery">
       <image class="headicon" src="/images/query.png"></image>
       <input class="inputbox" type="text" placeholder="十二位运单号" @input="bindInput" value="{{ qValue }}"/>
