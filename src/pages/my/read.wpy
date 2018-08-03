@@ -1,11 +1,11 @@
 <template>
-  <view class="{{ viewClass }}" style="{{ viewStyle }}">
+  <view class="letter {{ viewClass }}" style="{{ viewStyle }}">
     <view class="textarea">{{ content }}</view>
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
   <form report-submit="True" @submit="bindHide">
-    <button formType="submit">撕信</button>
+    <button class="btn-text" formType="submit">撕掉这封信</button>
   </form>
 </template>
 
@@ -102,95 +102,70 @@
 </script>
 
 <style lang="less">
+  @import "../../colors";
 
+  .letter {
+    margin: 0 ~"15rpx";
+    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 48rpx - 40rpx");
+    position: relative;
+    padding: ~"40rpx";
 
-  .confirmbutton {
-    color: white;
-    background-color: #F17250;
-    margin-top: ~"80rpx";
-  }
-
-  @text_font_size: ~"30rpx";
-
-  .date, .sign {
-    font-size: @text_font_size;
-    margin-bottom: 18px;
-    margin-right: ~"60rpx";
-    text-align: right;
-  }
-
-  .sign {
-    margin-bottom: 0;
-  }
-
-  .view-letter-01 {
-    background: #FCF7E8;
-    border: 2px solid #E5DCC2;
-    outline: 6px solid #FCF7E8;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #6E5F31;
-    margin-top: ~"40rpx";
-
-    .date, .sign {
-      color: #6E5F31;
+    .textarea {
+      text-align: left;
+      font-size: ~"30rpx";
+      line-height: 2;
+      white-space: pre-wrap;
     }
 
-  }
-
-  .view-letter-02 {
-    background: #FFFFFF;
-    border: 3px double #FBBAD0;
-    border-radius: 6px;
-    box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #6E1A36;
-    margin-top: ~"40rpx";
-
     .date, .sign {
-      color: #6E1A36;
+      font-size: ~"30rpx";
+      line-height: 2;
+      text-align: right;
     }
 
-  }
-
-  .view-letter-03 {
-    background: #F3F2F0;
-    border: 2px dashed #1562B3;
-    outline: 6px solid #F3F2F0;
-    box-shadow: 0 4px 20px 0 #a09369;
-    width: ~"660rpx";
-    margin-right: ~"40rpx";
-    margin-left: ~"40rpx";
-    padding: 0;
-    color: #052B53;
-    margin-top: ~"40rpx";
-
-    .date, .sign {
-      color: #052B53;
+    &.view-letter-01 {
+      background: #FCF7E8;
+      border: 2px solid #E5DCC2;
+      outline: 6px solid #FCF7E8;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 1);
+      .textarea,
+      .sign,
+      .date {
+        color: #6E5F31;
+      }
     }
 
+    &.view-letter-02 {
+      background: #FFFFFF;
+      border: 3px double #FBBAD0;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px 0 rgba(160, 147, 105, 0.2);
+
+      .textarea,
+      .sign,
+      .date {
+        color: #6E1A36;
+      }
+    }
+
+    &.view-letter-03 {
+      background: #F3F2F0;
+      border: 2px dashed #1562B3;
+      outline: 6px solid #F3F2F0;
+      box-shadow: 0 4px 20px 0 #a09369;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #052B53;
+      }
+    }
   }
 
-  .textarea {
-    padding: ~"40rpx" ~"40rpx" 0;
-    width: ~"584rpx";
-    font-size: @text_font_size;
-    line-height: 2;
-    margin-bottom: 40px;
-    white-space: pre-wrap;
-  }
-
-  .savenote {
-    margin-top: 32px;
+  .btn-text {
+    color: @weak-text-color;
+    font-size: ~"24rpx";
     text-align: center;
-    font-size: ~"30rpx";
-    margin-bottom: 35px;
-    color: gray;
+    margin-top: ~"24rpx";
   }
 </style>
