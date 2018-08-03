@@ -231,8 +231,8 @@
     button {
       background-color: #9E9477;
       color: @bg_color;
-      padding-left: ~"12rpx";
-      padding-right: ~"12rpx";
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
       margin-right: ~"20rpx";
     }
 
@@ -267,8 +267,8 @@
     button {
       background-color: #DA6D92;
       color: @bg_color;
-      padding-left: ~"12rpx";
-      padding-right: ~"12rpx";
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
       margin-right: ~"20rpx";
     }
 
@@ -303,8 +303,8 @@
     button {
       background-color: #09427F;
       color: @bg_color;
-      padding-left: ~"12rpx";
-      padding-right: ~"12rpx";
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
       margin-right: ~"20rpx";
     }
 
