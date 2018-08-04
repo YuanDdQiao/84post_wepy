@@ -77,9 +77,9 @@
   }
 
   .title {
-      font-size: ~"40rpx";
-      font-weight: bold;
-      margin-top: 4.6vh;
+    font-size: ~"40rpx";
+    font-weight: bold;
+    margin-top: 4.6vh;
 
   }
 
@@ -110,7 +110,6 @@
 
   .buttons {
     margin-top: 10vh;
-    width: ;
   }
 
   .btn {
@@ -149,8 +148,8 @@
   }
 
   .typelogo {
-    width:~"51rpx";
-    height:~"54rpx";
+    width: ~"51rpx";
+    height: ~"54rpx";
     position: absolute;
     left: ~"296rpx";
     bottom: ~"54rpx";

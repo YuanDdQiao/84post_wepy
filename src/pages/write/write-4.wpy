@@ -254,9 +254,9 @@
     /*width: ~"750rpx";*/
     /*height: 46vh;*/
 
-    margin-left:-60rpx;
-    margin-right:-60rpx;
-    margin-top:80rpx;
+    margin-left: ~"-60rpx";
+    margin-right: ~"-60rpx";
+    margin-top: ~"80rpx";
 
 
     .envelopepreview {

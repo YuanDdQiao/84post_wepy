@@ -217,7 +217,7 @@
     flex-direction: row;
     align-items: center;
     position:absolute;
-    bottom:60rpx;
+    bottom: ~"60rpx";
 
 
     .btn-left {

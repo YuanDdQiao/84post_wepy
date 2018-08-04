@@ -565,8 +565,8 @@
 
   .roletype {
     font-size:~"48rpx";
-    margin-bottom:80rpx;
-    margin-top:100rpx;
+    margin-bottom: ~"80rpx";
+    margin-top: ~"100rpx";
     font-weight:bold;
     color:#1562B3;
 
