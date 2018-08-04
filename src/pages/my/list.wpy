@@ -1,4 +1,7 @@
 <template>
+  <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
+    <button class="btn" formType="submit">退出删除模式</button>
+  </form>
   <block wx:if="{{ letters.length !== 0}}">
     <block wx:for="{{ letters }}" wx:key="id">
       <view class="mailholder">
@@ -95,6 +98,10 @@
         console.log('bindDelete', e)
         api.formIdSubmit(e.detail.formId)
         this.deleteLetter(e.target.dataset.uuid)
+      },
+      async bindExitDeleteMode(e) {
+        api.formIdSubmit(e.detail.formId)
+        this.exitDeleteMode()
       }
     }
 
@@ -164,6 +171,16 @@
       wepy.setNavigationBarColor({
         frontColor: '#ffffff',
         backgroundColor: '#E22C22'
+      })
+      this.$apply()
+    }
+
+    async exitDeleteMode() {
+      this.onAccelerometerChange()
+      this.deleteMode = false
+      wepy.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#0D55A1'
       })
       this.$apply()
     }
