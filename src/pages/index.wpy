@@ -1,51 +1,53 @@
 <template>
-  <view class="top">
-    <form report-submit="True" @submit="bindHelp" wx:if="{{ true }}">
-      <button class="help" formType="submit">?</button>
-    </form>
-    <view class="blank"></view>
-    <form report-submit="True" @submit="bindRecharge">
-      <button class="point" formType="submit">
-        <view class="balance">剩余点券:{{ pointStr }}</view>
-        <view class="split">|</view>
-        <view class="plus">+</view>
-      </button>
-    </form>
+  <view class="fixed">
+    <view class="top">
+      <form report-submit="True" @submit="bindHelp" wx:if="{{ true }}">
+        <button class="help" formType="submit">?</button>
+      </form>
+      <view class="blank"></view>
+      <form report-submit="True" @submit="bindRecharge">
+        <button class="point" formType="submit">
+          <view class="balance">剩余点券:{{ pointStr }}</view>
+          <view class="split">|</view>
+          <view class="plus">+</view>
+        </button>
+      </form>
+    </view>
+    <view class="logo">
+      <image class="logoimage" src="/images/logo_home.png" alt="84"/>
+    </view>
+    <view class="qiandao">
+
+      <form report-submit="True" @submit="bindGetPoint">
+        <button class="dailycheckbutton" formType="submit">
+          <block wx:if="{{ canQiandao }}">
+            <image class="dailycheckimage" src="{{ dailyCheckImages.normal }}" alt="check"/>
+          </block>
+          <block wx:else="{{ canQiandao }}">
+            <image class="dailycheckimage" src="{{ dailyCheckImages.done }}" alt="empty"/>
+          </block>
+        </button>
+      </form>
+
+    </view>
+
+    <view>
+      <form report-submit="True" @submit="bindWrite">
+        <button class="btnicon" formType="submit">
+          <image class="btnicon" src="/images/write.png" alt="write"/>
+        </button>
+      </form>
+      <form report-submit="True" @submit="bindBox">
+        <button class="btnicon" formType="submit">
+          <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
+        </button>
+      </form>
+    </view>
+
+    <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
+    <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
+
   </view>
-  <view class="logo">
-    <image class="logoimage" src="/images/logo_home.png" alt="84"/>
-  </view>
-  <view class="qiandao">
-
-    <form report-submit="True" @submit="bindGetPoint">
-      <button class="dailycheckbutton" formType="submit">
-        <block wx:if="{{ canQiandao }}">
-          <image class="dailycheckimage" src="{{ dailyCheckImages.normal }}" alt="check"/>
-        </block>
-        <block wx:else="{{ canQiandao }}">
-          <image class="dailycheckimage" src="{{ dailyCheckImages.done }}" alt="empty"/>
-        </block>
-      </button>
-    </form>
-
-  </view>
-
-  <view>
-    <form report-submit="True" @submit="bindWrite">
-      <button class="btnicon" formType="submit">
-        <image class="btnicon" src="/images/write.png" alt="write"/>
-      </button>
-    </form>
-    <form report-submit="True" @submit="bindBox">
-      <button class="btnicon" formType="submit">
-        <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
-      </button>
-    </form>
-  </view>
-
-  <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
-  <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
-
 
 </template>
 
@@ -176,6 +178,14 @@
 
 <style lang="less">
   @import "../colors";
+
+  .fixed {
+    position: fixed;
+    left: ~"45rpx";
+    top: ~"45rpx";
+    width: ~"660rpx";
+    height: calc(~"100vh - 2 * 45rpx");
+  }
 
   .top {
     display: flex;
