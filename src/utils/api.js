@@ -219,6 +219,33 @@ const stopDebug = async () => {
   })
 }
 
+// 检查更新
+const checkUpdate = async () => {
+  // eslint-disable-next-line no-undef
+  const updateManager = wx.getUpdateManager()
+  updateManager.onCheckForUpdate(res => {
+    // 请求完新版本信息的回调
+    console.log('hasUpdate', res.hasUpdate)
+  })
+  updateManager.onUpdateReady(async () => {
+    let r = await wepy.showModal({
+      title: '更新提示',
+      content: '小程序新版本已发布，如果不更新可能会造成部分功能异常，是否更新？',
+      showCancel: true,
+      confirmText: '重启更新',
+      confirmColor: '#3CC51F',
+      cancelText: '下次再说',
+      cancelColor: '#000000'
+    })
+    if (r.confirm) {
+      // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      console.log('applyUpdate')
+      updateManager.applyUpdate()
+    }
+  })
+
+}
+
 export default {
   host,
   request,
@@ -227,5 +254,6 @@ export default {
   getAuthScope,
   startDebug,
   stopDebug,
-  shareInfo
+  shareInfo,
+  checkUpdate
 }

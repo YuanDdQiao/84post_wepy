@@ -149,11 +149,11 @@
     color: @weak-text-color;
   }
 
-  .boldfont{
+  .boldfont {
     font-weight: bold;
   }
 
-  .heavyfont{
+  .heavyfont {
     font-weight: bolder;
   }
 
@@ -306,6 +306,12 @@
 
     async onLaunch() {
       await api.login()
+      await this.checkUpdate()
+    };
+
+    async checkUpdate() {
+      console.log('checkUpdate')
+      api.checkUpdate()
     }
   }
 </script>
