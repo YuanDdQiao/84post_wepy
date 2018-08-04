@@ -28,7 +28,15 @@ const request = async (options, showLoading = true, auth = true) => {
   // 拼接请求地址
   let start = /^https?:\/\//
   if (!start.exec(options.url)) {
-    options.url = apiRoot + '/' + options.url
+    if (apiRoot.substr(-1) !== '/' && options.url.charAt(0) !== '/') {
+      options.url = apiRoot + '/' + options.url
+    } else {
+      options.url = apiRoot + options.url
+    }
+
+    if (options.url.substr(-1) !== '/') {
+      options.url += '/'
+    }
   }
 
   // 权限验证 - Authorization
