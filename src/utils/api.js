@@ -1,5 +1,9 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
+import semver from 'semver'
+
+// 版本号
+const version = '1.2.1'
 
 // 服务器接口地址
 const host = '__HOST__'
@@ -231,25 +235,82 @@ const stopDebug = async () => {
 const checkUpdate = async () => {
   // eslint-disable-next-line no-undef
   const updateManager = wx.getUpdateManager()
-  updateManager.onCheckForUpdate(res => {
+
+  let prepared = false
+
+  let mustUpdate = false
+  let recommendUpdate = false
+
+  updateManager.onCheckForUpdate(async res => {
     // 请求完新版本信息的回调
     console.log('hasUpdate', res.hasUpdate)
+
+    if (res.hasUpdate) {
+      // 有更新 -> 拉取服务器端版本号信息
+
+      let apiSettingsResponse = await request('/api')
+      console.log('apiSettingsResponse', apiSettingsResponse)
+
+      let lowestVersion = apiSettingsResponse.data.find(k => k.key === 'lowest_version').value
+      let recommendVersion = apiSettingsResponse.data.find(k => k.key === 'recommend_version').value
+
+      console.log('lowestVersion', lowestVersion)
+      console.log('recommendVersion', recommendVersion)
+
+      // 判断是否需要提示更新
+      if (semver.lt(version, lowestVersion)) {
+        mustUpdate = true
+        recommendUpdate = true
+      } else if (semver.lt(version, recommendVersion)) {
+        mustUpdate = false
+        recommendUpdate = true
+      } else {
+        mustUpdate = false
+        recommendUpdate = false
+      }
+
+      prepared = true
+
+      console.log('mustUpdate', mustUpdate)
+      console.log('recommendUpdate', recommendUpdate)
+    }
   })
   updateManager.onUpdateReady(async () => {
-    let r = await wepy.showModal({
-      title: '更新提示',
-      content: '小程序新版本已发布，如果不更新可能会造成部分功能异常，是否更新？',
-      showCancel: true,
-      confirmText: '重启更新',
-      confirmColor: '#3CC51F',
-      cancelText: '下次再说',
-      cancelColor: '#000000'
-    })
-    if (r.confirm) {
-      // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-      console.log('applyUpdate')
-      updateManager.applyUpdate()
-    }
+    let timeInterval = setInterval(async () => {
+      if (prepared) {
+        clearInterval(timeInterval)
+        let r
+        if (mustUpdate) {
+          // 必须更新
+          r = await wepy.showModal({
+            title: '更新提示',
+            content: '小程序新版本已发布，此版本为重要版本，将会自动重启以更新',
+            showCancel: false,
+            confirmText: '重启更新',
+            confirmColor: '#3CC51F'
+          })
+        } else if (recommendUpdate) {
+          // 推荐更新
+          r = await wepy.showModal({
+            title: '更新提示',
+            content: '小程序新版本已发布，如不更新则可能会造成部分功能异常，是否更新？',
+            showCancel: true,
+            confirmText: '重启更新',
+            confirmColor: '#3CC51F',
+            cancelText: '下次再说',
+            cancelColor: '#000000'
+          })
+        } else {
+          // 不提示更新
+          return
+        }
+        if (r.confirm) {
+          // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+          console.log('applyUpdate')
+          updateManager.applyUpdate()
+        }
+      }
+    }, 50)
   })
 
 }
