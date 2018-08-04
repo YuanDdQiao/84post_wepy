@@ -1,7 +1,7 @@
 <template>
   <block wx:if="{{ letters.length !== 0}}">
     <block wx:for="{{ letters }}" wx:key="id">
-      <view>
+      <view class="mailholder">
         <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
               data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}"
               data-can_track="{{ item.letter_type.can_track }}" data-type_name="{{ item.letter_type.name }}">
@@ -146,17 +146,20 @@
     color: gray;
   }
 
+  .mailholder{
+    margin-bottom: ~"20rpx";
+  }
+
   .mailpreviewbutton {
-    margin-top: ~"40rpx";
     padding: 0;
 
     image {
       margin: 0;
       padding: 0;
-      width: ~"660rpx";
-      height: ~"394rpx";
+      width: ~"630rpx";
+      height: ~"364rpx";
 
-      box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.4);
+      box-shadow: 0 2px 6px 0px rgba(160, 147, 105, 0.4);
     }
   }
 
@@ -165,7 +168,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: ~"-20rpx" ~"60rpx" 6vh;
+    width: ~"580rpx";
+    padding-left:~"40rpx";
+    padding-right: ~"40rpx";
+    margin-top:~"-20rpx";
+    margin-bottom:~"30rpx";
+
 
   }
 
