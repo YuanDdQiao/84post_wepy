@@ -36,7 +36,7 @@
     padding: 0;
 
     color: @text-color;
-    font-size: ~"28rpx";
+    font-size: ~"32rpx";
     font-weight: normal;
     line-height: ~"28rpx";
     text-align: center;
@@ -144,7 +144,7 @@
   }
 
   .note {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     line-height: ~"38rpx";
     color: @weak-text-color;
   }
