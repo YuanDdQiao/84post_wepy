@@ -6,7 +6,7 @@
     <form report-submit="True" @submit="bindSubmitForm">
       <image class="headicon" src="/images/pickup_code.png"></image>
       <input class="inputbox" type="text" placeholder="六位取件码" @input="bindInput" value="{{ pickUpCode }}"/>
-      <view class="note">取件码是当信件到达目的地后通过短信发送给收件人的号码，挂号信以及快递必须凭取件码取件。</view>
+      <view class="explaination note">取件码是当信件到达目的地后通过短信发送给收件人的号码，挂号信以及快递必须凭取件码取件。</view>
       <button class="btn btn-primary btn-center" formType="submit">取信</button>
       <image class="typelogo" src="/images/logo_icon.png"></image>
     </form>
@@ -152,7 +152,7 @@
   .title {
     font-size: ~"40rpx";
     font-weight: bold;
-    margin-top: 4.6vh;
+    margin-top: 6vh;
   }
 
   .headicon {
@@ -169,7 +169,7 @@
     height: 6vh;
     width: ~"487rpx";
 
-    margin: 8.5vh auto 0;
+    margin: 6vh auto 0;
 
     color: #1562B3;
     text-align: center;
@@ -179,21 +179,20 @@
     }
   }
 
-  .note {
+  .explaination{
     width: 74vw;
-    margin: 5.4vh auto 10vh;
-    font-size: ~"28rpx";
+    margin: 6vh auto 8vh;
     line-height: 1.4;
     color: gray;
     text-align: center;
   }
 
   .typelogo {
-    width: ~"36rpx";
-    height: ~"44rpx";
+    width:~"46rpx";
+    height:~"48rpx";
     position: absolute;
     left: ~"296rpx";
-    bottom: ~"54rpx";
+    bottom: ~"45rpx";
   }
 
 </style>

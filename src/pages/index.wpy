@@ -7,7 +7,7 @@
       <view class="blank"></view>
       <form report-submit="True" @submit="bindRecharge">
         <button class="point" formType="submit">
-          <view class="balance">剩余点券:{{ pointStr }}</view>
+          <view class="balance">剩余点券: {{ pointStr }}</view>
           <view class="split">|</view>
           <view class="plus">+</view>
         </button>
@@ -141,7 +141,7 @@
     async refreshPoint() {
       api.request('user/balance/', false).then((e) => {
         this.point = e.data.balance
-        this.pointStr = utils.parseStr(e.data.balance, 4)
+        this.pointStr = utils.parseStr(e.data.balance, 0)
         this.$apply()
       })
     };
@@ -184,7 +184,7 @@
     left: ~"45rpx";
     top: ~"45rpx";
     width: ~"660rpx";
-    height: calc(~"100vh - 2 * 45rpx");
+    height: calc(~"100vh - 45rpx");
   }
 
   .top {
@@ -262,7 +262,7 @@
 
     height: 16px;
     width: 16px;
-    position: absolute;
+    position: fixed;
     bottom: ~"30rpx";
 
     &.nail-right {
