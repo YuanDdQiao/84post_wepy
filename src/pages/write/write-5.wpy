@@ -212,6 +212,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    position:absolute;
+    bottom:60rpx;
+
 
     .btn-left {
       margin-right: ~"24rpx";

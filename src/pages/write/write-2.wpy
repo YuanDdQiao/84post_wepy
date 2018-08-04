@@ -120,7 +120,7 @@
 
   .help {
 
-    margin-top: ~"96rpx";
+    margin-top: 6vh;
     margin-bottom: 0;
 
     .help-icon {
@@ -136,7 +136,6 @@
       border: ~"1.3rpx" solid #DCDCDC;
       border-radius: 50%;
       box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.50);
-
       margin: 0 auto ~"24rpx";
       color: #8C8C8C;
     }

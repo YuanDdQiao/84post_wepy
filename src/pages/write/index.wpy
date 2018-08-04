@@ -1,6 +1,6 @@
 <template>
-  <view class="indicator ">
-    <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} " wx:for="{{ paperType.types }}"
+  <view class="indicator">
+    <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} heavyfont" wx:for="{{ paperType.types }}"
           wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
     </view>
   </view>
