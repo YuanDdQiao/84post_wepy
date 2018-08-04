@@ -61,7 +61,8 @@
       type: 1,
       letters: [],
       loaded: false,
-      deleteMode: false
+      deleteMode: false,
+      accelerometerStopped: true
     }
 
     /**
@@ -114,23 +115,25 @@
       } else if (options.type === 'got') {
         this.type = 2
       } else {
-        await wepy.showModal({
-          title: '参数错误',
-          content: '未选择查询类型',
-          showCancel: false
-        })
+        await
+          wepy.showModal({
+            title: '参数错误',
+            content: '未选择查询类型',
+            showCancel: false
+          })
         wepy.reLaunch({ url: '/pages/box/index' })
       }
       this.code = options.type
       this.loaded = true
       this.$apply()
-    };
+    }
 
     async refreshList() {
-      let ret = await api.request(`my/list/${this.code}/`)
+      let ret = await
+        api.request(`my/list/${this.code}/`)
       this.letters = ret.data
       this.$apply()
-    };
+    }
 
     /**
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
@@ -145,18 +148,18 @@
           }
         }
       }, 50)
-    };
+    }
 
     async onHide() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async onUnload() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async enterDeleteMode() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
       this.deleteMode = true
       wepy.setNavigationBarColor({
         frontColor: '#ffffff',
@@ -166,28 +169,40 @@
     }
 
     async onAccelerometerChange() {
+      this.accelerometerStopped = false
       wepy.onAccelerometerChange(res => {
-        // console.log(res.x, res.y, res.z)
-        if (Math.abs(res.x) > 4 || Math.abs(res.y) > 4 || Math.abs(res.z) > 4) {
-          console.log(console.log(res.x, res.y, res.z))
-          wepy.vibrateLong()
-          this.enterDeleteMode()
+        if (!this.accelerometerStopped) {
+          console.log('/pages/my/list onAccelerometerChange')
+          // console.log(res.x, res.y, res.z)
+          if (Math.abs(res.x) > 2.5 || Math.abs(res.y) > 2.5 || Math.abs(res.z) > 2.5) {
+            console.log(console.log(res.x, res.y, res.z))
+            wepy.vibrateLong()
+            this.enterDeleteMode()
+          }
         }
       })
     }
 
     async deleteLetter(uuid) {
-      let modal = await wepy.showModal({
-        title: '删除这条记录？',
-        content: '一旦删除，这封信的纪录会在您寄出的信件中消失，且无法找回',
-        confirmText: '保留',
-        cancelText: '删除记录',
-        cancelColor: '#ff0000'
-      })
+      let modal = await
+        wepy.showModal({
+          title: '删除这条记录？',
+          content: '一旦删除，这封信的纪录会在您寄出的信件中消失，且无法找回',
+          confirmText: '保留',
+          cancelText: '删除记录',
+          cancelColor: '#ff0000'
+        })
       if (modal.cancel) {
-        await api.request(`letter/mark/hide/send/${uuid}`)
+        await
+          api.request(`letter/mark/hide/send/${uuid}/`)
         this.refreshList()
       }
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/my/list stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
     }
   }
 </script>

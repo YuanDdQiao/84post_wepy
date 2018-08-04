@@ -29,7 +29,9 @@
       viewStyle: '',
       content: '',
       submitDate: '',
-      sign: ''
+      sign: '',
+      accelerometerStopped: true,
+      uuid: ''
     }
 
     /**
@@ -65,19 +67,25 @@
     };
 
     async onShow() {
-      this.onAccelerometerChange()
+      let interval = setInterval(() => {
+        if (this.uuid) {
+          clearInterval(interval)
+          console.log('uuid', this.uuid)
+          this.onAccelerometerChange(this.uuid)
+        }
+      }, 50)
     }
 
     async onHide() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async onUnload() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async deleteLetter() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
       let modal = await wepy.showModal({
         title: '撕掉这封信？',
         content: '一旦撕掉，这封信会在您收到的信件中消失，且无法找回',
@@ -86,25 +94,31 @@
         cancelColor: '#ff0000'
       })
       if (modal.cancel) {
-        await api.request(`letter/mark/hide/save/${this.uuid}`)
+        await api.request(`letter/mark/hide/save/${this.uuid}/`)
         wepy.navigateBack()
       } else if (modal.confirm) {
-        this.onAccelerometerChange()
+        this.onAccelerometerChange(this.uuid)
       }
     }
 
-    async onAccelerometerChange() {
-      // let accelerometer = await wepy.startAccelerometer({
-      //   interval: 'normal'
-      // })
+    async onAccelerometerChange(uuid) {
+      this.accelerometerStopped = false
       wepy.onAccelerometerChange(res => {
-        // console.log(res.x, res.y, res.z)
-        if (Math.abs(res.x) > 4 || Math.abs(res.y) > 4 || Math.abs(res.z) > 4) {
-          console.log(console.log(res.x, res.y, res.z))
-          wepy.vibrateLong()
-          this.deleteLetter()
+        if (!this.accelerometerStopped && this.uuid === uuid) {
+          console.log('/pages/my/read onAccelerometerChange')
+          if (Math.abs(res.x) > 2.5 || Math.abs(res.y) > 2.5 || Math.abs(res.z) > 2.5) {
+            console.log(console.log(res.x, res.y, res.z))
+            wepy.vibrateLong()
+            this.deleteLetter()
+          }
         }
       })
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/my/read stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
     }
   }
 </script>
@@ -170,11 +184,11 @@
     }
   }
 
-  .deletenote{
-      color:#919191;
-      font-size:24rpx;
-      text-align:center;
-      opacity:0.3;
-      margin-top:4vh;
+  .deletenote {
+    color: #919191;
+    font-size: 24 rpx;
+    text-align: center;
+    opacity: 0.3;
+    margin-top: 4vh;
   }
 </style>

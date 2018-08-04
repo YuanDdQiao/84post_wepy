@@ -76,7 +76,8 @@
         normal: '',
         done: ''
       },
-      nailShow: true
+      nailShow: true,
+      accelerometerStopped: true
     }
 
     /**
@@ -134,6 +135,8 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.nailShow = true
+      this.$apply()
       this.onAccelerometerChange()
       this.refreshGlobalSettings()
       this.refreshPoint()
@@ -149,11 +152,13 @@
     }
 
     async onHide() {
-      wepy.stopAccelerometer()
+      console.log('/pages/index onHide')
+      this.stopAccelerometer()
     }
 
     async onUnload() {
-      wepy.stopAccelerometer()
+      console.log('/pages/index onUnload')
+      this.stopAccelerometer()
     }
 
     async checkCanQiandao() {
@@ -185,15 +190,26 @@
     }
 
     async onAccelerometerChange() {
+      this.accelerometerStopped = false
       wepy.onAccelerometerChange(res => {
-        // console.log(res.x, res.y, res.z)
-        if (Math.abs(res.x) > 3 || Math.abs(res.y) > 3 || Math.abs(res.z) > 3) {
-          console.log(console.log(res.x, res.y, res.z))
-          wepy.stopAccelerometer()
-          this.nailShow = false
-          this.$apply()
+        if (!this.accelerometerStopped) {
+          console.log('/pages/index onAccelerometerChange')
+
+          // console.log(res.x, res.y, res.z)
+          if (Math.abs(res.x) > 2 || Math.abs(res.y) > 2) {
+            console.log(console.log(res.x, res.y, res.z))
+            this.stopAccelerometer()
+            this.nailShow = false
+            this.$apply()
+          }
         }
       })
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/index stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
     }
   }
 </script>
