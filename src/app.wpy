@@ -171,7 +171,7 @@
     box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.33);
     color: @text-color;
     border-radius: 6px;
-    margin-bottom: ~"20rpx";
+    margin-bottom: 2vh;
     padding: ~"10rpx" 0;
 
   }
