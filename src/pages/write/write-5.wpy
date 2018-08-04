@@ -183,6 +183,10 @@
 </script>
 
 <style lang="less">
+
+  @import "../../colors";
+
+
   .texts {
     display: flex;
     flex-direction: column;

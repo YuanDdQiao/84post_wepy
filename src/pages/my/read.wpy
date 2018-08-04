@@ -4,8 +4,8 @@
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
-  <form report-submit="True" @submit="bindHide" wx:if="{{ false }}">
-    <button class="btn-text" formType="submit">撕掉这封信</button>
+  <form report-submit="True" @submit="bindHide" wx:if="{{ true }}">
+    <button class="deletenote" formType="submit">大力摇晃手机可撕掉这封信</button>
   </form>
 </template>
 
@@ -79,9 +79,9 @@
     async deleteLetter() {
       wepy.stopAccelerometer()
       let modal = await wepy.showModal({
-        title: '确认要撕掉这封信吗？',
-        content: '一旦撕掉这封信您将永远都无法再次看到这封信，并且此操作不可撤回',
-        confirmText: '继续保留',
+        title: '撕掉这封信？',
+        content: '一旦撕掉，这封信会在您收到的信件中消失，且无法找回',
+        confirmText: '保留',
         cancelText: '撕掉信件',
         cancelColor: '#ff0000'
       })
@@ -113,7 +113,7 @@
   @import "../../colors";
 
   .letter {
-    margin: 0 ~"15rpx";
+    margin: ~"15rpx" ~"15rpx";
     min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 48rpx - 40rpx");
     position: relative;
     padding: ~"40rpx";
@@ -170,10 +170,11 @@
     }
   }
 
-  .btn-text {
-    color: @weak-text-color;
-    font-size: ~"24rpx";
-    text-align: center;
-    margin-top: ~"24rpx";
+  .deletenote{
+      color:#919191;
+      font-size:24rpx;
+      text-align:center;
+      opacity:0.3;
+      margin-top:4vh;
   }
 </style>
