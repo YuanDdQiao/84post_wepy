@@ -125,6 +125,7 @@
         this.onAccelerometerChange()
         this.type = 1
       } else if (options.type === 'got') {
+        wepy.setNavigationBarTitle({ title: '收到的信' })
         this.type = 2
       } else {
         await
@@ -310,7 +311,7 @@
     padding-top: 2vh;
 
   }
-  
+
   .deletebutton {
 
     width: ~"120rpx";
