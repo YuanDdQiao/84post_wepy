@@ -4,7 +4,7 @@
     <form report-submit @submit="bindQuery">
       <image class="headicon" src="/images/query.png"></image>
       <input class="inputbox" type="text" placeholder="十二位运单号" @input="bindInput" value="{{ qValue }}"/>
-      <view class="note">填写运单号即可得知邮件的运输情况。运单号可在寄出信件之后获得，也可以在 信箱-寄出的信 页面查看。</view>
+      <view class="note">填写运单号即可查询邮件的运输情况。运单号可在寄出信件之后获得，也可以在 信箱-寄出的信 页面查看。</view>
       <button class="btn btn-primary btn-center" formType="submit">立即查询</button>
       <image class="typelogo" src="/images/logo_icon.png"></image>
     </form>
