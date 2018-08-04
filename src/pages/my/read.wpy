@@ -5,7 +5,7 @@
     <view class="date">{{ submitDate }}</view>
   </view>
   <form report-submit="True" @submit="bindHide">
-    <button class="btn-text" formType="submit">撕掉这封信</button>
+    <button class="deletenote" formType="submit">点击撕掉这封信</button>
   </form>
 </template>
 
@@ -162,10 +162,13 @@
     }
   }
 
-  .btn-text {
-    color: @weak-text-color;
-    font-size: ~"24rpx";
-    text-align: center;
-    margin-top: ~"24rpx";
+
+  .deletenote{
+    color:#919191;
+    font-size:24rpx;
+    text-align:center;
+    opacity:0.3;
+    margin-top:4vh;
+
   }
 </style>
