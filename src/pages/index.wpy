@@ -217,6 +217,7 @@
 <style lang="less">
   @import "../colors";
 
+
   .fixed {
     position: fixed;
     left: ~"45rpx";

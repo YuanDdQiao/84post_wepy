@@ -5,7 +5,7 @@
     <view class="date">{{ submitDate }}</view>
   </view>
   <form report-submit="True" @submit="bindHide" wx:if="{{ true }}">
-    <button class="deletenote" formType="submit">大力摇晃手机可撕掉这封信</button>
+    <button class="deletenote">大力摇晃手机可撕掉这封信</button>
   </form>
 </template>
 
@@ -189,6 +189,6 @@
     font-size: ~"24rpx";
     text-align: center;
     opacity: 0.3;
-    margin-top: 4vh;
+    margin-top: ~"60rpx";
   }
 </style>
