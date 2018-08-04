@@ -1,7 +1,7 @@
 <template>
   <view>
-    <view class="note">请点击下面的按钮后发送「充值」</view>
-    <view class="note2">(充值二字已经为您复制)</view>
+    <view class="note explaination">请点击下面的按钮后发送「充值」</view>
+    <view class="note">(充值二字已经为您复制)</view>
     <view>
       <block wx:for="{{ price }}" wx:key="id">
         <button open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
@@ -26,7 +26,7 @@
     </view>
   </view>
 
-  <view class="endnote">充值完成后一般即时到账。如果支付成功后超过一小时仍未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
+  <view class="endnote note">充值完成后一般即时到账。如果支付成功后超过一小时仍未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
 </template>
 
 <script>
@@ -179,11 +179,8 @@
 
   }
 
-  .note {
-    font-size: ~"28rpx";
+  .explaination {
     text-align: center;
-    margin-bottom: 2vh;
-    margin-top: 6vh;
     color: gray;
   }
 
@@ -195,12 +192,11 @@
   }
 
   .endnote {
-    font-size: ~"24rpx";
     line-height: 1.4;
     text-align: center;
-    margin-top: 6vh;
+    margin-top: ~"60rpx";
+    margin-bottom: 6vh;
     color: gray;
-    height: 14vh;
   }
 
 </style>
