@@ -11,9 +11,10 @@
         </form>
         <view class="nubmerholder" wx:if="{{ item.letter_type.can_track }}">
           <view class="expressnumber">运单号：{{ item.express_number }}</view>
+          <view class="split">|</view>
           <view>
             <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
-              <button class="copybutton" formType="submit">复制</button>
+              <button class="copybutton" formType="submit">点击复制</button>
             </form>
           </view>
         </view>
@@ -135,6 +136,8 @@
 
 <style lang="less">
 
+  @import "../../colors";
+
   .nomail {
     display: flex;
     flex-direction: column;
@@ -164,27 +167,39 @@
   }
 
   .nubmerholder {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: ~"580rpx";
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    width:~"460rpx" !important;
     padding-left:~"40rpx";
-    padding-right: ~"40rpx";
-    margin-top:~"-20rpx";
-    margin-bottom:~"30rpx";
+    padding-right:~"40rpx";
+    height:~"68rpx";
+    padding-top:~"12rpx";
+
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:~"-40rpx";
+    margin-bottom: ~"40rpx";
+
 
 
   }
 
   .expressnumber {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     color: gray;
   }
 
+  .split{
+    color: @split-color !important;
+    font-size: ~"26rpx";
+  }
+
   .copybutton {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     color: gray;
+
   }
 
 
