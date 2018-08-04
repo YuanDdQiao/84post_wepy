@@ -1,12 +1,15 @@
 <template>
-  <view class="holder">
+  <view class="more-space uber">
     <!--<image class="icon" src="/images/shipping.svg"></image>-->
+
     <view class="title">
       您的信件正在运输中
     </view>
 
+    <image class="headicon" src="/images/transfering.png"></image>
+
     <view class="note">
-      平邮不支持物流查询，请时不时到「信箱 - 平邮」中看看有没有你的信件
+      平邮不支持物流查询，请时不时到「信箱 - 取平邮」中看看有没有你的信件。
     </view>
 
 
@@ -16,12 +19,14 @@
     <view class="buttons">
       <!--<view class="links">快速通道</view>-->
       <form report-submit="True" @submit="bindWrite">
-        <button class="btn btn-lg" formType="submit">寄封信</button>
+        <button class="btn btn-md" formType="submit">寄封信</button>
       </form>
       <form report-submit="True" @submit="bindSearch">
-        <button class="btn btn-lg" formType="submit">去信箱</button>
+        <button class="btn btn-md" formType="submit">去信箱</button>
       </form>
     </view>
+
+    <image class="typelogo" src="/images/logo_icon.png"></image>
 
   </view>
 </template>
@@ -66,24 +71,15 @@
 
 <style lang="less">
 
-  .holder {
-    margin: ~"40rpx" auto 0;
+  .uber {
+    height: calc(~"100vh - 2 * 60rpx - 6rpx");
+    position: relative;
   }
 
   .title {
-    text-align: center;
-    font-size: ~"44rpx";
-    margin-top: 15vh;
-    margin-bottom: 2vh;
-
-  }
-
-  .note {
-    text-align: center;
-    font-size: ~"32rpx";
-    line-height: 1.4;
-    margin-top: 4vh;
-    margin-bottom: 6vh;
+      font-size: ~"40rpx";
+      font-weight: bold;
+      margin-top: 4.6vh;
 
   }
 
@@ -96,6 +92,15 @@
 
   }
 
+  .note {
+    width: 74vw;
+    margin: 5.4vh auto 10vh;
+    font-size: ~"28rpx";
+    line-height: 1.4;
+    color: gray;
+    text-align: center;
+  }
+
   .links {
     text-align: center;
     font-size: ~"38rpx";
@@ -105,6 +110,7 @@
 
   .buttons {
     margin-top: 10vh;
+    width: ;
   }
 
   .btn {
@@ -134,6 +140,22 @@
     margin-left: ~"185rpx";
     margin-right: ~"185rpx";
 
+  }
+
+  .headicon {
+    width: ~"196rpx";
+    height: ~"196rpx";
+    margin: 5.4vh auto 0;
+  }
+
+  .typelogo {
+    width:~"51rpx";
+    height:~"54rpx";
+    position: absolute;
+    left: ~"296rpx";
+    bottom: ~"54rpx";
+    margin-left: auto;
+    margin-right: auto;
   }
 
 
