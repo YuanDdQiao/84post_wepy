@@ -73,8 +73,8 @@
       canQiandao: false,
       payEnabled: false,
       dailyCheckImages: {
-        normal: '/images/dailycheck_normal.png',
-        done: '/images/dailycheck_done.png'
+        normal: '',
+        done: ''
       }
     }
 
