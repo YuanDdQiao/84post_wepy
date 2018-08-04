@@ -1,171 +1,171 @@
 {
-  "description": "项目配置文件。",
-  "packOptions": {
-    "ignore": []
-  },
-  "setting": {
-    "urlCheck": false,
-    "es6": false,
-    "postcss": false,
-    "minified": false,
-    "newFeature": true
-  },
-  "miniprogramRoot": "./dist",
-  "compileType": "miniprogram",
-  "libVersion": "2.0.4",
-  "appid": "wxb564393a08251db4",
-  "projectname": "84%E5%8F%B7%E9%82%AE%E5%B1%80",
-  "isGameTourist": false,
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": -1,
-      "list": [
-        {
-          "id": -1,
-          "name": "首页",
-          "pathName": "pages/index",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "写信",
-          "pathName": "pages/write/index",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "写信-1",
-          "pathName": "pages/write/write-1",
-          "query": "id=1"
-        },
-        {
-          "id": -1,
-          "name": "写信-2",
-          "pathName": "pages/write/write-2",
-          "query": "id=1"
-        },
-        {
-          "id": -1,
-          "name": "写信-3",
-          "pathName": "pages/write/write-3",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "写信-4",
-          "pathName": "pages/write/write-4",
-          "query": "",
-          "scene": "1047"
-        },
-        {
-          "id": -1,
-          "name": "写信-5",
-          "pathName": "pages/write/write-5",
-          "query": "",
-          "scene": "1047"
-        },
-        {
-          "id": -1,
-          "name": "信箱",
-          "pathName": "pages/box/index",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "平邮信箱",
-          "pathName": "pages/box/box1-1",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "挂号信/快递信箱",
-          "pathName": "pages/box/box1-2",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "挂号信/快递信箱（自动输入取件码）",
-          "pathName": "pages/box/box1-2",
-          "query": "scene=PickUpCode_MINA",
-          "scene": "1047"
-        },
-        {
-          "id": -1,
-          "name": "拆信",
-          "pathName": "pages/box/box-2",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "读信",
-          "pathName": "pages/box/box-3",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "寄出的信",
-          "pathName": "pages/my/list",
-          "query": "type=sent"
-        },
-        {
-          "id": -1,
-          "name": "收到的信",
-          "pathName": "pages/my/list",
-          "query": "type=got"
-        },
-        {
-          "id": -1,
-          "name": "物流查询",
-          "pathName": "pages/complex/query",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "物流查询（自动输入运单号）",
-          "pathName": "pages/complex/query",
-          "query": "q=518182634711"
-        },
-        {
-          "id": -1,
-          "name": "物流查询结果",
-          "pathName": "pages/complex/express",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "物流查询结果（自动输入运单号）",
-          "pathName": "pages/complex/express",
-          "query": "q=518182634711"
-        },
-        {
-          "id": -1,
-          "name": "平邮提醒",
-          "pathName": "pages/complex/normal",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "充值",
-          "pathName": "pages/my/recharge",
-          "query": ""
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"miniprogramRoot": "./dist",
+	"compileType": "miniprogram",
+	"libVersion": "2.0.4",
+	"appid": "wxb564393a08251db4",
+	"projectname": "84%E5%8F%B7%E9%82%AE%E5%B1%80",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "写信",
+					"pathName": "pages/write/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "写信-1",
+					"pathName": "pages/write/write-1",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "写信-2",
+					"pathName": "pages/write/write-2",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "写信-3",
+					"pathName": "pages/write/write-3",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "写信-4",
+					"pathName": "pages/write/write-4",
+					"query": "",
+					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "写信-5",
+					"pathName": "pages/write/write-5",
+					"query": "",
+					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "信箱",
+					"pathName": "pages/box/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "平邮信箱",
+					"pathName": "pages/box/box1-1",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "挂号信/快递信箱",
+					"pathName": "pages/box/box1-2",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "挂号信/快递信箱（自动输入取件码）",
+					"pathName": "pages/box/box1-2",
+					"query": "scene=PickUpCode_MINA",
+					"scene": "1047"
+				},
+				{
+					"id": -1,
+					"name": "拆信",
+					"pathName": "pages/box/box-2",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "读信",
+					"pathName": "pages/box/box-3",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "寄出的信",
+					"pathName": "pages/my/list",
+					"query": "type=sent"
+				},
+				{
+					"id": -1,
+					"name": "收到的信",
+					"pathName": "pages/my/list",
+					"query": "type=got"
+				},
+				{
+					"id": -1,
+					"name": "物流查询",
+					"pathName": "pages/complex/query",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "物流查询（自动输入运单号）",
+					"pathName": "pages/complex/query",
+					"query": "q=518182634711"
+				},
+				{
+					"id": -1,
+					"name": "物流查询结果",
+					"pathName": "pages/complex/express",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "物流查询结果（自动输入运单号）",
+					"pathName": "pages/complex/express",
+					"query": "q=518182634711"
+				},
+				{
+					"id": -1,
+					"name": "平邮提醒",
+					"pathName": "pages/complex/normal",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "充值",
+					"pathName": "pages/my/recharge",
+					"query": ""
+				}
+			]
+		}
+	}
 }

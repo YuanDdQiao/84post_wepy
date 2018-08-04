@@ -1,5 +1,5 @@
 <template>
-  <indicator status="1"></indicator>
+  <indicator status="1" ></indicator>
   <view class="indicator-space6">
     <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
