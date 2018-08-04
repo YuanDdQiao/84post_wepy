@@ -99,8 +99,9 @@
       // })
       wepy.onAccelerometerChange(res => {
         // console.log(res.x, res.y, res.z)
-        if (Math.abs(res.x) > 5 || Math.abs(res.y) > 5 || Math.abs(res.z) > 5) {
+        if (Math.abs(res.x) > 4 || Math.abs(res.y) > 4 || Math.abs(res.z) > 4) {
           console.log(console.log(res.x, res.y, res.z))
+          wepy.vibrateLong()
           this.deleteLetter()
         }
       })
