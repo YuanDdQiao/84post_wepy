@@ -210,7 +210,7 @@
       let modal = await
         wepy.showModal({
           title: '删除这条记录？',
-          content: '一旦删除，这封信的纪录会在您寄出的信件中消失，且无法找回',
+          content: '一旦删除，这封信的记录会在您寄出的信件中消失，且无法找回',
           confirmText: '保留',
           cancelText: '删除记录',
           cancelColor: '#ff0000'
