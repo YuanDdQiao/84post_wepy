@@ -71,10 +71,10 @@
               showCancel: false
             })
           } else {
-            wepy.navigateTo({ url: `express?q=${e.target.dataset.express}` })
+            wepy.navigateTo({ url: `/pages/complex/express?q=${e.target.dataset.express}` })
           }
         } else if (this.type === 2) {
-          wepy.navigateTo({ url: `read?uuid=${e.target.dataset.uuid}` })
+          wepy.navigateTo({ url: `/pages/my/read?uuid=${e.target.dataset.uuid}` })
         }
       },
       bindCopy(e) {
@@ -106,7 +106,7 @@
           content: '未选择查询类型',
           showCancel: false
         })
-        wepy.reLaunch({ url: '/pages/my/index' })
+        wepy.reLaunch({ url: '/pages/box/index' })
       }
       this.code = options.type
       this.loaded = true
