@@ -2,7 +2,7 @@
   <view class="page">
     <view class="fixed">
       <view class="top">
-        <form report-submit="True" @submit="bindHelp" wx:if="{{ true }}">
+        <form report-submit="True" @submit="bindHelp" wx:if="{{ false }}">
           <button class="help" formType="submit">?</button>
         </form>
         <view class="blank"></view>
