@@ -44,8 +44,8 @@
       </form>
     </view>
 
-    <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
-    <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
+    <image class="nail nail-left" src="/images/nail.png" alt="nail" wx:if="{{ nailShow }}"/>
+    <image class="nail nail-right" src="/images/nail.png" alt="nail" wx:if="{{ nailShow }}"/>
 
   </view>
 
@@ -75,7 +75,8 @@
       dailyCheckImages: {
         normal: '',
         done: ''
-      }
+      },
+      nailShow: true
     }
 
     /**
@@ -133,6 +134,7 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.onAccelerometerChange()
       this.refreshGlobalSettings()
       this.refreshPoint()
       this.checkCanQiandao()
@@ -144,7 +146,15 @@
         this.pointStr = utils.parseStr(e.data.balance, 0)
         this.$apply()
       })
-    };
+    }
+
+    async onHide() {
+      wepy.stopAccelerometer()
+    }
+
+    async onUnload() {
+      wepy.stopAccelerometer()
+    }
 
     async checkCanQiandao() {
       // todo: 下一次 check 时间（自动缓存）
@@ -171,6 +181,18 @@
       api.request('global/pay_enabled/').then((e) => {
         this.payEnabled = e.data.value
         this.$apply()
+      })
+    }
+
+    async onAccelerometerChange() {
+      wepy.onAccelerometerChange(res => {
+        // console.log(res.x, res.y, res.z)
+        if (Math.abs(res.x) > 3 || Math.abs(res.y) > 3 || Math.abs(res.z) > 3) {
+          console.log(console.log(res.x, res.y, res.z))
+          wepy.stopAccelerometer()
+          this.nailShow = false
+          this.$apply()
+        }
       })
     }
   }
