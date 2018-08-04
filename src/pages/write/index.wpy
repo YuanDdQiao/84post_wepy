@@ -1,30 +1,33 @@
 <template>
-  <view class="indicator">
-    <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} heavyfont" wx:for="{{ paperType.types }}"
-          wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
+  <view class="fixed">
+    <view class="indicator">
+      <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} heavyfont" wx:for="{{ paperType.types }}"
+            wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
+      </view>
     </view>
-  </view>
-  <view class="indicator-space8 more-space writeindex-space">
-    <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
-    <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
-      <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
-              indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
-              wx:if="{{ type.id === paperType.currentItemId }}">
-        <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
-          <view class="paper {{ item.class_attr }}">
-            <view class="demotext textcolor">{{ item.demo_text }}</view>
-            <view class="todaydate textcolor">{{ todayDate }}</view>
-          </view>
-          <!-- <view class="papername">{{ item.name }}</view> -->
-        </swiper-item>
-      </swiper>
-    </block>
+    <view class="indicator-space8 more-space writeindex-space">
+      <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
+      <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
+        <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
+                indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
+                wx:if="{{ type.id === paperType.currentItemId }}">
+          <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
+            <view class="paper {{ item.class_attr }}">
+              <view class="demotext textcolor">{{ item.demo_text }}</view>
+              <view class="todaydate textcolor">{{ todayDate }}</view>
+            </view>
+            <!-- <view class="papername">{{ item.name }}</view> -->
+          </swiper-item>
+        </swiper>
+      </block>
+
+    </view>
+
+    <form report-submit="True" @submit="bindStartWriting">
+      <button formType="submit" class="btn btn-primary btn-center">就选它</button>
+    </form>
 
   </view>
-
-  <form report-submit="True" @submit="bindStartWriting">
-    <button formType="submit" class="btn btn-primary btn-center">就选它</button>
-  </form>
 
 
 </template>
@@ -195,6 +198,13 @@
     padding-left: 0;
     padding-right: 0;
     width: ~"750rpx";
+  }
+
+  .fixed{
+    position: fixed;
+    top: ~"137rpx";
+    width: 100%;
+    height: calc(~"100vh - 30rpx");
   }
 
   .indicator {
