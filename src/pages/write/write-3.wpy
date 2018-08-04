@@ -6,7 +6,7 @@
 
         <image class="logo" src="/images/84_logo.png"></image>
         <image class="infoformlogo" src="/images/mailsendingform.svg"></image>
-        <view class="explain note">请在下表正确填写收信人和寄件人信息并选择邮票。<br>寄信嘛，要有仪式感。</view>
+        <view class="explain note">请在下表正确填写收信人和寄件人信息并选择邮票。寄信嘛，要有仪式感。</view>
         <view class="roletype">- 收信人信息 -</view>
 
         <view class="{{ toNameError ? 'error' : '' }} ">
