@@ -4,7 +4,7 @@
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
-  <form report-submit="True" @submit="bindHide">
+  <form report-submit="True" @submit="bindHide" wx:if="{{ false }}">
     <button class="btn-text" formType="submit">撕掉这封信</button>
   </form>
 </template>
@@ -38,17 +38,7 @@
     methods = {
       async bindHide(e) {
         api.formIdSubmit(e.detail.formId)
-        let modal = await wepy.showModal({
-          title: '确认要撕掉这封信吗？',
-          content: '一旦撕掉这封信您将永远都无法再次看到这封信，并且此操作不可撤回',
-          confirmText: '继续保留',
-          cancelText: '撕掉信件',
-          cancelColor: '#ff0000'
-        })
-        if (modal.cancel) {
-          await api.request(`letter/mark/hide/save/${this.uuid}`)
-          wepy.navigateBack()
-        }
+        this.deleteLetter()
       }
     }
 
@@ -64,7 +54,7 @@
       console.log(options)
       let uuid = options.uuid
       this.uuid = uuid
-      api.request(`my/read/${uuid}/`).then(ret => {
+      await api.request(`my/read/${uuid}/`).then(ret => {
         this.content = ret.data.content
         this.viewClass = ret.data.viewClass
         this.viewStyle = ret.data.viewStyle
@@ -74,30 +64,47 @@
       })
     };
 
-    /**
-     * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
-     */
     async onShow() {
-    };
+      this.onAccelerometerChange()
+    }
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
     async onHide() {
-    };
+      wepy.stopAccelerometer()
+    }
 
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
     async onUnload() {
-    };
+      wepy.stopAccelerometer()
+    }
+
+    async deleteLetter() {
+      wepy.stopAccelerometer()
+      let modal = await wepy.showModal({
+        title: '确认要撕掉这封信吗？',
+        content: '一旦撕掉这封信您将永远都无法再次看到这封信，并且此操作不可撤回',
+        confirmText: '继续保留',
+        cancelText: '撕掉信件',
+        cancelColor: '#ff0000'
+      })
+      if (modal.cancel) {
+        await api.request(`letter/mark/hide/save/${this.uuid}`)
+        wepy.navigateBack()
+      } else if (modal.confirm) {
+        this.onAccelerometerChange()
+      }
+    }
+
+    async onAccelerometerChange() {
+      // let accelerometer = await wepy.startAccelerometer({
+      //   interval: 'normal'
+      // })
+      wepy.onAccelerometerChange(res => {
+        // console.log(res.x, res.y, res.z)
+        if (Math.abs(res.x) > 5 || Math.abs(res.y) > 5 || Math.abs(res.z) > 5) {
+          console.log(console.log(res.x, res.y, res.z))
+          this.deleteLetter()
+        }
+      })
+    }
   }
 </script>
 
