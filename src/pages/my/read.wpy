@@ -5,7 +5,7 @@
     <view class="date">{{ submitDate }}</view>
   </view>
   <form report-submit="True" @submit="bindHide">
-    <button class="deletenote" formType="submit">点击撕掉这封信</button>
+    <button class="deletenote" formType="submit">大力摇晃手机可撕掉信件</button>
   </form>
 </template>
 
@@ -105,7 +105,7 @@
   @import "../../colors";
 
   .letter {
-    margin: 0 ~"15rpx";
+    margin: ~"15rpx" ~"15rpx";
     min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 48rpx - 40rpx");
     position: relative;
     padding: ~"40rpx";
