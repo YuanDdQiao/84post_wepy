@@ -26,18 +26,30 @@
       </view>
     </view>
 
-    <view class="buttons" wx:if="{{ letterType.can_track }}">
-      <button class="btn btn-md btn-left" open-type="share">分享给收信人</button>
+    <block wx:if="{{ letterType.can_track }}">
+      <view class="buttons">
+        <button class="btn btn-md btn-left" open-type="share">分享给收信人</button>
 
-      <form report-submit="True" @submit="bindTrack">
-        <button class="btn btn-md" formType="submit">查看物流</button>
+        <form report-submit="True" @submit="bindTrack">
+          <button class="btn btn-md" formType="submit">查看物流</button>
+        </form>
+      </view>
+
+
+      <form report-submit="True" @submit="bindGoBack">
+        <button class="btn btn-primary btn-lg" formType="submit">完成</button>
       </form>
-    </view>
+    </block>
+    <block wx:else>
+      <view class="buttons">
+        <button class="btn btn-md btn-left" open-type="share">分享给收信人</button>
+        <form report-submit="True" @submit="bindGoBack">
+          <button class="btn btn-primary btn-md" formType="submit">完成</button>
+        </form>
+      </view>
+    </block>
 
 
-    <form report-submit="True" @submit="bindGoBack">
-      <button class="btn btn-primary btn-lg" formType="submit">完成</button>
-    </form>
   </view>
 </template>
 
