@@ -283,19 +283,19 @@ const checkUpdate = async () => {
         if (mustUpdate) {
           // 必须更新
           r = await wepy.showModal({
-            title: '更新提示',
-            content: '小程序新版本已发布，此版本为重要版本，将会自动重启以更新',
+            title: '小程序更新',
+            content: '84 号邮局新版本已发布，该版本为重要版本，将会刷新页面以更新',
             showCancel: false,
-            confirmText: '重启更新',
+            confirmText: '刷新页面并更新',
             confirmColor: '#3CC51F'
           })
         } else if (recommendUpdate) {
           // 推荐更新
           r = await wepy.showModal({
-            title: '更新提示',
-            content: '小程序新版本已发布，如不更新则可能会造成部分功能异常，是否更新？',
+            title: '小程序更新',
+            content: '84 号邮局新版本已发布，若不更新可能会造成部分功能异常，是否更新？',
             showCancel: true,
-            confirmText: '重启更新',
+            confirmText: '更新',
             confirmColor: '#3CC51F',
             cancelText: '下次再说',
             cancelColor: '#000000'
