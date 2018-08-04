@@ -121,7 +121,7 @@
   .help {
 
     margin-top: ~"96rpx";
-    margin-bottom: ~"96rpx";
+    margin-bottom: 0;
 
     .help-icon {
       height: ~"60rpx";

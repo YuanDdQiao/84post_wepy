@@ -7,7 +7,7 @@
     min-height: calc(~"100% - 90rpx");
     padding: ~"45rpx";
 
-    background: #FCF8F5 url(@bg) no-repeat center center;
+    background: #FCF8F5 url(@bg) center center;
     background-size: cover;
 
     & > view.more-space {
