@@ -1,7 +1,11 @@
 <template>
-  <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
-    <button class="btn" formType="submit">退出删除模式</button>
-  </form>
+
+    <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
+      <view class="uber deletewindow">
+       <button class="btn btn-center" formType="submit">完成</button>
+      </view>
+    </form>
+
   <block wx:if="{{ letters.length !== 0}}">
     <block wx:for="{{ letters }}" wx:key="id">
       <view class="mailholder">
@@ -14,7 +18,7 @@
         </form>
         <view wx:if="{{ deleteMode }}">
           <form report-submit="True" @submit="bindDelete" data-uuid="{{ item.uuid }}">
-            <button class="btn" formType="submit">点击删除此寄信记录</button>
+            <button class="btn-plain deletebutton" formType="submit"><image src="/images/delete.png" alt="delete"/></button>
           </form>
         </view>
         <view wx:else>
@@ -30,6 +34,7 @@
       </view>
     </block>
     <view class="nomore">没有更多信件了</view>
+    <view class="bottommarginadd" wx:if="{{ deleteMode }}"> </view>
   </block>
   <block wx:else>
     <block wx:if="{{type === 1}}">
@@ -290,5 +295,38 @@
 
   }
 
+  .deletewindow{
+    position:fixed;
+    height: 10vh;
+    width:100vw;
+    bottom:0;
+    left:0;
+    border-radius: 0 !important;
+    border-top: 1px solid #DCDCDC;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: 0 -2px 4px 0 rgba(225, 225, 225, 0.50);
+    z-index: 100;
+    padding-top: 2vh;
+
+  }
+  
+  .deletebutton {
+
+    width: ~"120rpx";
+    height: ~"110rpx";
+    margin: ~"-80rpx" auto ~"40rpx";
+
+    image {
+      width: ~"110rpx";
+      height: ~"110rpx";
+    }
+  }
+
+  .bottommarginadd{
+    height: 8vh;
+    opacity: 0;
+
+  }
 
 </style>
