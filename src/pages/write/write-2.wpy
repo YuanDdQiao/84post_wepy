@@ -23,7 +23,7 @@
       </block>
     </view>
   </view>
-  <view class="help" wx:if="{{ true }}">
+  <view class="help" wx:if="{{ false }}">
     <form report-submit="True" @submit="bindHelp">
       <button formType="submit">
         <view class="help-icon">?</view>
@@ -130,7 +130,6 @@
       line-height: ~"60rpx";
       font-weight: bold;
       font-size: ~"38rpx";
-      
 
       background-image: linear-gradient(-180deg, #FBFBFB 0%, #F6F6F6 100%);
       border: ~"1.3rpx" solid #DCDCDC;
