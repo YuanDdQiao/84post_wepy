@@ -9,7 +9,7 @@
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
-        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder="落款签名"/>
+        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder-class="placeholder" placeholder="落款签名"/>
         <view class="dateandword">
           <view class="words">{{ wordCount }}/{{ maxLength }} 字</view>
           <view class="date">{{ todayDate }}</view>
@@ -254,7 +254,7 @@
     }
   }
 
-  .edit-letter-06 {
+  .edit-letter-02 {
     /*蠢白*/
     @bg_color: #FFFFFF;
 
@@ -348,8 +348,13 @@
     }
 
     textarea {
-      border-bottom: 3px #C7E6BA dashed;
-      border-top: 3px #EFD9A7 dashed;
+      border-bottom: 2px white solid;
+      border-top: 2px white solid;
+      height: calc(~"100vh - 92rpx - 90rpx - 92rpx - 80rpx - 108rpx - 24px");
+
+      width: ~"544rpx";
+      margin-right: ~"20rpx";
+      margin-left: ~"20rpx";
     }
 
     .date {
@@ -359,9 +364,18 @@
     .words {
       color: #9DA36F;
     }
+
+    .dateandword{
+      bottom: ~"90rpx" !important;
+    }
+
+    .sign {
+      position: fixed;
+      bottom: ~"130rpx";
+    }
   }
 
-  .edit-letter-06 {
+  .edit-letter-05 {
        /*青田*/
 
        box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
@@ -385,8 +399,8 @@
        }
 
        textarea {
-         border-bottom: 3px #CBE5CC dashed;
-         border-top: 3px #EBEFE5 dashed;
+         border-bottom: 2px #CBE5CC dashed;
+         border-top: 2px #EBEFE5 dashed;
        }
 
        .date {
@@ -396,9 +410,16 @@
        .words {
          color: #89C076;
        }
+
+        .placeholder{
+          color: #a7b8a1;
+       }
+
+
+
      }
 
-  .edit-letter-02 {
+  .edit-letter-06 {
     /*奥德赛*/
 
     box-shadow: 0 4px 14px 0 rgba(95, 148, 205, 0.7);
@@ -422,9 +443,25 @@
     }
 
     textarea {
-      border-bottom: 3px #F3F3F4 solid;
-      border-top: 3px #F3F3F4 solid;
+      border-bottom: 3px #546589 dashed;
+      border-top: 3px #546589 dashed;
+      width: ~"544rpx";
+      margin-right: ~"20rpx";
+      margin-left: ~"20rpx";
+      
     }
+
+    .placeholder{
+      color: #7f829e;
+    }
+
+    .autosavenote{
+      color: #afc2d7;
+    }
+
+
+
+
 
     .date {
       color: #C6D0E6;
@@ -506,6 +543,7 @@
     display: inline;
     font-size: ~"28rpx";
     color: gray;
+    opacity: 0.5;
   }
 
   .godown {
