@@ -640,7 +640,7 @@
       background-color: white;
 
       &.choose {
-        border: 3px #FF4A19 solid;
+        border: 2px #FF4A19 solid;
         border-radius: 6px;
       }
 
