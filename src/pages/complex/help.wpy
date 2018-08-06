@@ -1,0 +1,46 @@
+<template>
+  <web-view src="{{ url }}"></web-view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '@/utils/api'
+
+  export default class extends wepy.page {
+    /**
+     * 页面配置对象，对应于原生的 page.json 文件
+     */
+    config = {
+      navigationBarTitleText: '帮助'
+    }
+
+    /**
+     * 页面渲染数据对象，存放可用于页面模板绑定的渲染数据
+     */
+    data = {
+      url: ''
+    }
+
+    /**
+     * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
+     */
+    methods = {}
+
+    /**
+     * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
+     */
+    events = {}
+
+    /**
+     * 生命周期函数--监听页面加载（一个页面只会调用一次）
+     */
+    async onLoad(options) {
+      let anchor = options.anchor
+      this.url = `${api.host}/help/?version=${api.version}${anchor ? `#${anchor}` : ''}`
+      this.$apply()
+    };
+  }
+</script>
+
+<style lang="less">
+</style>

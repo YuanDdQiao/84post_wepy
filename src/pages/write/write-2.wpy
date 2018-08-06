@@ -23,7 +23,7 @@
       </block>
     </view>
   </view>
-  <view class="help" wx:if="{{ false }}">
+  <view class="help">
     <form report-submit="True" @submit="bindHelp">
       <button formType="submit">
         <view class="help-icon">?</view>
@@ -88,11 +88,7 @@
       },
       async bindHelp(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.showModal({
-          title: '@季节',
-          content: '和你抱在一起睡过一张床的某人喊你补充内容！',
-          showCancel: false
-        })
+        wepy.navigateTo({ url: '/pages/complex/help?anchor=compare' })
       }
     }
 

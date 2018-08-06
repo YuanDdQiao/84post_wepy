@@ -2,7 +2,7 @@
   <view class="page">
     <view class="fixed">
       <view class="top">
-        <form report-submit="True" @submit="bindHelp" wx:if="{{ false }}">
+        <form report-submit="True" @submit="bindHelp">
           <button class="help" formType="submit">?</button>
         </form>
         <view class="blank"></view>
@@ -88,11 +88,7 @@
     methods = {
       async bindHelp(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.showModal({
-          title: '@季节',
-          content: '和你抱在一起睡过一张床的某人喊你补充内容！',
-          showCancel: false
-        })
+        wepy.navigateTo({ url: '/pages/complex/help' })
       },
       async bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
