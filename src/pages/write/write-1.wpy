@@ -201,6 +201,10 @@
 
 <style lang="less">
 
+
+  @import "../../colors";
+  @import "../../images";
+
   .edit-letter-common {
     display: flex;
     flex-direction: column;
@@ -250,7 +254,7 @@
     }
   }
 
-  .edit-letter-02 {
+  .edit-letter-06 {
     /*蠢白*/
     @bg_color: #FFFFFF;
 
@@ -288,11 +292,10 @@
 
   .edit-letter-03 {
     /*八十四*/
-    @bg_color: #F3F2F0;
 
-    background: @bg_color;
+    background: #F3F2F0;
     border: 2px dashed #1562B3;
-    outline: 6px solid @bg_color;
+    outline: 6px solid #F3F2F0;
     box-shadow: 0 2px 8px 4px #a09369;
     color: #052B53;
 
@@ -302,7 +305,7 @@
 
     button {
       background-color: #09427F;
-      color: @bg_color;
+      color: #F3F2F0;
       padding-left: ~"20rpx";
       padding-right: ~"20rpx";
       margin-right: ~"20rpx";
@@ -319,6 +322,116 @@
 
     .words {
       color: #052B53;
+    }
+  }
+
+  .edit-letter-04 {
+    /*微甜青橘*/
+    background-image: linear-gradient(-180deg, #FFF3D8 0%, #E1FFDD 97%);
+    border: 12px solid rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
+    border-radius: 6px;
+    color: #9DA36F;
+    width:calc(~"660rpx - 24px");
+    height: calc(~"100vh - 186rpx - 24px");
+
+    &::selection {
+      background: #DFE4BC;
+    }
+
+    button {
+      background-color: #9DA36F;
+      color: #FEF3D9;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"40rpx";
+    }
+
+    textarea {
+      border-bottom: 3px #C7E6BA dashed;
+      border-top: 3px #EFD9A7 dashed;
+    }
+
+    .date {
+      color: #9DA36F;
+    }
+
+    .words {
+      color: #9DA36F;
+    }
+  }
+
+  .edit-letter-06 {
+       /*青田*/
+
+       box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
+       border-radius: 8px;
+       font-size: ~"32rpx";
+       background: #FBFEF7 url(@paper-qingtian) space;
+       background-size: cover;
+
+       color: #89C076;
+
+       &::selection {
+         background: #DFE4BC;
+       }
+
+       button {
+         background-color: #89C076;
+         color: #FBFEF7;
+         padding-left: ~"20rpx";
+         padding-right: ~"20rpx";
+         margin-right: ~"20rpx";
+       }
+
+       textarea {
+         border-bottom: 3px #CBE5CC dashed;
+         border-top: 3px #EBEFE5 dashed;
+       }
+
+       .date {
+         color: #89C076;
+       }
+
+       .words {
+         color: #89C076;
+       }
+     }
+
+  .edit-letter-02 {
+    /*奥德赛*/
+
+    box-shadow: 0 4px 14px 0 rgba(95, 148, 205, 0.7);
+    border-radius: 2px;
+    font-size: ~"32rpx";
+    background: #2C3A55 url(@paper-aodesaiopacity) space;
+    background-size: cover;
+
+    color: #F3F3F4;
+
+    &::selection {
+      background: #DFE4BC;
+    }
+
+    button {
+      background-color: #C6D0E6;
+      color: #2B3956;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"20rpx";
+    }
+
+    textarea {
+      border-bottom: 3px #F3F3F4 solid;
+      border-top: 3px #F3F3F4 solid;
+    }
+
+    .date {
+      color: #C6D0E6;
+    }
+
+    .words {
+      color: #C6D0E6;
     }
   }
 

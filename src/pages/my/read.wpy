@@ -125,6 +125,7 @@
 
 <style lang="less">
   @import "../../colors";
+  @import "../../images";
 
   .letter {
     margin: ~"15rpx" ~"15rpx";
@@ -146,6 +147,8 @@
     }
 
     &.view-letter-01 {
+      /*暖阳*/
+
       background: #FCF7E8;
       border: 2px solid #E5DCC2;
       outline: 6px solid #FCF7E8;
@@ -157,7 +160,9 @@
       }
     }
 
-    &.view-letter-02 {
+    &.view-letter-06 {
+      /*蠢白*/
+
       background: #FFFFFF;
       border: 3px double #FBBAD0;
       border-radius: 6px;
@@ -171,6 +176,8 @@
     }
 
     &.view-letter-03 {
+      /*八十四*/
+
       background: #F3F2F0;
       border: 2px dashed #1562B3;
       outline: 6px solid #F3F2F0;
@@ -182,6 +189,57 @@
         color: #052B53;
       }
     }
+
+    &.view-letter-04 {
+      /*微甜青橘*/
+
+      background-image: linear-gradient(-180deg, #FFF3D8 0%, #E1FFDD 97%);
+      border: 12px solid rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
+      border-radius: 6px;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #9DA36F;
+      }
+    }
+
+    &.view-letter-05 {
+      /*青田*/
+
+      box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
+      border-radius: 8px;
+      background-size: ~"660rpx" ~"660rpx";
+      background-position-y: bottom;
+      background: #FBFEF7 url(@paper-qingtian) no-repeat;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #89C076;
+      }
+    }
+
+    &.view-letter-02 {
+      /*奥德赛*/
+
+      box-shadow: 0 4px 14px 0 rgba(95, 148, 205, 0.7);
+      border-radius: 2px;
+      color: #F3F3F4 !important;
+      font-size: ~"32rpx";
+      background: #2C3A55 url(@paper-aodesai) no-repeat;
+      background-size: ~"660rpx" ~"660rpx";
+      background-position-y: bottom;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #F3F3F4;
+      }
+    }
+
+
   }
 
   .deletenote {
