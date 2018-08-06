@@ -1,10 +1,10 @@
 <template>
 
-    <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
-      <view class="uber deletewindow">
-       <button class="btn btn-center" formType="submit">完成</button>
-      </view>
-    </form>
+  <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
+    <view class="uber deletewindow">
+      <button class="btn btn-center" formType="submit">完成</button>
+    </view>
+  </form>
 
   <block wx:if="{{ letters.length !== 0}}">
     <block wx:for="{{ letters }}" wx:key="id">
@@ -18,7 +18,9 @@
         </form>
         <view wx:if="{{ deleteMode }}">
           <form report-submit="True" @submit="bindDelete" data-uuid="{{ item.uuid }}">
-            <button class="btn-plain deletebutton" formType="submit"><image src="/images/delete.png" alt="delete"/></button>
+            <button class="btn-plain deletebutton" formType="submit">
+              <image src="/images/delete.png" alt="delete"/>
+            </button>
           </form>
         </view>
         <view wx:else>
@@ -34,7 +36,7 @@
       </view>
     </block>
     <view class="nomore" wx:if="{{ false }}">没有更多信件了</view>
-    <view class="bottommarginadd" wx:if="{{ deleteMode }}"> </view>
+    <view class="bottommarginadd" wx:if="{{ deleteMode }}"></view>
   </block>
   <block wx:else>
     <block wx:if="{{type === 1}}">
@@ -178,6 +180,9 @@
         frontColor: '#ffffff',
         backgroundColor: '#E22C22'
       })
+      wepy.setNavigationBarTitle({
+        title: '删除记录'
+      })
       this.$apply()
     }
 
@@ -187,6 +192,9 @@
       wepy.setNavigationBarColor({
         frontColor: '#ffffff',
         backgroundColor: '#0D55A1'
+      })
+      wepy.setNavigationBarTitle({
+        title: '寄出的信'
       })
       this.$apply()
     }
@@ -296,12 +304,12 @@
 
   }
 
-  .deletewindow{
-    position:fixed;
+  .deletewindow {
+    position: fixed;
     height: 10vh;
-    width:100vw;
-    bottom:0;
-    left:0;
+    width: 100vw;
+    bottom: 0;
+    left: 0;
     border-radius: 0 !important;
     border-top: 1px solid #DCDCDC;
     border-left: 0;
@@ -324,7 +332,7 @@
     }
   }
 
-  .bottommarginadd{
+  .bottommarginadd {
     height: 8vh;
     opacity: 0;
 
