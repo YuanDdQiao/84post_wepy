@@ -242,7 +242,7 @@
           }
         } else {
           wepy.pageScrollTo({
-            scrollTop: 0
+            scrollTop: 300
           })
         }
       },
