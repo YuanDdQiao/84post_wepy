@@ -33,7 +33,7 @@
         </view>
       </view>
     </block>
-    <view class="nomore">没有更多信件了</view>
+    <view class="nomore" wx:if="{{ false }}">没有更多信件了</view>
     <view class="bottommarginadd" wx:if="{{ deleteMode }}"> </view>
   </block>
   <block wx:else>
