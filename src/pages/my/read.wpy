@@ -1,10 +1,10 @@
 <template>
-  <view class="letter {{ viewClass }}" style="{{ viewStyle }}">
+  <view class="letter {{ viewClass }}">
     <view class="textarea">{{ content }}</view>
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
-  <form report-submit="True" @submit="bindHide" wx:if="{{ true }}">
+  <form report-submit="True" @submit="bindHide" wx:if="{{ false }}">
     <button class="deletenote">大力摇晃手机可撕掉这封信</button>
   </form>
 </template>
@@ -129,7 +129,7 @@
 
   .letter {
     margin: ~"15rpx" ~"15rpx";
-    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 48rpx - 40rpx");
+    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 5rpx");
     position: relative;
     padding: ~"40rpx";
 
