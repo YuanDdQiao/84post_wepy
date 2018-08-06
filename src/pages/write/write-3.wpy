@@ -83,9 +83,7 @@
           <block wx:for="{{ letterStamps }}" wx:key="id">
             <form report-submit="True" @submit="bindStampChoose">
               <button class="stampbutton {{ item.choose? 'choose' : '' }}" formType="submit" id="{{ index }}">
-                <view class=" stampview">
-                  <image class="stampview" src="{{ item.icon }}"></image>
-                </view>
+                <image class="stampview" src="{{ item.icon }}"></image>
               </button>
             </form>
           </block>
@@ -622,40 +620,37 @@
     }
   }
 
-  .stampbutton {
-    width: ~"140rpx";
-    height: ~"140rpx";
-    margin-bottom: ~"15rpx";
-    padding: ~"6rpx";
-    border: 2px #1562B3 dashed;
-    border-radius: 6px;
-    background-color: white;
-
-    &.choose {
-      border: 3px #FF4A19 solid;
-      border-radius: 6px;
-    }
-  }
-
-  .stampbutton:after {
-    border: none;
-  }
-
-  .stampview {
-    width: ~"120rpx";
-    height: ~"120rpx";
-    margin: 0;
-    border-radius: 2px;
-  }
-
   .stampselector {
     margin-left: ~"40rpx";
     margin-right: ~"40rpx";
     width: ~"590rpx";
-    height: ~"200rpx";
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: ~"30rpx";
+
+    .stampbutton {
+      width: ~"140rpx";
+      height: ~"140rpx";
+      margin-bottom: ~"15rpx";
+      padding: ~"6rpx";
+      border: 2px #1562B3 dashed;
+      border-radius: 6px;
+      background-color: white;
+
+      &.choose {
+        border: 3px #FF4A19 solid;
+        border-radius: 6px;
+      }
+
+      .stampview {
+        width: ~"120rpx";
+        height: ~"120rpx";
+        margin: 0;
+        border-radius: 2px;
+      }
+    }
   }
 
   .chosen {
