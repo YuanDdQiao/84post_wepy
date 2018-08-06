@@ -43,17 +43,23 @@ const request = async (options, showLoading = true, auth = true) => {
     }
   }
 
+  // header
+  if (!options.header) {
+    options.header = {}
+  }
+
   // 权限验证 - Authorization
   if (auth) {
-    if (!options.header) {
-      options.header = {}
-    }
-
     let token = wepy.getStorageSync('token')
 
     if (token) {
       options.header.Authorization = `Token ${token}`
     }
+  }
+
+  // 版本控制
+  if (!options.header['X-MINAVersion']) {
+    options.header['X-MINAVersion'] = version
   }
 
   // 调用小程序的 request 方法
