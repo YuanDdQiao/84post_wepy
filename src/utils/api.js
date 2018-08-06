@@ -316,6 +316,7 @@ const checkUpdate = async () => {
 }
 
 export default {
+  version,
   host,
   request,
   login,

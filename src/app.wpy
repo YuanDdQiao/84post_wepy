@@ -274,7 +274,8 @@
         'pages/my/read',
         'pages/complex/query',
         'pages/complex/express',
-        'pages/complex/normal'
+        'pages/complex/normal',
+        'pages/complex/help'
       ],
       window: {
         backgroundTextStyle: 'dark',
