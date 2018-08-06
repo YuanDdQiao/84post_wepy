@@ -1,7 +1,7 @@
 <template>
   <indicator status="2"></indicator>
   <view class="indicator-space6">
-    <view >
+    <view>
       <block wx:for="{{ letterTypes }}" wx:key="id">
         <form report-submit="True" @submit="bindSubmit">
           <view class="{{ item.class_attr }}">
@@ -61,10 +61,27 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindSubmit(e) {
+      async bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
-        this.$parent.globalData.letterInfo.letterType = this.letterTypes[e.detail.target.id]
+        let letterObj = this.letterTypes[e.detail.target.id]
+        console.log('letterObj', letterObj)
+        console.log('need_code', letterObj.need_code)
         console.log(this.$parent.globalData.letterInfo)
+        if (!letterObj.need_code) {
+          let modal = await wepy.showModal({
+            title: '隐私警告',
+            content: '您选择的信件类型取件方式为在收件地址附近直接取件，信件内容可能会被他人看到甚至取走，因此不建议隐私内容选择此方式。是否继续选择此类型寄信？',
+            showCancel: true,
+            confirmText: '继续寄信',
+            confirmColor: '#3CC51F',
+            cancelText: '返回重选',
+            cancelColor: '#000000'
+          })
+          if (modal.cancel) {
+            return
+          }
+        }
+        this.$parent.globalData.letterInfo.letterType = letterObj
         wepy.navigateTo({
           url: 'write-3'
         })
@@ -156,7 +173,6 @@
     color: #1562B3;
     background: #FFFFFF;
     box-shadow: 0 2px 4px 0 #E4E2DC;
-
 
     border-radius: 6px;
 
