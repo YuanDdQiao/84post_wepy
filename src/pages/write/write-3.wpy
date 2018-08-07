@@ -13,7 +13,7 @@
           <view class="infotypeholder">
             <view class="infotype">称呼</view>
             <input class="inputbox {{ toNameError ? '.lineerror' : '' }}" type="text" confirm-type="next"
-                   @input="bindInput" data-name="toName" value="{{ toName }}" placeholder="称呼（必填）"
+                   @input="bindInput" data-name="toName" value="{{ toName }}" placeholder="称呼"
                    placeholder-class="placeholder"/>
           </view>
           <view class="errorinfo">{{ toNameErrorInfo }}</view>
@@ -36,7 +36,7 @@
           <view class="infotypeholder">
             <view class="infotype">邮编</view>
             <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip"
-                   value="{{ toZip }}" maxlength="6" placeholder="邮编（必填）" placeholder-class="placeholder"/>
+                   value="{{ toZip }}" maxlength="6" placeholder="邮编" placeholder-class="placeholder"/>
           </view>
           <view class="errorinfo">{{ toZipErrorInfo }}</view>
         </view>
@@ -53,7 +53,7 @@
         <view class="infotypeholder">
           <view class="infotype">称呼</view>
           <input class="inputbox" type="text" confirm-type="next" @input="bindInput" data-name="fromName"
-                 value="{{ fromName }}" placeholder="称呼" placeholder-class="placeholder"/>
+                 value="{{ fromName }}" placeholder="称呼（选填）" placeholder-class="placeholder"/>
         </view>
 
         <view class="infotypeholder">
@@ -69,13 +69,13 @@
         <view class="infotypeholder">
           <view class="infotype">邮编</view>
           <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="fromZip"
-                 value="{{ fromZip }}" maxlength="6" placeholder="邮编" placeholder-class="placeholder"/>
+                 value="{{ fromZip }}" maxlength="6" placeholder="邮编（选填）" placeholder-class="placeholder"/>
         </view>
 
         <view class="infotypeholder">
           <view class="infotype">手机</view>
           <input class="inputbox" type="number" confirm-type="done" @input="bindInput" data-name="fromTel"
-                 value="{{ fromTel }}" maxlength="11" placeholder="手机" placeholder-class="placeholder"/>
+                 value="{{ fromTel }}" maxlength="11" placeholder="手机（选填）" placeholder-class="placeholder"/>
         </view>
 
         <view class="roletype">- 邮票 -</view>
@@ -133,9 +133,9 @@
       toNameError: false,
       toNameErrorInfo: '',
 
-      toAddress: '选择地址（必选）',
-      fromAddress: '选择地址',
-      toTelPlaceholder: '手机（可能必填）',
+      toAddress: '选择地址',
+      fromAddress: '选择地址（选填）',
+      toTelPlaceholder: '手机（可能选填）',
 
       toAddressChosen: false,
       fromAddressChosen: false,
@@ -423,9 +423,9 @@
         ls.choose = false
       }
       if (this.$parent.globalData.letterInfo.letterType.arrived_notification_sms) {
-        this.toTelPlaceholder = '手机（必填）'
-      } else {
         this.toTelPlaceholder = '手机'
+      } else {
+        this.toTelPlaceholder = '手机（选填）'
       }
       this.$apply()
 
@@ -466,7 +466,7 @@
         this.toAddressChosen = true
       } catch (e) {
         this.$parent.globalData.letterInfo.shiftInfo.toAddress = {}
-        this.toAddress = '点击选择地址'
+        this.toAddress = '选择地址'
         this.toAddressChosen = false
       }
       try {
@@ -479,7 +479,7 @@
         this.fromAddressChosen = true
       } catch (e) {
         this.$parent.globalData.letterInfo.shiftInfo.fromAddress = {}
-        this.fromAddress = '点击选择地址'
+        this.fromAddress = '选择地址（选填）'
         this.fromAddressChosen = false
       }
       // 记住邮票
