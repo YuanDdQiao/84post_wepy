@@ -143,8 +143,9 @@
     onShareAppMessage() {
       let userId = wepy.getStorageSync('userId')
       let path = `/pages/write/index?fromUID=${userId}`
+      console.log('id', this.id)
       if (!this.letterType.can_track) {
-        path = `/pages/complex/normal?fromUID=${userId}`
+        path = `/pages/complex/normal?fromUID=${userId}&sourceLetter=${this.id}`
       } else {
         path = `/pages/complex/express?fromUID=${userId}&q=${this.expressNumber}`
       }
@@ -186,7 +187,6 @@
 
   @import "../../colors";
 
-
   .texts {
     display: flex;
     flex-direction: column;
@@ -216,9 +216,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    position:absolute;
+    position: absolute;
     bottom: ~"60rpx";
-
 
     .btn-left {
       margin-right: ~"24rpx";
