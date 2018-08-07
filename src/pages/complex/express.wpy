@@ -1,11 +1,11 @@
 <template>
-  <view class="more-space uber">
+  <view class="more-space uber {{ arrived ? '' : 'showSubscribeBtn'}}">
     <view class="expressnumber">运单号：{{ expressNumber }}</view>
     <view>
       <block wx:if="{{ info.length !== 0}}">
         <block wx:for="{{ info }}" wx:key="id">
           <view class="type-{{ item.type }} oneline">
-            <view class="info {{status === 3 ? 'got' : 'noget'}}">{{item.info}}</view>
+            <view class="info {{completed ? 'got' : 'noget'}}">{{item.info}}</view>
             <view class="date">{{item.date}} {{item.time}}</view>
           </view>
         </block>
@@ -16,6 +16,12 @@
     </view>
     <view class="endnote">感谢您使用 84 号邮局</view>
   </view>
+  <form report-submit="True" @submit="bindSubscribe">
+    <button class="btn btn-md btn-primary btn-center" formType="submit" disabled="{{ subscribed }}"
+            wx:if="{{ !arrived }}">
+      {{ subscribeButtonMsg }}
+    </button>
+  </form>
 </template>
 
 <script>
@@ -36,22 +42,36 @@
     data = {
       expressNumber: null,
       info: [],
-      status: -1
+      subscribed: false,
+      subscribeButtonMsg: '订阅到信通知',
+      completed: false,
+      arrived: false,
+      id: undefined
     }
 
     /**
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
-    methods = {}
+    methods = {
+      async bindSubscribe(e) {
+        api.formIdSubmit(e.detail.formId)
+        api.request(`letter/mark/subscribed/${this.id}/`)
+        await wepy.showModal({
+          title: '订阅成功',
+          content: '您将在信件到达后收到微信模板消息通知',
+          showCancel: false,
+          confirmText: '确定',
+          confirmColor: '#3CC51F'
+        })
+        this.onShow()
+      }
+    }
 
     /**
      * WePY组件事件处理函数对象，存放响应组件之间通过 broadcast、emit、invoke所传递的事件的函数
      */
     events = {}
 
-    /**
-     * 生命周期函数--监听页面加载（一个页面只会调用一次）
-     */
     async onLoad(options) {
       this.expressNumber = options.q
       if (!this.expressNumber) {
@@ -69,7 +89,6 @@
           type: 0,
           info: '运单不存在'
         }]
-        this.status = 0
         this.$apply()
         await wepy.showModal({
           content: '该运单信息不存在',
@@ -78,14 +97,30 @@
         wepy.navigateBack()
       }
       console.log(ret.data)
+      this.id = ret.data.id
       this.info = ret.data.info
-      this.status = ret.data.status
+      this.completed = ret.data.completed
+      this.arrived = ret.data.arrived
       this.$apply()
-    };
+    }
 
-    /**
-     * 用户点击右上角分享
-     */
+    async onShow() {
+      let interval = setInterval(async () => {
+        if (this.id) {
+          clearInterval(interval)
+          // 获取当前订阅状态
+          let r = await api.request(`letter/check/subscribed/${this.id}/`)
+          this.subscribed = r.data.subscribed
+          if (this.subscribed) {
+            this.subscribeButtonMsg = '已订阅'
+          } else {
+            this.subscribeButtonMsg = '订阅到信通知'
+          }
+          this.$apply()
+        }
+      }, 50)
+    }
+
     onShareAppMessage() {
       let userId = wepy.getStorageSync('userId')
       return {
@@ -103,6 +138,11 @@
   .uber {
     min-height: calc(~"100vh - 2 * 60rpx - 6rpx");
     position: relative;
+
+    &.showSubscribeBtn {
+      min-height: calc(~"100vh - 2 * 60rpx - 6rpx - 110rpx");
+      margin-bottom: ~"30rpx";
+    }
   }
 
   .expressnumber {
