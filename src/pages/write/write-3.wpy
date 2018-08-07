@@ -500,6 +500,16 @@
         this.letterStamps[0].choose = true
         this.$parent.globalData.letterInfo.letterStamp = this.letterStamps[0]
       }
+      // 自动填写寄信人昵称
+      if (!this.fromName) {
+        let fromName = this.$parent.globalData.letterInfo.sign
+        this.$parent.globalData.letterInfo.shiftInfo.fromName = fromName
+        this.fromName = fromName
+        wepy.setStorage({
+          key: 'letterInfo-shiftInfo-fromName',
+          value: fromName
+        })
+      }
       this.$apply()
     };
 
