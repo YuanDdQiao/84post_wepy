@@ -3,7 +3,7 @@ import 'wepy-async-function'
 import semver from 'semver'
 
 // 版本号
-const version = '1.2.3'
+const version = '1.2.4'
 
 // 服务器接口地址
 const host = '__HOST__'
