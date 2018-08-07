@@ -13,10 +13,10 @@
           <view class="infotypeholder">
             <view class="infotype">称呼</view>
             <input class="inputbox {{ toNameError ? '.lineerror' : '' }}" type="text" confirm-type="next"
-                   @input="bindInput" data-name="toName" value="{{ toName }}" placeholder="称呼"
+                   @input="bindInput" data-name="toName" value="{{ toName }}" placeholder="称呼" @tap="bindToNameTap"
                    placeholder-class="placeholder"/>
           </view>
-          <view class="errorinfo">{{ toNameErrorInfo }}</view>
+          <view class="errorinfo" wx:if="{{ toNameError }}">{{ toNameErrorInfo }}</view>
         </view>
 
         <view class="{{ toAddressError ? 'error' : '' }}">
@@ -24,21 +24,23 @@
             <view class="infotype">地址</view>
             <form report-submit="True" @submit="bindToAddress">
 
-              <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit">
+              <button class="choosebutton {{toAddressChosen ? 'chosen' : ''}}" formType="submit"
+                      @tap="bindToAddressTap">
                 {{ toAddress }}
               </button>
             </form>
           </view>
-          <view class="errorinfo">{{ toAddressErrorInfo }}</view>
+          <view class="errorinfo" wx:if="{{ toAddressError }}">{{ toAddressErrorInfo }}</view>
         </view>
 
         <view class="{{ toZipError ? 'error' : '' }}">
           <view class="infotypeholder">
             <view class="infotype">邮编</view>
             <input class="inputbox" type="number" confirm-type="next" @input="bindInput" data-name="toZip"
-                   value="{{ toZip }}" maxlength="6" placeholder="邮编" placeholder-class="placeholder"/>
+                   value="{{ toZip }}" maxlength="6" placeholder="邮编" placeholder-class="placeholder"
+                   @tap="bindToZipTap"/>
           </view>
-          <view class="errorinfo">{{ toZipErrorInfo }}</view>
+          <view class="errorinfo" wx:if="{{ toZipError }}">{{ toZipErrorInfo }}</view>
         </view>
 
         <view class="infotypeholder">
@@ -403,6 +405,18 @@
           await this.onShow()
           await wepy.pageScrollTo({ scrollTop: 0 })
         }
+      },
+      async bindToNameTap(e) {
+        this.toNameError = false
+        this.$apply()
+      },
+      async bindToAddressTap(e) {
+        this.toAddressError = false
+        this.$apply()
+      },
+      async bindToZipTap(e) {
+        this.toZipError = false
+        this.$apply()
       }
     }
 
@@ -517,37 +531,6 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
-    };
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     * 页面初次渲染完成 —— 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
-     */
-    async onReady() {
-    };
-
-    /**
-     * 生命周期函数--监听页面隐藏（当 navigateTo 或底部 tab 切换时调用）
-     */
-    async onHide() {
-    };
-
-    /**
-     * 生命周期函数--监听页面卸载（当 redirectTo 或 navigateBack 的时候调用）
-     */
-    async onUnload() {
-    };
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    async onPullDownRefresh() {
-    };
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    async onReachBottom() {
     };
 
     /**
