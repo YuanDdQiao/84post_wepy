@@ -1,7 +1,8 @@
 <template>
   <view class="fixed">
     <view class="indicator">
-      <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} heavyfont" wx:for="{{ paperType.types }}"
+      <view class="item{{ item.id === paperType.currentItemId ? ' chosen' : ''}} heavyfont"
+            wx:for="{{ paperType.types }}"
             wx:key="id" data-id="{{ item.id }}" @tap="bindChoosePaperType">{{ item.name }}
       </view>
     </view>
@@ -11,7 +12,8 @@
         <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
                 indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
                 wx:if="{{ type.id === paperType.currentItemId }}">
-          <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
+          <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id"
+                       wx:if="{{ item.enabled }}">
             <view class="paper {{ item.class_attr }}">
               <view class="demotext textcolor">{{ item.demo_text }}</view>
               <view class="todaydate textcolor">{{ todayDate }}</view>
@@ -179,13 +181,14 @@
       console.log('this.paperType.currentItemId', this.paperType.currentItemId)
       // let q = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
       let q = this.paperType.currentItem
-      console.log(q)
+      console.log('this.paperType.currentItem', q)
       if (q && q.papers[0]) {
         this.paper.currentItemId = q.papers[0].id
         this.paper.currentItem = this.paperType.currentItem.papers.find(p => p.id === this.paper.currentItemId)
       } else {
         this.paper.currentItemId = 0
       }
+      console.log('this.paper.currentItemId', this.paper.currentItemId)
       this.$apply()
     }
   }
@@ -201,7 +204,7 @@
     width: ~"750rpx";
   }
 
-  .fixed{
+  .fixed {
     position: fixed;
     top: ~"137rpx";
     width: 100%;
@@ -234,11 +237,10 @@
       height: calc(~"100vh - 2 * 60rpx - 107rpx - 92rpx - 190rpx - 10rpx");
       font-size: ~"32rpx";
 
-      .textcolor{
+      .textcolor {
         color: #6E5F31 !important;
       }
     }
-
 
     &.paper-02 {
       /* 蠢白 */
@@ -249,11 +251,10 @@
       color: #6E1A36 !important;
       font-size: ~"32rpx";
 
-      .textcolor{
+      .textcolor {
         color: #6E1A36 !important;
       }
     }
-
 
     &.paper-03 {
       /* 八十四 */
@@ -266,7 +267,7 @@
       height: calc(~"100vh - 2 * 60rpx - 107rpx - 92rpx - 190rpx - 18rpx");
       font-size: ~"32rpx";
 
-      .textcolor{
+      .textcolor {
         color: #052B53 !important;
       }
     }
@@ -280,7 +281,7 @@
       box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
       border-radius: 6px;
 
-      .textcolor{
+      .textcolor {
         color: #9DA36F !important;
       }
     }
@@ -295,7 +296,7 @@
       background: #FBFEF7 url(@paper-qingtian) space;
       background-size: cover;
 
-      .textcolor{
+      .textcolor {
         color: #89C076 !important;
       }
     }
@@ -310,11 +311,10 @@
       background-size: cover;
       height: calc(~"100vh - 2 * 60rpx - 107rpx - 92rpx - 190rpx + 24rpx");
 
-      .textcolor{
+      .textcolor {
         color: #F3F3F4 !important;
       }
     }
-
 
     .demotext {
       white-space: pre-wrap;
