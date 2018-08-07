@@ -16,9 +16,9 @@
     <image class="headicon" src="/images/completed.png" wx:else></image>
 
     <view class="note">
-      <text wx:if="{{ !arrived }}">平邮不支持物流查询，请时不时到「信箱 - 取平邮」中看看有没有你的信件</text>
-      <text wx:elif="{{ !completed }}">您的信件已经到达但尚未签收，请在取件地址附近到「信箱 - 取平邮」中查找</text>
-      <text wx:else>您的信件已经完成签收，如果不是您签收的那么很抱歉可能是被他人取走了</text>
+      <text wx:if="{{ !arrived }}">平邮不支持物流查询，快去「信箱 - 取平邮」里看看有没有你的信吧</text>
+      <text wx:elif="{{ !completed }}">有一封信件等待您签收，快去取件地址附近选择「信箱 - 取平邮」来取件吧</text>
+      <text wx:else>信件已签收。如果您没有收到信件，很抱歉可能是被别人误取了</text>
     </view>
     <view class="buttons">
       <form report-submit="True" @submit="bindSubscribe">
