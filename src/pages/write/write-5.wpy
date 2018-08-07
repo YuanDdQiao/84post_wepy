@@ -86,7 +86,7 @@
     methods = {
       bindGoBack(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.reLaunch({ url: 'index' })
+        wepy.reLaunch({ url: '/pages/index' })
       },
       bindTrack(e) {
         api.formIdSubmit(e.detail.formId)
