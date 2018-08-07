@@ -123,7 +123,8 @@
       this.$parent.globalData.letterInfo = {}
       console.log(this.$parent.globalData)
 
-      wepy.removeStorageSync('letterInfo-paperType')
+      wepy.removeStorageSync('letterInfo-paperTypeId')
+      wepy.removeStorageSync('letterInfo-paperId')
       wepy.removeStorageSync('letterContent')
       wepy.removeStorageSync('letterSign')
       wepy.removeStorageSync('letterInfo-shiftInfo-toName')
