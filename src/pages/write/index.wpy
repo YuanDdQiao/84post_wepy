@@ -206,19 +206,26 @@
         // 从当前类别的信纸中查找
         let item = paperTypeItem.papers.find(p => p.id === itemId)
         console.log('paperTypeItem.papers.find(p => p.id === itemId)', item)
-        if (item) {
-          // 当前类别列表能找到 -> 切换到这个类别
-          this.paper.currentItem = item
-          this.paper.currentItemId = item.id
-        } else {
-          // 找不到 -> 切换至当前类别列表第一位
-          this.paper.currentItem = paperTypeItem.papers[0]
-          this.paper.currentItemId = this.paper.currentItem.id
-          // 清除当前 paperId 记录
-          wepy.removeStorage({
-            key: 'letterInfo-paperId'
-          })
-        }
+        // 切换至当前列表第一位
+        this.paper.currentItem = paperTypeItem.papers[0]
+        this.paper.currentItemId = this.paper.currentItem.id
+        // 清除保存的 paperId 记录
+        wepy.removeStorage({
+          key: 'letterInfo-paperId'
+        })
+        // if (item) {
+        //   // 当前类别列表能找到 -> 切换到这个类别
+        //   this.paper.currentItem = item
+        //   this.paper.currentItemId = item.id
+        // } else {
+        //   // 找不到 -> 切换至当前类别列表第一位
+        //   this.paper.currentItem = paperTypeItem.papers[0]
+        //   this.paper.currentItemId = this.paper.currentItem.id
+        //   // 清除当前 paperId 记录
+        //   wepy.removeStorage({
+        //     key: 'letterInfo-paperId'
+        //   })
+        // }
       } catch (e) {
         // 并未保存过 paperId -> 切换至当前类别列表第一位
         console.log('No storage for letterInfo-paperId')
