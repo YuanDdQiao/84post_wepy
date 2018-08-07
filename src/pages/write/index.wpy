@@ -9,11 +9,10 @@
     <view class="indicator-space8 more-space writeindex-space">
       <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
       <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
-        <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-d="{{ paper.currentItemId }}"
+        <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ paper.currentItemId }}"
                 indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
                 wx:if="{{ type.id === paperType.currentItemId }}">
-          <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id"
-                       wx:if="{{ item.enabled }}">
+          <swiper-item item-id="{{ item.id }}" class="papers" wx:for="{{ type.papers }}" wx:key="id">
             <view class="paper {{ item.class_attr }}">
               <view class="demotext textcolor">{{ item.demo_text }}</view>
               <view class="todaydate textcolor">{{ todayDate }}</view>
@@ -69,33 +68,39 @@
     methods = {
       bindStartWriting(e) {
         api.formIdSubmit(e.detail.formId)
-        // console.log(this.current)
-        // console.log(this.currentItem.id)
         this.$parent.globalData.letterInfo.paperType = this.paper.currentItem
-        // wepy.setStorage({
-        //   key: 'letterInfo-paperType',
-        //   data: this.currentItem
-        // })
         console.log('this.$parent.globalData', this.$parent.globalData)
         wepy.navigateTo({
           url: 'write-1'
         })
       },
       bindSwiperCurrentChange(e) {
+        // 更换信纸选择
         console.log(e)
+        // 获取当前 item-id
         this.paper.currentItemId = parseInt(e.detail.currentItemId)
-        console.log('this.paper.currentItemId', this.paper.currentItemId)
-        console.log('this.paperType.currentItem.papers', this.paperType.currentItem.papers)
-        console.log('this.paper.currentItemId', this.paper.currentItemId)
+        // 获取当前 item
         this.paper.currentItem = this.paperType.currentItem.papers.find(p => p.id === this.paper.currentItemId) || {}
+        // 保存
+        wepy.setStorage({
+          key: 'letterInfo-paperId',
+          data: this.paper.currentItemId
+        })
         console.log('this.paper.currentItem', this.paper.currentItem)
         this.$apply()
       },
       async bindChoosePaperType(e) {
+        // 选择信纸类型
         console.log(e)
-        this.paperType.currentItemId = parseInt(e.currentTarget.dataset.id)
-        this.paperType.currentItem = this.paperType.types.find(t => t.id === this.paperType.currentItemId) || {}
+        this.paperType.currentItemId = parseInt(e.currentTarget.dataset.id) // 信纸类型ID
+        this.paperType.currentItem = this.paperType.types.find(t => t.id === this.paperType.currentItemId) || {} // 信纸类型 Object
+        // 保存信纸类型选择信息（letterInfo-paperTypeId）
+        wepy.setStorage({
+          key: 'letterInfo-paperTypeId',
+          data: this.paperType.currentItemId
+        })
         this.$apply()
+        // 重新初始化信纸选择
         this.initPaperId()
       }
     }
@@ -122,32 +127,10 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      // 获取信纸类型
       await this.getPaperTypes()
+      // 初始化信纸
       await this.initPaperId()
-      // // 获取信纸
-      // let res = await api.request('letter/paper/', false)
-      // this.papers = res.data
-      // 选择信纸
-      // try {
-      //   let v = await wepy.getStorage({
-      //     key: 'letterInfo-paperType'
-      //   })
-      //   this.currentItemId = v.data.id
-      //
-      //   let pci = this.papers.find(p => p.id === this.currentItemId)
-      //   if (pci) {
-      //     this.currentItem = pci
-      //     this.currentItemId = this.currentItem.id
-      //   } else {
-      //     console.log('No id for letterInfo-paperType')
-      //     this.currentItem = this.papers[0]
-      //     this.currentItemId = this.currentItem.id
-      //   }
-      // } catch (e) {
-      //   console.log('No storage for letterInfo-paperType')
-      //   this.currentItem = this.papers[0]
-      //   this.currentItemId = this.currentItem.id
-      // }
     };
 
     /**
@@ -166,29 +149,83 @@
       // 获取信纸类型
       let r = await api.request('letter/paper/type/', false)
       console.log(r)
-      this.paperType.types = r.data
+      // 全部类型（含信纸）
+      this.paperType.types = r.data.filter(t => {
+        console.log('t', t)
+        // 筛选出 enabled 信纸
+        t.papers = t.papers.filter(p => p.enabled)
+        // 筛选出类别不为空的类别
+        return (t.papers.length > 0)
+      })
 
-      // 选择信纸类型
-      this.paperType.currentItemId = parseInt(r.data[0].id)
-      this.paperType.currentItem = this.paperType.types.find(p => p.id === this.paperType.currentItemId) || {}
-      console.log('this.paperType.currentItemId', this.paperType.currentItemId)
-      console.log('this.paperType.currentItem', this.paperType.currentItem)
+      // 初始化信纸类型
+      try {
+        // 尝试获取保存的 paperTypeId
+        let v = await wepy.getStorage({
+          key: 'letterInfo-paperTypeId'
+        })
+        // 成功获取 -> 赋值
+        this.paperType.currentItemId = parseInt(v.data)
+      } catch (e) {
+        // 并未保存过 paperTypeId
+        console.log('No storage for letterInfo-paperTypeId')
+        // 第一个作为 item-id
+        this.paperType.currentItemId = parseInt(this.paperType.types[0].id)
+      }
+      let findResult = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
+
+      if (findResult) {
+        // id 正确 -> 赋值
+        this.paperType.currentItem = findResult
+      } else {
+        // id 错误 -> 重置
+        this.paperType.currentItemId = parseInt(this.paperType.types[0].id)
+        this.paperType.currentItem = this.paperType.types[0]
+      }
+
       this.$apply()
     }
 
     async initPaperId() {
+      // 初始化信纸
       console.log('this.paperType.types', this.paperType.types)
       console.log('this.paperType.currentItemId', this.paperType.currentItemId)
       // let q = this.paperType.types.find(p => p.id === this.paperType.currentItemId)
-      let q = this.paperType.currentItem
-      console.log('this.paperType.currentItem', q)
-      if (q && q.papers[0]) {
-        this.paper.currentItemId = q.papers[0].id
-        this.paper.currentItem = this.paperType.currentItem.papers.find(p => p.id === this.paper.currentItemId)
-      } else {
-        this.paper.currentItemId = 0
+      // 获取现在的信纸类别
+      let paperTypeItem = this.paperType.currentItem
+      console.log('this.paperType.currentItem', paperTypeItem)
+
+      // 获取当前缓存到的信纸
+      try {
+        // 尝试获取保存的 paperId
+        let v = await wepy.getStorage({
+          key: 'letterInfo-paperId'
+        })
+        // 成功获取 -> 保存值
+        let itemId = parseInt(v.data)
+        // 从当前类别的信纸中查找
+        let item = paperTypeItem.papers.find(p => p.id === itemId)
+        console.log('paperTypeItem.papers.find(p => p.id === itemId)', item)
+        if (item) {
+          // 当前类别列表能找到 -> 切换到这个类别
+          this.paper.currentItem = item
+          this.paper.currentItemId = item.id
+        } else {
+          // 找不到 -> 切换至当前类别列表第一位
+          this.paper.currentItem = paperTypeItem.papers[0]
+          this.paper.currentItemId = this.paper.currentItem.id
+          // 清除当前 paperId 记录
+          wepy.removeStorage({
+            key: 'letterInfo-paperId'
+          })
+        }
+      } catch (e) {
+        // 并未保存过 paperId -> 切换至当前类别列表第一位
+        console.log('No storage for letterInfo-paperId')
+        this.paper.currentItem = this.paperType.currentItem.papers[0]
+        this.paper.currentItemId = this.paper.currentItem.id
       }
-      console.log('this.paper.currentItemId', this.paper.currentItemId)
+
       this.$apply()
     }
   }
