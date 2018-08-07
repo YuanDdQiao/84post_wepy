@@ -11,7 +11,9 @@
       </view>
     </view>
 
-    <image class="headicon" src="/images/transfering.png"></image>
+    <image class="headicon" src="/images/transfering.png" wx:if="{{ !arrived }}"></image>
+    <image class="headicon" src="/images/arrived.png" wx:elif="{{ !completed }}"></image>
+    <image class="headicon" src="/images/completed.png" wx:else></image>
 
     <view class="note">
       <text wx:if="{{ !arrived }}">平邮不支持物流查询，请时不时到「信箱 - 取平邮」中看看有没有你的信件</text>
