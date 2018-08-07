@@ -7,7 +7,7 @@
       </view>
     </view>
     <view class="indicator-space8 more-space writeindex-space">
-      <!--<view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>-->
+      <view class="writeIndexError" wx:if="writeIndexError">{{ writeIndexError }}</view>
       <block wx:for="{{ paperType.types }}" wx:key="id" wx:for-item="type">
         <swiper class="paperselector" @change="bindSwiperCurrentChange" current-item-id="{{ paper.currentItemId }}"
                 indicator-dots indicator-color="rgba(0,0,0,.2)" indicator-active-color="rgba(0,0,0,.5)"
