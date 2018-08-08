@@ -1,5 +1,5 @@
 <template>
-  <indicator status="1" ></indicator>
+  <indicator status="1"></indicator>
   <view class="indicator-space6">
     <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
@@ -9,7 +9,8 @@
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
-        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder-class="placeholder" placeholder="落款签名"/>
+        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder-class="placeholder"
+               placeholder="落款签名"/>
         <view class="dateandword">
           <view class="words">{{ wordCount }}/{{ maxLength }} 字</view>
           <view class="date">{{ todayDate }}</view>
@@ -54,7 +55,7 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindSubmit(e) {
+      async bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         this.$parent.globalData.letterInfo.content = this.inputValue
         this.$parent.globalData.letterInfo.sign = this.sign
@@ -88,9 +89,27 @@
         } else {
           this.$apply()
           console.log(this.$parent.globalData.letterInfo)
-          wepy.navigateTo({
-            url: 'write-2'
+          let r = await api.request({
+            url: 'letter/content/test/',
+            method: 'POST',
+            data: {
+              content: this.inputValue
+            }
           })
+          console.log('r', r)
+          if (!r.data.status) {
+            wepy.showModal({
+              title: r.data.title,
+              content: r.data.info,
+              showCancel: false,
+              confirmText: '返回修改',
+              confirmColor: '#3CC51F'
+            })
+          } else {
+            wepy.navigateTo({
+              url: 'write-2'
+            })
+          }
         }
       },
       bindInput(e) {
@@ -332,7 +351,7 @@
     box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
     border-radius: 6px;
     color: #9DA36F;
-    width:calc(~"660rpx - 24px");
+    width: calc(~"660rpx - 24px");
     height: calc(~"100vh - 186rpx - 24px");
 
     &::selection {
@@ -365,7 +384,7 @@
       color: #9DA36F;
     }
 
-    .dateandword{
+    .dateandword {
       bottom: ~"90rpx" !important;
     }
 
@@ -376,48 +395,46 @@
   }
 
   .edit-letter-05 {
-       /*青田*/
+    /*青田*/
 
-       box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
-       border-radius: 8px;
-       font-size: ~"32rpx";
-       background: #FBFEF7 url(@paper-qingtian) space;
-       background-size: cover;
+    box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
+    border-radius: 8px;
+    font-size: ~"32rpx";
+    background: #FBFEF7 url(@paper-qingtian) space;
+    background-size: cover;
 
-       color: #89C076;
+    color: #89C076;
 
-       &::selection {
-         background: #DFE4BC;
-       }
+    &::selection {
+      background: #DFE4BC;
+    }
 
-       button {
-         background-color: #89C076;
-         color: #FBFEF7;
-         padding-left: ~"20rpx";
-         padding-right: ~"20rpx";
-         margin-right: ~"20rpx";
-       }
+    button {
+      background-color: #89C076;
+      color: #FBFEF7;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"20rpx";
+    }
 
-       textarea {
-         border-bottom: 2px #CBE5CC dashed;
-         border-top: 2px #EBEFE5 dashed;
-       }
+    textarea {
+      border-bottom: 2px #CBE5CC dashed;
+      border-top: 2px #EBEFE5 dashed;
+    }
 
-       .date {
-         color: #89C076;
-       }
+    .date {
+      color: #89C076;
+    }
 
-       .words {
-         color: #89C076;
-       }
+    .words {
+      color: #89C076;
+    }
 
-        .placeholder{
-          color: #a7b8a1;
-       }
+    .placeholder {
+      color: #a7b8a1;
+    }
 
-
-
-     }
+  }
 
   .edit-letter-06 {
     /*奥德赛*/
@@ -448,20 +465,16 @@
       width: ~"544rpx";
       margin-right: ~"20rpx";
       margin-left: ~"20rpx";
-      
+
     }
 
-    .placeholder{
+    .placeholder {
       color: #7f829e;
     }
 
-    .autosavenote{
+    .autosavenote {
       color: #afc2d7;
     }
-
-
-
-
 
     .date {
       color: #C6D0E6;
@@ -515,8 +528,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom:~"10rpx";
-
+    margin-bottom: ~"10rpx";
 
     .date {
       margin-right: ~"40rpx";
