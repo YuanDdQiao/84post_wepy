@@ -70,7 +70,7 @@
         if (!letterObj.need_code) {
           let modal = await wepy.showModal({
             title: '隐私警告',
-            content: '您选择的信件类型取件方式为在收件地址附近直接取件，信件内容可能会被他人看到甚至取走，因此不建议隐私内容选择此方式。是否继续选择此类型寄信？',
+            content: '您选择的信件类型到达后信件内容会公开于附近的人，因此信件有可能被他人阅读甚至误取。如信件内容较为私密，建议选择其他类型。',
             showCancel: true,
             confirmText: '继续寄信',
             confirmColor: '#3CC51F',
