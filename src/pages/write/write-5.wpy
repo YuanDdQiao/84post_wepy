@@ -165,7 +165,7 @@
 
       if (this.letterType.can_track) {
         // 获取运单号
-        r = await api.request(`letter/express/${this.uuid}`)
+        r = await api.request(`letter/express/${this.uuid}/`)
         console.log('express', r)
         this.expressNumber = r.data.express_number
         this.$apply()
