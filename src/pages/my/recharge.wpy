@@ -63,7 +63,14 @@
         })
         console.log(response.data)
         console.log(response.data['jsapi_param'])
-        wepy.requestPayment(response.data['jsapi_param'])
+        try {
+          await wepy.requestPayment(response.data['jsapi_param'])
+          wepy.navigateBack()
+        } catch (e) {
+          if (e.errMsg !== 'requestPayment:fail cancel') {
+            console.error(e)
+          }
+        }
       }
     }
 
