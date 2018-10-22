@@ -18,13 +18,10 @@
               <view class="right">¥ {{ item.price / 100}}</view>
             </view>
           </block>
-
         </button>
       </block>
     </view>
   </view>
-
-  <view class="endnote">充值完成后一般即时到账。如果支付成功后超过一小时仍未到账请发邮件给 imsingee@gmail.com 提供有关信息，我们将予以全额退款并赠送给您您充值的点券。</view>
 </template>
 
 <script>
