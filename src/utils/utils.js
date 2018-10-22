@@ -4,7 +4,7 @@ function parseStr(num, minLength) {
     return str
   } else {
     let strArray = []
-    let times = minLength - str.length
+    let times = minLength - str.length - 1
     while (strArray.length < times) {
       strArray.push('0')
     }

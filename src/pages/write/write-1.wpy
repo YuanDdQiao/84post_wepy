@@ -1,5 +1,5 @@
 <template>
-  <indicator status="1" ></indicator>
+  <indicator status="1"></indicator>
   <view class="indicator-space6">
     <view class="edit-letter-common {{ paperType.edit_class_attr }} godown" style="{{ paperType.edit_style_attr }}">
       <form report-submit="True" @submit="bindSubmit">
@@ -9,7 +9,8 @@
         </view>
         <textarea class="godown" @input="bindInput" placeholder="{{ placeHolderText }}" value="{{ inputValue }}"
                   maxlength="{{ maxLength }}" fixed="true"></textarea>
-        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder="落款签名"/>
+        <input type="text" class="sign" value="{{ sign }}" @input="bindSign" placeholder-class="placeholder"
+               placeholder="落款签名"/>
         <view class="dateandword">
           <view class="words">{{ wordCount }}/{{ maxLength }} 字</view>
           <view class="date">{{ todayDate }}</view>
@@ -54,7 +55,7 @@
      * wxml 事件处理函数对象，存放响应 wxml 中所捕获到的事件的函数，如 bindtap、bindchange
      */
     methods = {
-      bindSubmit(e) {
+      async bindSubmit(e) {
         api.formIdSubmit(e.detail.formId)
         this.$parent.globalData.letterInfo.content = this.inputValue
         this.$parent.globalData.letterInfo.sign = this.sign
@@ -88,9 +89,27 @@
         } else {
           this.$apply()
           console.log(this.$parent.globalData.letterInfo)
-          wepy.navigateTo({
-            url: 'write-2'
+          let r = await api.request({
+            url: 'letter/content/test/',
+            method: 'POST',
+            data: {
+              content: this.inputValue
+            }
           })
+          console.log('r', r)
+          if (!r.data.status) {
+            wepy.showModal({
+              title: r.data.title,
+              content: r.data.info,
+              showCancel: false,
+              confirmText: '返回修改',
+              confirmColor: '#3CC51F'
+            })
+          } else {
+            wepy.navigateTo({
+              url: 'write-2'
+            })
+          }
         }
       },
       bindInput(e) {
@@ -201,6 +220,10 @@
 
 <style lang="less">
 
+
+  @import "../../colors";
+  @import "../../images";
+
   .edit-letter-common {
     display: flex;
     flex-direction: column;
@@ -288,11 +311,10 @@
 
   .edit-letter-03 {
     /*八十四*/
-    @bg_color: #F3F2F0;
 
-    background: @bg_color;
+    background: #F3F2F0;
     border: 2px dashed #1562B3;
-    outline: 6px solid @bg_color;
+    outline: 6px solid #F3F2F0;
     box-shadow: 0 2px 8px 4px #a09369;
     color: #052B53;
 
@@ -302,7 +324,7 @@
 
     button {
       background-color: #09427F;
-      color: @bg_color;
+      color: #F3F2F0;
       padding-left: ~"20rpx";
       padding-right: ~"20rpx";
       margin-right: ~"20rpx";
@@ -319,6 +341,147 @@
 
     .words {
       color: #052B53;
+    }
+  }
+
+  .edit-letter-04 {
+    /*微甜青橘*/
+    background-image: linear-gradient(-180deg, #FFF3D8 0%, #E1FFDD 97%);
+    border: 12px solid rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
+    border-radius: 6px;
+    color: #9DA36F;
+    width: calc(~"660rpx - 24px");
+    height: calc(~"100vh - 186rpx - 24px");
+
+    &::selection {
+      background: #DFE4BC;
+    }
+
+    button {
+      background-color: #9DA36F;
+      color: #FEF3D9;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"40rpx";
+    }
+
+    textarea {
+      border-bottom: 2px white solid;
+      border-top: 2px white solid;
+      height: calc(~"100vh - 92rpx - 90rpx - 92rpx - 80rpx - 108rpx - 24px");
+
+      width: ~"544rpx";
+      margin-right: ~"20rpx";
+      margin-left: ~"20rpx";
+    }
+
+    .date {
+      color: #9DA36F;
+    }
+
+    .words {
+      color: #9DA36F;
+    }
+
+    .dateandword {
+      bottom: ~"90rpx" !important;
+    }
+
+    .sign {
+      position: fixed;
+      bottom: ~"130rpx";
+    }
+  }
+
+  .edit-letter-05 {
+    /*青田*/
+
+    box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
+    border-radius: 8px;
+    font-size: ~"32rpx";
+    background: #FBFEF7 url(@paper-qingtian) space;
+    background-size: cover;
+
+    color: #89C076;
+
+    &::selection {
+      background: #DFE4BC;
+    }
+
+    button {
+      background-color: #89C076;
+      color: #FBFEF7;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"20rpx";
+    }
+
+    textarea {
+      border-bottom: 2px #CBE5CC dashed;
+      border-top: 2px #EBEFE5 dashed;
+    }
+
+    .date {
+      color: #89C076;
+    }
+
+    .words {
+      color: #89C076;
+    }
+
+    .placeholder {
+      color: #a7b8a1;
+    }
+
+  }
+
+  .edit-letter-06 {
+    /*奥德赛*/
+
+    box-shadow: 0 4px 14px 0 rgba(95, 148, 205, 0.7);
+    border-radius: 2px;
+    font-size: ~"32rpx";
+    background: #2C3A55 url(@paper-aodesaiopacity) space;
+    background-size: cover;
+
+    color: #F3F3F4;
+
+    &::selection {
+      background: #DFE4BC;
+    }
+
+    button {
+      background-color: #C6D0E6;
+      color: #2B3956;
+      padding-left: ~"20rpx";
+      padding-right: ~"20rpx";
+      margin-right: ~"20rpx";
+    }
+
+    textarea {
+      border-bottom: 3px #546589 dashed;
+      border-top: 3px #546589 dashed;
+      width: ~"544rpx";
+      margin-right: ~"20rpx";
+      margin-left: ~"20rpx";
+
+    }
+
+    .placeholder {
+      color: #7f829e;
+    }
+
+    .autosavenote {
+      color: #afc2d7;
+    }
+
+    .date {
+      color: #C6D0E6;
+    }
+
+    .words {
+      color: #C6D0E6;
     }
   }
 
@@ -365,8 +528,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom:~"10rpx";
-
+    margin-bottom: ~"10rpx";
 
     .date {
       margin-right: ~"40rpx";
@@ -393,6 +555,7 @@
     display: inline;
     font-size: ~"28rpx";
     color: gray;
+    opacity: 0.5;
   }
 
   .godown {

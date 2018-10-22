@@ -1,52 +1,54 @@
 <template>
-  <view class="fixed">
-    <view class="top">
-      <form report-submit="True" @submit="bindHelp" wx:if="{{ true }}">
-        <button class="help" formType="submit">?</button>
-      </form>
-      <view class="blank"></view>
-      <form report-submit="True" @submit="bindRecharge">
-        <button class="point" formType="submit">
-          <view class="balance">剩余点券:{{ pointStr }}</view>
-          <view class="split">|</view>
-          <view class="plus">+</view>
-        </button>
-      </form>
+  <view class="page">
+    <view class="fixed">
+      <view class="top">
+        <form report-submit="True" @submit="bindHelp">
+          <button class="help" formType="submit">?</button>
+        </form>
+        <view class="blank"></view>
+        <form report-submit="True" @submit="bindRecharge">
+          <button class="point" formType="submit">
+            <view class="balance">剩余点券: {{ pointStr }}</view>
+            <view class="split">|</view>
+            <view class="plus">+</view>
+          </button>
+        </form>
+      </view>
+      <view class="logo">
+        <image class="logoimage" src="/images/logo_home.png" alt="84"/>
+      </view>
+      <view class="qiandao">
+
+        <form report-submit="True" @submit="bindGetPoint">
+          <button class="dailycheckbutton" formType="submit">
+            <block wx:if="{{ canQiandao }}">
+              <image class="dailycheckimage" src="{{ dailyCheckImages.normal }}" alt="check"/>
+            </block>
+            <block wx:else="{{ canQiandao }}">
+              <image class="dailycheckimage" src="{{ dailyCheckImages.done }}" alt="empty"/>
+            </block>
+          </button>
+        </form>
+
+      </view>
+
+      <view>
+        <form report-submit="True" @submit="bindWrite">
+          <button class="btnicon" formType="submit">
+            <image class="btnicon" src="/images/write.png" alt="write"/>
+          </button>
+        </form>
+        <form report-submit="True" @submit="bindBox">
+          <button class="btnicon" formType="submit">
+            <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
+          </button>
+        </form>
+      </view>
+
+      <image class="nail nail-left" src="/images/nail.png" alt="nail" wx:if="{{ nailShow }}"/>
+      <image class="nail nail-right" src="/images/nail.png" alt="nail" wx:if="{{ nailShow }}"/>
+
     </view>
-    <view class="logo">
-      <image class="logoimage" src="/images/logo_home.png" alt="84"/>
-    </view>
-    <view class="qiandao">
-
-      <form report-submit="True" @submit="bindGetPoint">
-        <button class="dailycheckbutton" formType="submit">
-          <block wx:if="{{ canQiandao }}">
-            <image class="dailycheckimage" src="{{ dailyCheckImages.normal }}" alt="check"/>
-          </block>
-          <block wx:else="{{ canQiandao }}">
-            <image class="dailycheckimage" src="{{ dailyCheckImages.done }}" alt="empty"/>
-          </block>
-        </button>
-      </form>
-
-    </view>
-
-    <view>
-      <form report-submit="True" @submit="bindWrite">
-        <button class="btnicon" formType="submit">
-          <image class="btnicon" src="/images/write.png" alt="write"/>
-        </button>
-      </form>
-      <form report-submit="True" @submit="bindBox">
-        <button class="btnicon" formType="submit">
-          <image class="btnicon" src="/images/mailbox.png" alt="mailbox"/>
-        </button>
-      </form>
-    </view>
-
-    <image class="nail nail-left" src="/images/nail.png" alt="nail"/>
-    <image class="nail nail-right" src="/images/nail.png" alt="nail"/>
-
   </view>
 
 </template>
@@ -73,9 +75,11 @@
       canQiandao: false,
       payEnabled: false,
       dailyCheckImages: {
-        normal: '/images/dailycheck_normal.png',
-        done: '/images/dailycheck_done.png'
-      }
+        normal: '',
+        done: ''
+      },
+      nailShow: true,
+      accelerometerStopped: true
     }
 
     /**
@@ -84,11 +88,7 @@
     methods = {
       async bindHelp(e) {
         api.formIdSubmit(e.detail.formId)
-        wepy.showModal({
-          title: '@季节',
-          content: '和你抱在一起睡过一张床的某人喊你补充内容！',
-          showCancel: false
-        })
+        wepy.navigateTo({ url: '/pages/complex/help' })
       },
       async bindRecharge(e) {
         api.formIdSubmit(e.detail.formId)
@@ -133,6 +133,9 @@
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
      */
     async onShow() {
+      this.nailShow = true
+      this.$apply()
+      this.onAccelerometerChange()
       this.refreshGlobalSettings()
       this.refreshPoint()
       this.checkCanQiandao()
@@ -141,10 +144,20 @@
     async refreshPoint() {
       api.request('user/balance/', false).then((e) => {
         this.point = e.data.balance
-        this.pointStr = utils.parseStr(e.data.balance, 4)
+        this.pointStr = utils.parseStr(e.data.balance, 0)
         this.$apply()
       })
-    };
+    }
+
+    async onHide() {
+      console.log('/pages/index onHide')
+      this.stopAccelerometer()
+    }
+
+    async onUnload() {
+      console.log('/pages/index onUnload')
+      this.stopAccelerometer()
+    }
 
     async checkCanQiandao() {
       // todo: 下一次 check 时间（自动缓存）
@@ -173,18 +186,53 @@
         this.$apply()
       })
     }
+
+    async onAccelerometerChange() {
+      this.accelerometerStopped = false
+      wepy.onAccelerometerChange(res => {
+        if (!this.accelerometerStopped) {
+          console.log('/pages/index onAccelerometerChange')
+
+          // console.log(res.x, res.y, res.z)
+          if (Math.abs(res.x) > 2 || Math.abs(res.y) > 2) {
+            console.log(console.log(res.x, res.y, res.z))
+            this.stopAccelerometer()
+            this.nailShow = false
+            this.$apply()
+          }
+        }
+      })
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/index stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
+    }
   }
 </script>
 
 <style lang="less">
   @import "../colors";
+  @import "../images";
+
+  .page {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: ~"750rpx";
+    height: 100vh;
+    background: #FCF8F5 url(@bg) space;
+    background-size: cover;
+  }
+
 
   .fixed {
     position: fixed;
     left: ~"45rpx";
     top: ~"45rpx";
     width: ~"660rpx";
-    height: calc(~"100vh - 2 * 45rpx");
+    height: calc(~"100vh - 45rpx");
   }
 
   .top {
@@ -262,7 +310,7 @@
 
     height: 16px;
     width: 16px;
-    position: absolute;
+    position: fixed;
     bottom: ~"30rpx";
 
     &.nail-right {

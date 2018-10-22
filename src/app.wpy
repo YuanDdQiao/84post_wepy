@@ -7,7 +7,7 @@
     min-height: calc(~"100% - 90rpx");
     padding: ~"45rpx";
 
-    background: #FCF8F5 url(@bg) no-repeat center center;
+    background: #FCF8F5 url(@bg) space;
     background-size: cover;
 
     & > view.more-space {
@@ -36,7 +36,7 @@
     padding: 0;
 
     color: @text-color;
-    font-size: ~"28rpx";
+    font-size: ~"32rpx";
     font-weight: normal;
     line-height: ~"28rpx";
     text-align: center;
@@ -131,6 +131,14 @@
     &.btn-center {
       margin: auto;
     }
+
+    &[disabled] {
+      background-image: linear-gradient(-180deg, #F2F2F2 0%, #E5E5E5 100%);
+      border: 1px solid #E5E5E5;
+      box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.33);
+      border-radius: 6px;
+      color: #888888;
+    }
   }
 
   .text-center {
@@ -144,7 +152,7 @@
   }
 
   .note {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     line-height: ~"38rpx";
     color: @weak-text-color;
   }
@@ -171,7 +179,7 @@
     box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.33);
     color: @text-color;
     border-radius: 6px;
-    margin-bottom: ~"20rpx";
+    margin-bottom: 2vh;
     padding: ~"10rpx" 0;
 
   }
@@ -237,8 +245,8 @@
     text-align: center;
     font-size: ~"30rpx";
     color: gray;
-    margin-top: 10vh;
-    height: 14vh;
+    margin-top: ~"60rpx";
+    margin-bottom: ~"80rpx";
   }
 
   .footerlogo {
@@ -274,7 +282,8 @@
         'pages/my/read',
         'pages/complex/query',
         'pages/complex/express',
-        'pages/complex/normal'
+        'pages/complex/normal',
+        'pages/complex/help'
       ],
       window: {
         backgroundTextStyle: 'dark',

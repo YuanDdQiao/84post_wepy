@@ -1,11 +1,11 @@
 <template>
-  <view class="letter {{ viewClass }}" style="{{ viewStyle }}">
+  <view class="letter {{ viewClass }}">
     <view class="textarea">{{ content }}</view>
     <view class="sign">{{ sign }}</view>
     <view class="date">{{ submitDate }}</view>
   </view>
   <form report-submit="True" @submit="bindHide" wx:if="{{ false }}">
-    <button class="btn-text" formType="submit">撕掉这封信</button>
+    <button class="deletenote">大力摇晃手机可撕掉这封信</button>
   </form>
 </template>
 
@@ -29,7 +29,9 @@
       viewStyle: '',
       content: '',
       submitDate: '',
-      sign: ''
+      sign: '',
+      accelerometerStopped: true,
+      uuid: ''
     }
 
     /**
@@ -65,56 +67,69 @@
     };
 
     async onShow() {
-      this.onAccelerometerChange()
+      let interval = setInterval(() => {
+        if (this.uuid) {
+          clearInterval(interval)
+          console.log('uuid', this.uuid)
+          this.onAccelerometerChange(this.uuid)
+        }
+      }, 50)
     }
 
     async onHide() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async onUnload() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
     }
 
     async deleteLetter() {
-      wepy.stopAccelerometer()
+      this.stopAccelerometer()
       let modal = await wepy.showModal({
-        title: '确认要撕掉这封信吗？',
-        content: '一旦撕掉这封信您将永远都无法再次看到这封信，并且此操作不可撤回',
-        confirmText: '继续保留',
+        title: '撕掉这封信？',
+        content: '一旦撕掉，这封信会在您收到的信件中消失，且无法找回',
+        confirmText: '保留',
         cancelText: '撕掉信件',
         cancelColor: '#ff0000'
       })
       if (modal.cancel) {
-        await api.request(`letter/mark/hide/save/${this.uuid}`)
+        await api.request(`letter/mark/hide/save/${this.uuid}/`)
         wepy.navigateBack()
       } else if (modal.confirm) {
-        this.onAccelerometerChange()
+        this.onAccelerometerChange(this.uuid)
       }
     }
 
-    async onAccelerometerChange() {
-      // let accelerometer = await wepy.startAccelerometer({
-      //   interval: 'normal'
-      // })
+    async onAccelerometerChange(uuid) {
+      this.accelerometerStopped = false
       wepy.onAccelerometerChange(res => {
-        // console.log(res.x, res.y, res.z)
-        if (Math.abs(res.x) > 4 || Math.abs(res.y) > 4 || Math.abs(res.z) > 4) {
-          console.log(console.log(res.x, res.y, res.z))
-          wepy.vibrateLong()
-          this.deleteLetter()
+        if (!this.accelerometerStopped && this.uuid === uuid) {
+          console.log('/pages/my/read onAccelerometerChange')
+          if (Math.abs(res.x) > 2.5 || Math.abs(res.y) > 2.5 || Math.abs(res.z) > 2.5) {
+            console.log(console.log(res.x, res.y, res.z))
+            wepy.vibrateLong()
+            this.deleteLetter()
+          }
         }
       })
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/my/read stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
     }
   }
 </script>
 
 <style lang="less">
   @import "../../colors";
+  @import "../../images";
 
   .letter {
-    margin: 0 ~"15rpx";
-    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 48rpx - 40rpx");
+    margin: ~"15rpx" ~"15rpx";
+    min-height: calc(~"100vh - 2 * 45rpx - 2 * 15rpx - 92rpx - 5rpx");
     position: relative;
     padding: ~"40rpx";
 
@@ -132,6 +147,8 @@
     }
 
     &.view-letter-01 {
+      /*暖阳*/
+
       background: #FCF7E8;
       border: 2px solid #E5DCC2;
       outline: 6px solid #FCF7E8;
@@ -144,6 +161,8 @@
     }
 
     &.view-letter-02 {
+      /*蠢白*/
+
       background: #FFFFFF;
       border: 3px double #FBBAD0;
       border-radius: 6px;
@@ -157,6 +176,8 @@
     }
 
     &.view-letter-03 {
+      /*八十四*/
+
       background: #F3F2F0;
       border: 2px dashed #1562B3;
       outline: 6px solid #F3F2F0;
@@ -168,12 +189,64 @@
         color: #052B53;
       }
     }
+
+    &.view-letter-04 {
+      /*微甜青橘*/
+
+      background-image: linear-gradient(-180deg, #FFF3D8 0%, #E1FFDD 97%);
+      border: 12px solid rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.2);
+      border-radius: 6px;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #9DA36F;
+      }
+    }
+
+    &.view-letter-05 {
+      /*青田*/
+
+      box-shadow: 0 4px 8px 0 rgba(201, 190, 159, 0.5);
+      border-radius: 8px;
+      background-size: ~"660rpx" ~"660rpx";
+      background-position-y: bottom;
+      background: #FBFEF7 url(@paper-qingtian) no-repeat;
+    
+      .textarea,
+      .sign,
+      .date {
+        color: #89C076;
+      }
+    }
+
+    &.view-letter-06 {
+      /*奥德赛*/
+
+      box-shadow: 0 4px 14px 0 rgba(95, 148, 205, 0.7);
+      border-radius: 2px;
+      color: #F3F3F4 !important;
+      font-size: ~"32rpx";
+      background: #2C3A55 url(@paper-aodesai) no-repeat;
+      background-size: ~"660rpx" ~"660rpx";
+      background-position-y: bottom;
+
+      .textarea,
+      .sign,
+      .date {
+        color: #F3F3F4;
+      }
+    }
+
+
   }
 
-  .btn-text {
-    color: @weak-text-color;
+  .deletenote {
+    color: #919191;
     font-size: ~"24rpx";
     text-align: center;
-    margin-top: ~"24rpx";
+    opacity: 0.3;
+    margin-top: ~"60rpx";
   }
 </style>

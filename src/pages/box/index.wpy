@@ -121,7 +121,7 @@
   @import "../../colors";
 
   .holder {
-    margin-bottom: ~"20rpx";
+    margin-bottom: 2vh;
     width: ~"630rpx" !important;
     height: ~"200rpx" !important;
     text-align: left;

@@ -1,7 +1,14 @@
 <template>
+
+  <form report-submit="True" @submit="bindExitDeleteMode" wx:if="{{ deleteMode }}">
+    <view class="uber deletewindow">
+      <button class="btn btn-center" formType="submit">完成</button>
+    </view>
+  </form>
+
   <block wx:if="{{ letters.length !== 0}}">
     <block wx:for="{{ letters }}" wx:key="id">
-      <view>
+      <view class="mailholder">
         <form report-submit="True" @submit="bindSubmit" data-uuid="{{ item.uuid }}"
               data-express="{{ item.express_number }}" data-type="{{ item.letter_type.type }}"
               data-can_track="{{ item.letter_type.can_track }}" data-type_name="{{ item.letter_type.name }}">
@@ -9,17 +16,27 @@
             <image src="{{ item.thumbnail }}"></image>
           </button>
         </form>
-        <view class="nubmerholder" wx:if="{{ item.letter_type.can_track }}">
-          <view class="expressnumber">运单号：{{ item.express_number }}</view>
-          <view>
+        <view wx:if="{{ deleteMode }}">
+          <form report-submit="True" @submit="bindDelete" data-uuid="{{ item.uuid }}">
+            <button class="btn-plain deletebutton" formType="submit">
+              <image src="/images/delete.png" alt="delete"/>
+            </button>
+          </form>
+        </view>
+        <view wx:else>
+          <view class="nubmerholder" wx:if="{{ item.letter_type.can_track }}">
+            <view class="expressnumber">运单号：{{ item.express_number }}</view>
+            <view class="split">|</view>
+
             <form report-submit="True" @submit="bindCopy" data-express="{{ item.express_number }}">
-              <button class="copybutton" formType="submit">复制</button>
+              <button class="copybutton" formType="submit">点击复制</button>
             </form>
           </view>
         </view>
       </view>
     </block>
-    <view class="nomore">没有更多信件了</view>
+    <view class="nomore" wx:if="{{ false }}">没有更多信件了</view>
+    <view class="bottommarginadd" wx:if="{{ deleteMode }}"></view>
   </block>
   <block wx:else>
     <block wx:if="{{type === 1}}">
@@ -53,7 +70,9 @@
     data = {
       type: 1,
       letters: [],
-      loaded: false
+      loaded: false,
+      deleteMode: false,
+      accelerometerStopped: true
     }
 
     /**
@@ -81,6 +100,15 @@
         wepy.setClipboardData({
           data: e.target.dataset.express
         })
+      },
+      async bindDelete(e) {
+        console.log('bindDelete', e)
+        api.formIdSubmit(e.detail.formId)
+        this.deleteLetter(e.target.dataset.uuid)
+      },
+      async bindExitDeleteMode(e) {
+        api.formIdSubmit(e.detail.formId)
+        this.exitDeleteMode()
       }
     }
 
@@ -96,28 +124,31 @@
       console.log(options)
       if (options.type === 'sent') {
         wepy.setNavigationBarTitle({ title: '寄出的信' })
+        this.onAccelerometerChange()
         this.type = 1
       } else if (options.type === 'got') {
         wepy.setNavigationBarTitle({ title: '收到的信' })
         this.type = 2
       } else {
-        await wepy.showModal({
-          title: '参数错误',
-          content: '未选择查询类型',
-          showCancel: false
-        })
+        await
+          wepy.showModal({
+            title: '参数错误',
+            content: '未选择查询类型',
+            showCancel: false
+          })
         wepy.reLaunch({ url: '/pages/box/index' })
       }
       this.code = options.type
       this.loaded = true
       this.$apply()
-    };
+    }
 
-    async refreshList(code) {
-      let ret = await api.request(`my/list/${code}/`)
+    async refreshList() {
+      let ret = await
+        api.request(`my/list/${this.code}/`)
       this.letters = ret.data
       this.$apply()
-    };
+    }
 
     /**
      * 生命周期函数--监听页面显示（每次打开页面都会调用一次）
@@ -125,15 +156,91 @@
     async onShow() {
       let interval = setInterval(() => {
         if (this.loaded) {
-          this.refreshList(this.code)
           clearInterval(interval)
+          this.refreshList()
+          if (this.type === 1) {
+            this.onAccelerometerChange()
+          }
         }
       }, 50)
-    };
+    }
+
+    async onHide() {
+      this.stopAccelerometer()
+    }
+
+    async onUnload() {
+      this.stopAccelerometer()
+    }
+
+    async enterDeleteMode() {
+      this.stopAccelerometer()
+      this.deleteMode = true
+      wepy.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#E22C22'
+      })
+      wepy.setNavigationBarTitle({
+        title: '删除记录'
+      })
+      this.$apply()
+    }
+
+    async exitDeleteMode() {
+      this.onAccelerometerChange()
+      this.deleteMode = false
+      wepy.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#0D55A1'
+      })
+      wepy.setNavigationBarTitle({
+        title: '寄出的信'
+      })
+      this.$apply()
+    }
+
+    async onAccelerometerChange() {
+      this.accelerometerStopped = false
+      wepy.onAccelerometerChange(res => {
+        if (!this.accelerometerStopped) {
+          console.log('/pages/my/list onAccelerometerChange')
+          // console.log(res.x, res.y, res.z)
+          if (Math.abs(res.x) > 2.5 || Math.abs(res.y) > 2.5 || Math.abs(res.z) > 2.5) {
+            console.log(console.log(res.x, res.y, res.z))
+            wepy.vibrateLong()
+            this.enterDeleteMode()
+          }
+        }
+      })
+    }
+
+    async deleteLetter(uuid) {
+      let modal = await
+        wepy.showModal({
+          title: '删除这条记录？',
+          content: '一旦删除，这封信的记录会在您寄出的信件中消失，且无法找回',
+          confirmText: '保留',
+          cancelText: '删除记录',
+          cancelColor: '#ff0000'
+        })
+      if (modal.cancel) {
+        await
+          api.request(`letter/mark/hide/send/${uuid}/`)
+        this.refreshList()
+      }
+    }
+
+    async stopAccelerometer() {
+      console.log('/pages/my/list stopAccelerometer')
+      this.accelerometerStopped = true
+      wepy.stopAccelerometer()
+    }
   }
 </script>
 
 <style lang="less">
+
+  @import "../../colors";
 
   .nomail {
     display: flex;
@@ -146,17 +253,20 @@
     color: gray;
   }
 
+  .mailholder {
+    margin-bottom: ~"20rpx";
+  }
+
   .mailpreviewbutton {
-    margin-top: ~"40rpx";
     padding: 0;
 
     image {
       margin: 0;
       padding: 0;
-      width: ~"660rpx";
-      height: ~"394rpx";
+      width: ~"630rpx";
+      height: ~"364rpx";
 
-      box-shadow: 0 4px 12px 0 rgba(160, 147, 105, 0.4);
+      box-shadow: 0 2px 6px 0px rgba(160, 147, 105, 0.4);
     }
   }
 
@@ -165,19 +275,67 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: ~"-20rpx" ~"60rpx" 6vh;
+    width: ~"460rpx" !important;
+    padding-left: ~"40rpx";
+    padding-right: ~"40rpx";
+    height: ~"68rpx";
+    padding-top: ~"12rpx";
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: ~"-40rpx";
+    margin-bottom: ~"40rpx";
 
   }
 
   .expressnumber {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     color: gray;
+  }
+
+  .split {
+    color: @split-color !important;
+    font-size: ~"26rpx";
   }
 
   .copybutton {
-    font-size: ~"28rpx";
+    font-size: ~"26rpx";
     color: gray;
+
   }
 
+  .deletewindow {
+    position: fixed;
+    height: 10vh;
+    width: 100vw;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 !important;
+    border-top: 1px solid #DCDCDC;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: 0 -2px 4px 0 rgba(225, 225, 225, 0.50);
+    z-index: 100;
+    padding-top: 2vh;
+
+  }
+
+  .deletebutton {
+
+    width: ~"120rpx";
+    height: ~"110rpx";
+    margin: ~"-80rpx" auto ~"40rpx";
+
+    image {
+      width: ~"110rpx";
+      height: ~"110rpx";
+    }
+  }
+
+  .bottommarginadd {
+    height: 8vh;
+    opacity: 0;
+
+  }
 
 </style>

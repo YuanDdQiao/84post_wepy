@@ -159,6 +159,12 @@
 					"pathName": "pages/complex/normal",
 					"query": ""
 				},
+        {
+          "id": -1,
+          "name": "平邮提醒（包含来源信件）",
+          "pathName": "pages/complex/normal",
+          "query": "sourceLetter=784"
+        },
 				{
 					"id": -1,
 					"name": "充值",
