@@ -4,9 +4,10 @@
   "description": "84post",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "wepy build --watch",
-    "dev-local": "cross-env API_HOST=local wepy build --watch",
-    "build": "cross-env NODE_ENV=production wepy build --no-cache",
+    "dev": "cross-env API_HOST=https://84.raoquan.xyz wepy build --watch",
+    "dev-local": "cross-env API_HOST=http://127.0.0.1:8000 wepy build --watch",
+    "dev-sandbox": "cross-env API_HOST=https://84s.raoquan.xyz wepy build --watch",
+    "build": "cross-env API_HOST=https://84.raoquan.xyz NODE_ENV=production wepy build --no-cache",
     "clean": "find ./dist -maxdepth 1 -not -name 'project.config.json' -not -name 'dist' | xargs rm -rf"
   },
   "wepy": {

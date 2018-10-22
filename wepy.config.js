@@ -41,7 +41,7 @@ module.exports = {
       filter: /api\.js$/g,
       config: {
         find: /__HOST__/g,
-        replace: process.env.API_HOST === 'local' ? 'http://127.0.0.1:8000' : 'https://84.singee.site'
+        replace: process.env.API_HOST
       }
     }
   },
