@@ -1,11 +1,9 @@
 <template>
   <view>
-    <view class="note">请点击下面的按钮后发送「充值」</view>
-    <view class="note2">(充值二字已经为您复制)</view>
     <view>
       <block wx:for="{{ price }}" wx:key="id">
-        <button open-type="contact" @contact="bindContact" session-from="recharge::{{ item.id }}"
-                id="recharge-{{ item.id }}">
+        <button @tap="bindRecharge" session-from="recharge::{{ item.id }}"
+                id="recharge-{{ item.id }}" data-id="{{item.id}}">
           <block wx:if="{{ item.featured_image }}">
             <view class="container image-container">
               <image src="{{ item.featured_image }}"></image>
@@ -55,8 +53,17 @@
       // bindNoSenseForm(e) {
       //   api.formIdSubmit(e.detail.formId)
       // },
-      async bindContact(e) {
-        console.log(e.target.id)
+      async bindRecharge(e) {
+        console.log(e.target.dataset.id)
+        let response = await api.request({
+          url: 'pay/wx/prepare/',
+          data: {
+            'price_id': e.target.dataset.id
+          }
+        })
+        console.log(response.data)
+        console.log(response.data['jsapi_param'])
+        wepy.requestPayment(response.data['jsapi_param'])
       }
     }
 
@@ -72,9 +79,6 @@
       let response = await api.request('pay/price/')
       this.price = response.data
       this.$apply()
-      wepy.setClipboardData({
-        data: '充值'
-      })
     };
 
     /**
