@@ -10,7 +10,7 @@
 		"minified": false,
 		"newFeature": true
 	},
-	"miniprogramRoot": "./dist",
+	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
 	"appid": "wxb564393a08251db4",
@@ -159,12 +159,12 @@
 					"pathName": "pages/complex/normal",
 					"query": ""
 				},
-        {
-          "id": -1,
-          "name": "平邮提醒（包含来源信件）",
-          "pathName": "pages/complex/normal",
-          "query": "sourceLetter=784"
-        },
+				{
+					"id": -1,
+					"name": "平邮提醒（包含来源信件）",
+					"pathName": "pages/complex/normal",
+					"query": "sourceLetter=784"
+				},
 				{
 					"id": -1,
 					"name": "充值",
