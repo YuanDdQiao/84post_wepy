@@ -222,7 +222,7 @@
     top: 0;
     width: ~"750rpx";
     height: 100vh;
-    background: #FCF8F5 url(@bg) space;
+    background: #FDFBF5;
     background-size: cover;
   }
 
