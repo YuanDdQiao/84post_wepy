@@ -42,37 +42,52 @@
         this.pickUpCode = e.detail.value
       },
       async bindSubmitForm(e) {
+        console.log('事件响应成功')
         api.formIdSubmit(e.detail.formId)
+        console.log('准备确认 Auth 状态')
         await api.getAuthScope('scope.userLocation')
-        let location = await wepy.getLocation()
-        console.log(location)
-        let res = await api.request({
-          url: `box/pickup/`,
-          method: 'POST',
-          data: {
-            pickUpCode: this.pickUpCode,
-            location: location
-          }
-        })
-        if (res.data.success) {
-          this.$parent.globalData.pickUp = {
-            id: res.data.id,
-            uuid: res.data.uuid,
-            type: 2
-          }
-          console.log(this.$parent.globalData.pickUp)
-          wepy.navigateTo({ url: 'box-2' })
-        } else {
-          let title
-          if (res.data.modalTitle === undefined) {
-            title = ''
+        console.log('确认 Auth 状态')
+        try {
+          console.log('准备获取位置信息')
+          let location = await wepy.getLocation()
+          console.log('成功获取位置信息', location)
+          console.log('准备请求拆信')
+          let res = await api.request({
+            url: `box/pickup/`,
+            method: 'POST',
+            data: {
+              pickUpCode: this.pickUpCode,
+              location: location
+            }
+          })
+          console.log('请求完成', res)
+
+          if (res.data.success) {
+            this.$parent.globalData.pickUp = {
+              id: res.data.id,
+              uuid: res.data.uuid,
+              type: 2
+            }
+            console.log(this.$parent.globalData.pickUp)
+            wepy.navigateTo({ url: 'box-2' })
           } else {
-            title = res.data.modalTitle
+            let title
+            if (res.data.modalTitle === undefined) {
+              title = ''
+            } else {
+              title = res.data.modalTitle
+            }
+            wepy.showModal({
+              title: title,
+              content: res.data.msg,
+              showCancel: false
+            })
           }
+        } catch (e) {
+          console.error('出错', e)
           wepy.showModal({
-            title: title,
-            content: res.data.msg,
-            showCancel: false
+            title: '系统问题',
+            content: '请检查微信是否拥有获取手机地理位置的权限，如果确认给了权限请通过帮助页面的联系方式联系开发者反馈本问题\n' + JSON.stringify(e)
           })
         }
       }
@@ -179,7 +194,7 @@
     }
   }
 
-  .explaination{
+  .explaination {
     width: 74vw;
     margin: 6vh auto 8vh;
     line-height: 1.4;
@@ -188,8 +203,8 @@
   }
 
   .typelogo {
-    width:~"46rpx";
-    height:~"48rpx";
+    width: ~"46rpx";
+    height: ~"48rpx";
     position: absolute;
     left: ~"296rpx";
     bottom: ~"45rpx";
